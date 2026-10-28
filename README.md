@@ -96,9 +96,13 @@ Cloudflare Workers serves `site/` exactly as committed, as static assets
 Cloudflare's side, so what it serves is what the gate passed. Every branch gets
 a preview address.
 
-It is connected in the Cloudflare dashboard: Workers & Pages → Create
-application → import `wherefore-co` from GitHub, with these settings:
+The owner connected it on 2026-10-28, in the Cloudflare dashboard: Workers &
+Pages → Create application → import `wherefore-co` from GitHub. These settings
+live in Cloudflare, not here:
 - project name `wherefore`, which must match `name` in `wrangler.jsonc`;
 - build command left empty;
-- deploy command `npx wrangler deploy`;
-- preview builds on.
+- deploy command `npx wrangler deploy`, for `main`;
+- preview command `npx wrangler preview`, for every other branch: each preview
+  is named after its branch;
+- Cloudflare Access off, so a preview's address opens for anyone who has it.
+  The page asks not to be indexed while it is a draft.
