@@ -1,0 +1,3 @@
+# the engine, installed per job into the checkout (requirements-engine.txt)
+/.wherefore-engine/
+__pycache__/

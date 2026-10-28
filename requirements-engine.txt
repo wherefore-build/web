@@ -1,0 +1,9 @@
+# The engine this company's corpus is built and judged by: one commit of
+# zakholdsworth/wherefore. The site reads the product's principles, commands
+# and version from it, so moving this line is how a release reaches the site -
+# by a pull request, whose gate fails until the site is regenerated against it.
+#
+# DRAFT: this names wherefore#34's branch, the first commit that ships the
+# principles and commands as data. When #34 merges, move it to the merge
+# commit, which release.yml tags v0.1.1. A pin names a released version.
+wherefore @ git+https://github.com/zakholdsworth/wherefore@b2b730b7690d1766aaa641f1bc5b47ca7d17f89e

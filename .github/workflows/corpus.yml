@@ -1,0 +1,55 @@
+# THE COMPANY'S CORPUS, judged on every push by the engine release it pins:
+# every file accounted for and every generated one current, every fact reaching
+# what a visitor receives, the site reaching nothing outside itself - and each
+# of those shown to fail. Hosted, and short: a minute or so a run.
+#
+# The engine's repository is private, so the install reads it with
+# WHEREFORE_READ_TOKEN: a fine-grained token with Contents: read on
+# zakholdsworth/wherefore alone, saved as a secret of THIS repository
+# (README.md, "CI"). It is installed into the checkout, never into the
+# runner's Python, so a moved pin is always the engine that runs.
+name: corpus
+
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: corpus-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  corpus:
+    runs-on: ubuntu-latest
+    env:
+      PYTHONPATH: ${{ github.workspace }}/.wherefore-engine
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install the engine this corpus pins
+        id: install
+        env:
+          TOKEN: ${{ secrets.WHEREFORE_READ_TOKEN }}
+          GIT_CONFIG_COUNT: "1"
+          GIT_CONFIG_KEY_0: url.https://x-access-token:${{ secrets.WHEREFORE_READ_TOKEN }}@github.com/zakholdsworth/wherefore.insteadOf
+          GIT_CONFIG_VALUE_0: https://github.com/zakholdsworth/wherefore
+        run: |
+          if [ -z "$TOKEN" ]; then
+            echo "::error::WHEREFORE_READ_TOKEN is not a secret of this repository, so the engine it pins cannot be installed. README.md, under CI, says how to add it."
+            exit 1
+          fi
+          rm -rf .wherefore-engine
+          python3 -m pip install --quiet --no-deps --target .wherefore-engine -r requirements-engine.txt
+      - name: Every file is accounted for, and every generated one is what its sources make
+        run: python3 -m wherefore gate
+      - name: Every fact reaches what a visitor receives
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: python3 -m wherefore check reach
+      - name: The site loads nothing from elsewhere, and every link on it goes somewhere
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: python3 checks/self_contained.py
+      - name: And each of those fails when it should
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: python3 -m wherefore prove
