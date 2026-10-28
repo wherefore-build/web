@@ -1,9 +1,12 @@
 // The hosting. Cloudflare Workers serves site/ exactly as committed, as static
-// assets, with the headers site/_headers declares. Nothing builds on
-// Cloudflare's side, so what it serves is what the gate passed. The name is
-// the Cloudflare project's, and must match it.
+// assets, with the headers site/_headers declares. CI deploys it, after every
+// check has passed (.github/workflows/corpus.yml, `deploy`), and nothing
+// builds on Cloudflare's side, so what it serves is what the checks judged.
 {
   "name": "wherefore",
+  // The Cloudflare account it deploys into. An identifier, not a credential:
+  // the credential is CLOUDFLARE_API_TOKEN, a secret only CI holds.
+  "account_id": "5aaa840c93c3fe89c9d9f883aa6e7b37",
   "compatibility_date": "2026-09-01",
   // The site's address is <name>.<account subdomain>.workers.dev until it has
   // a domain, and every preview's is <preview>-<name>.<subdomain>.workers.dev.

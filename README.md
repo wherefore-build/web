@@ -92,17 +92,25 @@ first step and says that this is the reason.
 ## Hosting
 
 Cloudflare Workers serves `site/` exactly as committed, as static assets
-(`wrangler.jsonc`), with the headers in `site/_headers`. Nothing builds on
-Cloudflare's side, so what it serves is what the gate passed. Every branch gets
-a preview address.
+(`wrangler.jsonc`), with the headers in `site/_headers`.
 
-The owner connected it on 2026-10-28, in the Cloudflare dashboard: Workers &
-Pages → Create application → import `wherefore-co` from GitHub. These settings
-live in Cloudflare, not here:
-- project name `wherefore`, which must match `name` in `wrangler.jsonc`;
-- build command left empty;
-- deploy command `npx wrangler deploy`, for `main`;
-- preview command `npx wrangler preview`, for every other branch: each preview
-  is named after its branch;
-- Cloudflare Access off, so a preview's address opens for anyone who has it.
-  The page asks not to be indexed while it is a draft.
+**CI deploys it, and only after every check has passed.** The `deploy` job in
+`.github/workflows/corpus.yml` needs `corpus`, so a tree the gate or a proof
+failed never reaches Cloudflare, and nothing builds on Cloudflare's side.
+- `main` deploys to the site's address.
+- Every other branch deploys to a preview of its own. The job posts the
+  preview's address on the branch's pull request, with the commit it was
+  built from, and updates that one comment on every push.
+
+**One-time setup (owner):**
+- A Cloudflare API token made from the **Edit Cloudflare Workers** template
+  (Zone Resources: All zones), saved here as the secret `CLOUDFLARE_API_TOKEN`.
+  Without it the deploy fails at its first step and says so.
+- Cloudflare's own Git builds for the `wherefore` Worker disconnected (Worker
+  → Settings → Build), so that this is the only deploy.
+- `workers.dev` and Preview URLs are declared in `wrangler.jsonc`. Cloudflare
+  applies them when `main` deploys. Until `main` has, they are switched on
+  under the Worker's Settings → Domains & Routes.
+
+Previews open for anyone who has the address. The page asks not to be indexed
+while it is a draft.
