@@ -23,6 +23,7 @@ pin. The reasons are in the engine's `DIRECTIONS.md`, §13 and §14.
 | `checks/*_proof.py` | each check, and the gate, shown to fail | authored |
 | `wherefore.json` | what this repository is to the engine | authored |
 | `requirements-engine.txt` | the engine release this is built and judged by | authored |
+| `wrangler.jsonc` | the hosting: Cloudflare serves `site/` as committed | authored |
 
 Never edit `site/` by hand. The gate fails a page that is not what its sources
 make.
@@ -90,12 +91,14 @@ first step and says that this is the reason.
 
 ## Hosting
 
-Cloudflare Pages serves `site/` exactly as committed. It runs no build, so what
-it serves is what the gate passed. Every branch gets a preview address.
+Cloudflare Workers serves `site/` exactly as committed, as static assets
+(`wrangler.jsonc`), with the headers in `site/_headers`. Nothing builds on
+Cloudflare's side, so what it serves is what the gate passed. Every branch gets
+a preview address.
 
-To set it up: Workers & Pages → Create → Pages → Connect to Git →
-`wherefore-co`, with these settings:
-- production branch `main`;
-- framework preset *None*;
+It is connected in the Cloudflare dashboard: Workers & Pages → Create
+application → import `wherefore-co` from GitHub, with these settings:
+- project name `wherefore`, which must match `name` in `wrangler.jsonc`;
 - build command left empty;
-- build output directory `site`.
+- deploy command `npx wrangler deploy`;
+- preview builds on.

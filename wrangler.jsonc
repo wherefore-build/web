@@ -1,0 +1,11 @@
+// The hosting. Cloudflare Workers serves site/ exactly as committed, as static
+// assets, with the headers site/_headers declares. Nothing builds on
+// Cloudflare's side, so what it serves is what the gate passed. The name is
+// the Cloudflare project's, and must match it.
+{
+  "name": "wherefore",
+  "compatibility_date": "2026-09-01",
+  "assets": {
+    "directory": "./site"
+  }
+}

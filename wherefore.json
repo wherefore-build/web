@@ -49,6 +49,10 @@
      "the engine release this corpus is built and judged by"
     ],
     [
+     "wrangler.jsonc",
+     "the hosting: Cloudflare serves site/ as it is committed, under the project's name"
+    ],
+    [
      ".gitignore",
      "what is never committed"
     ]
