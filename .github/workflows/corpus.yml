@@ -1,0 +1,120 @@
+# THE COMPANY'S CORPUS, judged on every push by the engine release it pins:
+# every file accounted for and every generated one current, every fact reaching
+# what a visitor receives, the site reaching nothing outside itself - and each
+# of those shown to fail. Hosted, and short: a minute or so a run.
+#
+# The engine's repository is private, so the install reads it with
+# WHEREFORE_READ_TOKEN: a fine-grained token with Contents: read on
+# zakholdsworth/wherefore alone, saved as a secret of THIS repository
+# (README.md, "CI"). It is installed into the checkout, never into the
+# runner's Python, so a moved pin is always the engine that runs.
+#
+# THEN IT DEPLOYS what those checks passed, and nothing else: `deploy` needs
+# `corpus`. main goes to the site's address; every other branch to a preview
+# of its own, whose address is posted on its pull request. Cloudflare builds
+# nothing, so what it serves is the tree that was judged.
+name: corpus
+
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: corpus-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  corpus:
+    runs-on: ubuntu-latest
+    env:
+      PYTHONPATH: ${{ github.workspace }}/.wherefore-engine
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install the engine this corpus pins
+        id: install
+        env:
+          TOKEN: ${{ secrets.WHEREFORE_READ_TOKEN }}
+          GIT_CONFIG_COUNT: "1"
+          GIT_CONFIG_KEY_0: url.https://x-access-token:${{ secrets.WHEREFORE_READ_TOKEN }}@github.com/zakholdsworth/wherefore.insteadOf
+          GIT_CONFIG_VALUE_0: https://github.com/zakholdsworth/wherefore
+        run: |
+          if [ -z "$TOKEN" ]; then
+            echo "::error::WHEREFORE_READ_TOKEN is not a secret of this repository, so the engine it pins cannot be installed. README.md, under CI, says how to add it."
+            exit 1
+          fi
+          rm -rf .wherefore-engine
+          python3 -m pip install --quiet --no-deps --target .wherefore-engine -r requirements-engine.txt
+      - name: Every file is accounted for, and every generated one is what its sources make
+        run: python3 -m wherefore gate
+      - name: Every fact reaches what a visitor receives
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: python3 -m wherefore check reach
+      - name: The site loads nothing from elsewhere, and every link on it goes somewhere
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: python3 checks/self_contained.py
+      - name: And each of those fails when it should
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: python3 -m wherefore prove
+
+  # Cloudflare's own Git builds are disconnected: this is the one deploy, and it
+  # waits for every check above. CLOUDFLARE_API_TOKEN is a token made from
+  # Cloudflare's "Edit Cloudflare Workers" template, saved as a secret of this
+  # repository (README.md, "Hosting"). wrangler is pinned, like the engine, so
+  # the deploy is the same program every time.
+  deploy:
+    needs: corpus
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    env:
+      WRANGLER: wrangler@4.154.0
+      WRANGLER_SEND_METRICS: "false"
+    steps:
+      - uses: actions/checkout@v7
+      - name: Deploy main, or preview this branch
+        id: deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          WRANGLER_OUTPUT_FILE_PATH: ${{ runner.temp }}/wrangler.ndjson
+          BRANCH: ${{ github.ref_name }}
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
+            echo "::error::CLOUDFLARE_API_TOKEN is not a secret of this repository, so nothing can be deployed. README.md, under Hosting, says how to add it."
+            exit 1
+          fi
+          if [ "$BRANCH" = main ]; then
+            npx --yes "$WRANGLER" deploy
+          else
+            # Cloudflare names a preview after its branch, in lower case, with
+            # every run of other characters made one hyphen.
+            NAME=$(printf '%s' "$BRANCH" | tr 'A-Z' 'a-z' | sed -E 's/[^a-z0-9]+/-/g; s/^-+//; s/-+$//')
+            # `wrangler preview` does not apply wrangler.jsonc's workers_dev and
+            # preview_urls; only main's `wrangler deploy` does. Apply them first.
+            python3 .github/scripts/cloudflare_urls.py
+            npx --yes "$WRANGLER" preview --name "$NAME"
+          fi
+          python3 .github/scripts/deployed.py "$WRANGLER_OUTPUT_FILE_PATH"
+      - name: Say where the preview is, on the pull request
+        if: github.ref_name != 'main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BRANCH: ${{ github.ref_name }}
+          URL: ${{ steps.deploy.outputs.url }}
+        run: |
+          PR=$(gh pr list --repo "$GITHUB_REPOSITORY" --head "$BRANCH" --state open --json number --jq '.[0].number // empty')
+          if [ -z "$PR" ]; then
+            echo "No open pull request for $BRANCH - the address is in this run's summary."
+            exit 0
+          fi
+          MARK='<!-- wherefore-preview -->'
+          BODY=$(printf '%s\n**Preview** - %s - `%s`\n\nDeployed from this commit after every check passed, with nothing built on Cloudflare'"'"'s side, so it is the site the checks judged. A newer push replaces this address'"'"'s contents and this line.\n' "$MARK" "$URL" "${GITHUB_SHA::7}")
+          ID=$(gh api "repos/$GITHUB_REPOSITORY/issues/$PR/comments" --paginate --jq ".[] | select(.body | startswith(\"$MARK\")) | .id" | head -1)
+          if [ -n "$ID" ]; then
+            gh api -X PATCH "repos/$GITHUB_REPOSITORY/issues/comments/$ID" -f body="$BODY" > /dev/null
+          else
+            gh api "repos/$GITHUB_REPOSITORY/issues/$PR/comments" -f body="$BODY" > /dev/null
+          fi

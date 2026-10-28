@@ -1,0 +1,8 @@
+# The engine this company's corpus is built and judged by: one commit of
+# zakholdsworth/wherefore. The site reads the product's principles, commands
+# and version from it, so moving this line is how a release reaches the site -
+# by a pull request, whose gate fails until the site is regenerated against it.
+#
+# Wherefore 0.1.1 (v0.1.1): the merge of wherefore#34, the first release that
+# ships the principles and commands as data.
+wherefore @ git+https://github.com/zakholdsworth/wherefore@06e910c8c5f5401cc58869a0cf3fa903bc2cc72e

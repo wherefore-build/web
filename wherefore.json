@@ -1,0 +1,97 @@
+{
+ "wherefore": 1,
+ "name": "wherefore-co",
+ "note": "The company: its site now, and every asset after it. Each asset is generated from facts/company.json and from the engine it pins - what the product is (its principles, its commands, its version) is read from that release, never retyped here.",
+ "sources": {
+  "facts": {
+   "path": "facts/company.json",
+   "adapter": "leaves",
+   "why": "THE SOURCE: every fact the company states about itself, once"
+  }
+ },
+ "generators": [
+  {
+   "script": "site.py",
+   "cwd": "gen",
+   "makes": "site/index.html and site/_headers, from the facts and the pinned engine"
+  }
+ ],
+ "inventory": {
+  "note": "Every tracked file is generated, authored or captured. GENERATED is derived by running the generators - site/, here - and never declared; this declares the rest.",
+  "authored": {
+   "rules": [
+    [
+     "facts/company.json",
+     "THE SOURCE"
+    ],
+    [
+     "*.py",
+     "code: the generators, the checks and their proofs"
+    ],
+    [
+     "gen/page.css",
+     "the site's design, inlined into every page by gen/site.py"
+    ],
+    [
+     "*.md",
+     "prose a person writes about this repository"
+    ],
+    [
+     ".github/**",
+     "the workflows"
+    ],
+    [
+     "wherefore.json",
+     "this file: what this repository is to the engine"
+    ],
+    [
+     "requirements-engine.txt",
+     "the engine release this corpus is built and judged by"
+    ],
+    [
+     "wrangler.jsonc",
+     "the hosting: Cloudflare serves site/ as it is committed, under the project's name"
+    ],
+    [
+     ".gitignore",
+     "what is never committed"
+    ]
+   ]
+  },
+  "captured": {
+   "groups": {}
+  }
+ },
+ "proofs": {
+  "glob": "checks/*_proof.py"
+ },
+ "reach": {
+  "facts": {
+   "source": "facts",
+   "include": [
+    "*"
+   ],
+   "exclude": [
+    "note"
+   ],
+   "why": "every fact the company states reaches the site; the note is about the file, for whoever edits it"
+  },
+  "watched": [
+   "site"
+  ],
+  "exclude": [],
+  "exempt": {},
+  "unconsumed": {},
+  "probes": [
+   {
+    "name": "the company's name",
+    "fact": "company.name",
+    "reaches": "the page",
+    "files": [
+     "site/index.html"
+    ]
+   }
+  ],
+  "audience": "a visitor"
+ }
+}
