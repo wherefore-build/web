@@ -92,11 +92,12 @@ jobs:
             # Cloudflare names a preview after its branch, in lower case, with
             # every run of other characters made one hyphen.
             NAME=$(printf '%s' "$BRANCH" | tr 'A-Z' 'a-z' | sed -E 's/[^a-z0-9]+/-/g; s/^-+//; s/-+$//')
+            # `wrangler preview` does not apply wrangler.jsonc's workers_dev and
+            # preview_urls; only main's `wrangler deploy` does. Apply them first.
+            python3 .github/scripts/cloudflare_urls.py
             npx --yes "$WRANGLER" preview --name "$NAME"
           fi
-          URL=$(python3 .github/scripts/deployed.py "$WRANGLER_OUTPUT_FILE_PATH")
-          echo "url=$URL" >> "$GITHUB_OUTPUT"
-          echo "**$BRANCH** is at $URL, built from \`${GITHUB_SHA::7}\`." >> "$GITHUB_STEP_SUMMARY"
+          python3 .github/scripts/deployed.py "$WRANGLER_OUTPUT_FILE_PATH"
       - name: Say where the preview is, on the pull request
         if: github.ref_name != 'main'
         env:

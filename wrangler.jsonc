@@ -10,7 +10,9 @@
   "compatibility_date": "2026-09-01",
   // The site's address is <name>.<account subdomain>.workers.dev until it has
   // a domain, and every preview's is <preview>-<name>.<subdomain>.workers.dev.
-  // Cloudflare applies both when main deploys, not when a preview does.
+  // main's `wrangler deploy` applies both; before every preview, CI applies
+  // them itself (.github/scripts/cloudflare_urls.py), since `wrangler preview`
+  // does not.
   "workers_dev": true,
   "preview_urls": true,
   "assets": {

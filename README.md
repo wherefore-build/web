@@ -108,9 +108,11 @@ failed never reaches Cloudflare, and nothing builds on Cloudflare's side.
   Without it the deploy fails at its first step and says so.
 - Cloudflare's own Git builds for the `wherefore` Worker disconnected (Worker
   → Settings → Build), so that this is the only deploy.
-- `workers.dev` and Preview URLs are declared in `wrangler.jsonc`. Cloudflare
-  applies them when `main` deploys. Until `main` has, they are switched on
-  under the Worker's Settings → Domains & Routes.
+- Nothing in the dashboard. `workers.dev` and Preview URLs are declared in
+  `wrangler.jsonc`: `main`'s deploy applies them, and before every preview CI
+  applies them itself (`.github/scripts/cloudflare_urls.py`). They need the
+  account to have a `workers.dev` subdomain; if it has none, the deploy says
+  so.
 
 Previews open for anyone who has the address. The page asks not to be indexed
 while it is a draft.
