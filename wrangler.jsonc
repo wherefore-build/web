@@ -7,5 +7,9 @@
   "compatibility_date": "2026-09-01",
   "assets": {
     "directory": "./site"
-  }
+  },
+  // `npx wrangler preview`, which builds every branch but main, refuses to run
+  // without this block. It can stay empty: the assets above are the preview's
+  // too.
+  "previews": {}
 }
