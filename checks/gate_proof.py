@@ -48,11 +48,11 @@ def main():
     r = []
     with Edit("site/index.html") as p:
         p.write_text(p.read_text(encoding="utf-8").replace(
-            "Run your company like it compiles.", "Run your company like it ships.", 1), encoding="utf-8")
+            "<em>compiled.</em>", "<em>shipped.</em>", 1), encoding="utf-8")
         gate(r, "the page edited by hand, instead of the facts", True, [PAGE])
 
     with Edit("facts/company.json") as p:
-        facts(p, lambda d: d["hero"].update(headline="Run your company like it ships."))
+        facts(p, lambda d: d["hero"].update(headline_end="shipped."))
         gate(r, "the headline changed in the facts, the page not regenerated", True, [PAGE])
 
     with Edit("facts/company.json") as p:

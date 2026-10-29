@@ -1,7 +1,9 @@
 # THE COMPANY'S CORPUS, judged on every push by the engine release it pins:
 # every file accounted for and every generated one current, every fact reaching
 # what a visitor receives, the site reaching nothing outside itself, the brand
-# said once and readable - and each of those shown to fail. Hosted, and short: a minute or so a run.
+# said once and readable, every control on it doing something when a thumb
+# presses it - and each of those shown to fail. Hosted, and short: two minutes
+# or so a run, most of it installing the browser.
 #
 # The engine's repository is private, so the install reads it with
 # WHEREFORE_READ_TOKEN: a fine-grained token with Contents: read on
@@ -30,7 +32,7 @@ jobs:
   corpus:
     runs-on: ubuntu-latest
     env:
-      PYTHONPATH: ${{ github.workspace }}/.wherefore-engine
+      PYTHONPATH: ${{ github.workspace }}/.wherefore-engine:${{ github.workspace }}/.browser
     steps:
       - uses: actions/checkout@v7
       - name: Install the engine this corpus pins
@@ -60,6 +62,19 @@ jobs:
         run: |
           python3 checks/one_palette.py
           python3 checks/contrast.py
+      # The press check drives a real browser, pinned in
+      # requirements-browser.txt and installed into the checkout like the
+      # engine; `playwright install` fetches the Chromium build that pin asks for.
+      - name: Install the browser the press check drives
+        id: browser
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: |
+          rm -rf .browser
+          python3 -m pip install --quiet --target .browser -r requirements-browser.txt
+          python3 -m playwright install --with-deps chromium
+      - name: Every control on the site does something a visitor sees, pressed cold on a phone
+        if: ${{ !cancelled() && steps.browser.outcome == 'success' }}
+        run: python3 checks/controls_press.py
       - name: And each of those fails when it should
         if: ${{ !cancelled() && steps.install.outcome == 'success' }}
         run: python3 -m wherefore prove

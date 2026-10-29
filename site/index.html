@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Wherefore — a company that compiles</title>
-<meta name="description" content="Say each fact once. Wherefore generates every asset from it, and refuses any change that would leave one stale.">
+<title>Wherefore — your company, compiled</title>
+<meta name="description" content="Change a fact once. Your website, pricing, deck and docs follow it, and nothing ships that still says the old thing.">
 <meta name="color-scheme" content="dark">
 <meta name="robots" content="noindex, nofollow">
 <link rel="stylesheet" href="brand.css">
@@ -13,57 +13,91 @@
 <body>
 <div class="draft" role="note"><span class="draft-mark">Draft</span> Nothing on this page is launched, and nothing here is a promise yet.</div>
 <header class="top"><div class="wrap"><a class="name" href="#top">Wherefore</a>
-<nav aria-label="On this page"><a href="#how">How</a><a href="#principles">Principles</a><a href="#interface">Interface</a><a href="#access">Access</a></nav></div></header>
+<nav aria-label="On this page"><a href="#why">Why “Wherefore”</a><a href="#how">How it works</a><a class="pill" href="#pilot">Join the pilot</a></nav></div></header>
 <main id="top">
 <section class="hero"><div class="wrap">
-<h1>Run your company like it compiles.</h1>
-<p class="lede">Say each fact once. Wherefore generates every asset from it — the drawings, the pages, the parts lists, the documents — and refuses any change that would leave one of them stale. Nothing ships that contradicts a decision.</p>
+<p class="eyebrow">Founder pilot · Wherefore 0.1.1</p>
+<h1>Your company, <em>compiled.</em></h1>
+<p class="lede">Change a fact once. Your website, pricing, deck and docs follow it, and nothing ships that still says the old thing.</p>
+<div class="demo" role="group" aria-labelledby="demo-label">
+<input class="state" type="radio" name="stage" id="stage-0" checked>
+<input class="state" type="radio" name="stage" id="stage-1">
+<input class="state" type="radio" name="stage" id="stage-2">
+<div class="demo-head">
+<p class="demo-label" id="demo-label">Change one fact, and watch what follows it</p>
+<p class="demo-source"><span class="demo-source-name">source</span> <code>plans.json · pro.seats = <b class="at at0">3</b><b class="at at1 at2">5</b></code></p>
+</div>
+<div class="stepper">
+<label class="step step-0" for="stage-0"><span class="step-n">1</span> Today</label>
+<label class="step step-1" for="stage-1"><span class="step-n">2</span> Make Pro 5 seats</label>
+<label class="step step-2" for="stage-2"><span class="step-n">3</span> Fix the help article</label>
+</div>
+<p class="demo-said"><span class="at at0 said-plain">One fact, and 7 assets that say it.</span><span class="at at1 said-fail">6 rebuilt from the source. The help article still says 3 seats, so nothing ships.</span><span class="at at2 said-pass">All 7 agree with the source. Ready to ship.</span></p>
+<ul class="tiles">
+<li class="tile tile-gen" style="--i: 0"><p class="tile-top"><span class="tile-name">Website</span><span class="badge at at0">live</span><span class="badge badge-pass at at1 at2">rebuilt</span></p><p class="tile-says"><span class="at at0">Pro: for teams of up to 3.</span><span class="at at1 at2">Pro: for teams of up to 5.</span></p><p class="tile-made">generated</p></li>
+<li class="tile tile-gen" style="--i: 1"><p class="tile-top"><span class="tile-name">Pricing page</span><span class="badge at at0">live</span><span class="badge badge-pass at at1 at2">rebuilt</span></p><p class="tile-says"><span class="at at0">Pro · 3 seats included</span><span class="at at1 at2">Pro · 5 seats included</span></p><p class="tile-made">generated</p></li>
+<li class="tile tile-gen" style="--i: 2"><p class="tile-top"><span class="tile-name">Sales deck · slide 7</span><span class="badge at at0">live</span><span class="badge badge-pass at at1 at2">rebuilt</span></p><p class="tile-says"><span class="at at0">Pro covers a team of 3 from day one.</span><span class="at at1 at2">Pro covers a team of 5 from day one.</span></p><p class="tile-made">generated</p></li>
+<li class="tile tile-gen" style="--i: 3"><p class="tile-top"><span class="tile-name">Docs</span><span class="badge at at0">live</span><span class="badge badge-pass at at1 at2">rebuilt</span></p><p class="tile-says"><span class="at at0">Invite up to 3 teammates on Pro.</span><span class="at at1 at2">Invite up to 5 teammates on Pro.</span></p><p class="tile-made">generated</p></li>
+<li class="tile tile-gen" style="--i: 4"><p class="tile-top"><span class="tile-name">Upgrade screen</span><span class="badge at at0">live</span><span class="badge badge-pass at at1 at2">rebuilt</span></p><p class="tile-says"><span class="at at0">Your plan includes 3 seats.</span><span class="at at1 at2">Your plan includes 5 seats.</span></p><p class="tile-made">generated for the app</p></li>
+<li class="tile tile-gen" style="--i: 5"><p class="tile-top"><span class="tile-name">Sales email</span><span class="badge at at0">live</span><span class="badge badge-pass at at1 at2">rebuilt</span></p><p class="tile-says"><span class="at at0">…and Pro covers all 3 of you.</span><span class="at at1 at2">…and Pro covers all 5 of you.</span></p><p class="tile-made">generated template</p></li>
+<li class="tile tile-hand" style="--i: 6"><p class="tile-top"><span class="tile-name">Help article</span><span class="badge at at0">live</span><span class="badge badge-fail at at1">caught</span><span class="badge badge-pass at at2">fixed</span></p><p class="tile-says"><span class="at at0 at1">Pro includes 3 seats.</span><span class="at at2">Pro includes 5 seats.</span></p><p class="tile-made">written by hand</p></li>
+</ul>
+<p class="demo-note">An illustration: a made-up company&#x27;s plan. The checks behind it are real: <code>wherefore gate</code> and <code>wherefore check retired</code>.</p>
+</div>
+<p class="actions"><a class="button" href="#pilot">Join the founder pilot</a><a class="button button-quiet" href="#how">How it works</a></p>
+</div></section>
+<section id="why" class="meaning"><div class="wrap meaning-grid">
+<div class="definition">
+<p class="eyebrow">Why “Wherefore”</p>
+<p class="word"><dfn>wherefore</dfn> <span class="part">adverb</span></p>
+<p class="sense">for what reason; why.</p>
+<p class="juliet">Juliet wasn’t asking where Romeo was. She was asking why he had to be who he was.</p>
+<p class="answers">In a Wherefore repository every file has to answer her: generated from a source, written by a person for a stated reason, or captured and stamped with what it was made from. A file that cannot answer stops the change.</p>
+</div>
+<div class="asks" role="group" aria-label="Pick an asset to ask">
+<input class="state" type="radio" name="ask" id="ask-0" checked>
+<label class="tab" for="ask-0">pricing page</label>
+<div class="ask-panel"><h2>Wherefore art thou, <em>5 seats</em>?</h2><dl class="answer"><div class="answer-from"><dt>Built from</dt><dd><code>plans.json · pro.seats = 5</code></dd></div><div class="answer-because"><dt>Because</dt><dd>Teams of four and five kept hitting the limit. The reason was written down with the change, so it ships with it.</dd></div></dl></div>
+<input class="state" type="radio" name="ask" id="ask-1">
+<label class="tab" for="ask-1">website</label>
+<div class="ask-panel"><h2>Wherefore art thou, <em>website</em>?</h2><dl class="answer"><div class="answer-from"><dt>Built from</dt><dd><code>company.json · copy · brand tokens</code></dd></div><div class="answer-because"><dt>Because</dt><dd>Every line of me is built from the source. Nobody typed me, so nobody can make me disagree with it.</dd></div></dl></div>
+<input class="state" type="radio" name="ask" id="ask-2">
+<label class="tab" for="ask-2">deck</label>
+<div class="ask-panel"><h2>Wherefore art thou, <em>slide 7</em>?</h2><dl class="answer"><div class="answer-from"><dt>Built from</dt><dd><code>plans.json · claims.json · deck template</code></dd></div><div class="answer-because"><dt>Because</dt><dd>I read the same plans and claims as the website, so the slide and the site cannot drift apart.</dd></div></dl></div>
+<input class="state" type="radio" name="ask" id="ask-3">
+<label class="tab" for="ask-3">brand</label>
+<div class="ask-panel"><h2>Wherefore art thou, <em>orange</em>?</h2><dl class="answer"><div class="answer-from"><dt>Built from</dt><dd><code>brand.json · accent</code></dd></div><div class="answer-because"><dt>Because</dt><dd>The accent is said once. Every page, slide and social card is built from it, so a rebrand is one line.</dd></div></dl></div>
+<input class="state" type="radio" name="ask" id="ask-4">
+<label class="tab" for="ask-4">claim</label>
+<div class="ask-panel"><h2>Wherefore art thou, <em>“SOC 2 certified”</em>?</h2><dl class="answer"><div class="answer-from"><dt>Built from</dt><dd><code>claims.json · compliance</code></dd></div><div class="answer-because"><dt>Because</dt><dd>I am not allowed yet. Until the audit is signed, the most any page may say is “SOC 2 in progress”, and the check refuses the rest.</dd></div></dl></div>
+<p class="ask-note">The same made-up company. <a href="brand/">This site’s own answers are on its brand page.</a></p>
+</div>
 </div></section>
 <section id="how"><div class="wrap">
-<h2>How it works</h2>
+<h2>It installs in your repo, beside your code.</h2>
 <ol class="steps">
-<li><h3>Say it once</h3><p>Prices, dimensions, names and claims live in one source. Nothing else is allowed to type them.</p></li>
-<li><h3>Generate the rest</h3><p>Plain scripts turn the source into every asset a customer, a supplier or a buyer sees. The same source makes the same files every time, because nothing in the build calls a model.</p></li>
-<li><h3>Gate every change</h3><p>Before a change lands, the gate rebuilds everything and compares it with what is committed. Every file must be generated, written by a person, or a capture stamped with what it was made from — and every generated file must be current — or the change is refused, in words that say why.</p></li>
-<li><h3>Prove the checks</h3><p>Each check has a proof that plants the fault it exists to catch and requires the check to name it. A check nobody has seen fail is not trusted.</p></li>
+<li><p class="step-label">01 · your sources</p><h3>Write it once.</h3><p>Prices, plans, specs and claims live in one source, each with its reason.</p></li>
+<li><p class="step-label">02 · <code>wherefore build</code></p><h3>Compile everything.</h3><p>Every asset is generated from the source, the same way every time. Nothing in the build calls a model.</p></li>
+<li><p class="step-label">03 · <code>wherefore gate</code></p><h3>Refuse the drift.</h3><p>On every push, anything stale or unaccounted for stops the change, and the error says why.</p></li>
 </ol>
+<p class="how-note">A command line, Python&#x27;s standard library, and one file that says what your corpus is.</p>
 </div></section>
-<section id="principles"><div class="wrap">
-<h2>What it enforces</h2>
-<ol class="principles">
-<li><strong>A fact exists in exactly one place.</strong> Everything else is generated from it or checked against it.</li>
-<li><strong>The build is deterministic.</strong> Nothing in the build path calls a model.</li>
-<li><strong>Fail loudly.</strong> A change the build cannot handle stops it; nothing improvises.</li>
-<li><strong>A check is not trusted until it has been shown to fail.</strong></li>
-<li><strong>Sources versus outputs.</strong> Every tracked file is <em>generated</em>, <em>authored</em> or <em>captured</em>. Generated files are never hand-edited, and a capture is stamped with what it was made from.</li>
-</ol>
+<section class="rule"><div class="wrap rule-grid">
+<p class="rule-line">AI writes the rules.<br><em>The build never improvises.</em></p>
+<p class="rule-client">Already compiling a hardware company: Chaotic Pendulums, where one spec file makes every drawing, solid model, parts list and web page. Move a dimension and every one of them moves with it, or the build stops and names the file that did not.</p>
 </div></section>
-<section id="client"><div class="wrap">
-<h2>Built inside a real company</h2>
-<blockquote><p>Wherefore was extracted from Chaotic Pendulums, where one spec file makes every drawing, solid model, parts list and web page. Move a dimension and every one of them moves with it, or the build stops and names the file that did not.</p></blockquote>
-</div></section>
-<section id="interface"><div class="wrap">
-<h2>The whole interface</h2>
-<p>A command line, Python&#x27;s standard library, and one file that says what your corpus is.</p>
-<dl class="terminal">
-<div class="cmd"><dt><code>wherefore init [DIR]</code></dt><dd>write a wherefore.json that declares nothing yet</dd></div>
-<div class="cmd"><dt><code>wherefore gate [--keep]</code></dt><dd>every tracked file classified, every generated one current; puts the tree back unless --keep</dd></div>
-<div class="cmd"><dt><code>wherefore gate --restamp GROUP</code></dt><dd>record a re-made capture against its sources</dd></div>
-<div class="cmd"><dt><code>wherefore build</code></dt><dd>the roll: every generator, twice, compared with what is committed, and the results left in place</dd></div>
-<div class="cmd"><dt><code>wherefore list</code></dt><dd>run every generator once and say what each wrote</dd></div>
-<div class="cmd"><dt><code>wherefore prove [SCRIPT ...]</code></dt><dd>run the client&#x27;s proofs, one at a time, in place</dd></div>
-<div class="cmd"><dt><code>wherefore check retired</code></dt><dd>nothing a person reads still claims a retired value or phrase</dd></div>
-<div class="cmd"><dt><code>wherefore check reach</code></dt><dd>every fact, moved one at a time, reaches what it should</dd></div>
-<div class="cmd"><dt><code>wherefore check claims</code></dt><dd>every claim says only what its rule allows</dd></div>
-<div class="cmd"><dt><code>wherefore hook install</code></dt><dd>a pre-push hook: no push leaves the corpus stale</dd></div>
-<div class="cmd"><dt><code>wherefore hook pre-push</code></dt><dd>what the installed hook runs before a push; not for typing</dd></div>
-</dl>
-</div></section>
-<section id="access"><div class="wrap">
-<h2>Early access</h2>
-<p>Wherefore is in private development. Version 0.1.1.</p>
-</div></section>
+<section id="pilot"><div class="wrap"><div class="pilot">
+<p class="pilot-ask">Wherefore art thou?</p>
+<h2>Find out how often you contradict yourself.</h2>
+<p class="pilot-text">The founder pilot starts with a count: every place your company states its pricing, and how many disagree. Then we compile them from one source, and keep them that way.</p>
+<p class="pilot-closed">Wherefore is in private development, and the pilot is not open yet.</p>
+<ul class="road">
+<li class="road-available"><span class="chip">Available</span> the engine and its checks, Wherefore 0.1.1</li>
+<li class="road-next"><span class="chip">Next</span> docs compiled from each release, and a skill that teaches your agent the rules</li>
+<li class="road-later"><span class="chip">Later</span> launches that wait until their page, pricing and docs agree</li>
+</ul>
+</div></div></section>
 </main>
-<footer><div class="wrap"><p>This page is generated by Wherefore from one source file, and checked by it. Wherefore 0.1.1. <a href="brand/">Brand</a></p></div></footer>
+<footer><div class="wrap footer-row"><p><span class="footer-name">Wherefore</span> · This page is compiled from one source file and the release it pins.</p><p class="footer-meta">Wherefore 0.1.1 · <a href="brand/">Brand</a></p></div></footer>
 </body>
 </html>

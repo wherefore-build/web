@@ -80,7 +80,7 @@ def page(t):
         f'<td class="num">{contrast(colours[p["text"]]["value"], colours[p["on"]]["value"]):.1f}:1</td>'
         f'<td class="num">{p["min"]:g}:1</td></tr>'
         for p in t["contrast"]["pairs"])
-    samples = {"display": FACTS["hero"]["headline"], "body": FACTS["hero"]["lede"],
+    samples = {"display": f'{FACTS["hero"]["headline"]} {FACTS["hero"]["headline_end"]}', "body": FACTS["hero"]["lede"],
                "mono": "$ " + gate_usage()}
     specimens = "\n".join(
         f'<div class="specimen"><p class="label">{esc(role)} · {esc(face["family"])} · '

@@ -48,7 +48,7 @@
     ],
     [
      "gen/page.css",
-     "the site's design, inlined into every page by gen/site.py"
+     "the site's layout, served as site/page.css by gen/site.py; every colour and face in it is a token"
     ],
     [
      "*.md",
@@ -65,6 +65,10 @@
     [
      "requirements-engine.txt",
      "the engine release this corpus is built and judged by"
+    ],
+    [
+     "requirements-browser.txt",
+     "the browser library checks/controls_press.py drives, pinned like the engine"
     ],
     [
      "wrangler.jsonc",

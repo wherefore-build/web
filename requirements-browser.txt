@@ -1,0 +1,5 @@
+# The browser library checks/controls_press.py drives, to press every control
+# on the site the way a thumb would. Pinned, like the engine, so the browser
+# that judges the page is the same one every run; CI installs it and the
+# Chromium build it asks for (.github/workflows/corpus.yml).
+playwright==1.63.0

@@ -28,9 +28,11 @@ pin. The reasons are in the engine's `DIRECTIONS.md`, §13 and §14.
 | `checks/self_contained.py` | the site loads nothing from elsewhere, and every link on it goes somewhere | authored |
 | `checks/one_palette.py` | no colour or typeface is said anywhere but the brand | authored |
 | `checks/contrast.py` | every text colour reaches 4.5:1 on every ground it is set on | authored |
+| `checks/controls_press.py` | every control on the site does something a visitor sees, pressed cold on a phone | authored |
 | `checks/*_proof.py` | each check, and the gate, shown to fail | authored |
 | `wherefore.json` | what this repository is to the engine | authored |
 | `requirements-engine.txt` | the engine release this is built and judged by | authored |
+| `requirements-browser.txt` | the browser library the press check drives | authored |
 | `wrangler.jsonc` | the hosting: Cloudflare serves `site/` as committed | authored |
 
 Never edit `site/` by hand. The gate fails a page that is not what its sources
@@ -51,16 +53,40 @@ brand pack at `site/brand/`.
 - **It is a draft.** The look was a first attempt kept as a starting point
   (`origin` in the tokens), and it changes by editing the tokens.
 
+## The page
+
+It is short on purpose: what Wherefore does, shown before it is explained.
+- **The demo.** One fact (a made-up company's seats on its Pro plan) and the
+  seven assets that state it. Three steps: today, the change, and the fix for
+  the one asset written by hand. The page says it is an illustration, and names
+  the real commands behind it.
+- **Why "Wherefore".** The word means *why*. Beside it, five tabs ask an asset
+  of the same made-up company "Wherefore art thou?" and show what it was built
+  from, and why.
+- **How it works, the rule, and the pilot**, with what is available, next and
+  later.
+
+Every line is in `facts/company.json`. A number appears in the facts once: a
+line that mentions it names it as `{before}`, `{after}`, `{total}` and the
+rest, and the generator fills it in. An unknown name stops the build.
+
+**No script runs on the site.** The demo's steps and the tabs are radio
+buttons and their labels, and `gen/page.css` shows what the checked one
+selects. `checks/controls_press.py` loads every page in a real browser at 390
+by 844 with touch, presses each control on a fresh load, and fails one that
+cannot be pressed, is smaller than 44 by 44, presses nothing, or shows nothing
+new on the screen.
+
 ## What comes from the engine, not from here
 
-The page states the product's **principles**, its **commands** and its
-**version**. None of them is typed here. `gen/site.py` reads them from the
-installed engine, the release `requirements-engine.txt` pins. So:
+The page states the product's **version** and names some of its **commands**.
+None of them is typed here. `gen/site.py` reads them from the installed engine,
+the release `requirements-engine.txt` pins, and refuses to name a command that
+release does not have. So:
 
-- a release that rewords a principle or renames a command reaches the site by
-  moving the pin, in a pull request;
-- that pull request's gate fails until the site is regenerated against the new
-  release.
+- a release that renames a command fails the build until the facts follow it;
+- a new version reaches the site by moving the pin, in a pull request whose
+  gate fails until the site is regenerated against it.
 
 The site can never describe an engine it does not pin.
 
@@ -74,8 +100,12 @@ wherefore build                      # regenerate site/ from the facts
 wherefore gate                       # every file classified, every generated one current
 wherefore check reach                # every fact reaches what a visitor receives
 python3 checks/self_contained.py     # nothing loaded from elsewhere, no dead links
+python3 checks/controls_press.py     # every control works under a thumb (needs the browser)
 wherefore prove                      # each of those fails when it should
 ```
+
+The press check and its proof need Playwright and its Chromium:
+`pip install -r requirements-browser.txt && python3 -m playwright install chromium`.
 
 Change a fact in `facts/company.json`, run `wherefore build`, and commit the
 fact and the regenerated `site/` together. `--force-reinstall` matters
@@ -95,12 +125,13 @@ anything else.
 
 A `null` in the facts is a fact not decided yet. With no `company.domain`, the
 page names no canonical address. With no `company.contact`, it offers no
-address to write to. Each appears when its fact is filled in.
+address to write to and says the pilot is not open. With no `pilot.terms`, it
+states none. Each appears when its fact is filled in.
 
 ## CI
 
 `.github/workflows/corpus.yml` runs on every push, on a hosted runner, in about
-a minute. The engine's repository is private, so CI reads it with a token.
+two minutes, most of it installing the browser the press check drives. The engine's repository is private, so CI reads it with a token.
 
 **One-time setup (owner).** Create a fine-grained token, *Contents: read* on
 `zakholdsworth/wherefore` only:
