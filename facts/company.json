@@ -18,10 +18,33 @@
   "eyebrow": "Founder pilot",
   "headline": "Your company,",
   "headline_end": "compiled.",
-  "lede": "Change a fact once. Your website, pricing, deck and docs follow it, and nothing ships that still says the old thing.",
+  "lede": "Your code has one source of truth, tests, and a merge. Everything else your company says is a copy of a copy, and every copy drifts.",
   "cta": "Join the founder pilot"
  },
+ "forks": {
+  "code": {
+   "title": "Your code",
+   "caption": "Every change branches off, is tested, and merges back. There is one main, and it is the truth.",
+   "main": "main",
+   "tests": "tests",
+   "ships": "ships"
+  },
+  "drift": {
+   "title": "Everything else",
+   "caption": "Every copy forks, then forks again, and nothing ever merges back. Each version drifts on its own, for good.",
+   "sting": "That is how a customer ends up quoting you last year’s price.",
+   "start": "a decision",
+   "copies": ["deck_final_v2.key", "pricing (old).pdf", "help: still 3 seats", "site, last spring"]
+  },
+  "compiled": {
+   "title": "With Wherefore",
+   "caption": "Everything else gets what code already has. Change a fact once: your website, pricing, deck and docs follow it, and nothing ships that still says the old thing.",
+   "source": "source",
+   "ships": "ships"
+  }
+ },
  "demo": {
+  "heading": "One change. Everywhere it is said.",
   "label": "Change one fact, and watch what follows it",
   "source": "source",
   "fact": "plans.json · pro.seats",

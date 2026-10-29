@@ -55,7 +55,12 @@ brand pack at `site/brand/`.
 
 ## The page
 
-It is short on purpose: what Wherefore does, shown before it is explained.
+It leads with the pain, then shows the cure working.
+- **The picture.** Three panels under the headline, drawn by the generator:
+  your code branches, is tested and merges back; everything else forks and
+  never comes back; with Wherefore, everything else has code's shape - one
+  source, built into every asset, through the gate. Its assets are the demo's
+  own, and the commands it names are checked against the engine.
 - **The demo.** One fact (a made-up company's seats on its Pro plan) and the
   seven assets that state it. Three steps: today, the change, and the fix for
   the one asset written by hand. The page says it is an illustration, and names

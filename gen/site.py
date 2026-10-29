@@ -248,6 +248,104 @@ def demo(d):
 </div>"""
 
 
+W, H = 360, 220    # every panel's drawing, in the units its viewBox gives it
+
+
+def svg(title, body):
+    return (f'<svg class="fork-art" viewBox="0 0 {W} {H}" role="img" aria-label="{esc(title)}">'
+            f'{body}</svg>')
+
+
+def text(x, y, words, cls="art-label", anchor="start"):
+    return f'<text class="{cls}" x="{x}" y="{y}" text-anchor="{anchor}">{esc(words)}</text>'
+
+
+def code_art(c):
+    """Your code: one main line; each branch leaves it, passes its tests, and merges back -
+    and the branches overlap, as work does."""
+    main_y = 162
+    out = [f'<path class="art-main" d="M 12 {main_y} H {W - 12}"/>']
+    for i, (x, run, up) in enumerate(((22, 112, 84), (104, 120, 116), (214, 120, 80))):
+        d = (f"M {x} {main_y} C {x + 22} {main_y} {x + 14} {up} {x + 36} {up} H {x + run - 36} "
+             f"C {x + run - 14} {up} {x + run - 22} {main_y} {x + run} {main_y}")
+        out.append(f'<path class="art-branch" d="{d}"/>')
+        out.append(f'<path class="art-pulse" pathLength="1" style="--d: {i * 0.9}s" d="{d}"/>')
+        out.append(f'<circle class="art-ok" cx="{x + run // 2}" cy="{up}" r="5"/>')
+        out.append(f'<circle class="art-ok" cx="{x + run}" cy="{main_y}" r="4"/>')
+        if i == 0:
+            out.append(text(x=x + run // 2, y=up - 12, words=c["tests"], anchor="middle"))
+    out.append(text(x=12, y=main_y + 26, words=c["main"]))
+    out.append(text(x=W - 12, y=main_y + 26, words=c["ships"], anchor="end"))
+    return svg(c["title"], "".join(out))
+
+
+def drift_art(d):
+    """Everything else: one decision copied into every asset, each copy forking again, none coming back."""
+    x0, y0 = 22, 110
+    rows = (30, 70, 110, 150, 190)
+    out, ends = [], []
+    for i, y in enumerate(rows):
+        a = 108 + (i * 23) % 44          # where this copy forks
+        b = 196 + (i * 37) % 52          # and where one of its forks forks again
+        out.append(f'<path class="art-drift grow" pathLength="1" style="--d: {i * 0.25}s" '
+                   f'd="M {x0} {y0} C {x0 + 30} {y0} {x0 + 26} {y} {x0 + 56} {y} H {a}"/>')
+        for k, dy in enumerate((-11, 11)):
+            y1 = y + dy
+            out.append(f'<path class="art-drift fade-1 grow" pathLength="1" style="--d: {1.2 + i * 0.25 + k * 0.1}s" '
+                       f'd="M {a} {y} C {a + 14} {y} {a + 10} {y1} {a + 24} {y1} H {b if k == i % 2 else W - 14}"/>')
+            if k == i % 2:
+                for j, dz in enumerate((-6, 6)):
+                    y2 = y1 + dz
+                    out.append(f'<path class="art-drift fade-2 grow" pathLength="1" '
+                               f'style="--d: {2.4 + i * 0.25 + j * 0.1}s" '
+                               f'd="M {b} {y1} C {b + 10} {y1} {b + 8} {y2} {b + 18} {y2} H {W - 14}"/>')
+                    ends.append(y2)
+            else:
+                ends.append(y1)
+    for n, y in enumerate(ends):
+        out.append(f'<circle class="{"art-stale" if n % 3 == 1 else "art-end"}" cx="{W - 14}" cy="{y}" r="2.5"/>')
+    out.append(f'<circle class="art-node" cx="{x0}" cy="{y0}" r="5"/>')
+    out.append(text(x=x0 - 10, y=y0 + 26, words=d["start"]))
+    for copy, y in zip(d["copies"], (rows[0] - 14, rows[1] + 26, rows[3] - 14, rows[4] + 24)):
+        out.append(text(x=W - 22, y=y, words=copy, cls="art-copy", anchor="end"))
+    return svg(d["title"], "".join(out))
+
+
+def compiled_art(c, assets):
+    """With Wherefore: one source, built into every asset, every asset through the gate, then out."""
+    x0, y0, gate = 22, 110, 300
+    n = len(assets)
+    gap = 168 / max(n - 1, 1)
+    out = []
+    for i, a in enumerate(assets):
+        y = round(26 + i * gap)
+        d = (f"M {x0} {y0} C {x0 + 30} {y0} {x0 + 26} {y} {x0 + 58} {y} H 258 "
+             f"C 284 {y} 278 {y0} {gate} {y0}")
+        out.append(f'<path class="art-line" d="{d}"/>')
+        out.append(f'<path class="art-pulse art-ripple" pathLength="1" d="{d}"/>')
+        out.append(text(x=x0 + 66, y=y - 4, words=a["name"], cls="art-asset"))
+    out.append(f'<path class="art-out" d="M {gate} {y0} H {W - 12}"/>')
+    out.append(f'<circle class="art-source" cx="{x0}" cy="{y0}" r="6"/>')
+    out.append(f'<rect class="art-gate" x="{gate - 12}" y="{y0 - 12}" width="24" height="24" rx="6"/>')
+    out.append(f'<path class="art-check" d="M {gate - 5} {y0} l 4 4 l 7 -8"/>')
+    out.append(text(x=x0 - 8, y=y0 + 24, words=c["source"]))
+    out.append(text(x=gate, y=y0 + 32, words=command("wherefore gate"), anchor="middle"))
+    out.append(text(x=W - 12, y=y0 - 10, words=c["ships"], anchor="end"))
+    out.append(text(x=x0 + 66, y=H - 4, words=command("wherefore build"), cls="art-label"))
+    return svg(c["title"], "".join(out))
+
+
+def forks(f):
+    """The picture: code merges back; everything else forks for good; Wherefore gives it code's shape."""
+    k = f["forks"]
+    code, drift, done = k["code"], k["drift"], k["compiled"]
+    return f"""<div class="forks">
+<figure class="fork fork-code"><figcaption class="fork-title">{esc(code["title"])}</figcaption>{code_art(code)}<p class="fork-caption">{esc(code["caption"])}</p></figure>
+<figure class="fork fork-drift"><figcaption class="fork-title">{esc(drift["title"])}</figcaption>{drift_art(drift)}<p class="fork-caption">{esc(drift["caption"])}</p><p class="fork-sting">{esc(drift["sting"])}</p></figure>
+<figure class="fork fork-compiled"><figcaption class="fork-title">{esc(done["title"])}</figcaption>{compiled_art(done, f["demo"]["assets"])}<p class="fork-caption">{esc(done["caption"])}</p></figure>
+</div>"""
+
+
 def hero(f):
     h = f["hero"]
     return f"""<section class="hero"><div class="wrap">
@@ -255,8 +353,16 @@ def hero(f):
 <p class="eyebrow">{esc(h["eyebrow"])} · Wherefore {esc(version())}</p>
 <h1>{esc(h["headline"])} <em>{esc(h["headline_end"])}</em></h1>
 <p class="lede">{esc(h["lede"])}</p>
-{demo(f["demo"])}
+{forks(f)}
 <p class="actions"><a class="button" href="#pilot">{esc(h["cta"])}</a><a class="button button-quiet" href="#how">{esc(f["nav"]["how"])}</a></p>
+</div></section>"""
+
+
+def ripple(f):
+    return f"""<section id="demo" class="ripple"><div class="wrap">
+{SRC}
+<h2>{esc(f["demo"]["heading"])}</h2>
+{demo(f["demo"])}
 </div></section>"""
 
 
@@ -391,7 +497,7 @@ def page(f):
     if company["domain"]:
         lines.append(f'<link rel="canonical" href="https://{esc(company["domain"])}/">')
     parts = {name: part(render, f, inspect) for name, render in (
-        ("header", header), ("hero", hero), ("why", why), ("how", how), ("case", case),
+        ("header", header), ("hero", hero), ("demo", ripple), ("why", why), ("how", how), ("case", case),
         ("rule", rule), ("pilot", pilot), ("footer", footer))}
     return f"""<!doctype html>
 <html lang="en">
@@ -404,6 +510,7 @@ def page(f):
 <main id="top">
 {key(f)}
 {parts["hero"]}
+{parts["demo"]}
 {parts["why"]}
 {parts["how"]}
 {parts["case"]}
