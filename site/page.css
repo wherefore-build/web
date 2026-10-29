@@ -213,7 +213,69 @@ em { font-style: italic; }
 .rule { background: var(--accent); color: var(--on-accent); border-top: 0; }
 .rule-grid { display: flex; flex-wrap: wrap; gap: 1.5rem 4rem; align-items: flex-end; justify-content: space-between; }
 .rule-line { margin: 0; max-width: none; font: 400 clamp(2.25rem, 5.6vw, 4.75rem)/1 var(--font-display); letter-spacing: -0.025em; }
-.rule-client { margin: 0; max-width: 36ch; font-size: 1.0625rem; line-height: 1.5; }
+.rule-text { margin: 0; max-width: 34ch; font-size: 1.0625rem; line-height: 1.5; }
+
+/* The case study */
+.case h2 { max-width: 20ch; }
+.case-text { font-size: 1.125rem; color: var(--muted); max-width: 46rem; }
+.case-quote { margin: 2rem 0 0; padding: 0.25rem 0 0.25rem 1.25rem; border-left: 3px solid var(--accent); font: 400 clamp(1.5rem, 3.4vw, 2rem)/1.3 var(--font-display); }
+.case-quote p { margin: 0; }
+.case-quote footer { padding: 0.75rem 0 0; border: 0; font: 400 0.875rem/1.4 var(--font-body); color: var(--faint); }
+.case-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(22rem, 100%), 1fr)); gap: 1rem; margin-top: 2.5rem; }
+.case-col { padding: 1.5rem; border: 1px solid var(--line); border-radius: var(--radius-card); background: var(--surface); }
+.case-col h3 { margin: 0 0 1rem; }
+.case-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 0.75rem; color: var(--muted); font-size: 0.9375rem; line-height: 1.5; }
+.case-list li { padding-left: 1.25rem; position: relative; }
+.case-list li::before { content: ""; position: absolute; left: 0; top: 0.6em; width: 0.45rem; height: 0.45rem; border-radius: var(--radius-control); background: var(--line); }
+.case-held li::before { background: var(--accent); }
+.stats { list-style: none; margin: 2rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr)); gap: 1rem; }
+.stats li { color: var(--muted); font-size: 0.9375rem; line-height: 1.4; }
+.stat-n { display: block; font: 400 clamp(2.75rem, 6vw, 4rem)/1 var(--font-display); color: var(--ink); margin-bottom: 0.4rem; }
+.as-of { margin: 1.25rem 0 0; font: 400 0.8125rem/1.4 var(--font-mono); color: var(--faint); }
+
+/* How this page is built. One checkbox, first in the page, held in place on
+   the screen so that pressing either of its labels never scrolls; checked, it
+   shows the key at the top of the page and each part's account of itself. */
+body { padding-bottom: 5.5rem; }
+.inspect-state { position: fixed; right: 1rem; bottom: 1rem; }
+.src, .src-key { display: none; }
+#inspect:checked ~ * .src { display: block; }
+#inspect:checked ~ main .src-key { display: block; }
+.src {
+  margin: 0 0 1.5rem; padding: 0.75rem 1rem; max-width: none;
+  border: 1px dashed var(--accent); border-radius: 10px; background: var(--raised);
+  font: 400 0.75rem/1.55 var(--font-mono); color: var(--muted); overflow-wrap: anywhere;
+}
+.src p { margin: 0; max-width: none; }
+.src-k { color: var(--accent); margin-right: 0.5rem; }
+.top .src { margin: 0 0 1rem; }
+footer .src { margin: 0 0 1.25rem; }
+.src-key { background: var(--raised); border-bottom: 1px dashed var(--accent); padding: 1.25rem 0; font-size: 0.9375rem; }
+.src-key p { color: var(--ink); margin: 0 0 0.75rem; }
+.src-key dl { margin: 0; display: grid; gap: 0.35rem; }
+.src-key dl div { display: grid; grid-template-columns: 4.5rem 1fr; gap: 0.75rem; }
+.src-key dt { font-family: var(--font-mono); font-size: 0.8125rem; color: var(--accent); }
+.src-key dd { margin: 0; color: var(--muted); }
+.inspect-switch {
+  position: fixed; right: max(1rem, env(safe-area-inset-right)); bottom: max(1rem, env(safe-area-inset-bottom)); z-index: 10;
+  display: inline-flex; align-items: center; gap: 0.6rem; min-height: var(--tap); padding: 0 1.1rem 0 0.75rem;
+  border: 1px solid var(--line); border-radius: var(--radius-control); background: var(--raised);
+  color: var(--ink); font-weight: 500; font-size: 0.875rem; cursor: pointer;
+  -webkit-tap-highlight-color: transparent; user-select: none;
+}
+.switch-track { position: relative; width: 2.25rem; height: 1.3rem; border-radius: var(--radius-control); background: var(--line); transition: background 0.2s ease; }
+.switch-track::after { content: ""; position: absolute; top: 0.15rem; left: 0.15rem; width: 1rem; height: 1rem; border-radius: var(--radius-control); background: var(--ink); transition: transform 0.2s ease; }
+#inspect:checked ~ .inspect-switch { border-color: var(--accent); }
+#inspect:checked ~ .inspect-switch .switch-track { background: var(--accent); }
+#inspect:checked ~ .inspect-switch .switch-track::after { transform: translateX(0.95rem); background: var(--on-accent); }
+#inspect:focus-visible ~ .inspect-switch { outline: 2px solid var(--accent); outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { .switch-track, .switch-track::after { transition: none; } }
+.inline-switch {
+  display: inline-flex; align-items: center; min-height: var(--tap); padding: 0 1rem; margin-top: 0.25rem;
+  border: 1px dashed var(--accent); border-radius: var(--radius-control); color: var(--ink); font-weight: 500; cursor: pointer;
+  -webkit-tap-highlight-color: transparent; user-select: none;
+}
+#inspect:checked ~ main .inline-switch { background: var(--accent); color: var(--on-accent); border-style: solid; }
 
 #pilot { border-top: 0; }
 .pilot { padding: clamp(2.25rem, 7vw, 5rem) clamp(1.25rem, 6vw, 4rem); border: 1px solid var(--line); border-radius: var(--radius-card); background: var(--surface); }

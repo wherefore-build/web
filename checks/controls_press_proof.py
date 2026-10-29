@@ -6,6 +6,7 @@ or its stylesheet, as a visitor receives them - and requires the check to fail
 in the words of the case, or, for the case that must not fire, to pass.
 
   fails   the stylesheet stops showing the step that is pressed
+          the switch that shows how the page is built shows nothing
           a tab whose radio button was renamed
           the demo's steps hidden at a phone's width
           the tabs shrunk below a thumb
@@ -46,6 +47,9 @@ def main():
         plant(p, "#stage-0:checked ~ * .at0, #stage-1:checked ~ * .at1, #stage-2:checked ~ * .at2 { display: inline; }",
               "#stage-0:checked ~ * .at0 { display: inline; }")
         check(r, "the step pressed is never shown", CHECK, True, ["pressing", "showed nothing new"])
+    with Edit(CSS) as p:
+        plant(p, "#inspect:checked ~ * .src { display: block; }\n#inspect:checked ~ main .src-key { display: block; }", "")
+        check(r, "the switch shows nothing", CHECK, True, ["'How this page is built'", "showed nothing new"])
     with Edit(PAGE) as p:
         plant(p, 'id="ask-3"', 'id="ask-three"')
         check(r, "a tab whose radio button was renamed", CHECK, True,

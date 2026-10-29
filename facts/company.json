@@ -81,8 +81,7 @@
    {"tab": "claim", "name": "“SOC 2 certified”", "from": "claims.json · compliance",
     "because": "I am not allowed yet. Until the audit is signed, the most any page may say is “SOC 2 in progress”, and the check refuses the rest."}
   ],
-  "note": "The same made-up company.",
-  "own": "This site’s own answers are on its brand page."
+  "note": "The same made-up company. This page can answer for itself:"
  },
  "how": {
   "heading": "It installs in your repo, beside your code.",
@@ -96,10 +95,42 @@
   ],
   "note": "A command line, Python's standard library, and one file that says what your corpus is."
  },
+ "case": {
+  "eyebrow": "Case study",
+  "name": "Chaotic Pendulums",
+  "heading": "A hardware company, compiled from one spec file.",
+  "text": "Chaotic Pendulums makes a desk-sized double pendulum: milled parts, a bronze blade, bearings and a clamp. It is our founder’s own company, and the first to run on Wherefore. One spec file holds the object. Everything a shop, a customer or a printer receives is built from it, and checked on every push.",
+  "url": "https://chaoticpendulums.com/",
+  "visit": "See the live site",
+  "made_heading": "What it compiles",
+  "made": [
+   "Part drawings a machine shop quotes and inspects against, each with its cut file and its solid model",
+   "Print-ready 3D files for a prototype, laid out plate by plate",
+   "A bill of materials, and a quote bundle a shop’s online tool takes in one drag",
+   "The engineering hand-over, frozen at every release so a shop can always find the pack it quoted",
+   "The brand: the mark, the hero and the renders, drawn from the object’s own dimensions",
+   "The website, and the 3D pendulum that swings on it"
+  ],
+  "held_heading": "What holds it",
+  "held": [
+   "Load simulations, worked from the real parts’ masses, prove every mount setup holds the pendulum at a torque a hand can give.",
+   "Worst-case tolerance stacks prove every screw clamps and never bottoms, at every extreme of every band.",
+   "A sweep proves the blade turns a full circle and touches nothing.",
+   "The swing on the website is integrated from the physics of the object as it is today, and a check holds every mass and length to the parts.",
+   "Move any dimension, and a probe requires every file a supplier receives to move with it, or the change is refused."
+  ],
+  "stats": [
+   {"n": 49, "what": "checks, each with a proof that plants the fault it exists to catch"},
+   {"n": 9, "what": "parts, each drawn, cut and modelled from the spec"},
+   {"n": 5, "what": "print plates for a prototype anyone holding the pack can make"}
+  ],
+  "as_of": "Counted at V83 of the pack, on 29 October 2026.",
+  "quote": null
+ },
  "rule": {
   "line": "AI writes the rules.",
   "end": "The build never improvises.",
-  "client": "Already compiling a hardware company: Chaotic Pendulums, where one spec file makes every drawing, solid model, parts list and web page. Move a dimension and every one of them moves with it, or the build stops and names the file that did not."
+  "text": "Agents write the generators and the checks. The build that runs them is plain code, the same every time, and nothing in it calls a model."
  },
  "pilot": {
   "ask": "Wherefore art thou?",
@@ -119,6 +150,21 @@
    {"state": "next", "text": "docs compiled from each release, and a skill that teaches your agent the rules"},
    {"state": "later", "text": "launches that wait until their page, pricing and docs agree"}
   ]
+ },
+ "inspect": {
+  "toggle": "How this page is built",
+  "ask": "show how it is built",
+  "intro": "Every part of this page is generated. Each now names the facts it is built from, and the checks that hold it on every push.",
+  "from": "from",
+  "facts": "{n} facts",
+  "held": "held by",
+  "checks": {
+   "gate": "rebuilt from its sources on every push, and refused if it differs from what is committed",
+   "reach": "each of these facts is moved, one at a time, and the page must change with it",
+   "press": "every control here is tapped on a fresh load, at a phone’s width, and must show something new",
+   "engine": "every command named here must be one the pinned release has",
+   "brand": "every colour and face is a brand token, and every text colour reads at 4.5:1 on its ground"
+  }
  },
  "colophon": "This page is compiled from one source file and the release it pins."
 }

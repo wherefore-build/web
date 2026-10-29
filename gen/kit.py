@@ -21,20 +21,21 @@ def esc(text):
     return html.escape(text, quote=True)
 
 
-def status():
+def status(facts=FACTS):
     """site.status, refused unless it is one this site knows how to show."""
-    s = FACTS["site"]["status"]
+    s = facts["site"]["status"]
     if s not in STATUSES:
         raise SystemExit(f"site.status is {s!r}: it is one of {', '.join(STATUSES)}")
     return s
 
 
-def banner():
-    """The draft banner, on every page of a draft; nothing once launched."""
-    if status() != "draft":
+def banner(facts=FACTS):
+    """The draft banner, on every page of a draft; nothing once launched.
+    `facts` is the facts or a view of them that records what it reads (site.py)."""
+    if status(facts) != "draft":
         return ""
     return (f'<div class="draft" role="note"><span class="draft-mark">Draft</span> '
-            f'{esc(FACTS["site"]["draft_banner"])}</div>\n')
+            f'{esc(facts["site"]["draft_banner"])}</div>\n')
 
 
 def head(title, description, css):

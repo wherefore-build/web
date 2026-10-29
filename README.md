@@ -63,15 +63,25 @@ It is short on purpose: what Wherefore does, shown before it is explained.
 - **Why "Wherefore".** The word means *why*. Beside it, five tabs ask an asset
   of the same made-up company "Wherefore art thou?" and show what it was built
   from, and why.
-- **How it works, the rule, and the pilot**, with what is available, next and
-  later.
+- **How it works**, in three steps.
+- **The case study**: Chaotic Pendulums, the founder's own hardware company and
+  the first to run on Wherefore - what it compiles, what holds it, and a link
+  to the live site. Its counts are stated with the release they were counted at.
+- **The rule, and the pilot**, with what is available, next and later.
+
+**How this page is built.** A switch at the bottom of the screen (and a
+second label for it beside the questions) shows, above every part of the
+page, the facts it was built from and the checks that hold it, with a key at
+the top. It is not a description typed beside the page: `gen/site.py` renders
+each part through a view of the facts that records every fact it reads and
+every command it asks the engine for, and that record is what the part shows.
 
 Every line is in `facts/company.json`. A number appears in the facts once: a
 line that mentions it names it as `{before}`, `{after}`, `{total}` and the
 rest, and the generator fills it in. An unknown name stops the build.
 
-**No script runs on the site.** The demo's steps and the tabs are radio
-buttons and their labels, and `gen/page.css` shows what the checked one
+**No script runs on the site.** The switch, the demo's steps and the tabs are
+checkboxes, radio buttons and their labels, and `gen/page.css` shows what the checked one
 selects. `checks/controls_press.py` loads every page in a real browser at 390
 by 844 with touch, presses each control on a fresh load, and fails one that
 cannot be pressed, is smaller than 44 by 44, presses nothing, or shows nothing
@@ -126,7 +136,7 @@ anything else.
 A `null` in the facts is a fact not decided yet. With no `company.domain`, the
 page names no canonical address. With no `company.contact`, it offers no
 address to write to and says the pilot is not open. With no `pilot.terms`, it
-states none. Each appears when its fact is filled in.
+states none, and with no `case.quote` the case study quotes no one. Each appears when its fact is filled in.
 
 ## CI
 

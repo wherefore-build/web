@@ -11,11 +11,14 @@
 <link rel="stylesheet" href="page.css">
 </head>
 <body>
+<input class="state inspect-state" type="checkbox" id="inspect">
 <div class="draft" role="note"><span class="draft-mark">Draft</span> Nothing on this page is launched, and nothing here is a promise yet.</div>
 <header class="top"><div class="wrap"><a class="name" href="#top">Wherefore</a>
-<nav aria-label="On this page"><a href="#why">Why “Wherefore”</a><a href="#how">How it works</a><a class="pill" href="#pilot">Join the pilot</a></nav></div></header>
+<nav aria-label="On this page"><a href="#why">Why “Wherefore”</a><a href="#how">How it works</a><a href="#case">Case study</a><a class="pill" href="#pilot">Join the pilot</a></nav></div><div class="wrap"><div class="src"><p><span class="src-k">from</span> facts/company.json · 7 facts: site.{status, draft_banner} · company.name · why.heading · nav.{how, pilot} · case.eyebrow</p><p><span class="src-k">held by</span> gate · reach · brand</p></div></div></header>
 <main id="top">
+<div class="src-key"><div class="wrap"><p>Every part of this page is generated. Each now names the facts it is built from, and the checks that hold it on every push.</p><dl><div><dt>gate</dt><dd>rebuilt from its sources on every push, and refused if it differs from what is committed</dd></div><div><dt>reach</dt><dd>each of these facts is moved, one at a time, and the page must change with it</dd></div><div><dt>press</dt><dd>every control here is tapped on a fresh load, at a phone’s width, and must show something new</dd></div><div><dt>engine</dt><dd>every command named here must be one the pinned release has</dd></div><div><dt>brand</dt><dd>every colour and face is a brand token, and every text colour reads at 4.5:1 on its ground</dd></div></dl></div></div>
 <section class="hero"><div class="wrap">
+<div class="src"><p><span class="src-k">from</span> facts/company.json · 46 facts: hero.{eyebrow, headline, headline_end, lede, cta} · demo.{assets[].{by_hand, name, says, made}, before, after, stages[], said[], badges.{live, rebuilt, caught, fixed}, label, source, fact, note, checks[]} · nav.how</p><p><span class="src-k">from</span> wherefore 0.1.1 · version · commands.json: wherefore gate, wherefore check retired</p><p><span class="src-k">held by</span> gate · reach · brand · press · engine</p></div>
 <p class="eyebrow">Founder pilot · Wherefore 0.1.1</p>
 <h1>Your company, <em>compiled.</em></h1>
 <p class="lede">Change a fact once. Your website, pricing, deck and docs follow it, and nothing ships that still says the old thing.</p>
@@ -46,7 +49,9 @@
 </div>
 <p class="actions"><a class="button" href="#pilot">Join the founder pilot</a><a class="button button-quiet" href="#how">How it works</a></p>
 </div></section>
-<section id="why" class="meaning"><div class="wrap meaning-grid">
+<section id="why" class="meaning"><div class="wrap">
+<div class="src"><p><span class="src-k">from</span> facts/company.json · 35 facts: demo.{fact, before, after} · why.{asks[].{name, tab, from, because}, ask, built_from, because, heading, word, part, meaning, juliet, rule, pick, note} · inspect.ask</p><p><span class="src-k">held by</span> gate · reach · brand · press</p></div>
+<div class="meaning-grid">
 <div class="definition">
 <p class="eyebrow">Why “Wherefore”</p>
 <p class="word"><dfn>wherefore</dfn> <span class="part">adverb</span></p>
@@ -70,10 +75,12 @@
 <input class="state" type="radio" name="ask" id="ask-4">
 <label class="tab" for="ask-4">claim</label>
 <div class="ask-panel"><h2>Wherefore art thou, <em>“SOC 2 certified”</em>?</h2><dl class="answer"><div class="answer-from"><dt>Built from</dt><dd><code>claims.json · compliance</code></dd></div><div class="answer-because"><dt>Because</dt><dd>I am not allowed yet. Until the audit is signed, the most any page may say is “SOC 2 in progress”, and the check refuses the rest.</dd></div></dl></div>
-<p class="ask-note">The same made-up company. <a href="brand/">This site’s own answers are on its brand page.</a></p>
+<p class="ask-note">The same made-up company. This page can answer for itself: <label class="inline-switch" for="inspect">show how it is built</label></p>
+</div>
 </div>
 </div></section>
 <section id="how"><div class="wrap">
+<div class="src"><p><span class="src-k">from</span> facts/company.json · 11 facts: how.{steps[].{label, name, text, command}, heading, note}</p><p><span class="src-k">from</span> wherefore 0.1.1 · commands.json: wherefore build, wherefore gate</p><p><span class="src-k">held by</span> gate · reach · brand · engine</p></div>
 <h2>It installs in your repo, beside your code.</h2>
 <ol class="steps">
 <li><p class="step-label">01 · your sources</p><h3>Write it once.</h3><p>Prices, plans, specs and claims live in one source, each with its reason.</p></li>
@@ -82,11 +89,30 @@
 </ol>
 <p class="how-note">A command line, Python&#x27;s standard library, and one file that says what your corpus is.</p>
 </div></section>
-<section class="rule"><div class="wrap rule-grid">
-<p class="rule-line">AI writes the rules.<br><em>The build never improvises.</em></p>
-<p class="rule-client">Already compiling a hardware company: Chaotic Pendulums, where one spec file makes every drawing, solid model, parts list and web page. Move a dimension and every one of them moves with it, or the build stops and names the file that did not.</p>
+<section id="case" class="case"><div class="wrap">
+<div class="src"><p><span class="src-k">from</span> facts/company.json · 27 facts: case.{made[], held[], stats[].{n, what}, quote, eyebrow, name, heading, text, url, visit, made_heading, held_heading, as_of}</p><p><span class="src-k">held by</span> gate · reach · brand</p></div>
+<p class="eyebrow">Case study · Chaotic Pendulums</p>
+<h2>A hardware company, compiled from one spec file.</h2>
+<p class="case-text">Chaotic Pendulums makes a desk-sized double pendulum: milled parts, a bronze blade, bearings and a clamp. It is our founder’s own company, and the first to run on Wherefore. One spec file holds the object. Everything a shop, a customer or a printer receives is built from it, and checked on every push.</p>
+<p class="actions"><a class="button button-quiet" href="https://chaoticpendulums.com/">See the live site</a></p>
+
+<div class="case-grid">
+<div class="case-col"><h3>What it compiles</h3><ul class="case-list"><li>Part drawings a machine shop quotes and inspects against, each with its cut file and its solid model</li><li>Print-ready 3D files for a prototype, laid out plate by plate</li><li>A bill of materials, and a quote bundle a shop’s online tool takes in one drag</li><li>The engineering hand-over, frozen at every release so a shop can always find the pack it quoted</li><li>The brand: the mark, the hero and the renders, drawn from the object’s own dimensions</li><li>The website, and the 3D pendulum that swings on it</li></ul></div>
+<div class="case-col"><h3>What holds it</h3><ul class="case-list case-held"><li>Load simulations, worked from the real parts’ masses, prove every mount setup holds the pendulum at a torque a hand can give.</li><li>Worst-case tolerance stacks prove every screw clamps and never bottoms, at every extreme of every band.</li><li>A sweep proves the blade turns a full circle and touches nothing.</li><li>The swing on the website is integrated from the physics of the object as it is today, and a check holds every mass and length to the parts.</li><li>Move any dimension, and a probe requires every file a supplier receives to move with it, or the change is refused.</li></ul></div>
+</div>
+<ul class="stats"><li><span class="stat-n">49</span> checks, each with a proof that plants the fault it exists to catch</li><li><span class="stat-n">9</span> parts, each drawn, cut and modelled from the spec</li><li><span class="stat-n">5</span> print plates for a prototype anyone holding the pack can make</li></ul>
+<p class="as-of">Counted at V83 of the pack, on 29 October 2026.</p>
 </div></section>
-<section id="pilot"><div class="wrap"><div class="pilot">
+<section class="rule"><div class="wrap">
+<div class="src"><p><span class="src-k">from</span> facts/company.json · 3 facts: rule.{line, end, text}</p><p><span class="src-k">held by</span> gate · reach · brand</p></div>
+<div class="rule-grid">
+<p class="rule-line">AI writes the rules.<br><em>The build never improvises.</em></p>
+<p class="rule-text">Agents write the generators and the checks. The build that runs them is plain code, the same every time, and nothing in it calls a model.</p>
+</div>
+</div></section>
+<section id="pilot"><div class="wrap">
+<div class="src"><p><span class="src-k">from</span> facts/company.json · 15 facts: company.contact · pilot.{closed, terms, ask, heading, text} · status.{items[].{state, text}, labels.{available, next, later}}</p><p><span class="src-k">from</span> wherefore 0.1.1 · version</p><p><span class="src-k">held by</span> gate · reach · brand</p></div>
+<div class="pilot">
 <p class="pilot-ask">Wherefore art thou?</p>
 <h2>Find out how often you contradict yourself.</h2>
 <p class="pilot-text">The founder pilot starts with a count: every place your company states its pricing, and how many disagree. Then we compile them from one source, and keep them that way.</p>
@@ -96,8 +122,10 @@
 <li class="road-next"><span class="chip">Next</span> docs compiled from each release, and a skill that teaches your agent the rules</li>
 <li class="road-later"><span class="chip">Later</span> launches that wait until their page, pricing and docs agree</li>
 </ul>
-</div></div></section>
+</div>
+</div></section>
 </main>
-<footer><div class="wrap footer-row"><p><span class="footer-name">Wherefore</span> · This page is compiled from one source file and the release it pins.</p><p class="footer-meta">Wherefore 0.1.1 · <a href="brand/">Brand</a></p></div></footer>
+<footer><div class="wrap"><div class="src"><p><span class="src-k">from</span> facts/company.json · 3 facts: company.{domain, name} · colophon</p><p><span class="src-k">from</span> wherefore 0.1.1 · version</p><p><span class="src-k">held by</span> gate · reach · brand</p></div><div class="footer-row"><p><span class="footer-name">Wherefore</span> · This page is compiled from one source file and the release it pins.</p><p class="footer-meta">Wherefore 0.1.1 · <a href="brand/">Brand</a></p></div></div></footer>
+<label class="inspect-switch" for="inspect"><span class="switch-track" aria-hidden="true"></span>How this page is built</label>
 </body>
 </html>
