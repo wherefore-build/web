@@ -6,8 +6,9 @@ about the product - its principles, its commands and its version - is the
 engine's own, read from the installed release that requirements-engine.txt
 pins. So a release that renames a command or rewords a principle changes this
 page by being pinned, never by being retyped, and the gate fails the page until
-it is regenerated. Nothing here types a fact; what is here is layout, and the
-styles are gen/page.css's.
+it is regenerated. Nothing here types a fact; what is here is layout. The
+look is the brand's: every page links site/brand.css, which gen/brand.py writes
+from brand/tokens.json, and site/page.css, gen/page.css served as it is.
 
 STATUS. site.status is "draft" or "launched", and nothing else: an unknown
 status stops the build. A draft says so in a banner across the page and asks
@@ -19,21 +20,16 @@ A NULL IS A FACT NOT DECIDED YET. With no domain the page names no canonical
 address, and with no contact it offers no address to write to. Each appears
 when its fact does.
 
-Run from gen/, as wherefore.json says. Writes site/index.html and site/_headers.
+Run from gen/, as wherefore.json says, after brand.py. Writes site/index.html,
+site/page.css and site/_headers.
 """
-import html
 import json
-import pathlib
 import re
+import shutil
 from importlib.resources import files
 
 import wherefore
-
-ROOT = pathlib.Path(__file__).resolve().parents[1]
-FACTS = json.loads((ROOT / "facts/company.json").read_text(encoding="utf-8"))
-CSS = (ROOT / "gen/page.css").read_text(encoding="utf-8")
-SITE = ROOT / "site"
-STATUSES = ("draft", "launched")
+from kit import FACTS, ROOT, SITE, banner, esc, head, status
 
 
 def engine(name):
@@ -45,10 +41,6 @@ def engine(name):
     return json.loads(data.read_text(encoding="utf-8"))
 
 
-def esc(text):
-    return html.escape(text, quote=True)
-
-
 def em(text):
     """Escaped, with the engine's `*word*` emphasis."""
     return re.sub(r"\*([^*\n]+)\*", r"<em>\1</em>", esc(text))
@@ -56,24 +48,10 @@ def em(text):
 
 def page(f, principles, commands, version):
     company, site = f["company"], f["site"]
-    if site["status"] not in STATUSES:
-        raise SystemExit(f"site.status is {site['status']!r}: it is one of {', '.join(STATUSES)}")
-    draft = site["status"] == "draft"
-    head = [
-        '<meta charset="utf-8">',
-        '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">',
-        f"<title>{esc(site['title'])}</title>",
-        f'<meta name="description" content="{esc(site["description"])}">',
-        '<meta name="color-scheme" content="light dark">',
-    ]
-    if draft:
-        head.append('<meta name="robots" content="noindex, nofollow">')
+    lines = [head(site["title"], site["description"], "brand.css"),
+             '<link rel="stylesheet" href="page.css">']
     if company["domain"]:
-        head.append(f'<link rel="canonical" href="https://{esc(company["domain"])}/">')
-    head.append(f"<style>\n{CSS}</style>")
-
-    banner = (f'<div class="draft" role="note"><span class="draft-mark">Draft</span> '
-              f'{esc(site["draft_banner"])}</div>\n') if draft else ""
+        lines.append(f'<link rel="canonical" href="https://{esc(company["domain"])}/">')
 
     steps = "\n".join(
         f'<li><h3>{esc(s["name"])}</h3><p>{esc(s["text"])}</p></li>' for s in f["how"]["steps"])
@@ -91,10 +69,10 @@ def page(f, principles, commands, version):
     return f"""<!doctype html>
 <html lang="en">
 <head>
-{chr(10).join(head)}
+{chr(10).join(lines)}
 </head>
 <body>
-{banner}<header class="top"><div class="wrap"><a class="name" href="#top">{esc(company["name"])}</a>
+{banner()}<header class="top"><div class="wrap"><a class="name" href="#top">{esc(company["name"])}</a>
 <nav aria-label="On this page"><a href="#how">How</a><a href="#principles">Principles</a><a href="#interface">Interface</a><a href="#access">Access</a></nav></div></header>
 <main id="top">
 <section class="hero"><div class="wrap">
@@ -129,7 +107,7 @@ def page(f, principles, commands, version):
 {access}
 </div></section>
 </main>
-<footer><div class="wrap"><p>{esc(f["colophon"])} Wherefore {esc(version)}.</p></div></footer>
+<footer><div class="wrap"><p>{esc(f["colophon"])} Wherefore {esc(version)}. <a href="brand/">Brand</a></p></div></footer>
 </body>
 </html>
 """
@@ -140,12 +118,12 @@ def headers(f):
     elsewhere, and a draft is not indexed."""
     lines = [
         "/*",
-        "  Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; img-src 'self' data:; "
-        "base-uri 'none'; form-action 'none'; frame-ancestors 'none'",
+        "  Content-Security-Policy: default-src 'none'; style-src 'self' 'unsafe-inline'; font-src 'self'; "
+        "img-src 'self' data:; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",
         "  X-Content-Type-Options: nosniff",
         "  Referrer-Policy: no-referrer",
     ]
-    if f["site"]["status"] == "draft":
+    if status() == "draft":
         lines.append("  X-Robots-Tag: noindex, nofollow")
     return "\n".join(lines) + "\n"
 
@@ -154,6 +132,7 @@ def main():
     principles = engine("principles.json")["principles"]
     commands = engine("commands.json")["commands"]
     SITE.mkdir(exist_ok=True)
+    shutil.copyfile(ROOT / "gen/page.css", SITE / "page.css")
     (SITE / "index.html").write_text(page(FACTS, principles, commands, wherefore.__version__),
                                      encoding="utf-8")
     (SITE / "_headers").write_text(headers(FACTS), encoding="utf-8")

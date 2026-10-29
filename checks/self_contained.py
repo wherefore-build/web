@@ -17,7 +17,9 @@ still be wrong to the person reading it:
 WHAT PASSES. A link to a page elsewhere (`https://...`) is a place a visitor
 chooses to go, not something the page loads, and is not judged. `mailto:` is
 the same. Everything the page LOADS - `src`, a stylesheet's `href`, `srcset`,
-`poster`, `url(...)` in a style - must be in site/.
+`poster`, `url(...)` in a style - must be in site/. So must everything a
+stylesheet in site/ loads - a font's `url(...)`, an `@import` - resolved from
+where that stylesheet sits.
 
 WHAT IT CANNOT SEE: whether a page elsewhere still exists, and anything a
 script would build at run time. The site has no scripts.
@@ -35,6 +37,7 @@ SITE = ROOT / "site"
 
 LOADS = {"src", "poster", "data"}
 URL_IN_STYLE = re.compile(r"url\(\s*['\"]?([^'\")]+)")
+IMPORT = re.compile(r"@import\s+['\"]([^'\"]+)")
 
 
 class Page(html.parser.HTMLParser):
@@ -110,6 +113,23 @@ def faults():
             target = target.resolve()
             if SITE.resolve() not in target.parents or not target.is_file():
                 found.append(f"{said} is not a file in {SITE.relative_to(ROOT)}/")
+    for path in sorted(SITE.rglob("*.css")):
+        rel = path.relative_to(ROOT).as_posix()
+        for n, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
+            for value in [m.group(1) for m in URL_IN_STYLE.finditer(line)] + \
+                         [m.group(1) for m in IMPORT.finditer(line)]:
+                said = f"{rel}:{n}: url({value})"
+                u = urllib.parse.urlsplit(value.strip())
+                if u.scheme == "data":
+                    continue
+                if u.scheme or u.netloc:
+                    found.append(f"{said} loads from outside the site - the page a visitor "
+                                 f"sees would change when that host does")
+                    continue
+                target = (SITE / u.path.lstrip("/")) if u.path.startswith("/") else (path.parent / u.path)
+                target = target.resolve()
+                if SITE.resolve() not in target.parents or not target.is_file():
+                    found.append(f"{said} is not a file in {SITE.relative_to(ROOT)}/")
     return found
 
 
@@ -120,8 +140,8 @@ def main():
         for f in found:
             print(f"   {f}")
         return 1
-    print(f"ok   every page in {SITE.relative_to(ROOT)}/ loads only what is in it, and every "
-          f"link on it goes somewhere")
+    print(f"ok   every page and stylesheet in {SITE.relative_to(ROOT)}/ loads only what is in it, "
+          f"and every link on it goes somewhere")
     return 0
 
 

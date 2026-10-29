@@ -1,19 +1,29 @@
 {
  "wherefore": 1,
  "name": "wherefore-co",
- "note": "The company: its site now, and every asset after it. Each asset is generated from facts/company.json and from the engine it pins - what the product is (its principles, its commands, its version) is read from that release, never retyped here.",
+ "note": "The company: its site and its brand now, and every asset after them. Each asset is generated from facts/company.json, from brand/tokens.json and from the engine it pins - what the product is (its principles, its commands, its version) is read from that release, never retyped here.",
  "sources": {
   "facts": {
    "path": "facts/company.json",
    "adapter": "leaves",
    "why": "THE SOURCE: every fact the company states about itself, once"
+  },
+  "brand": {
+   "path": "brand/tokens.json",
+   "adapter": "leaves",
+   "why": "THE BRAND: every colour, typeface and radius, once, each with its role and its reason"
   }
  },
  "generators": [
   {
+   "script": "brand.py",
+   "cwd": "gen",
+   "makes": "site/brand.css, site/fonts/ and the brand page site/brand/, from the brand tokens"
+  },
+  {
    "script": "site.py",
    "cwd": "gen",
-   "makes": "site/index.html and site/_headers, from the facts and the pinned engine"
+   "makes": "site/index.html, site/page.css and site/_headers, from the facts, the brand and the pinned engine"
   }
  ],
  "inventory": {
@@ -23,6 +33,14 @@
     [
      "facts/company.json",
      "THE SOURCE"
+    ],
+    [
+     "brand/tokens.json",
+     "THE BRAND"
+    ],
+    [
+     "brand/fonts/**",
+     "the font files and their licences, third-party and unchanged: each is copied from the npm package brand/tokens.json names, under the SIL Open Font License 1.1 its OFL.txt carries"
     ],
     [
      "*.py",

@@ -15,11 +15,19 @@ pin. The reasons are in the engine's `DIRECTIONS.md`, §13 and §14.
 | path | what | kind |
 |---|---|---|
 | `facts/company.json` | **the source**: every fact the company states about itself, once | authored |
+| `brand/tokens.json` | **the brand**: every colour, typeface and radius, once, each with its role and reason | authored |
+| `brand/fonts/` | the three typefaces and their licences (SIL OFL 1.1), unchanged | authored |
+| `gen/brand.py` | the brand pack's generator: the stylesheet, the fonts and the brand page | authored |
 | `gen/site.py` | the site's generator: layout, filled from the facts and the pinned engine | authored |
-| `gen/page.css` | the site's design, inlined into every page | authored |
+| `gen/page.css` | the site's layout; every colour and face in it is a `var(--…)` from the brand | authored |
+| `gen/kit.py` | what the generators share: the two sources, the draft banner, contrast | authored |
 | `site/index.html` | the page | generated |
 | `site/_headers` | what Cloudflare Pages serves with every file | generated |
+| `site/brand.css`, `site/fonts/` | the brand as custom properties, and the fonts it serves itself | generated |
+| `site/brand/` | the brand pack a person reads: every token, every contrast, the type, the licences | generated |
 | `checks/self_contained.py` | the site loads nothing from elsewhere, and every link on it goes somewhere | authored |
+| `checks/one_palette.py` | no colour or typeface is said anywhere but the brand | authored |
+| `checks/contrast.py` | every text colour reaches 4.5:1 on every ground it is set on | authored |
 | `checks/*_proof.py` | each check, and the gate, shown to fail | authored |
 | `wherefore.json` | what this repository is to the engine | authored |
 | `requirements-engine.txt` | the engine release this is built and judged by | authored |
@@ -27,6 +35,21 @@ pin. The reasons are in the engine's `DIRECTIONS.md`, §13 and §14.
 
 Never edit `site/` by hand. The gate fails a page that is not what its sources
 make.
+
+## The brand
+
+`brand/tokens.json` holds every colour, typeface and radius, with what each is
+for and why it is what it is. `gen/brand.py` writes them into `site/brand.css`
+as custom properties, copies the fonts the site serves itself, and builds the
+brand pack at `site/brand/`.
+- **Nothing else says a colour or a face.** `checks/one_palette.py` fails a
+  `#hex`, an `rgb()` or a typeface written into a stylesheet or a generator.
+  Change the accent in one place and every page follows when it is rebuilt.
+- **Every text colour stays readable.** `checks/contrast.py` computes each pair
+  `contrast.pairs` lists and fails one under its minimum. The brand page prints
+  the same numbers.
+- **It is a draft.** The look was a first attempt kept as a starting point
+  (`origin` in the tokens), and it changes by editing the tokens.
 
 ## What comes from the engine, not from here
 
