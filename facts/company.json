@@ -43,6 +43,18 @@
    "ships": "ships"
   }
  },
+ "pains": {
+  "heading": "Sound familiar?",
+  "items": [
+   {"pain": "Every team has a different picture of what is current.",
+    "detail": "Sales sells last quarter’s plan, support answers from last year’s article, and the truth lives in someone’s head."},
+   {"pain": "A feature ships, and the world never hears about it.",
+    "detail": "It is built, tested and released. The site, the docs, the deck and the help centre still describe the product before it."},
+   {"pain": "Nobody can say which version is true.",
+    "detail": "Search finds six copies of the same claim. None of them says which one was decided, or why."}
+  ],
+  "answer": "Wherefore makes the source the one current picture. Every asset is built from it, and a check can require each new feature to reach the site, the docs and the deck before the change lands."
+ },
  "demo": {
   "heading": "One change. Everywhere it is said.",
   "label": "Change one fact, and watch what follows it",
@@ -122,7 +134,7 @@
   "eyebrow": "Case study",
   "name": "Chaotic Pendulums",
   "heading": "A hardware company, compiled from one spec file.",
-  "text": "Chaotic Pendulums makes a desk-sized double pendulum: milled parts, a bronze blade, bearings and a clamp. It is our founder’s own company, and the first to run on Wherefore. One spec file holds the object. Everything a shop, a customer or a printer receives is built from it, and checked on every push.",
+  "text": "We proved Wherefore on a hardware company on purpose: if it can hold machined parts, physics and suppliers to one source, it can hold a pricing page. Chaotic Pendulums is our founder’s own company, and it makes a desk-sized double pendulum: milled parts, a bronze blade, bearings and a clamp. One spec file holds the object. Everything a shop, a customer or a printer receives is built from it, and checked on every push.",
   "url": "https://chaoticpendulums.com/",
   "visit": "See the live site",
   "made_heading": "What it compiles",

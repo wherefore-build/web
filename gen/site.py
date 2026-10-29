@@ -358,6 +358,19 @@ def hero(f):
 </div></section>"""
 
 
+def pains(f):
+    """What drift costs, in the words of the teams it costs, and what Wherefore does about it."""
+    p = f["pains"]
+    items = "".join(f'<li class="pain"><p class="pain-head">{esc(i["pain"])}</p><p class="pain-detail">{esc(i["detail"])}</p></li>'
+                    for i in p["items"])
+    return f"""<section class="pains"><div class="wrap">
+{SRC}
+<h2>{esc(p["heading"])}</h2>
+<ul class="pain-list">{items}</ul>
+<p class="pain-answer">{esc(p["answer"])}</p>
+</div></section>"""
+
+
 def ripple(f):
     return f"""<section id="demo" class="ripple"><div class="wrap">
 {SRC}
@@ -497,7 +510,7 @@ def page(f):
     if company["domain"]:
         lines.append(f'<link rel="canonical" href="https://{esc(company["domain"])}/">')
     parts = {name: part(render, f, inspect) for name, render in (
-        ("header", header), ("hero", hero), ("demo", ripple), ("why", why), ("how", how), ("case", case),
+        ("header", header), ("hero", hero), ("pains", pains), ("demo", ripple), ("why", why), ("how", how), ("case", case),
         ("rule", rule), ("pilot", pilot), ("footer", footer))}
     return f"""<!doctype html>
 <html lang="en">
@@ -510,6 +523,7 @@ def page(f):
 <main id="top">
 {key(f)}
 {parts["hero"]}
+{parts["pains"]}
 {parts["demo"]}
 {parts["why"]}
 {parts["how"]}

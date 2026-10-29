@@ -133,6 +133,15 @@ em { font-style: italic; }
   .grow, .art-end, .art-stale { animation: none; stroke-dashoffset: 0; }
 }
 
+/* Sound familiar? */
+.pains h2 { margin-bottom: 1.5rem; }
+.pain-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(18rem, 100%), 1fr)); gap: 1rem; }
+.pain { padding: 1.4rem 1.5rem; border: 1px solid var(--line); border-left: 3px solid var(--fail); border-radius: var(--radius-card); background: var(--surface); }
+.pain p { margin: 0; }
+.pain-head { font: 400 clamp(1.375rem, 2.6vw, 1.625rem)/1.2 var(--font-display); color: var(--ink); }
+.pain-detail { margin-top: 0.6rem !important; font-size: 0.9375rem; line-height: 1.5; color: var(--muted); }
+.pain-answer { margin: 1.75rem 0 0; max-width: 46rem; font-size: 1.125rem; line-height: 1.5; color: var(--ink); padding-left: 1rem; border-left: 3px solid var(--accent); }
+
 .ripple h2 { max-width: 18ch; }
 .ripple .demo { margin-top: 0; }
 

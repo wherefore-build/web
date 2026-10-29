@@ -61,6 +61,10 @@ It leads with the pain, then shows the cure working.
   never comes back; with Wherefore, everything else has code's shape - one
   source, built into every asset, through the gate. Its assets are the demo's
   own, and the commands it names are checked against the engine.
+- **Sound familiar?** Three pains in the words of the teams who have them -
+  no shared picture of what is current, features that ship and never reach the
+  site or the docs, six copies and no telling which is true - and what
+  Wherefore does about them.
 - **The demo.** One fact (a made-up company's seats on its Pro plan) and the
   seven assets that state it. Three steps: today, the change, and the fix for
   the one asset written by hand. The page says it is an illustration, and names
