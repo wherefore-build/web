@@ -11,6 +11,8 @@ requires the gate to fail in the words of the case.
           the site launched in the facts, and neither the page nor its
             headers regenerated - the banner and the noindex would stay up
           a launch status nobody has defined
+          the accent changed in the brand, its stylesheet and page not
+            regenerated
           a new file committed that nothing classifies
   passes  the repository as it is
 
@@ -62,6 +64,12 @@ def main():
         facts(p, lambda d: d["site"].update(status="beta"))
         gate(r, "a launch status nobody has defined", True,
              ["site.py failed while the gate ran it", "site.status is 'beta': it is one of draft, launched"])
+
+    with Edit("brand/tokens.json") as p:
+        facts(p, lambda d: d["color"]["accent"].update(value="#FF7A3D"))
+        gate(r, "the accent changed in the brand, nothing regenerated", True,
+             ["site/brand.css regenerated DIFFERENT from what is committed",
+              "site/brand/index.html regenerated DIFFERENT from what is committed"])
 
     notes = ROOT / "notes.txt"
     notes.write_text("a file nobody declared\n", encoding="utf-8")

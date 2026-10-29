@@ -1,7 +1,7 @@
 # THE COMPANY'S CORPUS, judged on every push by the engine release it pins:
 # every file accounted for and every generated one current, every fact reaching
-# what a visitor receives, the site reaching nothing outside itself - and each
-# of those shown to fail. Hosted, and short: a minute or so a run.
+# what a visitor receives, the site reaching nothing outside itself, the brand
+# said once and readable - and each of those shown to fail. Hosted, and short: a minute or so a run.
 #
 # The engine's repository is private, so the install reads it with
 # WHEREFORE_READ_TOKEN: a fine-grained token with Contents: read on
@@ -55,6 +55,11 @@ jobs:
       - name: The site loads nothing from elsewhere, and every link on it goes somewhere
         if: ${{ !cancelled() && steps.install.outcome == 'success' }}
         run: python3 checks/self_contained.py
+      - name: The brand is said once, and every text colour is readable on its ground
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: |
+          python3 checks/one_palette.py
+          python3 checks/contrast.py
       - name: And each of those fails when it should
         if: ${{ !cancelled() && steps.install.outcome == 'success' }}
         run: python3 -m wherefore prove

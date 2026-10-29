@@ -9,6 +9,8 @@ to pass.
           a background picture from another host, in the page's style
           a link to a section that does not exist
           a picture that is not in the site
+          a font the stylesheet loads from a font host
+          a font the stylesheet names and the site does not have
   passes  a link to a page elsewhere, and an address to write to
           the site as it is
 
@@ -42,7 +44,7 @@ def main():
         check(r, "a stylesheet from a font host", CHECK, True,
               [f"{PAGE}:", 'href="https://fonts.example.com/css?family=Inter"', "loads from outside the site"])
     with Edit(PAGE) as p:
-        plant(p, "</style>", "body { background: url(https://cdn.example.com/paper.png); }\n</style>")
+        plant(p, "</head>", "<style>body { background: url(https://cdn.example.com/paper.png); }</style>\n</head>")
         check(r, "a background picture from another host, in the style", CHECK, True,
               ['url()="https://cdn.example.com/paper.png"', "loads from outside the site"])
     with Edit(PAGE) as p:
@@ -53,6 +55,18 @@ def main():
         plant(p, "</main>", '<img src="hero.png" alt="">\n</main>')
         check(r, "a picture that is not in the site", CHECK, True,
               ['src="hero.png"', "is not a file in site/"])
+    with Edit("site/brand.css") as p:
+        p.write_text(p.read_text(encoding="utf-8").replace(
+            'url("fonts/inter/inter-latin-400-normal.woff2")',
+            'url("https://fonts.example.com/inter.woff2")', 1), encoding="utf-8")
+        check(r, "a font loaded from a font host", CHECK, True,
+              ["site/brand.css:", "url(https://fonts.example.com/inter.woff2)", "loads from outside the site"])
+    with Edit("site/brand.css") as p:
+        p.write_text(p.read_text(encoding="utf-8").replace(
+            'url("fonts/inter/inter-latin-400-normal.woff2")',
+            'url("fonts/inter/inter-latin-800-normal.woff2")', 1), encoding="utf-8")
+        check(r, "a font the site does not have", CHECK, True,
+              ["url(fonts/inter/inter-latin-800-normal.woff2)", "is not a file in site/"])
     with Edit(PAGE) as p:
         plant(p, "</main>", '<p><a href="https://github.com/">elsewhere</a> '
                             '<a href="mailto:someone@example.com">write</a></p>\n</main>')
