@@ -8,8 +8,10 @@ the minimum, so a token nudged darker for taste cannot quietly make a caption
 unreadable. The brand page prints the same ratios, from the same arithmetic
 (gen/kit.py).
 
-It also fails a pair that names a colour the tokens do not define, and a colour
-that is not #RRGGBB, because neither can be measured.
+It also fails a pair that names a colour the tokens do not define, a colour
+that is not #RRGGBB, and one that is the `same_as` a colour with no value,
+because none of them can be measured. A `same_as` colour is measured as the
+colour it names.
 
 WHAT IT CANNOT SEE: a pair a page uses and the tokens do not list. That is the
 tokens' to declare; the brand page shows every pair it holds.
@@ -31,9 +33,18 @@ HEX = re.compile(r"#[0-9A-Fa-f]{6}")
 
 def faults():
     t = json.loads(TOKENS.read_text(encoding="utf-8"))
-    colours = {k: c["value"] for k, c in t["color"].items()}
-    found = [f"{k} is {v!r}, which is not a #RRGGBB colour" for k, v in colours.items()
-             if not HEX.fullmatch(v)]
+    colours, found = {}, []
+    for k, c in t["color"].items():
+        if "same_as" in c:
+            target = t["color"].get(c["same_as"], {})
+            if "value" not in target:
+                found.append(f"{k} is the same as {c['same_as']}, which brand/tokens.json gives no value")
+                continue
+            colours[k] = target["value"]
+        else:
+            colours[k] = c["value"]
+    found += [f"{k} is {v!r}, which is not a #RRGGBB colour" for k, v in colours.items()
+              if not HEX.fullmatch(v)]
     for p in t["contrast"]["pairs"]:
         missing = [n for n in (p["text"], p["on"]) if n not in colours]
         if missing:

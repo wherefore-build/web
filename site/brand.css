@@ -51,13 +51,11 @@
 :root {
   --ground: #0B0C0E;
   --surface: #111317;
-  --raised: #15181C;
   --line: #2A2D33;
   --ink: #EDEBE6;
   --muted: #A3A6AD;
-  --faint: #8E9198;
-  --accent: #C8F53C;
-  --on-accent: #0B0C0E;
+  --accent: #C3FF0F;
+  --on-accent: var(--ground);
   --caution: #F4D35E;
   --fail: #FF8A6B;
   --font-display: "Instrument Serif", Georgia, 'Times New Roman', serif;

@@ -28,6 +28,7 @@ pin. The reasons are in the engine's `DIRECTIONS.md`, §13 and §14.
 | `checks/self_contained.py` | the site loads nothing from elsewhere, and every link on it goes somewhere | authored |
 | `checks/one_palette.py` | no colour or typeface is said anywhere but the brand | authored |
 | `checks/contrast.py` | every text colour reaches 4.5:1 on every ground it is set on | authored |
+| `checks/brand_reasons.py` | every colour, typeface and radius says what it is for and why, and the brand says its idea | authored |
 | `checks/install_line.py` | no install line on the site names the bare `wherefore` - another project's package; ours is `wherefore-build` | authored |
 | `checks/controls_press.py` | every control on the site does something a visitor sees, pressed cold on a phone | authored |
 | `checks/*_proof.py` | each check, and the gate, shown to fail | authored |
@@ -51,8 +52,11 @@ brand pack at `site/brand/`.
 - **Every text colour stays readable.** `checks/contrast.py` computes each pair
   `contrast.pairs` lists and fails one under its minimum. The brand page prints
   the same numbers.
-- **It is a draft.** The look was a first attempt kept as a starting point
-  (`origin` in the tokens), and it changes by editing the tokens.
+- **Every decision carries its reason.** Each colour, typeface and radius says
+  what it is for and why, and `idea` says what the whole look follows.
+  `checks/brand_reasons.py` fails a token without its reason. A colour that is
+  another one in a different role (`on-accent` is the ground's black) says
+  `same_as` instead of copying a value.
 
 ## The page
 
