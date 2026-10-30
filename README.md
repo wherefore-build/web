@@ -28,6 +28,7 @@ pin. The reasons are in the engine's `DIRECTIONS.md`, §13 and §14.
 | `checks/self_contained.py` | the site loads nothing from elsewhere, and every link on it goes somewhere | authored |
 | `checks/one_palette.py` | no colour or typeface is said anywhere but the brand | authored |
 | `checks/contrast.py` | every text colour reaches 4.5:1 on every ground it is set on | authored |
+| `checks/install_line.py` | no install line on the site names the bare `wherefore` - another project's package; ours is `wherefore-build` | authored |
 | `checks/controls_press.py` | every control on the site does something a visitor sees, pressed cold on a phone | authored |
 | `checks/*_proof.py` | each check, and the gate, shown to fail | authored |
 | `wherefore.json` | what this repository is to the engine | authored |

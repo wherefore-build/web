@@ -57,6 +57,9 @@ jobs:
       - name: The site loads nothing from elsewhere, and every link on it goes somewhere
         if: ${{ !cancelled() && steps.install.outcome == 'success' }}
         run: python3 checks/self_contained.py
+      - name: Nothing on the site tells a visitor to install somebody else's package
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: python3 checks/install_line.py
       - name: The brand is said once, and every text colour is readable on its ground
         if: ${{ !cancelled() && steps.install.outcome == 'success' }}
         run: |
