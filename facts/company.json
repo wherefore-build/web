@@ -1,5 +1,5 @@
 {
- "note": "THE SOURCE for the company's site. Every fact the site states about the company is said here, once. What it states about the product - the principles, the commands, the version - is the engine's, read from the release requirements-engine.txt pins, and never typed here. A null is a fact not decided yet: the page leaves out what depends on it.",
+ "note": "THE SOURCE for the company's site. Every fact the site states about the company is said here, once. What it states about the product - the version, the commands it names - is the engine's, read from the release requirements-engine.txt pins, and never typed here. A null is a fact not decided yet: the page leaves out what depends on it. The demo and the questions beside it are an illustration - a made-up company's plan and the assets that state it - and the page says so; `{name}` in a line is a value the generator fills from beside it, so no number is said twice.",
  "company": {
   "name": "Wherefore",
   "domain": null,
@@ -7,49 +7,199 @@
  },
  "site": {
   "status": "draft",
-  "title": "Wherefore — a company that compiles",
-  "description": "Say each fact once. Wherefore generates every asset from it, and refuses any change that would leave one stale.",
+  "title": "Wherefore — your company, compiled",
   "draft_banner": "Nothing on this page is launched, and nothing here is a promise yet."
  },
- "hero": {
-  "headline": "Run your company like it compiles.",
-  "lede": "Say each fact once. Wherefore generates every asset from it — the drawings, the pages, the parts lists, the documents — and refuses any change that would leave one of them stale. Nothing ships that contradicts a decision."
+ "nav": {
+  "how": "How it works",
+  "start": "Get started"
  },
- "how": {
-  "heading": "How it works",
-  "steps": [
-   {
-    "name": "Say it once",
-    "text": "Prices, dimensions, names and claims live in one source. Nothing else is allowed to type them."
-   },
-   {
-    "name": "Generate the rest",
-    "text": "Plain scripts turn the source into every asset a customer, a supplier or a buyer sees. The same source makes the same files every time, because nothing in the build calls a model."
-   },
-   {
-    "name": "Gate every change",
-    "text": "Before a change lands, the gate rebuilds everything and compares it with what is committed. Every file must be generated, written by a person, or a capture stamped with what it was made from — and every generated file must be current — or the change is refused, in words that say why."
-   },
-   {
-    "name": "Prove the checks",
-    "text": "Each check has a proof that plants the fault it exists to catch and requires the check to name it. A check nobody has seen fail is not trusted."
-   }
+ "hero": {
+  "eyebrow": "In development",
+  "headline": "Your company,",
+  "headline_end": "compiled.",
+  "lede": "Your code has one source of truth, and a pipeline that tests every change before it ships. Everything else your company says is a copy of a copy, and every copy drifts."
+ },
+ "forks": {
+  "code": {
+   "title": "Your code",
+   "caption": "Every change branches off, is tested, and merges back. There is one main, and it is the truth.",
+   "main": "main",
+   "tests": "tests",
+   "ships": "ships"
+  },
+  "drift": {
+   "title": "Everything else",
+   "caption": "Every copy forks, then forks again, and nothing ever merges back. Each version drifts on its own, for good.",
+   "sting": "That is how a customer ends up quoting you last year’s price.",
+   "start": "a decision",
+   "copies": ["deck_final_v2.key", "demo video (old UI).mp4", "help: still says Workspace", "site, last spring"]
+  },
+  "compiled": {
+   "title": "With Wherefore",
+   "caption": "Everything else gets what code already has. Change a fact once: your feature pages, docs, deck and demo video follow it, and nothing ships that still says the old thing.",
+   "source": "source",
+   "ships": "ships"
+  }
+ },
+ "pains": {
+  "heading": "Sound familiar?",
+  "items": [
+   {"pain": "Every team has a different picture of what is current.",
+    "detail": "Sales sells last quarter’s plan, support answers from last year’s article, and the truth lives in someone’s head."},
+   {"pain": "A feature ships, and the world never hears about it.",
+    "detail": "It is built, tested and released. The site, the docs, the deck and the help centre still describe the product before it."},
+   {"pain": "Nobody can say which version is true.",
+    "detail": "Search finds six copies of the same claim. None of them says which one was decided, or why."}
+  ],
+  "answer": "Wherefore makes the source the one current picture. Every asset is built from it, and a check can require each new feature to reach the site, the docs and the deck before the change lands."
+ },
+ "demo": {
+  "heading": "One change. Everywhere it is said.",
+  "label": "Change one fact, and watch what follows it",
+  "source": "source",
+  "fact": "product.json · names.workspace",
+  "before": "Workspace",
+  "after": "Project",
+  "stages": [
+   "Today",
+   "Rename {before} to {after}",
+   "Fix the {hand}"
+  ],
+  "assets": [
+   {"name": "Feature page", "made": "generated", "says": "Every {value} keeps its own roles and history."},
+   {"name": "Demo video · captions", "made": "generated", "says": "Click New {value} to get started."},
+   {"name": "Sales deck · slide 4", "made": "generated", "says": "One {value} per client, set up in a minute."},
+   {"name": "Docs", "made": "generated", "says": "Create a {value} from the sidebar."},
+   {"name": "App button", "made": "generated for the app", "says": "New {value}"},
+   {"name": "Onboarding email", "made": "generated template", "says": "Your first {value} is ready."},
+   {"name": "Help article", "made": "written by hand", "says": "Open the {value} menu to rename it.", "by_hand": true}
+  ],
+  "badges": {
+   "live": "live",
+   "rebuilt": "rebuilt",
+   "caught": "caught",
+   "fixed": "fixed"
+  },
+  "said": [
+   "One name, and {total} assets that say it.",
+   "{rebuilt} rebuilt from the source. The {hand} still says “{before}”, so nothing ships.",
+   "All {total} agree with the source. Ready to ship."
+  ],
+  "note": "An illustration: a made-up company's product. The checks behind it are real:",
+  "checks": [
+   "wherefore gate",
+   "wherefore check retired"
   ]
  },
- "principles": {
-  "heading": "What it enforces"
+ "why": {
+  "heading": "Why “Wherefore”",
+  "word": "wherefore",
+  "part": "adverb",
+  "meaning": "for what reason; why.",
+  "juliet": "Juliet wasn’t asking where Romeo was. She was asking why he had to be who he was.",
+  "rule": "In a Wherefore repository every file has to answer her: generated from a source, written by a person for a stated reason, or captured and stamped with what it was made from. A file that cannot answer stops the change.",
+  "pick": "Pick an asset to ask",
+  "ask": "Wherefore art thou, {name}?",
+  "built_from": "Built from",
+  "because": "Because",
+  "asks": [
+   {"tab": "feature page", "name": "{after}", "from": "{fact} = “{after}”",
+    "because": "Customers kept calling them projects; only we said workspace. The reason was written down with the change, so it ships with it."},
+   {"tab": "demo video", "name": "demo video", "from": "product.json · script.json · captions template",
+    "because": "My script and captions are built from the same names as the app, so I never point at a button the product no longer has."},
+   {"tab": "deck", "name": "slide 4", "from": "product.json · claims.json · deck template",
+    "because": "I read the same names and claims as the feature pages, so the slide and the site cannot drift apart."},
+   {"tab": "brand", "name": "orange", "from": "brand.json · accent",
+    "because": "The accent is said once. Every page, slide and social card is built from it, so a rebrand is one line."},
+   {"tab": "claim", "name": "“SOC 2 certified”", "from": "claims.json · compliance",
+    "because": "I am not allowed yet. Until the audit is signed, the most any page may say is “SOC 2 in progress”, and the check refuses the rest."}
+  ],
+  "note": "The same made-up company. This page can answer for itself:"
  },
- "client": {
-  "heading": "Built inside a real company",
-  "text": "Wherefore was extracted from Chaotic Pendulums, where one spec file makes every drawing, solid model, parts list and web page. Move a dimension and every one of them moves with it, or the build stops and names the file that did not."
+ "how": {
+  "heading": "It installs in your repo, beside your code.",
+  "steps": [
+   {"label": "your sources", "name": "Write it once.",
+    "text": "Names, features, specs and claims live in one source, each with its reason."},
+   {"command": "wherefore build", "name": "Compile everything.",
+    "text": "Every asset is generated from the source, the same way every time. Nothing in the build calls a model."},
+   {"command": "wherefore gate", "name": "Refuse the drift.",
+    "text": "On every push, anything stale or unaccounted for stops the change, and the error says why."}
+  ],
+  "note": "A command line, Python's standard library, and one file that says what your corpus is."
  },
- "interface": {
-  "heading": "The whole interface",
-  "lede": "A command line, Python's standard library, and one file that says what your corpus is."
+ "case": {
+  "eyebrow": "Case study",
+  "name": "Chaotic Pendulums",
+  "heading": "A hardware company, compiled from one spec file.",
+  "text": "Chaotic Pendulums is a small hardware company our founder started to test this idea on something with more surface area than software: a desk-sized double pendulum with milled parts, a bronze blade, bearings and a clamp. Wherefore was built alongside it, one rule at a time. If one source can hold machined parts, physics, suppliers and a storefront, it can hold your app, website and docs. One spec file holds the object. Everything a shop, a customer or a printer receives is built from it, and checked on every push.",
+  "url": "https://chaoticpendulums.com/",
+  "visit": "See the live site",
+  "made_heading": "What it compiles",
+  "made": [
+   "Part drawings a machine shop quotes and inspects against, each with its cut file and its solid model",
+   "Print-ready 3D files for a prototype, laid out plate by plate",
+   "A bill of materials, and a quote bundle a shop’s online tool takes in one drag",
+   "The engineering hand-over, frozen at every release so a shop can always find the pack it quoted",
+   "The brand: the mark, the hero and the renders, drawn from the object’s own dimensions",
+   "The website, and the 3D pendulum that swings on it"
+  ],
+  "held_heading": "What holds it",
+  "held": [
+   "Load simulations, worked from the real parts’ masses, prove every mount setup holds the pendulum at a torque a hand can give.",
+   "Worst-case tolerance stacks prove every screw clamps and never bottoms, at every extreme of every band.",
+   "A sweep proves the blade turns a full circle and touches nothing.",
+   "The swing on the website is integrated from the physics of the object as it is today, and a check holds every mass and length to the parts.",
+   "Move any dimension, and a probe requires every file a supplier receives to move with it, or the change is refused."
+  ],
+  "stats": [
+   {"n": 49, "what": "checks, each with a proof that plants the fault it exists to catch"},
+   {"n": 9, "what": "parts, each drawn, cut and modelled from the spec"},
+   {"n": 5, "what": "print plates for a prototype anyone holding the pack can make"}
+  ],
+  "as_of": "Counted at V83 of the pack, on 29 October 2026.",
+  "quote": null
  },
- "access": {
-  "heading": "Early access",
-  "text": "Wherefore is in private development."
+ "rule": {
+  "line": "AI writes the rules.",
+  "end": "The build never improvises.",
+  "text": "Agents write the generators and the checks. The build that runs them is plain code, the same every time, and nothing in it calls a model."
  },
- "colophon": "This page is generated by Wherefore from one source file, and checked by it."
+ "start": {
+  "ask": "Wherefore art thou?",
+  "heading": "Start with one fact.",
+  "text": "Install it beside your code, say one fact once, and let the gate hold everything that states it. Nothing to join, and nobody to call.",
+  "steps": ["wherefore init", "wherefore build", "wherefore hook install"],
+  "install": null,
+  "closed": "Wherefore is not public yet. The line that installs it appears here when it is."
+ },
+ "status": {
+  "labels": {
+   "available": "Available",
+   "next": "Next",
+   "later": "Later"
+  },
+  "items": [
+   {"state": "available", "text": "the engine and its checks, Wherefore {version}"},
+   {"state": "next", "text": "docs compiled from each release, and a skill that teaches your agent the rules"},
+   {"state": "later", "text": "launches that wait until their page, docs and demo agree"}
+  ]
+ },
+ "inspect": {
+  "toggle": "How this page is built",
+  "ask": "show how it is built",
+  "intro": "Every part of this page is generated. Each now names the facts it is built from, and the checks that hold it on every push.",
+  "from": "from",
+  "facts": "{n} facts",
+  "held": "held by",
+  "checks": {
+   "gate": "rebuilt from its sources on every push, and refused if it differs from what is committed",
+   "reach": "each of these facts is moved, one at a time, and the page must change with it",
+   "press": "every control here is tapped on a fresh load, at a phone’s width, and must show something new",
+   "engine": "every command named here must be one the pinned release has",
+   "brand": "every colour and face is a brand token, and every text colour reads at 4.5:1 on its ground"
+  }
+ },
+ "colophon": "This page is compiled from one source file and the release it pins."
 }

@@ -3,67 +3,149 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Wherefore — a company that compiles</title>
-<meta name="description" content="Say each fact once. Wherefore generates every asset from it, and refuses any change that would leave one stale.">
+<title>Wherefore — your company, compiled</title>
+<meta name="description" content="Your code has one source of truth, and a pipeline that tests every change before it ships. Everything else your company says is a copy of a copy, and every copy drifts.">
 <meta name="color-scheme" content="dark">
 <meta name="robots" content="noindex, nofollow">
 <link rel="stylesheet" href="brand.css">
 <link rel="stylesheet" href="page.css">
 </head>
 <body>
+<input class="state inspect-state" type="checkbox" id="inspect">
 <div class="draft" role="note"><span class="draft-mark">Draft</span> Nothing on this page is launched, and nothing here is a promise yet.</div>
 <header class="top"><div class="wrap"><a class="name" href="#top">Wherefore</a>
-<nav aria-label="On this page"><a href="#how">How</a><a href="#principles">Principles</a><a href="#interface">Interface</a><a href="#access">Access</a></nav></div></header>
+<nav aria-label="On this page"><a href="#why">Why “Wherefore”</a><a href="#how">How it works</a><a href="#case">Case study</a><a class="pill" href="#start">Get started</a></nav></div><div class="wrap"><div class="src"><p><span class="src-k">from</span> facts/company.json · 7 facts: site.{status, draft_banner} · company.name · why.heading · nav.{how, start} · case.eyebrow</p><p><span class="src-k">held by</span> gate · reach · brand</p></div></div></header>
 <main id="top">
+<div class="src-key"><div class="wrap"><p>Every part of this page is generated. Each now names the facts it is built from, and the checks that hold it on every push.</p><dl><div><dt>gate</dt><dd>rebuilt from its sources on every push, and refused if it differs from what is committed</dd></div><div><dt>reach</dt><dd>each of these facts is moved, one at a time, and the page must change with it</dd></div><div><dt>press</dt><dd>every control here is tapped on a fresh load, at a phone’s width, and must show something new</dd></div><div><dt>engine</dt><dd>every command named here must be one the pinned release has</dd></div><div><dt>brand</dt><dd>every colour and face is a brand token, and every text colour reads at 4.5:1 on its ground</dd></div></dl></div></div>
 <section class="hero"><div class="wrap">
-<h1>Run your company like it compiles.</h1>
-<p class="lede">Say each fact once. Wherefore generates every asset from it — the drawings, the pages, the parts lists, the documents — and refuses any change that would leave one of them stale. Nothing ships that contradicts a decision.</p>
+<div class="src"><p><span class="src-k">from</span> facts/company.json · 30 facts: hero.{eyebrow, headline, headline_end, lede} · forks.{code.{title, tests, main, ships, caption}, drift.{title, start, copies[], caption, sting}, compiled.{title, source, ships, caption}} · demo.assets[].name · nav.{start, how}</p><p><span class="src-k">from</span> wherefore 0.1.1 · version · commands.json: wherefore gate, wherefore build</p><p><span class="src-k">held by</span> gate · reach · brand · engine</p></div>
+<p class="eyebrow">In development · Wherefore 0.1.1</p>
+<h1>Your company, <em>compiled.</em></h1>
+<p class="lede">Your code has one source of truth, and a pipeline that tests every change before it ships. Everything else your company says is a copy of a copy, and every copy drifts.</p>
+<div class="forks">
+<figure class="fork fork-code"><figcaption class="fork-title">Your code</figcaption><svg class="fork-art" viewBox="0 0 360 220" role="img" aria-label="Your code"><path class="art-main" d="M 12 162 H 348"/><path class="art-branch" d="M 22 162 C 44 162 36 84 58 84 H 98 C 120 84 112 162 134 162"/><path class="art-pulse" pathLength="1" style="--d: 0.0s" d="M 22 162 C 44 162 36 84 58 84 H 98 C 120 84 112 162 134 162"/><circle class="art-ok" cx="78" cy="84" r="5"/><circle class="art-ok" cx="134" cy="162" r="4"/><text class="art-label" x="78" y="72" text-anchor="middle">tests</text><path class="art-branch" d="M 104 162 C 126 162 118 116 140 116 H 188 C 210 116 202 162 224 162"/><path class="art-pulse" pathLength="1" style="--d: 0.9s" d="M 104 162 C 126 162 118 116 140 116 H 188 C 210 116 202 162 224 162"/><circle class="art-ok" cx="164" cy="116" r="5"/><circle class="art-ok" cx="224" cy="162" r="4"/><path class="art-branch" d="M 214 162 C 236 162 228 80 250 80 H 298 C 320 80 312 162 334 162"/><path class="art-pulse" pathLength="1" style="--d: 1.8s" d="M 214 162 C 236 162 228 80 250 80 H 298 C 320 80 312 162 334 162"/><circle class="art-ok" cx="274" cy="80" r="5"/><circle class="art-ok" cx="334" cy="162" r="4"/><text class="art-label" x="12" y="188" text-anchor="start">main</text><text class="art-label" x="348" y="188" text-anchor="end">ships</text></svg><p class="fork-caption">Every change branches off, is tested, and merges back. There is one main, and it is the truth.</p></figure>
+<figure class="fork fork-drift"><figcaption class="fork-title">Everything else</figcaption><svg class="fork-art" viewBox="0 0 360 220" role="img" aria-label="Everything else"><path class="art-drift grow" pathLength="1" style="--d: 0.0s" d="M 22 110 C 52 110 48 30 78 30 H 108"/><path class="art-drift fade-1 grow" pathLength="1" style="--d: 1.2s" d="M 108 30 C 122 30 118 19 132 19 H 196"/><path class="art-drift fade-2 grow" pathLength="1" style="--d: 2.4s" d="M 196 19 C 206 19 204 13 214 13 H 346"/><path class="art-drift fade-2 grow" pathLength="1" style="--d: 2.5s" d="M 196 19 C 206 19 204 25 214 25 H 346"/><path class="art-drift fade-1 grow" pathLength="1" style="--d: 1.3s" d="M 108 30 C 122 30 118 41 132 41 H 346"/><path class="art-drift grow" pathLength="1" style="--d: 0.25s" d="M 22 110 C 52 110 48 70 78 70 H 131"/><path class="art-drift fade-1 grow" pathLength="1" style="--d: 1.45s" d="M 131 70 C 145 70 141 59 155 59 H 346"/><path class="art-drift fade-1 grow" pathLength="1" style="--d: 1.55s" d="M 131 70 C 145 70 141 81 155 81 H 233"/><path class="art-drift fade-2 grow" pathLength="1" style="--d: 2.65s" d="M 233 81 C 243 81 241 75 251 75 H 346"/><path class="art-drift fade-2 grow" pathLength="1" style="--d: 2.75s" d="M 233 81 C 243 81 241 87 251 87 H 346"/><path class="art-drift grow" pathLength="1" style="--d: 0.5s" d="M 22 110 C 52 110 48 110 78 110 H 110"/><path class="art-drift fade-1 grow" pathLength="1" style="--d: 1.7s" d="M 110 110 C 124 110 120 99 134 99 H 218"/><path class="art-drift fade-2 grow" pathLength="1" style="--d: 2.9s" d="M 218 99 C 228 99 226 93 236 93 H 346"/><path class="art-drift fade-2 grow" pathLength="1" style="--d: 3.0s" d="M 218 99 C 228 99 226 105 236 105 H 346"/><path class="art-drift fade-1 grow" pathLength="1" style="--d: 1.8s" d="M 110 110 C 124 110 120 121 134 121 H 346"/><path class="art-drift grow" pathLength="1" style="--d: 0.75s" d="M 22 110 C 52 110 48 150 78 150 H 133"/><path class="art-drift fade-1 grow" pathLength="1" style="--d: 1.95s" d="M 133 150 C 147 150 143 139 157 139 H 346"/><path class="art-drift fade-1 grow" pathLength="1" style="--d: 2.05s" d="M 133 150 C 147 150 143 161 157 161 H 203"/><path class="art-drift fade-2 grow" pathLength="1" style="--d: 3.15s" d="M 203 161 C 213 161 211 155 221 155 H 346"/><path class="art-drift fade-2 grow" pathLength="1" style="--d: 3.25s" d="M 203 161 C 213 161 211 167 221 167 H 346"/><path class="art-drift grow" pathLength="1" style="--d: 1.0s" d="M 22 110 C 52 110 48 190 78 190 H 112"/><path class="art-drift fade-1 grow" pathLength="1" style="--d: 2.2s" d="M 112 190 C 126 190 122 179 136 179 H 240"/><path class="art-drift fade-2 grow" pathLength="1" style="--d: 3.4s" d="M 240 179 C 250 179 248 173 258 173 H 346"/><path class="art-drift fade-2 grow" pathLength="1" style="--d: 3.5s" d="M 240 179 C 250 179 248 185 258 185 H 346"/><path class="art-drift fade-1 grow" pathLength="1" style="--d: 2.3000000000000003s" d="M 112 190 C 126 190 122 201 136 201 H 346"/><circle class="art-end" cx="346" cy="13" r="2.5"/><circle class="art-stale" cx="346" cy="25" r="2.5"/><circle class="art-end" cx="346" cy="41" r="2.5"/><circle class="art-end" cx="346" cy="59" r="2.5"/><circle class="art-stale" cx="346" cy="75" r="2.5"/><circle class="art-end" cx="346" cy="87" r="2.5"/><circle class="art-end" cx="346" cy="93" r="2.5"/><circle class="art-stale" cx="346" cy="105" r="2.5"/><circle class="art-end" cx="346" cy="121" r="2.5"/><circle class="art-end" cx="346" cy="139" r="2.5"/><circle class="art-stale" cx="346" cy="155" r="2.5"/><circle class="art-end" cx="346" cy="167" r="2.5"/><circle class="art-end" cx="346" cy="173" r="2.5"/><circle class="art-stale" cx="346" cy="185" r="2.5"/><circle class="art-end" cx="346" cy="201" r="2.5"/><circle class="art-node" cx="22" cy="110" r="5"/><text class="art-label" x="12" y="136" text-anchor="start">a decision</text><text class="art-copy" x="338" y="16" text-anchor="end">deck_final_v2.key</text><text class="art-copy" x="338" y="96" text-anchor="end">demo video (old UI).mp4</text><text class="art-copy" x="338" y="136" text-anchor="end">help: still says Workspace</text><text class="art-copy" x="338" y="214" text-anchor="end">site, last spring</text></svg><p class="fork-caption">Every copy forks, then forks again, and nothing ever merges back. Each version drifts on its own, for good.</p><p class="fork-sting">That is how a customer ends up quoting you last year’s price.</p></figure>
+<figure class="fork fork-compiled"><figcaption class="fork-title">With Wherefore</figcaption><svg class="fork-art" viewBox="0 0 360 220" role="img" aria-label="With Wherefore"><path class="art-line" d="M 22 110 C 52 110 48 26 80 26 H 258 C 284 26 278 110 300 110"/><path class="art-pulse art-ripple" pathLength="1" d="M 22 110 C 52 110 48 26 80 26 H 258 C 284 26 278 110 300 110"/><text class="art-asset" x="88" y="22" text-anchor="start">Feature page</text><path class="art-line" d="M 22 110 C 52 110 48 54 80 54 H 258 C 284 54 278 110 300 110"/><path class="art-pulse art-ripple" pathLength="1" d="M 22 110 C 52 110 48 54 80 54 H 258 C 284 54 278 110 300 110"/><text class="art-asset" x="88" y="50" text-anchor="start">Demo video · captions</text><path class="art-line" d="M 22 110 C 52 110 48 82 80 82 H 258 C 284 82 278 110 300 110"/><path class="art-pulse art-ripple" pathLength="1" d="M 22 110 C 52 110 48 82 80 82 H 258 C 284 82 278 110 300 110"/><text class="art-asset" x="88" y="78" text-anchor="start">Sales deck · slide 4</text><path class="art-line" d="M 22 110 C 52 110 48 110 80 110 H 258 C 284 110 278 110 300 110"/><path class="art-pulse art-ripple" pathLength="1" d="M 22 110 C 52 110 48 110 80 110 H 258 C 284 110 278 110 300 110"/><text class="art-asset" x="88" y="106" text-anchor="start">Docs</text><path class="art-line" d="M 22 110 C 52 110 48 138 80 138 H 258 C 284 138 278 110 300 110"/><path class="art-pulse art-ripple" pathLength="1" d="M 22 110 C 52 110 48 138 80 138 H 258 C 284 138 278 110 300 110"/><text class="art-asset" x="88" y="134" text-anchor="start">App button</text><path class="art-line" d="M 22 110 C 52 110 48 166 80 166 H 258 C 284 166 278 110 300 110"/><path class="art-pulse art-ripple" pathLength="1" d="M 22 110 C 52 110 48 166 80 166 H 258 C 284 166 278 110 300 110"/><text class="art-asset" x="88" y="162" text-anchor="start">Onboarding email</text><path class="art-line" d="M 22 110 C 52 110 48 194 80 194 H 258 C 284 194 278 110 300 110"/><path class="art-pulse art-ripple" pathLength="1" d="M 22 110 C 52 110 48 194 80 194 H 258 C 284 194 278 110 300 110"/><text class="art-asset" x="88" y="190" text-anchor="start">Help article</text><path class="art-out" d="M 300 110 H 348"/><circle class="art-source" cx="22" cy="110" r="6"/><rect class="art-gate" x="288" y="98" width="24" height="24" rx="6"/><path class="art-check" d="M 295 110 l 4 4 l 7 -8"/><text class="art-label" x="14" y="134" text-anchor="start">source</text><text class="art-label" x="300" y="142" text-anchor="middle">wherefore gate</text><text class="art-label" x="348" y="100" text-anchor="end">ships</text><text class="art-label" x="88" y="216" text-anchor="start">wherefore build</text></svg><p class="fork-caption">Everything else gets what code already has. Change a fact once: your feature pages, docs, deck and demo video follow it, and nothing ships that still says the old thing.</p></figure>
+</div>
+<p class="actions"><a class="button" href="#start">Get started</a><a class="button button-quiet" href="#how">How it works</a></p>
+</div></section>
+<section class="pains"><div class="wrap">
+<div class="src"><p><span class="src-k">from</span> facts/company.json · 8 facts: pains.{items[].{pain, detail}, heading, answer}</p><p><span class="src-k">held by</span> gate · reach · brand</p></div>
+<h2>Sound familiar?</h2>
+<ul class="pain-list"><li class="pain"><p class="pain-head">Every team has a different picture of what is current.</p><p class="pain-detail">Sales sells last quarter’s plan, support answers from last year’s article, and the truth lives in someone’s head.</p></li><li class="pain"><p class="pain-head">A feature ships, and the world never hears about it.</p><p class="pain-detail">It is built, tested and released. The site, the docs, the deck and the help centre still describe the product before it.</p></li><li class="pain"><p class="pain-head">Nobody can say which version is true.</p><p class="pain-detail">Search finds six copies of the same claim. None of them says which one was decided, or why.</p></li></ul>
+<p class="pain-answer">Wherefore makes the source the one current picture. Every asset is built from it, and a check can require each new feature to reach the site, the docs and the deck before the change lands.</p>
+</div></section>
+<section id="demo" class="ripple"><div class="wrap">
+<div class="src"><p><span class="src-k">from</span> facts/company.json · 41 facts: demo.{heading, assets[].{by_hand, name, says, made}, before, after, stages[], said[], badges.{live, rebuilt, caught, fixed}, label, source, fact, note, checks[]}</p><p><span class="src-k">from</span> wherefore 0.1.1 · commands.json: wherefore gate, wherefore check retired</p><p><span class="src-k">held by</span> gate · reach · brand · press · engine</p></div>
+<h2>One change. Everywhere it is said.</h2>
+<div class="demo" role="group" aria-labelledby="demo-label">
+<input class="state" type="radio" name="stage" id="stage-0" checked>
+<input class="state" type="radio" name="stage" id="stage-1">
+<input class="state" type="radio" name="stage" id="stage-2">
+<div class="demo-head">
+<p class="demo-label" id="demo-label">Change one fact, and watch what follows it</p>
+<p class="demo-source"><span class="demo-source-name">source</span> <code>product.json · names.workspace = <b class="at at0">&quot;Workspace&quot;</b><b class="at at1 at2">&quot;Project&quot;</b></code></p>
+</div>
+<div class="stepper">
+<label class="step step-0" for="stage-0"><span class="step-n">1</span> Today</label>
+<label class="step step-1" for="stage-1"><span class="step-n">2</span> Rename Workspace to Project</label>
+<label class="step step-2" for="stage-2"><span class="step-n">3</span> Fix the help article</label>
+</div>
+<p class="demo-said"><span class="at at0 said-plain">One name, and 7 assets that say it.</span><span class="at at1 said-fail">6 rebuilt from the source. The help article still says “Workspace”, so nothing ships.</span><span class="at at2 said-pass">All 7 agree with the source. Ready to ship.</span></p>
+<ul class="tiles">
+<li class="tile tile-gen" style="--i: 0"><p class="tile-top"><span class="tile-name">Feature page</span><span class="badge at at0">live</span><span class="badge badge-pass at at1 at2">rebuilt</span></p><p class="tile-says"><span class="at at0">Every Workspace keeps its own roles and history.</span><span class="at at1 at2">Every Project keeps its own roles and history.</span></p><p class="tile-made">generated</p></li>
+<li class="tile tile-gen" style="--i: 1"><p class="tile-top"><span class="tile-name">Demo video · captions</span><span class="badge at at0">live</span><span class="badge badge-pass at at1 at2">rebuilt</span></p><p class="tile-says"><span class="at at0">Click New Workspace to get started.</span><span class="at at1 at2">Click New Project to get started.</span></p><p class="tile-made">generated</p></li>
+<li class="tile tile-gen" style="--i: 2"><p class="tile-top"><span class="tile-name">Sales deck · slide 4</span><span class="badge at at0">live</span><span class="badge badge-pass at at1 at2">rebuilt</span></p><p class="tile-says"><span class="at at0">One Workspace per client, set up in a minute.</span><span class="at at1 at2">One Project per client, set up in a minute.</span></p><p class="tile-made">generated</p></li>
+<li class="tile tile-gen" style="--i: 3"><p class="tile-top"><span class="tile-name">Docs</span><span class="badge at at0">live</span><span class="badge badge-pass at at1 at2">rebuilt</span></p><p class="tile-says"><span class="at at0">Create a Workspace from the sidebar.</span><span class="at at1 at2">Create a Project from the sidebar.</span></p><p class="tile-made">generated</p></li>
+<li class="tile tile-gen" style="--i: 4"><p class="tile-top"><span class="tile-name">App button</span><span class="badge at at0">live</span><span class="badge badge-pass at at1 at2">rebuilt</span></p><p class="tile-says"><span class="at at0">New Workspace</span><span class="at at1 at2">New Project</span></p><p class="tile-made">generated for the app</p></li>
+<li class="tile tile-gen" style="--i: 5"><p class="tile-top"><span class="tile-name">Onboarding email</span><span class="badge at at0">live</span><span class="badge badge-pass at at1 at2">rebuilt</span></p><p class="tile-says"><span class="at at0">Your first Workspace is ready.</span><span class="at at1 at2">Your first Project is ready.</span></p><p class="tile-made">generated template</p></li>
+<li class="tile tile-hand" style="--i: 6"><p class="tile-top"><span class="tile-name">Help article</span><span class="badge at at0">live</span><span class="badge badge-fail at at1">caught</span><span class="badge badge-pass at at2">fixed</span></p><p class="tile-says"><span class="at at0 at1">Open the Workspace menu to rename it.</span><span class="at at2">Open the Project menu to rename it.</span></p><p class="tile-made">written by hand</p></li>
+</ul>
+<p class="demo-note">An illustration: a made-up company&#x27;s product. The checks behind it are real: <code>wherefore gate</code> and <code>wherefore check retired</code>.</p>
+</div>
+</div></section>
+<section id="why" class="meaning"><div class="wrap">
+<div class="src"><p><span class="src-k">from</span> facts/company.json · 35 facts: demo.{fact, before, after} · why.{asks[].{name, tab, from, because}, ask, built_from, because, heading, word, part, meaning, juliet, rule, pick, note} · inspect.ask</p><p><span class="src-k">held by</span> gate · reach · brand · press</p></div>
+<div class="meaning-grid">
+<div class="definition">
+<p class="eyebrow">Why “Wherefore”</p>
+<p class="word"><dfn>wherefore</dfn> <span class="part">adverb</span></p>
+<p class="sense">for what reason; why.</p>
+<p class="juliet">Juliet wasn’t asking where Romeo was. She was asking why he had to be who he was.</p>
+<p class="answers">In a Wherefore repository every file has to answer her: generated from a source, written by a person for a stated reason, or captured and stamped with what it was made from. A file that cannot answer stops the change.</p>
+</div>
+<div class="asks" role="group" aria-label="Pick an asset to ask">
+<input class="state" type="radio" name="ask" id="ask-0" checked>
+<label class="tab" for="ask-0">feature page</label>
+<div class="ask-panel"><h2>Wherefore art thou, <em>Project</em>?</h2><dl class="answer"><div class="answer-from"><dt>Built from</dt><dd><code>product.json · names.workspace = “Project”</code></dd></div><div class="answer-because"><dt>Because</dt><dd>Customers kept calling them projects; only we said workspace. The reason was written down with the change, so it ships with it.</dd></div></dl></div>
+<input class="state" type="radio" name="ask" id="ask-1">
+<label class="tab" for="ask-1">demo video</label>
+<div class="ask-panel"><h2>Wherefore art thou, <em>demo video</em>?</h2><dl class="answer"><div class="answer-from"><dt>Built from</dt><dd><code>product.json · script.json · captions template</code></dd></div><div class="answer-because"><dt>Because</dt><dd>My script and captions are built from the same names as the app, so I never point at a button the product no longer has.</dd></div></dl></div>
+<input class="state" type="radio" name="ask" id="ask-2">
+<label class="tab" for="ask-2">deck</label>
+<div class="ask-panel"><h2>Wherefore art thou, <em>slide 4</em>?</h2><dl class="answer"><div class="answer-from"><dt>Built from</dt><dd><code>product.json · claims.json · deck template</code></dd></div><div class="answer-because"><dt>Because</dt><dd>I read the same names and claims as the feature pages, so the slide and the site cannot drift apart.</dd></div></dl></div>
+<input class="state" type="radio" name="ask" id="ask-3">
+<label class="tab" for="ask-3">brand</label>
+<div class="ask-panel"><h2>Wherefore art thou, <em>orange</em>?</h2><dl class="answer"><div class="answer-from"><dt>Built from</dt><dd><code>brand.json · accent</code></dd></div><div class="answer-because"><dt>Because</dt><dd>The accent is said once. Every page, slide and social card is built from it, so a rebrand is one line.</dd></div></dl></div>
+<input class="state" type="radio" name="ask" id="ask-4">
+<label class="tab" for="ask-4">claim</label>
+<div class="ask-panel"><h2>Wherefore art thou, <em>“SOC 2 certified”</em>?</h2><dl class="answer"><div class="answer-from"><dt>Built from</dt><dd><code>claims.json · compliance</code></dd></div><div class="answer-because"><dt>Because</dt><dd>I am not allowed yet. Until the audit is signed, the most any page may say is “SOC 2 in progress”, and the check refuses the rest.</dd></div></dl></div>
+<p class="ask-note">The same made-up company. This page can answer for itself: <label class="inline-switch" for="inspect">show how it is built</label></p>
+</div>
+</div>
 </div></section>
 <section id="how"><div class="wrap">
-<h2>How it works</h2>
+<div class="src"><p><span class="src-k">from</span> facts/company.json · 11 facts: how.{steps[].{label, name, text, command}, heading, note}</p><p><span class="src-k">from</span> wherefore 0.1.1 · commands.json: wherefore build, wherefore gate</p><p><span class="src-k">held by</span> gate · reach · brand · engine</p></div>
+<h2>It installs in your repo, beside your code.</h2>
 <ol class="steps">
-<li><h3>Say it once</h3><p>Prices, dimensions, names and claims live in one source. Nothing else is allowed to type them.</p></li>
-<li><h3>Generate the rest</h3><p>Plain scripts turn the source into every asset a customer, a supplier or a buyer sees. The same source makes the same files every time, because nothing in the build calls a model.</p></li>
-<li><h3>Gate every change</h3><p>Before a change lands, the gate rebuilds everything and compares it with what is committed. Every file must be generated, written by a person, or a capture stamped with what it was made from — and every generated file must be current — or the change is refused, in words that say why.</p></li>
-<li><h3>Prove the checks</h3><p>Each check has a proof that plants the fault it exists to catch and requires the check to name it. A check nobody has seen fail is not trusted.</p></li>
+<li><p class="step-label">01 · your sources</p><h3>Write it once.</h3><p>Names, features, specs and claims live in one source, each with its reason.</p></li>
+<li><p class="step-label">02 · <code>wherefore build</code></p><h3>Compile everything.</h3><p>Every asset is generated from the source, the same way every time. Nothing in the build calls a model.</p></li>
+<li><p class="step-label">03 · <code>wherefore gate</code></p><h3>Refuse the drift.</h3><p>On every push, anything stale or unaccounted for stops the change, and the error says why.</p></li>
 </ol>
+<p class="how-note">A command line, Python&#x27;s standard library, and one file that says what your corpus is.</p>
 </div></section>
-<section id="principles"><div class="wrap">
-<h2>What it enforces</h2>
-<ol class="principles">
-<li><strong>A fact exists in exactly one place.</strong> Everything else is generated from it or checked against it.</li>
-<li><strong>The build is deterministic.</strong> Nothing in the build path calls a model.</li>
-<li><strong>Fail loudly.</strong> A change the build cannot handle stops it; nothing improvises.</li>
-<li><strong>A check is not trusted until it has been shown to fail.</strong></li>
-<li><strong>Sources versus outputs.</strong> Every tracked file is <em>generated</em>, <em>authored</em> or <em>captured</em>. Generated files are never hand-edited, and a capture is stamped with what it was made from.</li>
+<section id="case" class="case"><div class="wrap">
+<div class="src"><p><span class="src-k">from</span> facts/company.json · 27 facts: case.{made[], held[], stats[].{n, what}, quote, eyebrow, name, heading, text, url, visit, made_heading, held_heading, as_of}</p><p><span class="src-k">held by</span> gate · reach · brand</p></div>
+<p class="eyebrow">Case study · Chaotic Pendulums</p>
+<h2>A hardware company, compiled from one spec file.</h2>
+<p class="case-text">Chaotic Pendulums is a small hardware company our founder started to test this idea on something with more surface area than software: a desk-sized double pendulum with milled parts, a bronze blade, bearings and a clamp. Wherefore was built alongside it, one rule at a time. If one source can hold machined parts, physics, suppliers and a storefront, it can hold your app, website and docs. One spec file holds the object. Everything a shop, a customer or a printer receives is built from it, and checked on every push.</p>
+<p class="actions"><a class="button button-quiet" href="https://chaoticpendulums.com/">See the live site</a></p>
+
+<div class="case-grid">
+<div class="case-col"><h3>What it compiles</h3><ul class="case-list"><li>Part drawings a machine shop quotes and inspects against, each with its cut file and its solid model</li><li>Print-ready 3D files for a prototype, laid out plate by plate</li><li>A bill of materials, and a quote bundle a shop’s online tool takes in one drag</li><li>The engineering hand-over, frozen at every release so a shop can always find the pack it quoted</li><li>The brand: the mark, the hero and the renders, drawn from the object’s own dimensions</li><li>The website, and the 3D pendulum that swings on it</li></ul></div>
+<div class="case-col"><h3>What holds it</h3><ul class="case-list case-held"><li>Load simulations, worked from the real parts’ masses, prove every mount setup holds the pendulum at a torque a hand can give.</li><li>Worst-case tolerance stacks prove every screw clamps and never bottoms, at every extreme of every band.</li><li>A sweep proves the blade turns a full circle and touches nothing.</li><li>The swing on the website is integrated from the physics of the object as it is today, and a check holds every mass and length to the parts.</li><li>Move any dimension, and a probe requires every file a supplier receives to move with it, or the change is refused.</li></ul></div>
+</div>
+<ul class="stats"><li><span class="stat-n">49</span> checks, each with a proof that plants the fault it exists to catch</li><li><span class="stat-n">9</span> parts, each drawn, cut and modelled from the spec</li><li><span class="stat-n">5</span> print plates for a prototype anyone holding the pack can make</li></ul>
+<p class="as-of">Counted at V83 of the pack, on 29 October 2026.</p>
+</div></section>
+<section class="rule"><div class="wrap">
+<div class="src"><p><span class="src-k">from</span> facts/company.json · 3 facts: rule.{line, end, text}</p><p><span class="src-k">held by</span> gate · reach · brand</p></div>
+<div class="rule-grid">
+<p class="rule-line">AI writes the rules.<br><em>The build never improvises.</em></p>
+<p class="rule-text">Agents write the generators and the checks. The build that runs them is plain code, the same every time, and nothing in it calls a model.</p>
+</div>
+</div></section>
+<section id="start"><div class="wrap">
+<div class="src"><p><span class="src-k">from</span> facts/company.json · 17 facts: start.{install, steps[], closed, ask, heading, text} · status.{items[].{state, text}, labels.{available, next, later}}</p><p><span class="src-k">from</span> wherefore 0.1.1 · version · commands.json: wherefore init, wherefore build, wherefore hook install</p><p><span class="src-k">held by</span> gate · reach · brand · engine</p></div>
+<div class="start-box">
+<p class="start-ask">Wherefore art thou?</p>
+<h2>Start with one fact.</h2>
+<p class="start-text">Install it beside your code, say one fact once, and let the gate hold everything that states it. Nothing to join, and nobody to call.</p>
+<ol class="start-steps">
+<li><code>wherefore init [DIR]</code><span class="does">write a wherefore.json that declares nothing yet</span></li>
+<li><code>wherefore build</code><span class="does">the roll: every generator, twice, compared with what is committed, and the results left in place</span></li>
+<li><code>wherefore hook install</code><span class="does">a pre-push hook: no push leaves the corpus stale</span></li>
 </ol>
-</div></section>
-<section id="client"><div class="wrap">
-<h2>Built inside a real company</h2>
-<blockquote><p>Wherefore was extracted from Chaotic Pendulums, where one spec file makes every drawing, solid model, parts list and web page. Move a dimension and every one of them moves with it, or the build stops and names the file that did not.</p></blockquote>
-</div></section>
-<section id="interface"><div class="wrap">
-<h2>The whole interface</h2>
-<p>A command line, Python&#x27;s standard library, and one file that says what your corpus is.</p>
-<dl class="terminal">
-<div class="cmd"><dt><code>wherefore init [DIR]</code></dt><dd>write a wherefore.json that declares nothing yet</dd></div>
-<div class="cmd"><dt><code>wherefore gate [--keep]</code></dt><dd>every tracked file classified, every generated one current; puts the tree back unless --keep</dd></div>
-<div class="cmd"><dt><code>wherefore gate --restamp GROUP</code></dt><dd>record a re-made capture against its sources</dd></div>
-<div class="cmd"><dt><code>wherefore build</code></dt><dd>the roll: every generator, twice, compared with what is committed, and the results left in place</dd></div>
-<div class="cmd"><dt><code>wherefore list</code></dt><dd>run every generator once and say what each wrote</dd></div>
-<div class="cmd"><dt><code>wherefore prove [SCRIPT ...]</code></dt><dd>run the client&#x27;s proofs, one at a time, in place</dd></div>
-<div class="cmd"><dt><code>wherefore check retired</code></dt><dd>nothing a person reads still claims a retired value or phrase</dd></div>
-<div class="cmd"><dt><code>wherefore check reach</code></dt><dd>every fact, moved one at a time, reaches what it should</dd></div>
-<div class="cmd"><dt><code>wherefore check claims</code></dt><dd>every claim says only what its rule allows</dd></div>
-<div class="cmd"><dt><code>wherefore hook install</code></dt><dd>a pre-push hook: no push leaves the corpus stale</dd></div>
-<div class="cmd"><dt><code>wherefore hook pre-push</code></dt><dd>what the installed hook runs before a push; not for typing</dd></div>
-</dl>
-</div></section>
-<section id="access"><div class="wrap">
-<h2>Early access</h2>
-<p>Wherefore is in private development. Version 0.1.1.</p>
+<p class="start-closed">Wherefore is not public yet. The line that installs it appears here when it is.</p>
+<ul class="road">
+<li class="road-available"><span class="chip">Available</span> the engine and its checks, Wherefore 0.1.1</li>
+<li class="road-next"><span class="chip">Next</span> docs compiled from each release, and a skill that teaches your agent the rules</li>
+<li class="road-later"><span class="chip">Later</span> launches that wait until their page, docs and demo agree</li>
+</ul>
+</div>
 </div></section>
 </main>
-<footer><div class="wrap"><p>This page is generated by Wherefore from one source file, and checked by it. Wherefore 0.1.1. <a href="brand/">Brand</a></p></div></footer>
+<footer><div class="wrap"><div class="src"><p><span class="src-k">from</span> facts/company.json · 4 facts: company.{contact, domain, name} · colophon</p><p><span class="src-k">from</span> wherefore 0.1.1 · version</p><p><span class="src-k">held by</span> gate · reach · brand</p></div><div class="footer-row"><p><span class="footer-name">Wherefore</span> · This page is compiled from one source file and the release it pins.</p><p class="footer-meta">Wherefore 0.1.1 · <a href="brand/">Brand</a></p></div></div></footer>
+<label class="inspect-switch" for="inspect"><span class="switch-track" aria-hidden="true"></span>How this page is built</label>
 </body>
 </html>

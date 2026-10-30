@@ -1,3 +1,5 @@
 # the engine, installed per job into the checkout (requirements-engine.txt)
 /.wherefore-engine/
 __pycache__/
+# the browser library the press check drives, installed per job (requirements-browser.txt)
+/.browser/

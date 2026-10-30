@@ -18,7 +18,7 @@
   {
    "script": "brand.py",
    "cwd": "gen",
-   "makes": "site/brand.css, site/fonts/ and the brand page site/brand/, from the brand tokens"
+   "makes": "site/brand.css, site/fonts/ and the brand page site/brand/ with the icon, from the brand tokens"
   },
   {
    "script": "site.py",
@@ -48,7 +48,7 @@
     ],
     [
      "gen/page.css",
-     "the site's design, inlined into every page by gen/site.py"
+     "the site's layout, served as site/page.css by gen/site.py; every colour and face in it is a token"
     ],
     [
      "*.md",
@@ -67,6 +67,10 @@
      "the engine release this corpus is built and judged by"
     ],
     [
+     "requirements-browser.txt",
+     "the browser library checks/controls_press.py drives, pinned like the engine"
+    ],
+    [
      "wrangler.jsonc",
      "the hosting: Cloudflare serves site/ as it is committed, under the project's name"
     ],
@@ -77,7 +81,18 @@
    ]
   },
   "captured": {
-   "groups": {}
+   "groups": {
+    "icon": {
+     "files": [
+      "brand/icon/*.png"
+     ],
+     "shot_from": [
+      "site/brand/icon.svg"
+     ],
+     "why": "the icon as a picture, for the accounts that take only PNG. Setting type into pixels takes a browser, which the build does not run, so brand/shoot_icon.py shoots it from the SVG gen/brand.py writes. When that SVG moves, shoot it again and run `wherefore gate --restamp icon`",
+     "stamp": "18d5bc6ba9d722ed"
+    }
+   }
   }
  },
  "proofs": {

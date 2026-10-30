@@ -5,7 +5,7 @@ Each case breaks a copy of this repository (checks/_copy.py) and requires the
 check to fail in the words of the case, or - for the case that must not fire -
 to pass.
 
-  fails   the faint grey darkened until captions cannot be read on the page
+  fails   the muted grey darkened until captions cannot be read on the page
           a pair that names a colour the tokens do not define
           a colour that is not #RRGGBB, which cannot be measured
   passes  the brand as it is
@@ -36,9 +36,9 @@ def tokens(p, change):
 def main():
     r = []
     with Edit(TOKENS) as p:
-        tokens(p, lambda d: d["color"]["faint"].update(value="#3A3D44"))
-        check(r, "the faint grey darkened past reading", CHECK, True,
-              ["faint on ground reaches", "it must reach 4.5:1"])
+        tokens(p, lambda d: d["color"]["muted"].update(value="#3A3D44"))
+        check(r, "the muted grey darkened past reading", CHECK, True,
+              ["muted on ground reaches", "it must reach 4.5:1"])
     with Edit(TOKENS) as p:
         tokens(p, lambda d: d["contrast"]["pairs"].append({"text": "grey", "on": "ground", "min": 4.5}))
         check(r, "a pair naming a colour nobody defined", CHECK, True,

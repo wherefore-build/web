@@ -21,20 +21,21 @@ def esc(text):
     return html.escape(text, quote=True)
 
 
-def status():
+def status(facts=FACTS):
     """site.status, refused unless it is one this site knows how to show."""
-    s = FACTS["site"]["status"]
+    s = facts["site"]["status"]
     if s not in STATUSES:
         raise SystemExit(f"site.status is {s!r}: it is one of {', '.join(STATUSES)}")
     return s
 
 
-def banner():
-    """The draft banner, on every page of a draft; nothing once launched."""
-    if status() != "draft":
+def banner(facts=FACTS):
+    """The draft banner, on every page of a draft; nothing once launched.
+    `facts` is the facts or a view of them that records what it reads (site.py)."""
+    if status(facts) != "draft":
         return ""
     return (f'<div class="draft" role="note"><span class="draft-mark">Draft</span> '
-            f'{esc(FACTS["site"]["draft_banner"])}</div>\n')
+            f'{esc(facts["site"]["draft_banner"])}</div>\n')
 
 
 def head(title, description, css):
@@ -50,6 +51,22 @@ def head(title, description, css):
         lines.append('<meta name="robots" content="noindex, nofollow">')
     lines.append(f'<link rel="stylesheet" href="{css}">')
     return "\n".join(lines)
+
+
+def colours(tokens=TOKENS):
+    """{name: #RRGGBB} for every colour token. A token that is another colour in
+    a different role says `same_as` instead of a value, and reads as that one."""
+    out = {}
+    for name, c in tokens["color"].items():
+        if "same_as" in c:
+            target = tokens["color"].get(c["same_as"])
+            if target is None or "value" not in target:
+                raise SystemExit(f"colour {name} is the same as {c['same_as']!r}, which is not a "
+                                 f"colour brand/tokens.json gives a value")
+            out[name] = target["value"]
+        else:
+            out[name] = c["value"]
+    return out
 
 
 def luminance(hex_value):
