@@ -181,8 +181,8 @@
    "later": "Later"
   },
   "items": [
-   {"state": "available", "text": "the engine and its checks, Wherefore {version}"},
-   {"state": "next", "text": "docs compiled from each release, and a skill that teaches your agent the rules"},
+   {"state": "available", "text": "the engine, its checks, and the skill that teaches your agent the rules, Wherefore {version}"},
+   {"state": "next", "text": "docs compiled from each release"},
    {"state": "later", "text": "launches that wait until their page, docs and demo agree"}
   ]
  },

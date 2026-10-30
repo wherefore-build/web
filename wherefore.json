@@ -29,6 +29,11 @@
    "script": "site.py",
    "cwd": "gen",
    "makes": "site/index.html, site/page.css and site/_headers, from the facts, the pendulum's counts, the brand and the pinned engine"
+  },
+  {
+   "script": "-m wherefore.skill",
+   "cwd": ".",
+   "makes": ".claude/skills/wherefore/, the skill the pinned release ships, for every coding agent that works here"
   }
  ],
  "inventory": {
@@ -57,7 +62,10 @@
     ],
     [
      "*.md",
-     "prose a person writes about this repository"
+     "prose a person writes about this repository",
+     [
+      ".claude/skills/wherefore/*"
+     ]
     ],
     [
      ".github/**",
