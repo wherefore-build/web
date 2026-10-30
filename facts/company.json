@@ -18,7 +18,7 @@
   "eyebrow": "In development",
   "headline": "Your company,",
   "headline_end": "compiled.",
-  "lede": "Your code has one source of truth, tests, and a merge. Everything else your company says is a copy of a copy, and every copy drifts."
+  "lede": "Your code has one source of truth, and a pipeline that tests every change before it ships. Everything else your company says is a copy of a copy, and every copy drifts."
  },
  "forks": {
   "code": {
@@ -133,7 +133,7 @@
   "eyebrow": "Case study",
   "name": "Chaotic Pendulums",
   "heading": "A hardware company, compiled from one spec file.",
-  "text": "Chaotic Pendulums is a small hardware company our founder started to test this idea on something with more surface area than software: a desk-sized double pendulum with milled parts, a bronze blade, bearings and a clamp. Wherefore was built alongside it, one rule at a time. If one source can hold machined parts, physics, suppliers and a storefront, it can hold your website and your docs. One spec file holds the object. Everything a shop, a customer or a printer receives is built from it, and checked on every push.",
+  "text": "Chaotic Pendulums is a small hardware company our founder started to test this idea on something with more surface area than software: a desk-sized double pendulum with milled parts, a bronze blade, bearings and a clamp. Wherefore was built alongside it, one rule at a time. If one source can hold machined parts, physics, suppliers and a storefront, it can hold your app, your website and your docs. One spec file holds the object. Everything a shop, a customer or a printer receives is built from it, and checked on every push.",
   "url": "https://chaoticpendulums.com/",
   "visit": "See the live site",
   "made_heading": "What it compiles",
