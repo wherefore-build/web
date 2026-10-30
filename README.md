@@ -65,9 +65,11 @@ It leads with the pain, then shows the cure working.
   no shared picture of what is current, features that ship and never reach the
   site or the docs, six copies and no telling which is true - and what
   Wherefore does about them.
-- **The demo.** One fact (a made-up company's seats on its Pro plan) and the
-  seven assets that state it. Three steps: today, the change, and the fix for
-  the one asset written by hand. The page says it is an illustration, and names
+- **The demo.** One fact (a made-up company renaming Workspaces to Projects)
+  and the seven assets that state it - the feature page, the demo video's
+  captions, the deck, the docs, the app's button, the onboarding email and a
+  help article. Three steps: today, the rename, and the fix for the one asset
+  written by hand. The page says it is an illustration, and names
   the real commands behind it.
 - **Why "Wherefore".** The word means *why*. Beside it, five tabs ask an asset
   of the same made-up company "Wherefore art thou?" and show what it was built
@@ -76,7 +78,9 @@ It leads with the pain, then shows the cure working.
 - **The case study**: Chaotic Pendulums, the founder's own hardware company and
   the first to run on Wherefore - what it compiles, what holds it, and a link
   to the live site. Its counts are stated with the release they were counted at.
-- **The rule, and the pilot**, with what is available, next and later.
+- **The rule, and getting started**: no pilot to join - the install line (once
+  there is one) and the release's own commands, with what is available, next
+  and later.
 
 **How this page is built.** A switch at the bottom of the screen (and a
 second label for it beside the questions) shows, above every part of the
@@ -144,8 +148,8 @@ anything else.
 
 A `null` in the facts is a fact not decided yet. With no `company.domain`, the
 page names no canonical address. With no `company.contact`, it offers no
-address to write to and says the pilot is not open. With no `pilot.terms`, it
-states none, and with no `case.quote` the case study quotes no one. Each appears when its fact is filled in.
+address to write to. With no `start.install`, it says Wherefore is not public
+yet, and with no `case.quote` the case study quotes no one. Each appears when its fact is filled in.
 
 ## CI
 

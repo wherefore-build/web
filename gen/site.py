@@ -37,8 +37,8 @@ it (site/_headers). Launching is the owner's decision, and it is one word in
 the facts.
 
 A NULL IS A FACT NOT DECIDED YET. With no domain the page names no canonical
-address, with no contact it offers no address to write to and says the pilot
-is not open, with no terms it states none, and with no quote the case study
+address, with no contact it offers no address to write to, with no install
+line it says Wherefore is not public yet, and with no quote the case study
 quotes no one. Each appears when its fact does.
 
 Run from gen/, as wherefore.json says, after brand.py. Writes site/index.html,
@@ -74,14 +74,20 @@ def version():
     return wherefore.__version__
 
 
-def command(usage):
-    """A command the page names, refused unless the pinned release has it."""
+def entry(usage):
+    """The pinned release's own entry for a command the page names; refused if it has none."""
     for c in COMMANDS:
         if c["usage"] == usage or c["usage"].startswith(usage + " "):
             ASKED.append(("command", usage))
-            return usage
+            return c
     raise SystemExit(f"the page names `{usage}`, which {ENGINE} does not have: "
                      f"its commands are {', '.join(c['usage'] for c in COMMANDS)}")
+
+
+def command(usage):
+    """A command the page names, refused unless the pinned release has it."""
+    entry(usage)
+    return usage
 
 
 class Reading:
@@ -150,6 +156,11 @@ def said(words):
     return codes[0] if len(codes) == 1 else ", ".join(codes[:-1]) + " and " + codes[-1]
 
 
+def literal(v):
+    """A value as its source file writes it: a string in quotes, a number bare."""
+    return esc(json.dumps(v, ensure_ascii=False))
+
+
 def at(*stages):
     """The classes that show an element only at these steps of the demo."""
     return "at " + " ".join(f"at{s}" for s in stages)
@@ -180,7 +191,7 @@ def header(f):
     w = f["why"]
     return (f'{banner(f)}<header class="top"><div class="wrap"><a class="name" href="#top">{esc(f["company"]["name"])}</a>\n'
             f'<nav aria-label="On this page"><a href="#why">{esc(w["heading"])}</a><a href="#how">{esc(f["nav"]["how"])}</a>'
-            f'<a href="#case">{esc(f["case"]["eyebrow"])}</a><a class="pill" href="#pilot">{esc(f["nav"]["pilot"])}</a></nav></div>'
+            f'<a href="#case">{esc(f["case"]["eyebrow"])}</a><a class="pill" href="#start">{esc(f["nav"]["start"])}</a></nav></div>'
             f'<div class="wrap">{SRC}</div></header>')
 
 
@@ -218,14 +229,14 @@ def demo(d):
             badges = (f'<span class="badge {at(0)}">{esc(b["live"])}</span>'
                       f'<span class="badge badge-fail {at(1)}">{esc(b["caught"])}</span>'
                       f'<span class="badge badge-pass {at(2)}">{esc(b["fixed"])}</span>')
-            says = (f'<span class="{at(0, 1)}">{esc(fill(a["says"], seats=d["before"]))}</span>'
-                    f'<span class="{at(2)}">{esc(fill(a["says"], seats=d["after"]))}</span>')
+            says = (f'<span class="{at(0, 1)}">{esc(fill(a["says"], value=d["before"]))}</span>'
+                    f'<span class="{at(2)}">{esc(fill(a["says"], value=d["after"]))}</span>')
             kind = "tile-hand"
         else:
             badges = (f'<span class="badge {at(0)}">{esc(b["live"])}</span>'
                       f'<span class="badge badge-pass {at(1, 2)}">{esc(b["rebuilt"])}</span>')
-            says = (f'<span class="{at(0)}">{esc(fill(a["says"], seats=d["before"]))}</span>'
-                    f'<span class="{at(1, 2)}">{esc(fill(a["says"], seats=d["after"]))}</span>')
+            says = (f'<span class="{at(0)}">{esc(fill(a["says"], value=d["before"]))}</span>'
+                    f'<span class="{at(1, 2)}">{esc(fill(a["says"], value=d["after"]))}</span>')
             kind = "tile-gen"
         tiles.append(f'<li class="tile {kind}" style="--i: {i}"><p class="tile-top">'
                      f'<span class="tile-name">{esc(a["name"])}</span>{badges}</p>'
@@ -235,7 +246,7 @@ def demo(d):
 {inputs}
 <div class="demo-head">
 <p class="demo-label" id="demo-label">{esc(d["label"])}</p>
-<p class="demo-source"><span class="demo-source-name">{esc(d["source"])}</span> <code>{esc(d["fact"])} = <b class="{at(0)}">{counts["before"]}</b><b class="{at(1, 2)}">{counts["after"]}</b></code></p>
+<p class="demo-source"><span class="demo-source-name">{esc(d["source"])}</span> <code>{esc(d["fact"])} = <b class="{at(0)}">{literal(counts["before"])}</b><b class="{at(1, 2)}">{literal(counts["after"])}</b></code></p>
 </div>
 <div class="stepper">
 {steps}
@@ -354,7 +365,7 @@ def hero(f):
 <h1>{esc(h["headline"])} <em>{esc(h["headline_end"])}</em></h1>
 <p class="lede">{esc(h["lede"])}</p>
 {forks(f)}
-<p class="actions"><a class="button" href="#pilot">{esc(h["cta"])}</a><a class="button button-quiet" href="#how">{esc(f["nav"]["how"])}</a></p>
+<p class="actions"><a class="button" href="#start">{esc(f["nav"]["start"])}</a><a class="button button-quiet" href="#how">{esc(f["nav"]["how"])}</a></p>
 </div></section>"""
 
 
@@ -464,15 +475,16 @@ def rule(f):
 </div></section>"""
 
 
-def pilot(f):
-    company, p, s = f["company"], f["pilot"], f["status"]
-    if company["contact"]:
-        join = (f'<p class="actions"><a class="button" href="mailto:{esc(company["contact"])}">'
-                f'{esc(f["hero"]["cta"])}</a></p>')
-    else:
-        join = f'<p class="pilot-closed">{esc(p["closed"])}</p>'
-    if p["terms"]:
-        join += f'<p class="pilot-terms">{esc(p["terms"])}</p>'
+def start(f):
+    """Getting started, by yourself: the install line once there is one, then the release's own commands."""
+    st, s = f["start"], f["status"]
+    lines = []
+    if st["install"]:
+        lines.append(f'<li><code>{esc(st["install"])}</code></li>')
+    for usage in st["steps"]:
+        c = entry(usage)
+        lines.append(f'<li><code>{esc(c["usage"])}</code><span class="does">{esc(c["does"])}</span></li>')
+    closed = "" if st["install"] else f'<p class="start-closed">{esc(st["closed"])}</p>'
     labels, road = s["labels"], []
     for it in s["items"]:
         state = it["state"]
@@ -480,13 +492,16 @@ def pilot(f):
             raise SystemExit(f"status item {it['text']!r} is {state!r}, which status.labels does not name")
         road.append(f'<li class="road-{esc(state)}"><span class="chip">{esc(labels[state])}</span> '
                     f'{esc(fill(it["text"], version=version()))}</li>')
-    return f"""<section id="pilot"><div class="wrap">
+    return f"""<section id="start"><div class="wrap">
 {SRC}
-<div class="pilot">
-<p class="pilot-ask">{esc(p["ask"])}</p>
-<h2>{esc(p["heading"])}</h2>
-<p class="pilot-text">{esc(p["text"])}</p>
-{join}
+<div class="start-box">
+<p class="start-ask">{esc(st["ask"])}</p>
+<h2>{esc(st["heading"])}</h2>
+<p class="start-text">{esc(st["text"])}</p>
+<ol class="start-steps">
+{chr(10).join(lines)}
+</ol>
+{closed}
 <ul class="road">
 {chr(10).join(road)}
 </ul>
@@ -497,6 +512,8 @@ def pilot(f):
 def footer(f):
     company = f["company"]
     meta = f'Wherefore {esc(version())} · <a href="brand/">Brand</a>'
+    if company["contact"]:
+        meta += f' · <a href="mailto:{esc(company["contact"])}">{esc(company["contact"])}</a>'
     if company["domain"]:
         meta += f' · {esc(company["domain"])}'
     return (f'<footer><div class="wrap">{SRC}<div class="footer-row"><p><span class="footer-name">{esc(company["name"])}</span>'
@@ -511,7 +528,7 @@ def page(f):
         lines.append(f'<link rel="canonical" href="https://{esc(company["domain"])}/">')
     parts = {name: part(render, f, inspect) for name, render in (
         ("header", header), ("hero", hero), ("pains", pains), ("demo", ripple), ("why", why), ("how", how), ("case", case),
-        ("rule", rule), ("pilot", pilot), ("footer", footer))}
+        ("rule", rule), ("start", start), ("footer", footer))}
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -529,7 +546,7 @@ def page(f):
 {parts["how"]}
 {parts["case"]}
 {parts["rule"]}
-{parts["pilot"]}
+{parts["start"]}
 </main>
 {parts["footer"]}
 <label class="inspect-switch" for="inspect"><span class="switch-track" aria-hidden="true"></span>{esc(inspect["toggle"])}</label>

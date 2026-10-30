@@ -12,14 +12,13 @@
  },
  "nav": {
   "how": "How it works",
-  "pilot": "Join the pilot"
+  "start": "Get started"
  },
  "hero": {
-  "eyebrow": "Founder pilot",
+  "eyebrow": "In development",
   "headline": "Your company,",
   "headline_end": "compiled.",
-  "lede": "Your code has one source of truth, tests, and a merge. Everything else your company says is a copy of a copy, and every copy drifts.",
-  "cta": "Join the founder pilot"
+  "lede": "Your code has one source of truth, tests, and a merge. Everything else your company says is a copy of a copy, and every copy drifts."
  },
  "forks": {
   "code": {
@@ -34,11 +33,11 @@
    "caption": "Every copy forks, then forks again, and nothing ever merges back. Each version drifts on its own, for good.",
    "sting": "That is how a customer ends up quoting you last year’s price.",
    "start": "a decision",
-   "copies": ["deck_final_v2.key", "pricing (old).pdf", "help: still 3 seats", "site, last spring"]
+   "copies": ["deck_final_v2.key", "demo video (old UI).mp4", "help: still says Workspace", "site, last spring"]
   },
   "compiled": {
    "title": "With Wherefore",
-   "caption": "Everything else gets what code already has. Change a fact once: your website, pricing, deck and docs follow it, and nothing ships that still says the old thing.",
+   "caption": "Everything else gets what code already has. Change a fact once: your feature pages, docs, deck and demo video follow it, and nothing ships that still says the old thing.",
    "source": "source",
    "ships": "ships"
   }
@@ -59,22 +58,22 @@
   "heading": "One change. Everywhere it is said.",
   "label": "Change one fact, and watch what follows it",
   "source": "source",
-  "fact": "plans.json · pro.seats",
-  "before": 3,
-  "after": 5,
+  "fact": "product.json · names.workspace",
+  "before": "Workspace",
+  "after": "Project",
   "stages": [
    "Today",
-   "Make Pro {after} seats",
+   "Rename {before} to {after}",
    "Fix the {hand}"
   ],
   "assets": [
-   {"name": "Website", "made": "generated", "says": "Pro: for teams of up to {seats}."},
-   {"name": "Pricing page", "made": "generated", "says": "Pro · {seats} seats included"},
-   {"name": "Sales deck · slide 7", "made": "generated", "says": "Pro covers a team of {seats} from day one."},
-   {"name": "Docs", "made": "generated", "says": "Invite up to {seats} teammates on Pro."},
-   {"name": "Upgrade screen", "made": "generated for the app", "says": "Your plan includes {seats} seats."},
-   {"name": "Sales email", "made": "generated template", "says": "…and Pro covers all {seats} of you."},
-   {"name": "Help article", "made": "written by hand", "says": "Pro includes {seats} seats.", "by_hand": true}
+   {"name": "Feature page", "made": "generated", "says": "Every {value} keeps its own roles and history."},
+   {"name": "Demo video · captions", "made": "generated", "says": "Click New {value} to get started."},
+   {"name": "Sales deck · slide 4", "made": "generated", "says": "One {value} per client, set up in a minute."},
+   {"name": "Docs", "made": "generated", "says": "Create a {value} from the sidebar."},
+   {"name": "App button", "made": "generated for the app", "says": "New {value}"},
+   {"name": "Onboarding email", "made": "generated template", "says": "Your first {value} is ready."},
+   {"name": "Help article", "made": "written by hand", "says": "Open the {value} menu to rename it.", "by_hand": true}
   ],
   "badges": {
    "live": "live",
@@ -83,11 +82,11 @@
    "fixed": "fixed"
   },
   "said": [
-   "One fact, and {total} assets that say it.",
-   "{rebuilt} rebuilt from the source. The {hand} still says {before} seats, so nothing ships.",
+   "One name, and {total} assets that say it.",
+   "{rebuilt} rebuilt from the source. The {hand} still says “{before}”, so nothing ships.",
    "All {total} agree with the source. Ready to ship."
   ],
-  "note": "An illustration: a made-up company's plan. The checks behind it are real:",
+  "note": "An illustration: a made-up company's product. The checks behind it are real:",
   "checks": [
    "wherefore gate",
    "wherefore check retired"
@@ -105,12 +104,12 @@
   "built_from": "Built from",
   "because": "Because",
   "asks": [
-   {"tab": "pricing page", "name": "{after} seats", "from": "{fact} = {after}",
-    "because": "Teams of four and five kept hitting the limit. The reason was written down with the change, so it ships with it."},
-   {"tab": "website", "name": "website", "from": "company.json · copy · brand tokens",
-    "because": "Every line of me is built from the source. Nobody typed me, so nobody can make me disagree with it."},
-   {"tab": "deck", "name": "slide 7", "from": "plans.json · claims.json · deck template",
-    "because": "I read the same plans and claims as the website, so the slide and the site cannot drift apart."},
+   {"tab": "feature page", "name": "{after}", "from": "{fact} = “{after}”",
+    "because": "Customers kept calling them projects; only we said workspace. The reason was written down with the change, so it ships with it."},
+   {"tab": "demo video", "name": "demo video", "from": "product.json · script.json · captions template",
+    "because": "My script and captions are built from the same names as the app, so I never point at a button the product no longer has."},
+   {"tab": "deck", "name": "slide 4", "from": "product.json · claims.json · deck template",
+    "because": "I read the same names and claims as the feature pages, so the slide and the site cannot drift apart."},
    {"tab": "brand", "name": "orange", "from": "brand.json · accent",
     "because": "The accent is said once. Every page, slide and social card is built from it, so a rebrand is one line."},
    {"tab": "claim", "name": "“SOC 2 certified”", "from": "claims.json · compliance",
@@ -122,7 +121,7 @@
   "heading": "It installs in your repo, beside your code.",
   "steps": [
    {"label": "your sources", "name": "Write it once.",
-    "text": "Prices, plans, specs and claims live in one source, each with its reason."},
+    "text": "Names, features, specs and claims live in one source, each with its reason."},
    {"command": "wherefore build", "name": "Compile everything.",
     "text": "Every asset is generated from the source, the same way every time. Nothing in the build calls a model."},
    {"command": "wherefore gate", "name": "Refuse the drift.",
@@ -134,7 +133,7 @@
   "eyebrow": "Case study",
   "name": "Chaotic Pendulums",
   "heading": "A hardware company, compiled from one spec file.",
-  "text": "We proved Wherefore on a hardware company on purpose: if it can hold machined parts, physics and suppliers to one source, it can hold a pricing page. Chaotic Pendulums is our founder’s own company, and it makes a desk-sized double pendulum: milled parts, a bronze blade, bearings and a clamp. One spec file holds the object. Everything a shop, a customer or a printer receives is built from it, and checked on every push.",
+  "text": "We proved Wherefore on a hardware company on purpose: if it can hold machined parts, physics and suppliers to one source, it can hold your website and your docs. Chaotic Pendulums is our founder’s own company, and it makes a desk-sized double pendulum: milled parts, a bronze blade, bearings and a clamp. One spec file holds the object. Everything a shop, a customer or a printer receives is built from it, and checked on every push.",
   "url": "https://chaoticpendulums.com/",
   "visit": "See the live site",
   "made_heading": "What it compiles",
@@ -167,12 +166,13 @@
   "end": "The build never improvises.",
   "text": "Agents write the generators and the checks. The build that runs them is plain code, the same every time, and nothing in it calls a model."
  },
- "pilot": {
+ "start": {
   "ask": "Wherefore art thou?",
-  "heading": "Find out how often you contradict yourself.",
-  "text": "The founder pilot starts with a count: every place your company states its pricing, and how many disagree. Then we compile them from one source, and keep them that way.",
-  "closed": "Wherefore is in private development, and the pilot is not open yet.",
-  "terms": null
+  "heading": "Start with one fact.",
+  "text": "Install it beside your code, say one fact once, and let the gate hold everything that states it. Nothing to join, and nobody to call.",
+  "steps": ["wherefore init", "wherefore build", "wherefore hook install"],
+  "install": null,
+  "closed": "Wherefore is not public yet. The line that installs it appears here when it is."
  },
  "status": {
   "labels": {
@@ -183,7 +183,7 @@
   "items": [
    {"state": "available", "text": "the engine and its checks, Wherefore {version}"},
    {"state": "next", "text": "docs compiled from each release, and a skill that teaches your agent the rules"},
-   {"state": "later", "text": "launches that wait until their page, pricing and docs agree"}
+   {"state": "later", "text": "launches that wait until their page, docs and demo agree"}
   ]
  },
  "inspect": {
