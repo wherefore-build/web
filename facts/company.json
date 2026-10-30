@@ -132,8 +132,8 @@
  "case": {
   "eyebrow": "Case study",
   "name": "Chaotic Pendulums",
-  "heading": "A physical product, compiled from one spec file.",
-  "text": "Chaotic Pendulums is our founder’s side project, used on purpose to test Wherefore on something harder than software: a desk-sized double pendulum with milled parts, a bronze blade, bearings and a clamp. If it can hold machined parts, physics and suppliers to one source, it can hold your website and your docs. One spec file holds the object. Everything a shop, a customer or a printer receives is built from it, and checked on every push.",
+  "heading": "A hardware company, compiled from one spec file.",
+  "text": "Chaotic Pendulums is a small hardware company our founder started to test this idea on something harder than software: a desk-sized double pendulum with milled parts, a bronze blade, bearings and a clamp. Wherefore was built alongside it, one rule at a time. If it can hold machined parts, physics and suppliers to one source, it can hold your website and your docs. One spec file holds the object. Everything a shop, a customer or a printer receives is built from it, and checked on every push.",
   "url": "https://chaoticpendulums.com/",
   "visit": "See the live site",
   "made_heading": "What it compiles",
