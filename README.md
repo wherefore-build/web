@@ -209,9 +209,12 @@ failed never reaches Cloudflare, and nothing builds on Cloudflare's side.
 - The other two addresses redirect to it, by one Redirect Rule in each zone:
   `getwherefore.com` and `wherefore.sh` → Rules → Redirect Rules → the
   "Redirect from one domain to another" template, from every path to
-  `https://wherefore.build/` with the path kept, status 301. Each zone needs a
-  proxied DNS record for the rule to see a request: `AAAA @ 100::`, orange
-  cloud on (and the same for `www`, if it should redirect too).
+  `https://wherefore.build/` with the path kept. Status 301 for
+  `getwherefore.com`, which only ever redirects; 302 for `wherefore.sh`, which
+  is to serve the installer one day, since a browser keeps a 301 for good and
+  would go on redirecting after it changes. Each zone needs a proxied DNS
+  record for the rule to see a request: `AAAA @ 100::`, orange cloud on (and
+  the same for `www`, if it should redirect too).
 
 Previews open for anyone who has the address. The page asks not to be indexed
 while it is a draft.
