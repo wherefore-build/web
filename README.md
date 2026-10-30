@@ -75,8 +75,8 @@ It leads with the pain, then shows the cure working.
   of the same made-up company "Wherefore art thou?" and show what it was built
   from, and why.
 - **How it works**, in three steps.
-- **The case study**: Chaotic Pendulums, the founder's own hardware company and
-  the first to run on Wherefore - what it compiles, what holds it, and a link
+- **The case study**: Chaotic Pendulums, the founder's side project, used on
+  purpose to test Wherefore on a physical product - what it compiles, what holds it, and a link
   to the live site. Its counts are stated with the release they were counted at.
 - **The rule, and getting started**: no pilot to join - the install line (once
   there is one) and the release's own commands, with what is available, next
