@@ -15,6 +15,14 @@
   // does not.
   "workers_dev": true,
   "preview_urls": true,
+  // The site's own address, a Custom Domain on the wherefore.build zone in
+  // this account: Cloudflare makes its DNS record and its certificate itself.
+  // main's `wrangler deploy` attaches it, and previews keep their workers.dev
+  // addresses. getwherefore.com and wherefore.sh are not here: each redirects
+  // to this one by a Redirect Rule in its own zone (README.md, "Hosting").
+  "routes": [
+    { "pattern": "wherefore.build", "custom_domain": true }
+  ],
   "assets": {
     "directory": "./site"
   },

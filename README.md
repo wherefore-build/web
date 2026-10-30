@@ -187,7 +187,8 @@ Cloudflare Workers serves `site/` exactly as committed, as static assets
 **CI deploys it, and only after every check has passed.** The `deploy` job in
 `.github/workflows/corpus.yml` needs `corpus`, so a tree the gate or a proof
 failed never reaches Cloudflare, and nothing builds on Cloudflare's side.
-- `main` deploys to the site's address.
+- `main` deploys to the site's address, `wherefore.build`, a Custom Domain
+  declared in `wrangler.jsonc` (and still at its `workers.dev` address).
 - Every other branch deploys to a preview of its own. The job posts the
   preview's address on the branch's pull request, with the commit it was
   built from, and updates that one comment on every push.
@@ -202,7 +203,15 @@ failed never reaches Cloudflare, and nothing builds on Cloudflare's side.
   `wrangler.jsonc`: `main`'s deploy applies them, and before every preview CI
   applies them itself (`.github/scripts/cloudflare_urls.py`). They need the
   account to have a `workers.dev` subdomain; if it has none, the deploy says
-  so.
+  so. The custom domain is declared there too, and `main`'s deploy attaches it.
+  If that deploy fails on the domain for want of a permission, the token needs
+  *Zone · DNS · Edit* on `wherefore.build` as well.
+- The other two addresses redirect to it, by one Redirect Rule in each zone:
+  `getwherefore.com` and `wherefore.sh` → Rules → Redirect Rules → the
+  "Redirect from one domain to another" template, from every path to
+  `https://wherefore.build/` with the path kept, status 301. Each zone needs a
+  proxied DNS record for the rule to see a request: `AAAA @ 100::`, orange
+  cloud on (and the same for `www`, if it should redirect too).
 
 Previews open for anyone who has the address. The page asks not to be indexed
 while it is a draft.

@@ -2,7 +2,7 @@
  "note": "THE SOURCE for the company's site. Every fact the site states about the company is said here, once. What it states about the product - the version, the commands it names - is the engine's, read from the release requirements-engine.txt pins, and never typed here. A null is a fact not decided yet: the page leaves out what depends on it. The demo and the questions beside it are an illustration - a made-up company's plan and the assets that state it - and the page says so; `{name}` in a line is a value the generator fills from beside it, so no number is said twice.",
  "company": {
   "name": "Wherefore",
-  "domain": null,
+  "domain": "wherefore.build",
   "contact": null
  },
  "site": {
