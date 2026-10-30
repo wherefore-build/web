@@ -387,3 +387,6 @@ footer p { margin: 0; }
 .wordmark-ground, .wordmark-accent { margin: 0; padding: 2.5rem 1.5rem; border-radius: var(--radius-card); text-align: center; font-size: clamp(2.5rem, 7vw, 3.75rem); }
 .wordmark-ground { background: var(--ground); border: 1px solid var(--line); color: var(--ink); }
 .wordmark-accent { background: var(--accent); color: var(--on-accent); }
+.icons { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 1.25rem; margin-bottom: 1.25rem; }
+.icon-show { display: block; border: 1px solid var(--line); }
+.icon-round { border-radius: 50%; }

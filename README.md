@@ -17,6 +17,7 @@ pin. The reasons are in the engine's `DIRECTIONS.md`, §13 and §14.
 | `facts/company.json` | **the source**: every fact the company states about itself, once | authored |
 | `brand/tokens.json` | **the brand**: every colour, typeface and radius, once, each with its role and reason | authored |
 | `brand/fonts/` | the three typefaces and their licences (SIL OFL 1.1), unchanged | authored |
+| `brand/icon/icon-1024.png`, `brand/shoot_icon.py` | the icon as a PNG, for accounts that take only PNG, and the script that shoots it from `site/brand/icon.svg` | captured, stamped |
 | `gen/brand.py` | the brand pack's generator: the stylesheet, the fonts and the brand page | authored |
 | `gen/site.py` | the site's generator: layout, filled from the facts and the pinned engine | authored |
 | `gen/page.css` | the site's layout; every colour and face in it is a `var(--…)` from the brand | authored |
@@ -24,11 +25,11 @@ pin. The reasons are in the engine's `DIRECTIONS.md`, §13 and §14.
 | `site/index.html` | the page | generated |
 | `site/_headers` | what Cloudflare Pages serves with every file | generated |
 | `site/brand.css`, `site/fonts/` | the brand as custom properties, and the fonts it serves itself | generated |
-| `site/brand/` | the brand pack a person reads: every token, every contrast, the type, the licences | generated |
+| `site/brand/` | the brand pack a person reads: every token, every contrast, the type, the icon, the licences | generated |
 | `checks/self_contained.py` | the site loads nothing from elsewhere, and every link on it goes somewhere | authored |
 | `checks/one_palette.py` | no colour or typeface is said anywhere but the brand | authored |
 | `checks/contrast.py` | every text colour reaches 4.5:1 on every ground it is set on | authored |
-| `checks/brand_reasons.py` | every colour, typeface and radius says what it is for and why, and the brand says its idea | authored |
+| `checks/brand_reasons.py` | every colour, typeface and radius says what it is for and why, so does the icon, and the brand says its idea | authored |
 | `checks/install_line.py` | no install line on the site names the bare `wherefore` - another project's package; ours is `wherefore-build` | authored |
 | `checks/controls_press.py` | every control on the site does something a visitor sees, pressed cold on a phone | authored |
 | `checks/*_proof.py` | each check, and the gate, shown to fail | authored |
@@ -57,6 +58,13 @@ brand pack at `site/brand/`.
   `checks/brand_reasons.py` fails a token without its reason. A colour that is
   another one in a different role (`on-accent` is the ground's black) says
   `same_as` instead of copying a value.
+- **The icon is shot from the brand, and held to it.** `icon` in the tokens is
+  the letter, its colours and its place. `gen/brand.py` writes
+  `site/brand/icon.svg` with its face embedded, so it draws the same anywhere.
+  The PNG that profiles need takes a browser to draw, so it is captured, not
+  generated: when the icon or a colour it uses changes, the gate fails until it
+  is shot again -
+  `python3 brand/shoot_icon.py`, regenerate, then `wherefore gate --restamp icon`.
 
 ## The page
 

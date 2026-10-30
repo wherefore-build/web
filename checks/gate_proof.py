@@ -13,6 +13,8 @@ requires the gate to fail in the words of the case.
           a launch status nobody has defined
           the accent changed in the brand, its stylesheet and page not
             regenerated
+          the icon changed in the brand and regenerated, and its PNG not
+            shot again - the picture on every profile would be the old one
           a new file committed that nothing classifies
   passes  the repository as it is
 
@@ -44,6 +46,10 @@ def facts(p, change):
     p.write_text(json.dumps(doc, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
 
 
+def regenerate_brand():
+    subprocess.run([sys.executable, "brand.py"], cwd=ROOT / "gen", check=True)
+
+
 def main():
     r = []
     with Edit("site/index.html") as p:
@@ -70,6 +76,15 @@ def main():
         gate(r, "the accent changed in the brand, nothing regenerated", True,
              ["site/brand.css regenerated DIFFERENT from what is committed",
               "site/brand/index.html regenerated DIFFERENT from what is committed"])
+
+    try:
+        with Edit("brand/tokens.json") as p:
+            facts(p, lambda d: d["icon"].update(glyph="W"))
+            regenerate_brand()
+            gate(r, "the icon changed and regenerated, its PNG not shot again", True,
+                 ["what 'icon' was made from has moved", "brand/icon/icon-1024.png"])
+    finally:
+        regenerate_brand()
 
     notes = ROOT / "notes.txt"
     notes.write_text("a file nobody declared\n", encoding="utf-8")
