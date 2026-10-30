@@ -36,6 +36,13 @@ not to be indexed, both in the page and in the headers Cloudflare serves with
 it (site/_headers). Launching is the owner's decision, and it is one word in
 the facts.
 
+THE CASE STUDY'S COUNTS ARE THE PENDULUM'S. facts/pendulum.json is a copy of
+the counts chaotic-pendulums-co makes of itself - its proofs, its parts, its
+print plates and the release they were counted at - captured by
+.github/workflows/case-study.yml, which opens a pull request when they move.
+Each stat names its count by `of`, and a count the copy does not have stops the
+build. That part's account of itself names the copy on a `from` line of its own.
+
 A NULL IS A FACT NOT DECIDED YET. With no domain the page names no canonical
 address, with no contact it offers no address to write to, with no install
 line it says Wherefore is not public yet, and with no quote the case study
@@ -51,9 +58,11 @@ import string
 from importlib.resources import files
 
 import wherefore
-from kit import FACTS, ROOT, SITE, banner, esc, head, status
+from kit import FACTS, PENDULUM, ROOT, SITE, banner, esc, head, status
 
 ENGINE = f"wherefore {wherefore.__version__}"
+MONTHS = ("January", "February", "March", "April", "May", "June", "July", "August",
+          "September", "October", "November", "December")
 ASKED = []          # what the part being rendered asked the engine for
 
 
@@ -169,16 +178,25 @@ def at(*stages):
 SRC = "\x01src\x01"
 
 
-def part(render, f, inspect):
-    """A part of the page, rendered through a Reading, with its account of itself where it put SRC."""
-    log = []
+def part(render, f, inspect, also=()):
+    """A part of the page, rendered through a Reading, with its account of itself where it put SRC.
+
+    `also` is any source the part reads beside the facts, as (file, value)
+    pairs. Each is read through a Reading of its own and named on its own
+    `from` line, and a part that reads the pendulum's copy is held by `feed`."""
+    log, logs = [], [[] for _ in also]
     del ASKED[:]
-    html = render(Reading(f, "", log))
+    html = render(Reading(f, "", log), *(Reading(v, "", l) for (_, v), l in zip(also, logs)))
     facts = list(dict.fromkeys(log))
     commands = list(dict.fromkeys(a[1] for a in ASKED if isinstance(a, tuple)))
-    held = ["gate", "reach", "brand"] + (["press"] if "<label" in html else []) + (["engine"] if commands else [])
+    held = (["gate", "reach", "brand"] + (["press"] if "<label" in html else []) + (["engine"] if commands else [])
+            + (["feed"] if also else []))
     lines = [f'<p><span class="src-k">{esc(inspect["from"])}</span> facts/company.json · '
              f'{esc(fill(inspect["facts"], n=len(facts)))}: {esc(" · ".join(tree(facts)))}</p>']
+    for (file, _), read in zip(also, logs):
+        read = list(dict.fromkeys(read))
+        lines.append(f'<p><span class="src-k">{esc(inspect["from"])}</span> {esc(file)} · '
+                     f'{esc(fill(inspect["facts"], n=len(read)))}: {esc(" · ".join(tree(read)))}</p>')
     if ASKED:
         asked = (["version"] if "version" in ASKED else []) + ([f"commands.json: {', '.join(commands)}"] if commands else [])
         lines.append(f'<p><span class="src-k">{esc(inspect["from"])}</span> {esc(ENGINE)} · '
@@ -439,11 +457,28 @@ def how(f):
 </div></section>"""
 
 
-def case(f):
+def counted(counts, name):
+    """One of the pendulum's counts, by the name a stat gives it; one it does not count stops the build."""
+    if name not in counts or not isinstance(counts.get(name), int):
+        have = ", ".join(k for k in counts if not isinstance(counts.get(k), Reading))
+        raise SystemExit(f"case.stats names {name!r}, which facts/pendulum.json does not count. It counts: {have}")
+    return counts[name]
+
+
+def long_date(iso):
+    """2026-10-30 -> 30 October 2026, by table: a locale must not decide the page's bytes."""
+    y, m, d = (int(x) for x in iso.split("-"))
+    return f"{d} {MONTHS[m - 1]} {y}"
+
+
+def case(f, p):
     c = f["case"]
     made = "".join(f"<li>{esc(m)}</li>" for m in c["made"])
     held = "".join(f"<li>{esc(m)}</li>" for m in c["held"])
-    stats = "".join(f'<li><span class="stat-n">{s["n"]}</span> {esc(s["what"])}</li>' for s in c["stats"])
+    counts = p["counts"]
+    stats = "".join(f'<li><span class="stat-n">{counted(counts, s["of"])}</span> {esc(s["what"])}</li>'
+                    for s in c["stats"])
+    as_of = fill(c["as_of"], version=counts["pack"]["version"], on=long_date(p["captured"]["on"]))
     quote = ""
     if c["quote"]:
         quote = (f'<blockquote class="case-quote"><p>{esc(c["quote"]["text"])}</p>'
@@ -460,7 +495,7 @@ def case(f):
 <div class="case-col"><h3>{esc(c["held_heading"])}</h3><ul class="case-list case-held">{held}</ul></div>
 </div>
 <ul class="stats">{stats}</ul>
-<p class="as-of">{esc(c["as_of"])}</p>
+<p class="as-of">{esc(as_of)}</p>
 </div></section>"""
 
 
@@ -526,8 +561,9 @@ def page(f):
              '<link rel="stylesheet" href="page.css">']
     if company["domain"]:
         lines.append(f'<link rel="canonical" href="https://{esc(company["domain"])}/">')
-    parts = {name: part(render, f, inspect) for name, render in (
-        ("header", header), ("hero", hero), ("pains", pains), ("demo", ripple), ("why", why), ("how", how), ("case", case),
+    parts = {name: part(render, f, inspect, *also) for name, render, *also in (
+        ("header", header), ("hero", hero), ("pains", pains), ("demo", ripple), ("why", why), ("how", how),
+        ("case", case, (("facts/pendulum.json", PENDULUM),)),
         ("rule", rule), ("start", start), ("footer", footer))}
     return f"""<!doctype html>
 <html lang="en">

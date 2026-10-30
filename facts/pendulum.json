@@ -1,0 +1,19 @@
+{
+ "note": "CAPTURED, never edited by hand: zakholdsworth/chaotic-pendulums-co's docs/case-study.json, which the pendulum's own build counts from the things themselves. .github/workflows/case-study.yml reads it at the pendulum's main once a day and, when the counts move, writes this file again and opens a pull request. `captured` says where it was read, at which commit and on which day; `counts` is the file as it was read. The case study's numbers are read from here, never typed.",
+ "captured": {
+  "from": "zakholdsworth/chaotic-pendulums-co",
+  "path": "docs/case-study.json",
+  "commit": "04a7b1a1eb1c12a3f4e730dad04376e6ac9d2a34",
+  "on": "2026-10-30"
+ },
+ "counts": {
+  "pack": {
+   "version": 83,
+   "date": "2026-10-24",
+   "draft": null
+  },
+  "proofs": 49,
+  "parts": 9,
+  "plates": 5
+ }
+}

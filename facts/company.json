@@ -1,5 +1,5 @@
 {
- "note": "THE SOURCE for the company's site. Every fact the site states about the company is said here, once. What it states about the product - the version, the commands it names - is the engine's, read from the release requirements-engine.txt pins, and never typed here. A null is a fact not decided yet: the page leaves out what depends on it. The demo and the questions beside it are an illustration - a made-up company's plan and the assets that state it - and the page says so; `{name}` in a line is a value the generator fills from beside it, so no number is said twice.",
+ "note": "THE SOURCE for the company's site. Every fact the site states about the company is said here, once. What it states about the product - the version, the commands it names - is the engine's, read from the release requirements-engine.txt pins, and never typed here. A null is a fact not decided yet: the page leaves out what depends on it. The demo and the questions beside it are an illustration - a made-up company's plan and the assets that state it - and the page says so; `{name}` in a line is a value the generator fills from beside it, so no number is said twice. The case study's counts are not here at all: the pendulum counts them itself, facts/pendulum.json is the copy, and each stat names the count it shows by `of`.",
  "company": {
   "name": "Wherefore",
   "domain": "wherefore.build",
@@ -154,11 +154,11 @@
    "Move any dimension, and a probe requires every file a supplier receives to move with it, or the change is refused."
   ],
   "stats": [
-   {"n": 49, "what": "checks, each with a proof that plants the fault it exists to catch"},
-   {"n": 9, "what": "parts, each drawn, cut and modelled from the spec"},
-   {"n": 5, "what": "print plates for a prototype anyone holding the pack can make"}
+   {"of": "proofs", "what": "proofs, each planting the fault a check exists to catch"},
+   {"of": "parts", "what": "parts, each drawn, cut and modelled from the spec"},
+   {"of": "plates", "what": "print plates for a prototype anyone holding the pack can make"}
   ],
-  "as_of": "Counted at V83 of the pack, on 29 October 2026.",
+  "as_of": "Counted by the pendulum itself, at V{version} of the pack, on {on}.",
   "quote": null
  },
  "rule": {
@@ -198,7 +198,8 @@
    "reach": "each of these facts is moved, one at a time, and the page must change with it",
    "press": "every control here is tapped on a fresh load, at a phone’s width, and must show something new",
    "engine": "every command named here must be one the pinned release has",
-   "brand": "every colour and face is a brand token, and every text colour reads at 4.5:1 on its ground"
+   "brand": "every colour and face is a brand token, and every text colour reads at 4.5:1 on its ground",
+   "feed": "the pendulum counts these itself; each count is moved, one at a time, and the page must change with it, and when the pendulum's counts move a pull request brings them here"
   }
  },
  "colophon": "This page is compiled from one source file and the release it pins."

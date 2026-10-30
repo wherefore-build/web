@@ -16,12 +16,13 @@ pin. The reasons are in the engine's `DIRECTIONS.md`, §13 and §14.
 |---|---|---|
 | `facts/company.json` | **the source**: every fact the company states about itself, once | authored |
 | `brand/tokens.json` | **the brand**: every colour, typeface and radius, once, each with its role and reason | authored |
+| `facts/pendulum.json` | the case study's counts, as `chaotic-pendulums-co` counts itself, read by `.github/workflows/case-study.yml` | captured, stamped inside |
 | `brand/fonts/` | the three typefaces and their licences (SIL OFL 1.1), unchanged | authored |
 | `brand/icon/icon-1024.png`, `brand/shoot_icon.py` | the icon as a PNG, for accounts that take only PNG, and the script that shoots it from `site/brand/icon.svg` | captured, stamped |
 | `gen/brand.py` | the brand pack's generator: the stylesheet, the fonts and the brand page | authored |
 | `gen/site.py` | the site's generator: layout, filled from the facts and the pinned engine | authored |
 | `gen/page.css` | the site's layout; every colour and face in it is a `var(--…)` from the brand | authored |
-| `gen/kit.py` | what the generators share: the two sources, the draft banner, contrast | authored |
+| `gen/kit.py` | what the generators share: the sources, the draft banner, contrast | authored |
 | `site/index.html` | the page | generated |
 | `site/_headers` | what Cloudflare Pages serves with every file | generated |
 | `site/brand.css`, `site/fonts/` | the brand as custom properties, and the fonts it serves itself | generated |
@@ -32,6 +33,7 @@ pin. The reasons are in the engine's `DIRECTIONS.md`, §13 and §14.
 | `checks/brand_reasons.py` | every colour, typeface and radius says what it is for and why, so does the icon, and the brand says its idea | authored |
 | `checks/install_line.py` | no install line on the site names the bare `wherefore` - another project's package; ours is `wherefore-build` | authored |
 | `checks/controls_press.py` | every control on the site does something a visitor sees, pressed cold on a phone | authored |
+| `checks/case_study_feed.py` | the pendulum's copy says where and when it was read, and each count on the page moves the page | authored |
 | `checks/*_proof.py` | each check, and the gate, shown to fail | authored |
 | `wherefore.json` | what this repository is to the engine | authored |
 | `requirements-engine.txt` | the engine release this is built and judged by | authored |
@@ -163,6 +165,40 @@ A `null` in the facts is a fact not decided yet. With no `company.domain`, the
 page names no canonical address. With no `company.contact`, it offers no
 address to write to. With no `start.install`, it says Wherefore is not public
 yet, and with no `case.quote` the case study quotes no one. Each appears when its fact is filled in.
+
+## The case study
+
+The case study's numbers - the pendulum's proofs, parts, print plates, and the
+release they stand at - are not typed here. `chaotic-pendulums-co` counts
+itself into `docs/case-study.json` on every build, and `facts/pendulum.json` is
+the copy, stamped with the commit it was read at and that commit's day.
+- **Each stat names its count** (`case.stats[].of` in the facts), and the as-of
+  line fills `{version}` and `{on}` from the copy. A count the copy does not
+  have stops the build.
+- **`checks/case_study_feed.py`** requires the stamp, requires every value in the
+  copy to be on the page or excused with a reason, and moves each one on the
+  page to see the page move. The release this pins sweeps only the facts for
+  reach, so this does it for the copy.
+- **`.github/workflows/case-study.yml`** reads the pendulum's main once a day,
+  and on request. When the counts move, it writes the copy, regenerates the
+  site and opens a draft pull request from `case-study/update`, or updates the
+  one open. It never merges: the preview is read and merged like any other.
+
+**One-time setup (owner).** Two fine-grained tokens, each saved here (Settings
+→ Secrets and variables → Actions → New repository secret). Two, because a
+token's permissions apply to every repository it selects, and the pendulum is
+read, never written. Each: GitHub → Settings → Developer settings →
+Fine-grained tokens → Generate new token → Only select repositories.
+- **`PENDULUM_READ_TOKEN`:** `chaotic-pendulums-co` only; Contents, Read-only.
+  The pendulum is private.
+- **`CASE_STUDY_TOKEN`:** `wherefore-co` only; Contents, Pull requests and
+  Actions, each Read and write. A branch pushed with a workflow's own
+  `GITHUB_TOKEN` starts no other workflow, so without it the pull request would
+  run no checks and get no preview.
+
+Until both exist, the daily run fails at its first step and says which is
+missing. Nothing else changes: the copy stays as it was last read, and the page
+with it.
 
 ## CI
 
