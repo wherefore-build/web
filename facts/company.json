@@ -158,7 +158,7 @@
    {"of": "parts", "what": "parts, each drawn, cut and modelled from the spec"},
    {"of": "plates", "what": "print plates for a prototype anyone holding the pack can make"}
   ],
-  "as_of": "Counted by the pendulum itself, at V{version} of the pack, on {on}.",
+  "as_of": "Counted at V{version} of the pack, on {on}.",
   "quote": null
  },
  "rule": {
@@ -199,7 +199,7 @@
    "press": "every control here is tapped on a fresh load, at a phone’s width, and must show something new",
    "engine": "every command named here must be one the pinned release has",
    "brand": "every colour and face is a brand token, and every text colour reads at 4.5:1 on its ground",
-   "feed": "the pendulum counts these itself; each count is moved, one at a time, and the page must change with it, and when the pendulum's counts move a pull request brings them here"
+   "snapshot": "these counts were taken from the pendulum once, at the commit and day they name; each is moved, one at a time, and the page must change with it"
   }
  },
  "colophon": "This page is compiled from one source file and the release it pins."

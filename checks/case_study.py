@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
-"""The case study's counts are the pendulum's, and every one of them reaches the page.
+"""The case study's counts are a dated snapshot, and every one of them reaches the page.
 
-facts/pendulum.json is a copy of chaotic-pendulums-co's docs/case-study.json -
-the counts the pendulum makes of itself - captured by
-.github/workflows/case-study.yml, and gen/site.py reads the case study's
-numbers from it. The release this corpus pins sweeps only the first declared
-source for reach (`reach` in wherefore.json), so this does for the copy what
-that does for the facts, and checks what only a copy needs:
+facts/pendulum.json is the case study's counts - the pendulum's proofs, parts,
+print plates and the release they stand at - counted once from
+chaotic-pendulums-co at the commit it names, and gen/site.py reads the case
+study's numbers from it. Nothing reads the pendulum again: the owner decided
+the two repositories stay apart, since the pendulum may be open-sourced or
+split out, and a case study is a dated story anyway. The release this corpus
+pins sweeps only the first declared source for reach (`reach` in
+wherefore.json), so this does for the snapshot what that does for the facts,
+and checks what only a snapshot needs:
 
   - THE STAMP. `captured` names the repository, the path, the commit (forty
     hex digits) and the day (YYYY-MM-DD). A copy that cannot say where it came
@@ -14,18 +17,18 @@ that does for the facts, and checks what only a copy needs:
   - THE COUNTS ARE COUNTS. proofs, parts and plates are whole numbers, and the
     pack has a version and an ISO date.
   - EVERY VALUE IS DECIDED. Each is either on the page or named in UNSHOWN
-    below with the reason it is not. A count the pendulum starts making arrives
-    with the workflow's next pull request, and fails here until somebody
-    decides whether the page says it.
+    below with the reason it is not. A count somebody adds to the snapshot
+    fails here until they decide whether the page says it.
   - EVERY VALUE ON THE PAGE REACHES IT. Each is moved, one at a time, in a copy
     of this repository (checks/_copy.py); the page is regenerated and must
     differ. A number typed into the facts instead of read from the copy does
     not move, and fails.
 
-WHAT IT CANNOT SEE: whether the copy is current with the pendulum. That is the
-workflow's daily read, and the pull request it opens when the counts move.
+WHAT IT CANNOT SEE: whether the snapshot is current with the pendulum. It is
+not meant to be: the page says the day it was counted, and a person counts it
+again when the story is retold.
 
-Usage:  python3 checks/case_study_feed.py
+Usage:  python3 checks/case_study.py
 """
 import json
 import pathlib
@@ -114,7 +117,7 @@ def main():
     values = dict(leaves(doc))
     for p in values:
         if p not in UNSHOWN and not p.startswith(("captured.", "counts.")):
-            found.append(f"{p} is outside `captured` and `counts`: the copy is not shaped as the workflow writes it")
+            found.append(f"{p} is outside `captured` and `counts`: the snapshot is not shaped as `captured` and `counts`")
     for p in UNSHOWN:
         if p not in values:
             found.append(f"UNSHOWN names {p}, which the copy does not have: an excuse for nothing")

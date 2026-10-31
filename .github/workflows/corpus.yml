@@ -56,7 +56,7 @@ jobs:
         run: python3 -m wherefore check reach
       - name: The case study's counts are the pendulum's, and each one reaches the page
         if: ${{ !cancelled() && steps.install.outcome == 'success' }}
-        run: python3 checks/case_study_feed.py
+        run: python3 checks/case_study.py
       - name: The site loads nothing from elsewhere, and every link on it goes somewhere
         if: ${{ !cancelled() && steps.install.outcome == 'success' }}
         run: python3 checks/self_contained.py

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Prove checks/case_study_feed.py fails a case study that is not built from the pendulum's counts.
+"""Prove checks/case_study.py fails a case study that is not built from its snapshot of the pendulum's counts.
 
 Each case breaks a copy of this repository (checks/_copy.py) and requires the
 check to fail in the words of the case, or, for the case that must not fire, to
@@ -12,7 +12,7 @@ pass.
           an excuse in UNSHOWN for a value the copy does not have
   passes  the copy and the page as they are
 
-Usage:  python3 checks/case_study_feed_proof.py
+Usage:  python3 checks/case_study_proof.py
 """
 import json
 import pathlib
@@ -24,7 +24,7 @@ import _copy                                                       # noqa: E402
 _copy.fresh()
 from wherefore.prove import Edit, check, report                   # noqa: E402
 
-CHECK = "checks/case_study_feed.py"
+CHECK = "checks/case_study.py"
 COPY = "facts/pendulum.json"
 PASS = "the copy says where and when it was read"
 

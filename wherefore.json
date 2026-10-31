@@ -16,7 +16,7 @@
   "pendulum": {
    "path": "facts/pendulum.json",
    "adapter": "leaves",
-   "why": "THE CASE STUDY'S COUNTS, which chaotic-pendulums-co makes of itself: a copy, captured by .github/workflows/case-study.yml. The release this corpus pins sweeps only the first source for reach, so checks/case_study_feed.py moves each of these"
+   "why": "THE CASE STUDY'S COUNTS: a dated snapshot of chaotic-pendulums-co, counted once at the commit it names. The release this corpus pins sweeps only the first source for reach, so checks/case_study.py moves each of these"
   }
  },
  "generators": [
@@ -99,8 +99,8 @@
      "files": [
       "facts/pendulum.json"
      ],
-     "no_stamp": "read from another repository, which this gate cannot see: the file stamps the commit it was read at and the day, and .github/workflows/case-study.yml reads it again every day and opens a pull request when the counts move",
-     "why": "the case study's counts, as chaotic-pendulums-co counts them in its own docs/case-study.json - written by the workflow, never by hand, and merged by a person"
+     "no_stamp": "counted from another repository, which this gate cannot see and deliberately does not read: the file names the commit and the day it was counted at, and a case study is a dated story, so a person counts again when it is retold",
+     "why": "the case study's counts, a snapshot of chaotic-pendulums-co at one commit"
     },
     "icon": {
      "files": [

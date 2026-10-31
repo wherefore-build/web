@@ -36,10 +36,10 @@ not to be indexed, both in the page and in the headers Cloudflare serves with
 it (site/_headers). Launching is the owner's decision, and it is one word in
 the facts.
 
-THE CASE STUDY'S COUNTS ARE THE PENDULUM'S. facts/pendulum.json is a copy of
-the counts chaotic-pendulums-co makes of itself - its proofs, its parts, its
-print plates and the release they were counted at - captured by
-.github/workflows/case-study.yml, which opens a pull request when they move.
+THE CASE STUDY'S COUNTS ARE A DATED SNAPSHOT. facts/pendulum.json holds
+chaotic-pendulums-co's proofs, parts, print plates and the release they were
+counted at, counted once at the commit it names; nothing reads the pendulum
+again, and a person counts it afresh when the story is retold.
 Each stat names its count by `of`, and a count the copy does not have stops the
 build. That part's account of itself names the copy on a `from` line of its own.
 
@@ -183,14 +183,14 @@ def part(render, f, inspect, also=()):
 
     `also` is any source the part reads beside the facts, as (file, value)
     pairs. Each is read through a Reading of its own and named on its own
-    `from` line, and a part that reads the pendulum's copy is held by `feed`."""
+    `from` line, and a part that reads the case study's snapshot is held by `snapshot`."""
     log, logs = [], [[] for _ in also]
     del ASKED[:]
     html = render(Reading(f, "", log), *(Reading(v, "", l) for (_, v), l in zip(also, logs)))
     facts = list(dict.fromkeys(log))
     commands = list(dict.fromkeys(a[1] for a in ASKED if isinstance(a, tuple)))
     held = (["gate", "reach", "brand"] + (["press"] if "<label" in html else []) + (["engine"] if commands else [])
-            + (["feed"] if also else []))
+            + (["snapshot"] if also else []))
     lines = [f'<p><span class="src-k">{esc(inspect["from"])}</span> facts/company.json · '
              f'{esc(fill(inspect["facts"], n=len(facts)))}: {esc(" · ".join(tree(facts)))}</p>']
     for (file, _), read in zip(also, logs):
