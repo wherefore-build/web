@@ -16,12 +16,13 @@ pin. The reasons are in the engine's `DIRECTIONS.md`, §13 and §14.
 |---|---|---|
 | `facts/company.json` | **the source**: every fact the company states about itself, once | authored |
 | `brand/tokens.json` | **the brand**: every colour, typeface and radius, once, each with its role and reason | authored |
+| `facts/pendulum.json` | the case study's counts: a dated snapshot of `chaotic-pendulums-co`, counted once at the commit it names | captured, stamped inside |
 | `brand/fonts/` | the three typefaces and their licences (SIL OFL 1.1), unchanged | authored |
 | `brand/icon/icon-1024.png`, `brand/shoot_icon.py` | the icon as a PNG, for accounts that take only PNG, and the script that shoots it from `site/brand/icon.svg` | captured, stamped |
 | `gen/brand.py` | the brand pack's generator: the stylesheet, the fonts and the brand page | authored |
 | `gen/site.py` | the site's generator: layout, filled from the facts and the pinned engine | authored |
 | `gen/page.css` | the site's layout; every colour and face in it is a `var(--…)` from the brand | authored |
-| `gen/kit.py` | what the generators share: the two sources, the draft banner, contrast | authored |
+| `gen/kit.py` | what the generators share: the sources, the draft banner, contrast | authored |
 | `site/index.html` | the page | generated |
 | `site/_headers` | what Cloudflare Pages serves with every file | generated |
 | `site/brand.css`, `site/fonts/` | the brand as custom properties, and the fonts it serves itself | generated |
@@ -32,6 +33,7 @@ pin. The reasons are in the engine's `DIRECTIONS.md`, §13 and §14.
 | `checks/brand_reasons.py` | every colour, typeface and radius says what it is for and why, so does the icon, and the brand says its idea | authored |
 | `checks/install_line.py` | no install line on the site names the bare `wherefore` - another project's package; ours is `wherefore-build` | authored |
 | `checks/controls_press.py` | every control on the site does something a visitor sees, pressed cold on a phone | authored |
+| `checks/case_study.py` | the snapshot says where and when it was counted, and each count on the page moves the page | authored |
 | `checks/*_proof.py` | each check, and the gate, shown to fail | authored |
 | `wherefore.json` | what this repository is to the engine | authored |
 | `requirements-engine.txt` | the engine release this is built and judged by | authored |
@@ -164,6 +166,24 @@ page names no canonical address. With no `company.contact`, it offers no
 address to write to. With no `start.install`, it says Wherefore is not public
 yet, and with no `case.quote` the case study quotes no one. Each appears when its fact is filled in.
 
+## The case study
+
+The case study's numbers - the pendulum's proofs, parts, print plates, and the
+release they stand at - are not typed into the page. `facts/pendulum.json`
+holds them as a dated snapshot, counted once from `chaotic-pendulums-co` at
+the commit and on the day it names.
+- **Nothing reads the pendulum again.** The two repositories stay apart: the
+  pendulum may be open-sourced or split out, and should carry nothing for this
+  company, nor be readable from here. A case study is a dated story, so when
+  it is retold a person counts again and rewrites the snapshot.
+- **Each stat names its count** (`case.stats[].of` in the facts), and the as-of
+  line fills `{version}` and `{on}` from the snapshot. A count the snapshot does
+  not have stops the build.
+- **`checks/case_study.py`** requires the snapshot to say where and when it was
+  counted, requires every value in it to be on the page or excused with a
+  reason, and moves each one on the page to see the page move. The release this
+  pins sweeps only the facts for reach, so this does it for the snapshot.
+
 ## CI
 
 `.github/workflows/corpus.yml` runs on every push, on a hosted runner, in about
@@ -187,7 +207,8 @@ Cloudflare Workers serves `site/` exactly as committed, as static assets
 **CI deploys it, and only after every check has passed.** The `deploy` job in
 `.github/workflows/corpus.yml` needs `corpus`, so a tree the gate or a proof
 failed never reaches Cloudflare, and nothing builds on Cloudflare's side.
-- `main` deploys to the site's address.
+- `main` deploys to the site's address, `wherefore.build`, a Custom Domain
+  declared in `wrangler.jsonc` (and still at its `workers.dev` address).
 - Every other branch deploys to a preview of its own. The job posts the
   preview's address on the branch's pull request, with the commit it was
   built from, and updates that one comment on every push.
@@ -202,7 +223,18 @@ failed never reaches Cloudflare, and nothing builds on Cloudflare's side.
   `wrangler.jsonc`: `main`'s deploy applies them, and before every preview CI
   applies them itself (`.github/scripts/cloudflare_urls.py`). They need the
   account to have a `workers.dev` subdomain; if it has none, the deploy says
-  so.
+  so. The custom domain is declared there too, and `main`'s deploy attaches it.
+  If that deploy fails on the domain for want of a permission, the token needs
+  *Zone · DNS · Edit* on `wherefore.build` as well.
+- The other two addresses redirect to it, by one Redirect Rule in each zone:
+  `getwherefore.com` and `wherefore.sh` → Rules → Redirect Rules → the
+  "Redirect from one domain to another" template, from every path to
+  `https://wherefore.build/` with the path kept. Status 301 for
+  `getwherefore.com`, which only ever redirects; 302 for `wherefore.sh`, which
+  is to serve the installer one day, since a browser keeps a 301 for good and
+  would go on redirecting after it changes. Each zone needs a proxied DNS
+  record for the rule to see a request: `AAAA @ 100::`, orange cloud on (and
+  the same for `www`, if it should redirect too).
 
 Previews open for anyone who has the address. The page asks not to be indexed
 while it is a draft.

@@ -12,6 +12,11 @@
    "path": "brand/tokens.json",
    "adapter": "leaves",
    "why": "THE BRAND: every colour, typeface and radius, once, each with its role and its reason"
+  },
+  "pendulum": {
+   "path": "facts/pendulum.json",
+   "adapter": "leaves",
+   "why": "THE CASE STUDY'S COUNTS: a dated snapshot of chaotic-pendulums-co, counted once at the commit it names. The release this corpus pins sweeps only the first source for reach, so checks/case_study.py moves each of these"
   }
  },
  "generators": [
@@ -23,7 +28,12 @@
   {
    "script": "site.py",
    "cwd": "gen",
-   "makes": "site/index.html, site/page.css and site/_headers, from the facts, the brand and the pinned engine"
+   "makes": "site/index.html, site/page.css and site/_headers, from the facts, the pendulum's counts, the brand and the pinned engine"
+  },
+  {
+   "script": "-m wherefore.skill",
+   "cwd": ".",
+   "makes": ".claude/skills/wherefore/, the skill the pinned release ships, for every coding agent that works here"
   }
  ],
  "inventory": {
@@ -52,7 +62,10 @@
     ],
     [
      "*.md",
-     "prose a person writes about this repository"
+     "prose a person writes about this repository",
+     [
+      ".claude/skills/wherefore/*"
+     ]
     ],
     [
      ".github/**",
@@ -82,6 +95,13 @@
   },
   "captured": {
    "groups": {
+    "pendulum": {
+     "files": [
+      "facts/pendulum.json"
+     ],
+     "no_stamp": "counted from another repository, which this gate cannot see and deliberately does not read: the file names the commit and the day it was counted at, and a case study is a dated story, so a person counts again when it is retold",
+     "why": "the case study's counts, a snapshot of chaotic-pendulums-co at one commit"
+    },
     "icon": {
      "files": [
       "brand/icon/*.png"

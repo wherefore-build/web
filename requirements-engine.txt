@@ -3,6 +3,8 @@
 # and version from it, so moving this line is how a release reaches the site -
 # by a pull request, whose gate fails until the site is regenerated against it.
 #
-# Wherefore 0.1.1 (v0.1.1): the merge of wherefore#34, the first release that
-# ships the principles and commands as data.
-wherefore @ git+https://github.com/zakholdsworth/wherefore@06e910c8c5f5401cc58869a0cf3fa903bc2cc72e
+# Wherefore 0.2.1 (v0.2.1): the merge of wherefore#37, which fixes what a fresh
+# review found, and ships the skill an agent reads (0.2.0). The distribution is
+# named wherefore-build since wherefore#36: `wherefore` on PyPI is another
+# project's, and pip refuses a pin whose name does not match the package.
+wherefore-build @ git+https://github.com/zakholdsworth/wherefore@3c90622ba473f987e30a6672a6b8f2c2614d6cb4

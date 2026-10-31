@@ -13,6 +13,7 @@ import pathlib
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 SITE = ROOT / "site"
 FACTS = json.loads((ROOT / "facts/company.json").read_text(encoding="utf-8"))
+PENDULUM = json.loads((ROOT / "facts/pendulum.json").read_text(encoding="utf-8"))
 TOKENS = json.loads((ROOT / "brand/tokens.json").read_text(encoding="utf-8"))
 STATUSES = ("draft", "launched")
 
