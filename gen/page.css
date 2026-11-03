@@ -238,7 +238,7 @@ em { font-style: italic; }
 .answers { color: var(--muted); max-width: 40ch; font-size: 0.9375rem; }
 .asks { flex: 1 1 30rem; min-width: 0; position: relative; display: flex; flex-wrap: wrap; gap: 0.5rem; align-content: flex-start; }
 .tab {
-  order: 0; display: inline-flex; align-items: center; min-height: var(--tap); padding: 0 1rem;
+  order: 0; position: relative; overflow: hidden; display: inline-flex; align-items: center; min-height: var(--tap); padding: 0 1rem;
   border: 1px solid var(--line); border-radius: var(--radius-control);
   color: var(--ink); font-weight: 500; font-size: 0.875rem; cursor: pointer;
   -webkit-tap-highlight-color: transparent; user-select: none;
@@ -246,8 +246,13 @@ em { font-style: italic; }
 .tab:hover { border-color: var(--muted); }
 .state:checked + .tab { background: var(--accent); border-color: var(--accent); color: var(--on-accent); font-weight: 600; }
 .state:focus-visible + .tab { outline: 2px solid var(--accent); outline-offset: 3px; }
-.ask-panel { order: 1; flex: 1 1 100%; display: none; margin-top: 0.75rem; }
-.state:checked + .tab + .ask-panel { display: block; }
+/* The bar that crosses a chip while its question stands (site.py flipping()). */
+.tab::after { content: ""; position: absolute; left: 1rem; right: 1rem; bottom: 0.45rem; height: 3px; border-radius: 2px; transform: scaleX(0); transform-origin: left; pointer-events: none; }
+/* Every answer in one place, so the page does not move as they turn: the
+   tallest sets the height, and the one whose radio is checked is the one seen. */
+.ask-panels { order: 1; flex: 1 1 100%; display: grid; margin-top: 0.75rem; }
+.ask-panel { grid-area: 1 / 1; visibility: hidden; }
+.ask-prompt { margin: 0; padding: 1.25rem 0; color: var(--muted); }
 .ask-panel h2 { margin: 0 0 1.25rem; font-size: clamp(2.125rem, 4.4vw, 3.5rem); }
 .ask-panel h2 em { color: var(--accent); }
 .answer { margin: 0; }
@@ -270,12 +275,13 @@ em { font-style: italic; }
 .how-note { margin: 1.5rem 0 0; color: var(--muted); font-size: 0.9375rem; }
 
 .does-intro { color: var(--muted); max-width: 46ch; margin: 0 0 2rem; }
-/* A short list, two columns where there is room: a name and a line each. */
-.does { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(24rem, 100%), 1fr)); column-gap: 2.5rem; }
-.does li { padding: 0.9rem 0; border-top: 1px solid var(--line); display: grid; gap: 0.25rem; }
+.does { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(17rem, 100%), 1fr)); gap: 1rem; }
+.does li { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-card); padding: 1.4rem 1.5rem; display: flex; flex-direction: column; gap: 0.6rem; }
 .does li p { margin: 0; }
-.does-name { font-weight: 600; display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.6rem; }
-.does li p:nth-child(2) { color: var(--muted); font-size: 0.9375rem; line-height: 1.5; }
+.does-name { font-weight: 600; display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.75rem; }
+.does li p:nth-child(2) { color: var(--muted); }
+.does-cmd { margin-top: auto !important; font: 400 0.875rem/1.4 var(--font-mono); color: var(--accent); }
+.does-cmd code { font-size: 1em; }
 .does-intro a { color: var(--accent); white-space: nowrap; }
 
 /* The changelog: every release the pinned engine has cut, newest first. The

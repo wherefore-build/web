@@ -22,6 +22,7 @@
  },
  "nav": {
   "how": "How it works",
+  "does": "What it does",
   "start": "Get started",
   "github": "View on GitHub"
  },
@@ -111,7 +112,7 @@
   "juliet": "Juliet wasn’t asking where Romeo was. She was asking why he had to be who he was.",
   "rule": "In a Wherefore repository every file has to answer her: generated from a source, written by a person for a stated reason, or captured and stamped with what it was made from. A file that cannot answer stops the change.",
   "pick": "Pick an asset to ask",
-  "ask": "Wherefore art thou, {name}?",
+  "ask": "Wherefore art thou {name}?",
   "built_from": "Built from",
   "because": "Because",
   "asks": [

@@ -97,6 +97,9 @@ jobs:
       - name: The pendulum's model stands beside the case study's heading, and turns under a thumb
         if: ${{ !cancelled() && steps.browser.outcome == 'success' }}
         run: python3 checks/model_turns.py
+      - name: The questions turn by themselves, and stop on the chip a thumb taps
+        if: ${{ !cancelled() && steps.browser.outcome == 'success' }}
+        run: python3 checks/questions_turn.py
       - name: And each of those fails when it should
         if: ${{ !cancelled() && steps.install.outcome == 'success' }}
         run: python3 -m wherefore prove
