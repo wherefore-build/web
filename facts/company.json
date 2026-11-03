@@ -3,7 +3,8 @@
  "company": {
   "name": "Wherefore",
   "domain": "wherefore.build",
-  "contact": null
+  "contact": null,
+  "github": null
  },
  "site": {
   "status": "draft",
@@ -12,7 +13,8 @@
  },
  "nav": {
   "how": "How it works",
-  "start": "Get started"
+  "start": "Get started",
+  "github": "View on GitHub"
  },
  "hero": {
   "eyebrow": "In development",
