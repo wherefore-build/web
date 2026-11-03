@@ -36,6 +36,17 @@ not to be indexed, both in the page and in the headers Cloudflare serves with
 it (site/_headers). Launching is the owner's decision, and it is one word in
 the facts.
 
+THE ONE PAGE THAT RUNS A SCRIPT IS THE PENDULUM'S OWN. Beside the case study's
+heading stands the pendulum's interactive model: cases/pendulum/model.html, a
+byte-for-byte copy of the file chaotic-pendulums-co's home page embeds, taken
+at the commit case.model.taken names. It is written to site/pendulum/ with a
+few lines that frame it - the view, and a swing to start it moving - and shown
+in a sandboxed frame: the frame may run its script and nothing else, cannot
+reach this page, and is the only path the headers let run one. This page still
+runs none. Like the counts, it is a dated snapshot, copied again when the story
+is retold; checks/model_turns.py drags it, at a phone's width, and requires it
+to turn.
+
 THE CASE STUDY'S COUNTS ARE A DATED SNAPSHOT. facts/pendulum.json holds
 chaotic-pendulums-co's proofs, parts, print plates and the release they were
 counted at, counted once at the commit it names; nothing reads the pendulum
@@ -49,7 +60,7 @@ line it says Wherefore is not public yet, and with no quote the case study
 quotes no one. Each appears when its fact does.
 
 Run from gen/, as wherefore.json says, after brand.py. Writes site/index.html,
-site/page.css and site/_headers.
+site/page.css, site/_headers and the framed model, site/pendulum/index.html.
 """
 import json
 import re
@@ -58,12 +69,29 @@ import string
 from importlib.resources import files
 
 import wherefore
-from kit import FACTS, PENDULUM, ROOT, SITE, banner, esc, head, status
+from kit import FACTS, PENDULUM, ROOT, SITE, banner, colours, esc, head, status
 
 ENGINE = f"wherefore {wherefore.__version__}"
 MONTHS = ("January", "February", "March", "April", "May", "June", "July", "August",
           "September", "October", "November", "December")
 ASKED = []          # what the part being rendered asked the engine for
+MODEL = ROOT / "cases/pendulum/model.html"
+MODEL_PAGE = "pendulum/"
+# What frames the pendulum's model on this site, appended after its source -
+# which has no closing tags, so it is appended to, never edited. A three-quarter
+# view drawn back far enough, with the pivot high, that the whole swing stays in
+# a small frame; the arms in the pose the home page shows; then a swing from it.
+# A visitor who asks for less motion gets the pose alone.
+FRAMING = """
+<style>html,body{overflow:hidden}</style>
+<script>
+addEventListener('load', function () {
+  var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  CP.go({view: {yaw: 30, pitch: -14, fov: 30, tx: 0, ty: -100, app: 580}, pose: 'house', dur: 1})
+    .then(function () { if (!still) return CP.swing(); });
+});
+</script>
+"""
 
 
 def engine(name, since="0.1.1"):
@@ -535,6 +563,35 @@ def long_date(iso):
     return f"{d} {MONTHS[m - 1]} {y}"
 
 
+def ground(name):
+    """A brand colour, as the six hex digits the pendulum's model takes for its background."""
+    have = colours()
+    if name not in have:
+        raise SystemExit(f"case.model.ground names {name!r}, which is not a colour in brand/tokens.json. "
+                         f"It has: {', '.join(have)}")
+    return have[name].lstrip("#")
+
+
+def model(m):
+    """The pendulum's model in a frame that may run its script and nothing else."""
+    g = m["ground"]
+    return (f'<figure class="case-model"><iframe src="{MODEL_PAGE}?embed=1&amp;bg={ground(g)}" '
+            f'title="{esc(m["title"])}" loading="lazy" sandbox="allow-scripts" '
+            f'style="background: var(--{esc(g)})"></iframe>'
+            f'<figcaption>{esc(m["hint"])}</figcaption></figure>')
+
+
+def model_page(f):
+    """site/pendulum/index.html: the pendulum's own model, byte for byte, and what frames it."""
+    t = f["case"]["model"]["taken"]
+    said = f'{t["from"]} {t["file"]} at {t["commit"]}, {t["on"]}'
+    if "--" in said:
+        raise SystemExit(f"case.model.taken cannot be written in a comment: {said!r}")
+    return (f"<!doctype html>\n<!-- The pendulum's own model: {said}, copied byte for byte into "
+            f"cases/pendulum/model.html, and framed for the case study by gen/site.py. -->\n"
+            f'<html lang="en">\n' + MODEL.read_text(encoding="utf-8") + FRAMING)
+
+
 def case(f, p):
     c = f["case"]
     made = "".join(f"<li>{esc(m)}</li>" for m in c["made"])
@@ -549,10 +606,13 @@ def case(f, p):
                  f'<footer>{esc(c["quote"]["by"])}</footer></blockquote>')
     return f"""<section id="case" class="case"><div class="wrap">
 {SRC}
+<div class="case-head">
 <p class="eyebrow">{esc(c["eyebrow"])} · {esc(c["name"])}</p>
 <h2>{esc(c["heading"])}</h2>
+{model(c["model"])}
 <p class="case-text">{esc(c["text"])}</p>
 <p class="actions"><a class="button button-quiet" href="{esc(c["url"])}">{esc(c["visit"])}</a></p>
+</div>
 {quote}
 <div class="case-grid">
 <div class="case-col"><h3>{esc(c["made_heading"])}</h3><ul class="case-list">{made}</ul></div>
@@ -658,11 +718,12 @@ def page(f):
 
 def headers():
     """What Cloudflare sends with every file: nothing loads from elsewhere, no
-    script runs, and a draft is not indexed."""
+    script runs, and a draft is not indexed - but for the pendulum's model,
+    which may run its own script, inline, load nothing, and be framed only here."""
     lines = [
         "/*",
         "  Content-Security-Policy: default-src 'none'; style-src 'self' 'unsafe-inline'; font-src 'self'; "
-        "img-src 'self' data:; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",
+        "img-src 'self' data:; frame-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",
         "  X-Content-Type-Options: nosniff",
         "  Referrer-Policy: no-referrer",
     ]
@@ -671,6 +732,10 @@ def headers():
     # The installer, shown as text to a browser that opens it - "read it
     # before you run it" has to be possible - and run by sh from curl.
     lines += ["", "/install.sh", "  Content-Type: text/plain; charset=utf-8"]
+    # The model: the policy above taken off (`!`) and its own put on.
+    lines += ["", f"/{MODEL_PAGE}*", "  ! Content-Security-Policy",
+              "  Content-Security-Policy: default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; "
+              "img-src data:; font-src data:; base-uri 'none'; form-action 'none'; frame-ancestors 'self'"]
     return "\n".join(lines) + "\n"
 
 
@@ -679,6 +744,8 @@ def main():
     shutil.copyfile(ROOT / "gen/page.css", SITE / "page.css")
     (SITE / "index.html").write_text(page(FACTS), encoding="utf-8")
     (SITE / "_headers").write_text(headers(), encoding="utf-8")
+    (SITE / MODEL_PAGE).mkdir(exist_ok=True)
+    (SITE / MODEL_PAGE / "index.html").write_text(model_page(FACTS), encoding="utf-8")
 
 
 if __name__ == "__main__":

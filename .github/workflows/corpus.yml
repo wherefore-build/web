@@ -85,6 +85,9 @@ jobs:
       - name: Every control on the site does something a visitor sees, pressed cold on a phone
         if: ${{ !cancelled() && steps.browser.outcome == 'success' }}
         run: python3 checks/controls_press.py
+      - name: The pendulum's model stands beside the case study's heading, and turns under a thumb
+        if: ${{ !cancelled() && steps.browser.outcome == 'success' }}
+        run: python3 checks/model_turns.py
       - name: And each of those fails when it should
         if: ${{ !cancelled() && steps.install.outcome == 'success' }}
         run: python3 -m wherefore prove
