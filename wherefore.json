@@ -106,7 +106,13 @@
       "facts/pendulum.json"
      ],
      "no_stamp": "counted from another repository, which this gate cannot see and deliberately does not read: the file names the commit and the day it was counted at, and a case study is a dated story, so a person counts again when it is retold",
-     "why": "the case study's counts, a snapshot of chaotic-pendulums-co at one commit"
+     "why": "the case study's counts, a snapshot of chaotic-pendulums-co at one commit",
+     "upstream": {
+      "url": "https://chaoticpendulums.com/release.json",
+      "read": {"json": "/release"},
+      "matches": {"file": "facts/pendulum.json", "at": "captured.release"},
+      "unreachable": "the pendulum's site being down is not a new release: a deploy goes ahead and says so, and the next build reads it again"
+     }
     },
     "pendulum-model": {
      "files": [

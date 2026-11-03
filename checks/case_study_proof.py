@@ -8,6 +8,7 @@ pass.
   fails   the release typed into the facts' as-of line instead of read
           a count the pendulum started making that nobody decided about
           the copy's stamp without its commit
+          the copy's stamp with a version where its release mark goes
           a count that is not a number
           an excuse in UNSHOWN for a value the copy does not have
   passes  the copy and the page as they are
@@ -50,6 +51,10 @@ def main():
         change(p, lambda d: d["captured"].pop("commit"))
         check(r, "the stamp without its commit", CHECK, True,
               ["captured.commit is None, not a commit"])
+    with Edit(COPY) as p:
+        change(p, lambda d: d["captured"].update(release="V83"))
+        check(r, "the stamp with a version where its release mark goes", CHECK, True,
+              ["captured.release is 'V83', not a release mark"])
     with Edit(COPY) as p:
         change(p, lambda d: d["counts"].update(parts="nine"))
         check(r, "a count that is not a number", CHECK, True,
