@@ -106,21 +106,21 @@
 <p class="how-note">A command line, Python&#x27;s standard library, and one file that says what your corpus is.</p>
 </div></section>
 <section id="does"><div class="wrap">
-<div class="src"><p><span class="src-k">from</span> facts/company.json · 15 facts: does.{words.{scan, start, gate, build, proofs, retired, reach, claims, upstream, hook, skill}, new, heading, intro} · changelog.link</p><p><span class="src-k">from</span> wherefore 0.5.0 · commands.json: wherefore scan, wherefore init, wherefore gate, wherefore build, wherefore prove, wherefore check retired, wherefore check reach, wherefore check claims, wherefore check upstream, wherefore hook install</p><p><span class="src-k">held by</span> gate · reach · brand · engine</p></div>
+<div class="src"><p><span class="src-k">from</span> facts/company.json · 15 facts: does.{words.{scan, start, gate, build, proofs, retired, reach, claims, upstream, hook, skill}, new, heading, intro} · changelog.link</p><p><span class="src-k">held by</span> gate · reach · brand</p></div>
 <h2>Everything it does.</h2>
 <p class="does-intro">Built from the release this page pins. Every feature it ships is here, in our words: a release that adds one this page does not describe stops the build until it does. <a href="changelog/">Every release, and what it printed</a></p>
 <ul class="does">
-<li><p class="does-name">Scan</p><p>Point it at your site or your docs. It finds every value you state more than one way - a price, a trial length, a version - and shows where the copies disagree. Nothing to set up first.</p><p class="does-cmd"><code>wherefore scan</code></p></li>
-<li><p class="does-name">Start a corpus</p><p>One command starts a repository, and the skill walks your agent through the first fact: said once, built into one asset, held by the gate.</p><p class="does-cmd"><code>wherefore init</code></p></li>
-<li><p class="does-name">The gate</p><p>On every push, every file is generated from a source, written for a stated reason, or captured and stamped. Anything stale or unaccounted for stops the change, and says why.</p><p class="does-cmd"><code>wherefore gate</code></p></li>
-<li><p class="does-name">The build</p><p>Every asset regenerated from the source, the same way every time, compared with what is committed, so you see exactly what a change moves.</p><p class="does-cmd"><code>wherefore build</code></p></li>
-<li><p class="does-name">Proofs</p><p>No check is trusted until it has failed: each proof plants the fault its check exists to catch, and requires the check to catch it.</p><p class="does-cmd"><code>wherefore prove</code></p></li>
-<li><p class="does-name">Retired facts</p><p>Retire a value once - the old price, the old name, the old limit - and nothing a person reads may say it again.</p><p class="does-cmd"><code>wherefore check retired</code></p></li>
-<li><p class="does-name">Reach</p><p>Every fact is moved, one at a time, and the page, deck or doc that states it must move with it. A fact that reaches nothing is caught.</p><p class="does-cmd"><code>wherefore check reach</code></p></li>
-<li><p class="does-name">Claims</p><p>A claim like &quot;SOC 2 certified&quot; may only be said as its rule allows, and the check refuses the rest.</p><p class="does-cmd"><code>wherefore check claims</code></p></li>
-<li><p class="does-name">Derived from elsewhere <span class="chip chip-new">New in 0.5.0</span></p><p>Some things you copy from where you can&#x27;t pin them - a partner&#x27;s spec sheet, another product&#x27;s site. Say where each came from, and the deploy fails the day that source changes, until the copy is taken again.</p><p class="does-cmd"><code>wherefore check upstream</code></p></li>
-<li><p class="does-name">The pre-push hook</p><p>A push that would ship a stale document stops before it leaves your machine, with the fix in one command.</p><p class="does-cmd"><code>wherefore hook install</code></p></li>
-<li><p class="does-name">The skill, for Claude Code and Codex</p><p>Claude Code or Codex learns the rules from a skill that ships with each release, and sets up the first fact with you.</p></li>
+<li><p class="does-name">Scan</p><p>Point it at your site or docs: it finds every value you state more than one way, and where the copies disagree.</p></li>
+<li><p class="does-name">Start a corpus</p><p>One command starts a repository; the skill walks your agent through the first fact.</p></li>
+<li><p class="does-name">The gate</p><p>On every push, every file is generated, written for a reason, or captured - or the change stops, and says why.</p></li>
+<li><p class="does-name">The build</p><p>Every asset rebuilt from the source, the same way every time, so you see exactly what a change moves.</p></li>
+<li><p class="does-name">Proofs</p><p>No check is trusted until it has failed: each proof plants the fault its check exists to catch.</p></li>
+<li><p class="does-name">Retired facts</p><p>Retire a value once - an old price, name or limit - and nothing a person reads may say it again.</p></li>
+<li><p class="does-name">Reach</p><p>Each fact is moved, one at a time, and everything that states it must move too.</p></li>
+<li><p class="does-name">Claims</p><p>A claim like &quot;SOC 2 certified&quot; may be said only as its rule allows.</p></li>
+<li><p class="does-name">Derived from elsewhere <span class="chip chip-new">New in 0.5.0</span></p><p>Copied something you can&#x27;t pin, like a partner&#x27;s spec sheet? The deploy fails the day its source changes.</p></li>
+<li><p class="does-name">The pre-push hook</p><p>A push that would ship a stale document stops before it leaves your machine.</p></li>
+<li><p class="does-name">The skill, for Claude Code and Codex</p><p>Claude Code or Codex learns the rules from a skill that ships with each release.</p></li>
 </ul>
 </div></section>
 <section id="case" class="case"><div class="wrap">
@@ -129,7 +129,7 @@
 <p class="eyebrow">Case study · Chaotic Pendulums</p>
 <h2>A hardware company, compiled from one spec file.</h2>
 <figure class="case-model"><iframe src="pendulum/?embed=1&amp;bg=EDEBE6" title="The MK3 pendulum in 3D: drag to turn it, or grab an arm and swing it" loading="lazy" sandbox="allow-scripts" style="background: var(--ink)"></iframe><figcaption>Drag to turn it</figcaption></figure>
-<p class="case-text">Chaotic Pendulums is a small hardware company, started to test this idea on something with more surface area than software: a desk-sized double pendulum with milled parts, a bronze blade, bearings and a clamp. Wherefore was built alongside it, one rule at a time. If one source can hold machined parts, physics, suppliers and a storefront, it can hold your app, website and docs. One spec file holds the object. Everything a shop, a customer or a printer receives is built from it, and checked on every push.</p>
+<p class="case-text">Chaotic Pendulums is a small hardware company, started to test this idea on something with more surface area than software: a desk-sized double pendulum with milled parts, a bronze blade, bearings and a clamp. Wherefore was built alongside it, one rule at a time. If one source can hold machined parts, physics, suppliers and a storefront, it can hold your app, website and docs.</p>
 <p class="actions"><a class="button button-quiet" href="https://chaoticpendulums.com/">See the live site</a></p>
 </div>
 

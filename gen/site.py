@@ -593,12 +593,6 @@ def changelog_page(f):
 """
 
 
-def short(usage):
-    """`wherefore gate [--keep]` -> `wherefore gate`: the command, without what it takes."""
-    return " ".join(w for w in usage.split()
-                    if not (w[:1] in "[-." or w.endswith("]") or w.isupper() or "|" in w))
-
-
 def does(f):
     """Every feature the pinned release ships, in this company's words.
 
@@ -606,8 +600,9 @@ def does(f):
     describe stops the build until the facts say something about it - words in
     `does.words`, or its name in `does.unshown` with the reason it is left off -
     so nothing the product does can ship without the page telling people. Words
-    for a feature the release no longer has stop it too. The name, the release it
-    arrived in and the command are the engine's; only the words are ours. The
+    for a feature the release no longer has stop it too. The name and the release
+    it arrived in are the engine's; only the words are ours. A short list, not
+    cards, and no commands: "How it works" and "Start" already name them. The
     features of the newest release that brought any are marked new; every release
     is on the changelog, each feature under the one it arrived in."""
     d = f["does"]
@@ -632,10 +627,8 @@ def does(f):
             continue
         new = (f' <span class="chip chip-new">{esc(fill(d["new"], version=newest))}</span>'
                if x["since"] == newest else "")
-        cmd = (f'<p class="does-cmd"><code>{esc(command(short(x["commands"][0])))}</code></p>'
-               if x.get("commands") else "")
         items.append(f'<li><p class="does-name">{esc(x["name"])}{new}</p>'
-                     f'<p>{esc(words[x["id"]])}</p>{cmd}</li>')
+                     f'<p>{esc(words[x["id"]])}</p></li>')
     return f"""<section id="does"><div class="wrap">
 {SRC}
 <h2>{esc(d["heading"])}</h2>

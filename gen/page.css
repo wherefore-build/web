@@ -270,13 +270,12 @@ em { font-style: italic; }
 .how-note { margin: 1.5rem 0 0; color: var(--muted); font-size: 0.9375rem; }
 
 .does-intro { color: var(--muted); max-width: 46ch; margin: 0 0 2rem; }
-.does { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(17rem, 100%), 1fr)); gap: 1rem; }
-.does li { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-card); padding: 1.4rem 1.5rem; display: flex; flex-direction: column; gap: 0.6rem; }
+/* A short list, two columns where there is room: a name and a line each. */
+.does { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(24rem, 100%), 1fr)); column-gap: 2.5rem; }
+.does li { padding: 0.9rem 0; border-top: 1px solid var(--line); display: grid; gap: 0.25rem; }
 .does li p { margin: 0; }
-.does-name { font-weight: 600; display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.75rem; }
-.does li p:nth-child(2) { color: var(--muted); }
-.does-cmd { margin-top: auto !important; font: 400 0.875rem/1.4 var(--font-mono); color: var(--accent); }
-.does-cmd code { font-size: 1em; }
+.does-name { font-weight: 600; display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.6rem; }
+.does li p:nth-child(2) { color: var(--muted); font-size: 0.9375rem; line-height: 1.5; }
 .does-intro a { color: var(--accent); white-space: nowrap; }
 
 /* The changelog: every release the pinned engine has cut, newest first. The

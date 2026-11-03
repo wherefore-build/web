@@ -36,7 +36,7 @@ wrote .claude/skills/wherefore/ (Claude Code) and .agents/skills/wherefore/ (Cod
 Then every place the product is described - a site, the docs, another repository - pins
 the one that decides it, and fails its build on a feature it does not say: start.md, &quot;Every surface&quot;.</code></pre>
 <figcaption>What it printed</figcaption></figure>
-<h3>What arrived</h3><ul class="arrived"><li><span class="arrived-name">Derived from elsewhere</span> Some things you copy from where you can&#x27;t pin them - a partner&#x27;s spec sheet, another product&#x27;s site. Say where each came from, and the deploy fails the day that source changes, until the copy is taken again.</li></ul>
+<h3>What arrived</h3><ul class="arrived"><li><span class="arrived-name">Derived from elsewhere</span> Copied something you can&#x27;t pin, like a partner&#x27;s spec sheet? The deploy fails the day its source changes.</li></ul>
 </div>
 </li>
 <li class="release" id="v0.4.0">
@@ -68,7 +68,7 @@ From the first build on, the skill is regenerated from the release this reposito
      14           3x   docs/start.md:1, site/index.html:1, site/pricing.html:1
      30           1x   help/billing.md:1</code></pre>
 <figcaption>What it printed</figcaption></figure>
-<h3>What arrived</h3><ul class="arrived"><li><span class="arrived-name">Scan</span> Point it at your site or your docs. It finds every value you state more than one way - a price, a trial length, a version - and shows where the copies disagree. Nothing to set up first.</li></ul>
+<h3>What arrived</h3><ul class="arrived"><li><span class="arrived-name">Scan</span> Point it at your site or docs: it finds every value you state more than one way, and where the copies disagree.</li></ul>
 </div>
 </li>
 <li class="release" id="v0.2.1">
@@ -98,7 +98,7 @@ wrote ~/fernhollow/.claude/skills/wherefore/, the skill every coding agent here 
 Commit both. Then ask your agent to set up Wherefore: the skill&#x27;s start.md is how.
 From the first build on, the skill is regenerated from the release this repository pins.</code></pre>
 <figcaption>What it printed</figcaption></figure>
-<h3>What arrived</h3><ul class="arrived"><li><span class="arrived-name">The skill, for Claude Code and Codex</span> Claude Code or Codex learns the rules from a skill that ships with each release, and sets up the first fact with you.</li></ul>
+<h3>What arrived</h3><ul class="arrived"><li><span class="arrived-name">The skill, for Claude Code and Codex</span> Claude Code or Codex learns the rules from a skill that ships with each release.</li></ul>
 </div>
 </li>
 <li class="release" id="v0.1.1">
@@ -135,7 +135,7 @@ file; `wherefore --help` prints them from there, and so does the README.</code><
 every tracked file is classified, and every generated one was written
 during this run and matches what is committed</code></pre>
 <figcaption>What it printed</figcaption></figure>
-<h3>What arrived</h3><ul class="arrived"><li><span class="arrived-name">Start a corpus</span> One command starts a repository, and the skill walks your agent through the first fact: said once, built into one asset, held by the gate.</li><li><span class="arrived-name">The gate</span> On every push, every file is generated from a source, written for a stated reason, or captured and stamped. Anything stale or unaccounted for stops the change, and says why.</li><li><span class="arrived-name">The build</span> Every asset regenerated from the source, the same way every time, compared with what is committed, so you see exactly what a change moves.</li><li><span class="arrived-name">Proofs</span> No check is trusted until it has failed: each proof plants the fault its check exists to catch, and requires the check to catch it.</li><li><span class="arrived-name">Retired facts</span> Retire a value once - the old price, the old name, the old limit - and nothing a person reads may say it again.</li><li><span class="arrived-name">Reach</span> Every fact is moved, one at a time, and the page, deck or doc that states it must move with it. A fact that reaches nothing is caught.</li><li><span class="arrived-name">Claims</span> A claim like &quot;SOC 2 certified&quot; may only be said as its rule allows, and the check refuses the rest.</li><li><span class="arrived-name">The pre-push hook</span> A push that would ship a stale document stops before it leaves your machine, with the fix in one command.</li></ul>
+<h3>What arrived</h3><ul class="arrived"><li><span class="arrived-name">Start a corpus</span> One command starts a repository; the skill walks your agent through the first fact.</li><li><span class="arrived-name">The gate</span> On every push, every file is generated, written for a reason, or captured - or the change stops, and says why.</li><li><span class="arrived-name">The build</span> Every asset rebuilt from the source, the same way every time, so you see exactly what a change moves.</li><li><span class="arrived-name">Proofs</span> No check is trusted until it has failed: each proof plants the fault its check exists to catch.</li><li><span class="arrived-name">Retired facts</span> Retire a value once - an old price, name or limit - and nothing a person reads may say it again.</li><li><span class="arrived-name">Reach</span> Each fact is moved, one at a time, and everything that states it must move too.</li><li><span class="arrived-name">Claims</span> A claim like &quot;SOC 2 certified&quot; may be said only as its rule allows.</li><li><span class="arrived-name">The pre-push hook</span> A push that would ship a stale document stops before it leaves your machine.</li></ul>
 </div>
 </li>
 </ol>
