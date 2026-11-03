@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Changelog — Wherefore</title>
+<meta name="description" content="Built from the release this site pins, so a release is here the moment the site moves to it - and the build stops if a feature it ships has no words on this site.">
+<meta name="color-scheme" content="dark">
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="../brand.css">
+<link rel="stylesheet" href="../page.css">
+<link rel="canonical" href="https://wherefore.build/changelog/">
+</head>
+<body>
+<div class="draft" role="note"><span class="draft-mark">Draft</span> Nothing on this page is launched, and nothing here is a promise yet.</div>
+<header class="top"><div class="wrap"><a class="name" href="../">Wherefore</a>
+<nav aria-label="Elsewhere"><a href="../#how">How it works</a><a class="pill" href="../#start">Get started</a></nav></div></header>
+<main id="top">
+<section class="log-head"><div class="wrap">
+<p class="eyebrow">Changelog · Wherefore 0.5.0</p>
+<h1>Every release, newest first.</h1>
+<p class="lede">Built from the release this site pins, so a release is here the moment the site moves to it - and the build stops if a feature it ships has no words on this site.</p>
+</div></section>
+<section class="log"><div class="wrap">
+<ol class="releases">
+<li class="release" id="v0.5.0">
+<div class="release-meta"><p class="release-v"><a href="#v0.5.0">0.5.0</a></p>
+<p class="release-date"><time datetime="2026-11-03">3 November 2026</time></p></div>
+<div class="release-body">
+<h2>Every surface, held to the source</h2>
+<p class="release-says">The skill now asks where else the product is described and sets each surface up to pin the source and fail its build on a feature it does not say. A copy taken from somewhere that cannot be pinned - another site, another product - says where it came from, and wherefore check upstream fails when that source moves. Every release is said once, as data, so a changelog is built rather than kept.</p>
+<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore init
+wrote ~/fernhollow/wherefore.json
+wrote .claude/skills/wherefore/ (Claude Code) and .agents/skills/wherefore/ (Codex): the skill a coding agent here reads
+<span class="term-cut" title="lines left out">…</span>
+Then every place the product is described - a site, the docs, another repository - pins
+the one that decides it, and fails its build on a feature it does not say: start.md, &quot;Every surface&quot;.</code></pre>
+<figcaption>What it printed</figcaption></figure>
+<h3>What arrived</h3><ul class="arrived"><li><span class="arrived-name">Derived from elsewhere</span> Some things you copy from where you can&#x27;t pin them - a partner&#x27;s spec sheet, another product&#x27;s site. Say where each came from, and the deploy fails the day that source changes, until the copy is taken again.</li></ul>
+</div>
+</li>
+<li class="release" id="v0.4.0">
+<div class="release-meta"><p class="release-v"><a href="#v0.4.0">0.4.0</a></p>
+<p class="release-date"><time datetime="2026-11-03">3 November 2026</time></p></div>
+<div class="release-body">
+<h2>The skill reaches Codex</h2>
+<p class="release-says">The skill is written where Codex reads it as well as Claude Code, and held to the release in both places. What the engine does is said once, as data, so a page that describes the product keeps up or its build stops.</p>
+<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore init
+wrote ~/fernhollow/wherefore.json
+wrote .claude/skills/wherefore/ (Claude Code) and .agents/skills/wherefore/ (Codex): the skill a coding agent here reads
+
+Commit them. Then ask your agent to set up Wherefore: the skill&#x27;s start.md is how.
+From the first build on, the skill is regenerated from the release this repository pins.</code></pre>
+<figcaption>What it printed</figcaption></figure>
+
+</div>
+</li>
+<li class="release" id="v0.3.0">
+<div class="release-meta"><p class="release-v"><a href="#v0.3.0">0.3.0</a></p>
+<p class="release-date"><time datetime="2026-11-03">3 November 2026</time></p></div>
+<div class="release-body">
+<h2>Scan: the first win, with no setup</h2>
+<p class="release-says">Point wherefore scan at a built site, a docs folder or a live address, and it reports every value stated more than one way. It needs no configuration, and it would rather miss a disagreement than invent one.</p>
+<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore scan .
+4 stated values in 4 files or pages; 1 statement whose copies disagree
+
+  &quot;start your {} day free&quot;  - said 4 times, 2 ways
+     14           3x   docs/start.md:1, site/index.html:1, site/pricing.html:1
+     30           1x   help/billing.md:1</code></pre>
+<figcaption>What it printed</figcaption></figure>
+<h3>What arrived</h3><ul class="arrived"><li><span class="arrived-name">Scan</span> Point it at your site or your docs. It finds every value you state more than one way - a price, a trial length, a version - and shows where the copies disagree. Nothing to set up first.</li></ul>
+</div>
+</li>
+<li class="release" id="v0.2.1">
+<div class="release-meta"><p class="release-v"><a href="#v0.2.1">0.2.1</a></p>
+<p class="release-date"><time datetime="2026-10-30">30 October 2026</time></p></div>
+<div class="release-body">
+<h2>What a fresh review found</h2>
+<p class="release-says">Every way a fresh review found for the gate to pass when it should fail, reproduced, fixed, and held by a test that plants it. A flag a command does not take is refused, not ignored. Ready to be published as open source, under Apache-2.0.</p>
+<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore gate --kep
+::error::the gate does not take --kep
+usage: wherefore gate [--keep]
+       wherefore gate --restamp GROUP</code></pre>
+<figcaption>What it printed</figcaption></figure>
+
+</div>
+</li>
+<li class="release" id="v0.2.0">
+<div class="release-meta"><p class="release-v"><a href="#v0.2.0">0.2.0</a></p>
+<p class="release-date"><time datetime="2026-10-30">30 October 2026</time></p></div>
+<div class="release-body">
+<h2>The skill ships with the engine</h2>
+<p class="release-says">A coding agent learns the rules from the release itself, and starts a corpus with you: one fact, end to end. The copy in a repository is generated, so it moves with the pin.</p>
+<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore init
+wrote ~/fernhollow/wherefore.json
+wrote ~/fernhollow/.claude/skills/wherefore/, the skill every coding agent here reads
+
+Commit both. Then ask your agent to set up Wherefore: the skill&#x27;s start.md is how.
+From the first build on, the skill is regenerated from the release this repository pins.</code></pre>
+<figcaption>What it printed</figcaption></figure>
+<h3>What arrived</h3><ul class="arrived"><li><span class="arrived-name">The skill, for Claude Code and Codex</span> Claude Code or Codex learns the rules from a skill that ships with each release, and sets up the first fact with you.</li></ul>
+</div>
+</li>
+<li class="release" id="v0.1.1">
+<div class="release-meta"><p class="release-v"><a href="#v0.1.1">0.1.1</a></p>
+<p class="release-date"><time datetime="2026-10-28">28 October 2026</time></p></div>
+<div class="release-body">
+<h2>Wherefore on Wherefore</h2>
+<p class="release-says">The engine became a client of itself. Its commands and its principles are said once, its own README is built from them, and it is judged by the release before it, the way a compiler builds itself.</p>
+<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore --help
+wherefore - the command line.
+
+  wherefore init [DIR]            write a wherefore.json that declares nothing yet
+  wherefore gate [--keep]         every tracked file classified, every generated one current; puts the tree back unless --keep
+<span class="term-cut" title="lines left out">…</span>
+The commands, and what each does, are said once, in commands.json beside this
+file; `wherefore --help` prints them from there, and so does the README.</code></pre>
+<figcaption>What it printed</figcaption></figure>
+
+</div>
+</li>
+<li class="release" id="v0.1.0">
+<div class="release-meta"><p class="release-v"><a href="#v0.1.0">0.1.0</a></p>
+<p class="release-date"><time datetime="2026-10-28">28 October 2026</time></p></div>
+<div class="release-body">
+<h2>The first release</h2>
+<p class="release-says">The machinery that keeps a hardware company&#x27;s documents true, moved out of the pendulum it was built for: generators, the coverage gate, proofs, retired facts and reach, proved against a fictional company.</p>
+<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore gate
+15 tracked files; 4 generators
+
+  generated      4   written by a generator during this run
+  authored      10   declared a source in wherefore.json
+  captured       1   declared hand-made, and stamped
+<span class="term-cut" title="lines left out">…</span>
+every tracked file is classified, and every generated one was written
+during this run and matches what is committed</code></pre>
+<figcaption>What it printed</figcaption></figure>
+<h3>What arrived</h3><ul class="arrived"><li><span class="arrived-name">Start a corpus</span> One command starts a repository, and the skill walks your agent through the first fact: said once, built into one asset, held by the gate.</li><li><span class="arrived-name">The gate</span> On every push, every file is generated from a source, written for a stated reason, or captured and stamped. Anything stale or unaccounted for stops the change, and says why.</li><li><span class="arrived-name">The build</span> Every asset regenerated from the source, the same way every time, compared with what is committed, so you see exactly what a change moves.</li><li><span class="arrived-name">Proofs</span> No check is trusted until it has failed: each proof plants the fault its check exists to catch, and requires the check to catch it.</li><li><span class="arrived-name">Retired facts</span> Retire a value once - the old price, the old name, the old limit - and nothing a person reads may say it again.</li><li><span class="arrived-name">Reach</span> Every fact is moved, one at a time, and the page, deck or doc that states it must move with it. A fact that reaches nothing is caught.</li><li><span class="arrived-name">Claims</span> A claim like &quot;SOC 2 certified&quot; may only be said as its rule allows, and the check refuses the rest.</li><li><span class="arrived-name">The pre-push hook</span> A push that would ship a stale document stops before it leaves your machine, with the fix in one command.</li></ul>
+</div>
+</li>
+</ol>
+</div></section>
+</main>
+<footer><div class="wrap"><div class="footer-row"><p><span class="footer-name">Wherefore</span> · This page is compiled from one source file and the release it pins.</p>
+<p class="footer-meta"><a href="../">Wherefore</a> · <a href="../brand/">Brand</a></p></div></div></footer>
+</body>
+</html>

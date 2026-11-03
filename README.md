@@ -17,6 +17,7 @@ pin. The reasons are in the engine's `DIRECTIONS.md`, §13 and §14.
 | `facts/company.json` | **the source**: every fact the company states about itself, once | authored |
 | `brand/tokens.json` | **the brand**: every colour, typeface and radius, once, each with its role and reason | authored |
 | `facts/pendulum.json` | the case study's counts: a dated snapshot of `chaotic-pendulums-co`, counted once at the commit it names | captured, stamped inside |
+| `cases/pendulum/model.html` | the pendulum's interactive 3D model, copied byte for byte from `chaotic-pendulums-co` at the commit `case.model.taken` names | captured |
 | `brand/fonts/` | the three typefaces and their licences (SIL OFL 1.1), unchanged | authored |
 | `brand/icon/icon-1024.png`, `brand/shoot_icon.py` | the icon as a PNG, for accounts that take only PNG, and the script that shoots it from `site/brand/icon.svg` | captured, stamped |
 | `gen/brand.py` | the brand pack's generator: the stylesheet, the fonts and the brand page | authored |
@@ -36,6 +37,7 @@ pin. The reasons are in the engine's `DIRECTIONS.md`, §13 and §14.
 | `checks/install_script.py` | the installer installs the pinned release with uv, pipx or pip, and refuses an old Python and an empty machine in words | authored |
 | `checks/controls_press.py` | every control on the site does something a visitor sees, pressed cold on a phone | authored |
 | `checks/case_study.py` | the snapshot says where and when it was counted, and each count on the page moves the page | authored |
+| `checks/model_turns.py` | the pendulum's model stands beside the case study's heading, draws, and turns under a thumb; only its frame may run a script | authored |
 | `checks/*_proof.py` | each check, and the gate, shown to fail | authored |
 | `wherefore.json` | what this repository is to the engine | authored |
 | `requirements-engine.txt` | the engine release this is built and judged by | authored |
@@ -110,12 +112,21 @@ Every line is in `facts/company.json`. A number appears in the facts once: a
 line that mentions it names it as `{before}`, `{after}`, `{total}` and the
 rest, and the generator fills it in. An unknown name stops the build.
 
-**No script runs on the site.** The switch, the demo's steps and the tabs are
+**No script runs on the site's own pages.** The switch, the demo's steps and the tabs are
 checkboxes, radio buttons and their labels, and `gen/page.css` shows what the checked one
 selects. `checks/controls_press.py` loads every page in a real browser at 390
 by 844 with touch, presses each control on a fresh load, and fails one that
 cannot be pressed, is smaller than 44 by 44, presses nothing, or shows nothing
 new on the screen.
+
+The one page that runs a script is the pendulum's own model, beside the case
+study's heading. It is shown in a frame sandboxed to its script alone, which
+cannot reach the page around it, and `site/_headers` gives its path a policy
+of its own: its inline script, its own pictures and font, nothing loaded from
+anywhere, framed only here. `checks/model_turns.py` serves the site with those
+headers, and at 390 by 844 with touch and at 1280 by 900 requires the model to
+be to the right of the heading, to draw on the ground the facts name, and to
+turn when dragged.
 
 ## What comes from the engine, not from here
 
@@ -127,6 +138,18 @@ release does not have. So:
 - a release that renames a command fails the build until the facts follow it;
 - a new version reaches the site by moving the pin, in a pull request whose
   gate fails until the site is regenerated against it.
+
+The same holds for **what it does** and **every release**:
+
+- **Everything it does** lists each feature in the pinned release's
+  `features.json`, in our words (`does.words`). A feature with no words, or
+  words for one the release no longer ships, stops the build.
+- **The changelog** (`site/changelog/`) is built from the pinned release's
+  `releases.json`: each release's version, date, title and sentence, a
+  terminal card of what that release printed when it was run, and the
+  features it brought, in our words. A release is on it the moment the pin
+  moves to it, and the build stops if the engine names a feature in a release
+  it does not list, or the newest release it lists is not the one pinned.
 
 The site can never describe an engine it does not pin.
 
@@ -141,6 +164,7 @@ wherefore gate                       # every file classified, every generated on
 wherefore check reach                # every fact reaches what a visitor receives
 python3 checks/self_contained.py     # nothing loaded from elsewhere, no dead links
 python3 checks/controls_press.py     # every control works under a thumb (needs the browser)
+python3 checks/model_turns.py        # the pendulum's model turns under a thumb (needs the browser)
 wherefore prove                      # each of those fails when it should
 ```
 
@@ -174,10 +198,10 @@ The case study's numbers - the pendulum's proofs, parts, print plates, and the
 release they stand at - are not typed into the page. `facts/pendulum.json`
 holds them as a dated snapshot, counted once from `chaotic-pendulums-co` at
 the commit and on the day it names.
-- **Nothing reads the pendulum again.** The two repositories stay apart: the
-  pendulum may be open-sourced or split out, and should carry nothing for this
-  company, nor be readable from here. A case study is a dated story, so when
-  it is retold a person counts again and rewrites the snapshot.
+- **Nothing reads the pendulum's repository.** The two repositories stay
+  apart: the pendulum may be open-sourced or split out, and should carry
+  nothing for this company, nor be readable from here. A case study is a dated
+  story, so when it is retold a person counts again and rewrites the snapshot.
 - **Each stat names its count** (`case.stats[].of` in the facts), and the as-of
   line fills `{version}` and `{on}` from the snapshot. A count the snapshot does
   not have stops the build.
@@ -185,6 +209,19 @@ the commit and on the day it names.
   counted, requires every value in it to be on the page or excused with a
   reason, and moves each one on the page to see the page move. The release this
   pins sweeps only the facts for reach, so this does it for the snapshot.
+- **The model beside the heading is a snapshot too:** the file the pendulum's
+  home page embeds, copied into `cases/pendulum/model.html` at the commit
+  `case.model.taken` names. `gen/site.py` writes it to `site/pendulum/` with a
+  few lines that frame it - a view drawn back far enough that the whole swing
+  stays in a small frame, then a swing, unless the visitor asks for less
+  motion. It stands on the brand colour `case.model.ground` names.
+- **The model is watched; the counts are not yet.** Its captured group names
+  an `upstream`: the pendulum's public home page, which embeds the same file.
+  `wherefore check upstream` reads it whenever the site is compiled - so
+  before every deploy - and fails when the pendulum has moved,
+  until the copy is taken again - re-copy the file, record the commit and day
+  in `case.model.taken`, never the commit alone. The counts would need the
+  pendulum to publish its version (DECISIONS.md §5).
 
 ## CI
 

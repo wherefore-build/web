@@ -36,6 +36,28 @@ not to be indexed, both in the page and in the headers Cloudflare serves with
 it (site/_headers). Launching is the owner's decision, and it is one word in
 the facts.
 
+THE ONE PAGE THAT RUNS A SCRIPT IS THE PENDULUM'S OWN. Beside the case study's
+heading stands the pendulum's interactive model: cases/pendulum/model.html, a
+byte-for-byte copy of the file chaotic-pendulums-co's home page embeds, taken
+at the commit case.model.taken names. It is written to site/pendulum/ with a
+few lines that frame it - the view, and a swing to start it moving - and shown
+in a sandboxed frame: the frame may run its script and nothing else, cannot
+reach this page, and is the only path the headers let run one. This page still
+runs none. Like the counts, it is a dated snapshot; unlike them, it is
+watched - its captured group names the pendulum's public home page as its
+upstream, and `wherefore check upstream` fails the deploy when the pendulum's
+model has moved, until it is copied again. checks/model_turns.py drags it, at
+a phone's width, and requires it to turn.
+
+THE CHANGELOG IS THE RELEASE'S OWN. site/changelog/ lists every release the
+pinned engine has cut - its version, its date, its title and sentence, and a
+picture of it working, which is what that release printed when it was run -
+from the releases.json it ships. Nothing here types a release. Under each are
+the features it brought, in this site's own words from `does`, so a feature
+with no words stops the build on this page as on the first. A release newer
+than the pin is not here until the pin moves to it; a feature whose release the
+engine does not list, or a newest release that is not the one pinned, stops it.
+
 THE CASE STUDY'S COUNTS ARE A DATED SNAPSHOT. facts/pendulum.json holds
 chaotic-pendulums-co's proofs, parts, print plates and the release they were
 counted at, counted once at the commit it names; nothing reads the pendulum
@@ -49,7 +71,8 @@ line it says Wherefore is not public yet, and with no quote the case study
 quotes no one. Each appears when its fact does.
 
 Run from gen/, as wherefore.json says, after brand.py. Writes site/index.html,
-site/page.css and site/_headers.
+site/page.css, site/_headers, the changelog, site/changelog/index.html, and
+the framed model, site/pendulum/index.html.
 """
 import json
 import re
@@ -58,12 +81,29 @@ import string
 from importlib.resources import files
 
 import wherefore
-from kit import FACTS, PENDULUM, ROOT, SITE, banner, esc, head, status
+from kit import FACTS, PENDULUM, ROOT, SITE, banner, colours, esc, head, status
 
 ENGINE = f"wherefore {wherefore.__version__}"
 MONTHS = ("January", "February", "March", "April", "May", "June", "July", "August",
           "September", "October", "November", "December")
 ASKED = []          # what the part being rendered asked the engine for
+MODEL = ROOT / "cases/pendulum/model.html"
+MODEL_PAGE = "pendulum/"
+# What frames the pendulum's model on this site, appended after its source -
+# which has no closing tags, so it is appended to, never edited. A three-quarter
+# view drawn back far enough, with the pivot high, that the whole swing stays in
+# a small frame; the arms in the pose the home page shows; then a swing from it.
+# A visitor who asks for less motion gets the pose alone.
+FRAMING = """
+<style>html,body{overflow:hidden}</style>
+<script>
+addEventListener('load', function () {
+  var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  CP.go({view: {yaw: 30, pitch: -14, fov: 30, tx: 0, ty: -100, app: 580}, pose: 'house', dur: 1})
+    .then(function () { if (!still) return CP.swing(); });
+});
+</script>
+"""
 
 
 def engine(name, since="0.1.1"):
@@ -473,6 +513,86 @@ def how(f):
 </div></section>"""
 
 
+def releases():
+    """Every release the pinned engine has cut, newest first, each with the features it brought."""
+    rows = engine("releases.json", since="0.5.0")["releases"]
+    cut = [r["version"] for r in rows]
+    if not rows or cut[0] != wherefore.__version__:
+        raise SystemExit(f"{ENGINE} lists {cut[0] if rows else 'no release'} as its newest release; "
+                         f"the changelog starts at the release this site pins")
+    for x in FEATURES:
+        if x["since"] not in cut:
+            raise SystemExit(f"{ENGINE} ships `{x['id']}` since {x['since']}, a release its releases.json "
+                             f"does not list: the changelog would leave it out")
+    for r in rows:
+        for key in ("date", "title", "says", "shows"):
+            if not r.get(key):
+                raise SystemExit(f"{ENGINE} says nothing of release {r['version']}'s {key}")
+    return [(r, [x for x in FEATURES if x["since"] == r["version"]]) for r in rows]
+
+
+def terminal(shows, cut):
+    """What a release printed, as a terminal shows it; a line of just … is lines left out."""
+    lines = [f'<span class="term-prompt">$</span> {esc(shows["run"])}']
+    for line in shows["output"]:
+        lines.append(f'<span class="term-cut" title="{esc(cut)}">…</span>' if line == "…" else esc(line))
+    return "\n".join(lines)
+
+
+def changelog_page(f):
+    """site/changelog/index.html: every release, from the engine; each feature in our words."""
+    c, company, d = f["changelog"], f["company"], f["does"]
+    items = []
+    for r, brought in releases():
+        v = r["version"]
+        arrived = ""
+        if brought:
+            names = "".join(f'<li><span class="arrived-name">{esc(x["name"])}</span> '
+                            f'{esc(d["words"][x["id"]]) if x["id"] in d["words"] else ""}</li>'
+                            for x in brought)
+            arrived = f'<h3>{esc(c["arrived"])}</h3><ul class="arrived">{names}</ul>'
+        items.append(f"""<li class="release" id="v{esc(v)}">
+<div class="release-meta"><p class="release-v"><a href="#v{esc(v)}">{esc(v)}</a></p>
+<p class="release-date"><time datetime="{esc(r["date"])}">{esc(long_date(r["date"]))}</time></p></div>
+<div class="release-body">
+<h2>{esc(r["title"])}</h2>
+<p class="release-says">{esc(r["says"])}</p>
+<figure class="term"><pre><code>{terminal(r["shows"], c["cut"])}</code></pre>
+<figcaption>{esc(c["printed"])}</figcaption></figure>
+{arrived}
+</div>
+</li>""")
+    name = company["name"]
+    lines = [head(f'{c["title"]} — {name}', c["intro"], "../brand.css"), '<link rel="stylesheet" href="../page.css">']
+    if company["domain"]:
+        lines.append(f'<link rel="canonical" href="https://{esc(company["domain"])}/changelog/">')
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+{chr(10).join(lines)}
+</head>
+<body>
+{banner()}<header class="top"><div class="wrap"><a class="name" href="../">{esc(name)}</a>
+<nav aria-label="Elsewhere"><a href="../#how">{esc(f["nav"]["how"])}</a><a class="pill" href="../#start">{esc(f["nav"]["start"])}</a></nav></div></header>
+<main id="top">
+<section class="log-head"><div class="wrap">
+<p class="eyebrow">{esc(c["title"])} · {esc(name)} {esc(wherefore.__version__)}</p>
+<h1>{esc(c["heading"])}</h1>
+<p class="lede">{esc(c["intro"])}</p>
+</div></section>
+<section class="log"><div class="wrap">
+<ol class="releases">
+{chr(10).join(items)}
+</ol>
+</div></section>
+</main>
+<footer><div class="wrap"><div class="footer-row"><p><span class="footer-name">{esc(name)}</span> · {esc(f["colophon"])}</p>
+<p class="footer-meta"><a href="../">{esc(name)}</a> · <a href="../brand/">Brand</a></p></div></div></footer>
+</body>
+</html>
+"""
+
+
 def short(usage):
     """`wherefore gate [--keep]` -> `wherefore gate`: the command, without what it takes."""
     return " ".join(w for w in usage.split()
@@ -487,7 +607,9 @@ def does(f):
     `does.words`, or its name in `does.unshown` with the reason it is left off -
     so nothing the product does can ship without the page telling people. Words
     for a feature the release no longer has stop it too. The name, the release it
-    arrived in and the command are the engine's; only the words are ours."""
+    arrived in and the command are the engine's; only the words are ours. The
+    features of the newest release that brought any are marked new; every release
+    is on the changelog, each feature under the one it arrived in."""
     d = f["does"]
     words, unshown = d["words"], d["unshown"]
     shipped = [x["id"] for x in FEATURES]
@@ -500,13 +622,16 @@ def does(f):
         if k not in shipped:
             raise SystemExit(f"does says something about `{k}`, which {ENGINE} does not ship: "
                              f"its features are {', '.join(shipped)}")
+    # The newest features: those of the latest release that brought any. A
+    # release that only mends what is there leaves the last new ones marked.
+    newest = max((x["since"] for x in FEATURES), key=lambda v: tuple(int(n) for n in v.split(".")))
     items = []
     for x in FEATURES:
         if x["id"] in unshown:
             unshown[x["id"]]                          # read, so its reason is accounted for
             continue
-        new = (f' <span class="chip chip-new">{esc(fill(d["new"], version=version()))}</span>'
-               if x["since"] == wherefore.__version__ else "")
+        new = (f' <span class="chip chip-new">{esc(fill(d["new"], version=newest))}</span>'
+               if x["since"] == newest else "")
         cmd = (f'<p class="does-cmd"><code>{esc(command(short(x["commands"][0])))}</code></p>'
                if x.get("commands") else "")
         items.append(f'<li><p class="does-name">{esc(x["name"])}{new}</p>'
@@ -514,7 +639,7 @@ def does(f):
     return f"""<section id="does"><div class="wrap">
 {SRC}
 <h2>{esc(d["heading"])}</h2>
-<p class="does-intro">{esc(d["intro"])}</p>
+<p class="does-intro">{esc(d["intro"])} <a href="changelog/">{esc(f["changelog"]["link"])}</a></p>
 <ul class="does">
 {chr(10).join(items)}
 </ul>
@@ -535,6 +660,35 @@ def long_date(iso):
     return f"{d} {MONTHS[m - 1]} {y}"
 
 
+def ground(name):
+    """A brand colour, as the six hex digits the pendulum's model takes for its background."""
+    have = colours()
+    if name not in have:
+        raise SystemExit(f"case.model.ground names {name!r}, which is not a colour in brand/tokens.json. "
+                         f"It has: {', '.join(have)}")
+    return have[name].lstrip("#")
+
+
+def model(m):
+    """The pendulum's model in a frame that may run its script and nothing else."""
+    g = m["ground"]
+    return (f'<figure class="case-model"><iframe src="{MODEL_PAGE}?embed=1&amp;bg={ground(g)}" '
+            f'title="{esc(m["title"])}" loading="lazy" sandbox="allow-scripts" '
+            f'style="background: var(--{esc(g)})"></iframe>'
+            f'<figcaption>{esc(m["hint"])}</figcaption></figure>')
+
+
+def model_page(f):
+    """site/pendulum/index.html: the pendulum's own model, byte for byte, and what frames it."""
+    t = f["case"]["model"]["taken"]
+    said = f'{t["from"]} {t["file"]} at {t["commit"]}, {t["on"]}'
+    if "--" in said:
+        raise SystemExit(f"case.model.taken cannot be written in a comment: {said!r}")
+    return (f"<!doctype html>\n<!-- The pendulum's own model: {said}, copied byte for byte into "
+            f"cases/pendulum/model.html, and framed for the case study by gen/site.py. -->\n"
+            f'<html lang="en">\n' + MODEL.read_text(encoding="utf-8") + FRAMING)
+
+
 def case(f, p):
     c = f["case"]
     made = "".join(f"<li>{esc(m)}</li>" for m in c["made"])
@@ -549,10 +703,13 @@ def case(f, p):
                  f'<footer>{esc(c["quote"]["by"])}</footer></blockquote>')
     return f"""<section id="case" class="case"><div class="wrap">
 {SRC}
+<div class="case-head">
 <p class="eyebrow">{esc(c["eyebrow"])} · {esc(c["name"])}</p>
 <h2>{esc(c["heading"])}</h2>
+{model(c["model"])}
 <p class="case-text">{esc(c["text"])}</p>
 <p class="actions"><a class="button button-quiet" href="{esc(c["url"])}">{esc(c["visit"])}</a></p>
+</div>
 {quote}
 <div class="case-grid">
 <div class="case-col"><h3>{esc(c["made_heading"])}</h3><ul class="case-list">{made}</ul></div>
@@ -610,7 +767,7 @@ def start(f):
 
 def footer(f):
     company = f["company"]
-    meta = f'Wherefore {esc(version())} · <a href="brand/">Brand</a>'
+    meta = f'<a href="changelog/">Wherefore {esc(version())}</a> · <a href="brand/">Brand</a>'
     if company["contact"]:
         meta += f' · <a href="mailto:{esc(company["contact"])}">{esc(company["contact"])}</a>'
     if company["domain"]:
@@ -658,11 +815,12 @@ def page(f):
 
 def headers():
     """What Cloudflare sends with every file: nothing loads from elsewhere, no
-    script runs, and a draft is not indexed."""
+    script runs, and a draft is not indexed - but for the pendulum's model,
+    which may run its own script, inline, load nothing, and be framed only here."""
     lines = [
         "/*",
         "  Content-Security-Policy: default-src 'none'; style-src 'self' 'unsafe-inline'; font-src 'self'; "
-        "img-src 'self' data:; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",
+        "img-src 'self' data:; frame-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",
         "  X-Content-Type-Options: nosniff",
         "  Referrer-Policy: no-referrer",
     ]
@@ -671,6 +829,10 @@ def headers():
     # The installer, shown as text to a browser that opens it - "read it
     # before you run it" has to be possible - and run by sh from curl.
     lines += ["", "/install.sh", "  Content-Type: text/plain; charset=utf-8"]
+    # The model: the policy above taken off (`!`) and its own put on.
+    lines += ["", f"/{MODEL_PAGE}*", "  ! Content-Security-Policy",
+              "  Content-Security-Policy: default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; "
+              "img-src data:; font-src data:; base-uri 'none'; form-action 'none'; frame-ancestors 'self'"]
     return "\n".join(lines) + "\n"
 
 
@@ -679,6 +841,10 @@ def main():
     shutil.copyfile(ROOT / "gen/page.css", SITE / "page.css")
     (SITE / "index.html").write_text(page(FACTS), encoding="utf-8")
     (SITE / "_headers").write_text(headers(), encoding="utf-8")
+    (SITE / "changelog").mkdir(exist_ok=True)
+    (SITE / "changelog/index.html").write_text(changelog_page(FACTS), encoding="utf-8")
+    (SITE / MODEL_PAGE).mkdir(exist_ok=True)
+    (SITE / MODEL_PAGE / "index.html").write_text(model_page(FACTS), encoding="utf-8")
 
 
 if __name__ == "__main__":

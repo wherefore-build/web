@@ -22,7 +22,9 @@ stylesheet in site/ loads - a font's `url(...)`, an `@import` - resolved from
 where that stylesheet sits.
 
 WHAT IT CANNOT SEE: whether a page elsewhere still exists, and anything a
-script would build at run time. The site has no scripts.
+script would build at run time. The site's own pages run none; the one page
+that does, the pendulum's framed model, is held to loading nothing by the
+policy site/_headers gives its path (checks/model_turns.py).
 
 Usage:  python3 checks/self_contained.py
 """

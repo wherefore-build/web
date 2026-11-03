@@ -28,7 +28,7 @@
   {
    "script": "site.py",
    "cwd": "gen",
-   "makes": "site/index.html, site/page.css and site/_headers, from the facts, the pendulum's counts, the brand and the pinned engine"
+   "makes": "site/index.html, site/page.css, site/_headers and the pendulum's framed model site/pendulum/, from the facts, the pendulum's counts and model, the brand and the pinned engine"
   },
   {
    "script": "install.py",
@@ -107,6 +107,19 @@
      ],
      "no_stamp": "counted from another repository, which this gate cannot see and deliberately does not read: the file names the commit and the day it was counted at, and a case study is a dated story, so a person counts again when it is retold",
      "why": "the case study's counts, a snapshot of chaotic-pendulums-co at one commit"
+    },
+    "pendulum-model": {
+     "files": [
+      "cases/pendulum/model.html"
+     ],
+     "no_stamp": "copied byte for byte from another repository, which this gate cannot see and deliberately does not read: facts/company.json case.model.taken names the file, the commit and the day, and the pendulum's own suite builds and judges it. The case study is a dated story, so a person copies it again when it is retold",
+     "why": "the pendulum's interactive 3D model, the same file its home page embeds, shown beside the case study's heading",
+     "upstream": {
+      "url": "https://chaoticpendulums.com/",
+      "read": {"pattern": "var HERO_B64=\"([A-Za-z0-9+/=]+)\"", "decode": "base64"},
+      "matches": "bytes",
+      "unreachable": "the pendulum's site being down is not the pendulum moving: a deploy goes ahead and says so, and the next build reads it again"
+     }
     },
     "icon": {
      "files": [

@@ -11,6 +11,15 @@
   "title": "Wherefore — your company, compiled",
   "draft_banner": "Nothing on this page is launched, and nothing here is a promise yet."
  },
+ "changelog": {
+  "link": "Every release, and what it printed",
+  "title": "Changelog",
+  "heading": "Every release, newest first.",
+  "intro": "Built from the release this site pins, so a release is here the moment the site moves to it - and the build stops if a feature it ships has no words on this site.",
+  "arrived": "What arrived",
+  "printed": "What it printed",
+  "cut": "lines left out"
+ },
  "nav": {
   "how": "How it works",
   "start": "Get started",
@@ -144,9 +153,9 @@
    "retired": "Retire a value once - the old price, the old name, the old limit - and nothing a person reads may say it again.",
    "reach": "Every fact is moved, one at a time, and the page, deck or doc that states it must move with it. A fact that reaches nothing is caught.",
    "claims": "A claim like \"SOC 2 certified\" may only be said as its rule allows, and the check refuses the rest.",
+   "upstream": "Some things you copy from where you can't pin them - a partner's spec sheet, another product's site. Say where each came from, and the deploy fails the day that source changes, until the copy is taken again.",
    "hook": "A push that would ship a stale document stops before it leaves your machine, with the fix in one command.",
-   "skill": "Your coding agent learns the rules from a skill that ships with each release, and sets up the first fact with you.",
-   "codex": "The same skill, where Codex reads it: whichever agent you use, it works by the same rules."
+   "skill": "Claude Code or Codex learns the rules from a skill that ships with each release, and sets up the first fact with you."
   },
   "unshown": {}
  },
@@ -154,7 +163,13 @@
   "eyebrow": "Case study",
   "name": "Chaotic Pendulums",
   "heading": "A hardware company, compiled from one spec file.",
-  "text": "Chaotic Pendulums is a small hardware company our founder started to test this idea on something with more surface area than software: a desk-sized double pendulum with milled parts, a bronze blade, bearings and a clamp. Wherefore was built alongside it, one rule at a time. If one source can hold machined parts, physics, suppliers and a storefront, it can hold your app, website and docs. One spec file holds the object. Everything a shop, a customer or a printer receives is built from it, and checked on every push.",
+  "model": {
+   "title": "The MK3 pendulum in 3D: drag to turn it, or grab an arm and swing it",
+   "hint": "Drag to turn it",
+   "ground": "ink",
+   "taken": {"from": "chaotic-pendulums-co", "file": "web/prototype/mk3-hero-public.html", "commit": "0a6a824b494cebd29edfd025b6457805fabe0b6e", "on": "2026-10-24"}
+  },
+  "text": "Chaotic Pendulums is a small hardware company, started to test this idea on something with more surface area than software: a desk-sized double pendulum with milled parts, a bronze blade, bearings and a clamp. Wherefore was built alongside it, one rule at a time. If one source can hold machined parts, physics, suppliers and a storefront, it can hold your app, website and docs. One spec file holds the object. Everything a shop, a customer or a printer receives is built from it, and checked on every push.",
   "url": "https://chaoticpendulums.com/",
   "visit": "See the live site",
   "made_heading": "What it compiles",

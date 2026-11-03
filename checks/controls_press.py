@@ -10,8 +10,8 @@ first client learned this twice by thumb - a control placed where it could not
 be found, then the same control doing nothing when pressed, both after a green
 suite. So this does what the thumb did.
 
-For every control on every page in site/ - a `<label>`, a `<button>`, a
-`<summary>` - it loads the page fresh at 390 by 844 with touch, presses that
+For every control on every page in site/ but the pendulum's framed model
+(NOT_OURS says why) - a `<label>`, a `<button>`, a `<summary>` - it loads the page fresh at 390 by 844 with touch, presses that
 one control, and requires that:
 
   - the control can be pressed there: it is shown, on the page, and nothing
@@ -46,6 +46,13 @@ PHONE = {"width": 390, "height": 844}
 THUMB = 44
 
 CONTROLS = "label, button, summary"
+
+# A page whose controls are not this site's to press, and why.
+NOT_OURS = {
+    "pendulum/index.html": "the pendulum's own model, framed beside the case study with its controls "
+                           "hidden; its own suite presses them, and checks/model_turns.py does what a thumb "
+                           "does to it here - drags it",
+}
 
 # Every rendered run of text, where it sits on the page, and whether it is on the screen.
 SEEN = """() => {
@@ -138,6 +145,8 @@ def main():
         browser = p.chromium.launch()
         for path in sorted(SITE.rglob("*.html")):
             rel = path.relative_to(SITE).as_posix()
+            if rel in NOT_OURS:
+                continue
             url = base + (rel[:-len("index.html")] if rel.endswith("index.html") else rel)
             ctx = browser.new_context(viewport=PHONE, is_mobile=True, has_touch=True)
             page = ctx.new_page()
