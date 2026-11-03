@@ -66,16 +66,18 @@ MONTHS = ("January", "February", "March", "April", "May", "June", "July", "Augus
 ASKED = []          # what the part being rendered asked the engine for
 
 
-def engine(name):
+def engine(name, since="0.1.1"):
     """One of the engine's own data files, from the release this runs under."""
     data = files("wherefore") / name
     if not data.is_file():
         raise SystemExit(f"the pinned engine, {ENGINE}, has no {name}: "
-                         f"the site needs 0.1.1 or later - move requirements-engine.txt")
+                         f"the site needs {since} or later - move requirements-engine.txt")
     return json.loads(data.read_text(encoding="utf-8"))
 
 
 COMMANDS = engine("commands.json")["commands"]
+# What the engine does, as the release says it. Every one must be on the page.
+FEATURES = engine("features.json", since="0.4.0")["features"]
 
 
 def version():
@@ -471,6 +473,54 @@ def how(f):
 </div></section>"""
 
 
+def short(usage):
+    """`wherefore gate [--keep]` -> `wherefore gate`: the command, without what it takes."""
+    return " ".join(w for w in usage.split()
+                    if not (w[:1] in "[-." or w.endswith("]") or w.isupper() or "|" in w))
+
+
+def does(f):
+    """Every feature the pinned release ships, in this company's words.
+
+    THE PROMISE, KEPT HERE FIRST. A release that adds a feature this page does not
+    describe stops the build until the facts say something about it - words in
+    `does.words`, or its name in `does.unshown` with the reason it is left off -
+    so nothing the product does can ship without the page telling people. Words
+    for a feature the release no longer has stop it too. The name, the release it
+    arrived in and the command are the engine's; only the words are ours."""
+    d = f["does"]
+    words, unshown = d["words"], d["unshown"]
+    shipped = [x["id"] for x in FEATURES]
+    for x in FEATURES:
+        if x["id"] not in words and x["id"] not in unshown:
+            raise SystemExit(f"{ENGINE} ships the feature `{x['id']}` - {x['name']}, since {x['since']} - "
+                             f"and facts/company.json says nothing about it. Give it words in does.words, "
+                             f"or name it in does.unshown with the reason")
+    for k in list(words) + list(unshown):
+        if k not in shipped:
+            raise SystemExit(f"does says something about `{k}`, which {ENGINE} does not ship: "
+                             f"its features are {', '.join(shipped)}")
+    items = []
+    for x in FEATURES:
+        if x["id"] in unshown:
+            unshown[x["id"]]                          # read, so its reason is accounted for
+            continue
+        new = (f' <span class="chip chip-new">{esc(fill(d["new"], version=version()))}</span>'
+               if x["since"] == wherefore.__version__ else "")
+        cmd = (f'<p class="does-cmd"><code>{esc(command(short(x["commands"][0])))}</code></p>'
+               if x.get("commands") else "")
+        items.append(f'<li><p class="does-name">{esc(x["name"])}{new}</p>'
+                     f'<p>{esc(words[x["id"]])}</p>{cmd}</li>')
+    return f"""<section id="does"><div class="wrap">
+{SRC}
+<h2>{esc(d["heading"])}</h2>
+<p class="does-intro">{esc(d["intro"])}</p>
+<ul class="does">
+{chr(10).join(items)}
+</ul>
+</div></section>"""
+
+
 def counted(counts, name):
     """One of the pendulum's counts, by the name a stat gives it; one it does not count stops the build."""
     if name not in counts or not isinstance(counts.get(name), int):
@@ -576,7 +626,7 @@ def page(f):
     if company["domain"]:
         lines.append(f'<link rel="canonical" href="https://{esc(company["domain"])}/">')
     parts = {name: part(render, f, inspect, *also) for name, render, *also in (
-        ("header", header), ("hero", hero), ("pains", pains), ("demo", ripple), ("why", why), ("how", how),
+        ("header", header), ("hero", hero), ("pains", pains), ("demo", ripple), ("why", why), ("how", how), ("does", does),
         ("case", case, (("facts/pendulum.json", PENDULUM),)),
         ("rule", rule), ("start", start), ("footer", footer))}
     return f"""<!doctype html>
@@ -594,6 +644,7 @@ def page(f):
 {parts["demo"]}
 {parts["why"]}
 {parts["how"]}
+{parts["does"]}
 {parts["case"]}
 {parts["rule"]}
 {parts["start"]}

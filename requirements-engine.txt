@@ -3,8 +3,10 @@
 # and version from it, so moving this line is how a release reaches the site -
 # by a pull request, whose gate fails until the site is regenerated against it.
 #
-# Wherefore 0.3.0 (v0.3.0): the merge of wherefore#39, which adds `wherefore
-# scan` - the installer (gen/install.py) suggests it. The distribution is named
-# wherefore-build since wherefore#36: `wherefore` on PyPI is another project's,
-# and pip refuses a pin whose name does not match the package.
-wherefore-build @ git+https://github.com/zakholdsworth/wherefore@e363f2b292956f6c2810b36308171409d2cbfd64
+# TEMPORARY: the head of wherefore#40 (0.4.0, not yet merged), which ships
+# features.json - the list of what the engine does that this page must say
+# each of - and the skill for Codex. Re-pinned to the merge of #40 before this
+# pull request is merged; a pin names a release. The distribution is named
+# wherefore-build since wherefore#36, and pip refuses a pin whose name does
+# not match the package.
+wherefore-build @ git+https://github.com/zakholdsworth/wherefore@361fed4

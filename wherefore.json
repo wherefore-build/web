@@ -69,7 +69,8 @@
      "*.md",
      "prose a person writes about this repository",
      [
-      ".claude/skills/wherefore/*"
+      ".claude/skills/wherefore/*",
+      ".agents/skills/wherefore/*"
      ]
     ],
     [
