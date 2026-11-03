@@ -38,11 +38,14 @@ def change(p, how):
 
 def main():
     r = []
+    # The release the snapshot stands at, read rather than typed: a proof that
+    # named V83 broke the day the pendulum cut V84.
+    v = json.loads(pathlib.Path(_copy.ROOT, COPY).read_text(encoding="utf-8"))["counts"]["pack"]["version"]
     with Edit("facts/company.json") as p:
         text = p.read_text(encoding="utf-8")
-        p.write_text(text.replace("at V{version} of the pack", "at V83 of the pack", 1), encoding="utf-8")
+        p.write_text(text.replace("at V{version} of the pack", f"at V{v} of the pack", 1), encoding="utf-8")
         check(r, "the release typed into the as-of line", CHECK, True,
-              ["counts.pack.version moved (83 -> 1083) and the page did not"])
+              [f"counts.pack.version moved ({v} -> {v + 1000}) and the page did not"])
     with Edit(COPY) as p:
         change(p, lambda d: d["counts"].update(welds=12))
         check(r, "a new count nobody decided about", CHECK, True,
