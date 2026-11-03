@@ -617,6 +617,9 @@ def headers():
     ]
     if status() == "draft":
         lines.append("  X-Robots-Tag: noindex, nofollow")
+    # The installer, shown as text to a browser that opens it - "read it
+    # before you run it" has to be possible - and run by sh from curl.
+    lines += ["", "/install.sh", "  Content-Type: text/plain; charset=utf-8"]
     return "\n".join(lines) + "\n"
 
 
