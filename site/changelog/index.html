@@ -17,12 +17,24 @@
 <nav aria-label="The site"><a href="../#how">How it works</a><a href="../#does">What it does</a><a href="../#case">Case study</a><a href="../changelog/">Changelog</a><a class="pill" href="../#start">Get started</a></nav></div></header>
 <main id="top">
 <section class="log-head"><div class="wrap">
-<p class="eyebrow">Changelog · Wherefore 0.5.0</p>
+<p class="eyebrow">Changelog · Wherefore 0.5.1</p>
 <h1>Every release, newest first.</h1>
 <p class="lede">Built from the release this site pins, so a release is here the moment the site moves to it - and the build stops if a feature it ships has no words on this site.</p>
 </div></section>
 <section class="log"><div class="wrap">
 <ol class="releases">
+<li class="release" id="v0.5.1">
+<div class="release-meta"><p class="release-v"><a href="#v0.5.1">0.5.1</a></p>
+<p class="release-date"><time datetime="2026-11-03">3 November 2026</time></p></div>
+<div class="release-body">
+<h2>What a pre-publication review found</h2>
+<p class="release-says">The first release for PyPI. When what the engine reads is not what it expected - an answer cut short, a pointer that is not one, a file that is not JSON, a redirect to another host - it now says so in words instead of a traceback or a wrong answer, and a scan of a site fetches no more than it is told to.</p>
+<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore check upstream
+::error::wherefore.json: captured group &#x27;pack&#x27; in wherefore.json: `upstream.read.json` is a JSON pointer - &quot;&quot; for the whole document, or a path that starts with &quot;/&quot;, such as &quot;/version&quot;; it says &#x27;release/version&#x27;</code></pre>
+<figcaption>What it printed</figcaption></figure>
+
+</div>
+</li>
 <li class="release" id="v0.5.0">
 <div class="release-meta"><p class="release-v"><a href="#v0.5.0">0.5.0</a></p>
 <p class="release-date"><time datetime="2026-11-03">3 November 2026</time></p></div>

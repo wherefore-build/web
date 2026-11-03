@@ -2,8 +2,8 @@
 """Nothing on the site tells a visitor to install somebody else's package.
 
 `wherefore` on PyPI is another project's (tracelore/wherefore, "Explains WHY
-two datasets differ"); this one is published as `wherefore-build`
-(the company's decisions, section 2). The brand is still Wherefore and the command a
+two datasets differ"); this one is published as `wherefore-build`.
+The brand is still Wherefore and the command a
 person types is still `wherefore`, so those are right wherever they appear.
 The one slip that costs a visitor something is an install line that names the
 bare `wherefore`: it installs another project's code. This reads every file in

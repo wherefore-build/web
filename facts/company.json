@@ -4,7 +4,7 @@
   "name": "Wherefore",
   "domain": "wherefore.build",
   "contact": null,
-  "github": null
+  "github": "https://github.com/wherefore-build/wherefore"
  },
  "site": {
   "status": "draft",
@@ -208,8 +208,7 @@
   "heading": "Start with one fact.",
   "text": "Install it beside your code, say one fact once, and let the gate hold everything that states it. Nothing to join, and nobody to call.",
   "steps": ["wherefore scan", "wherefore init", "wherefore build", "wherefore hook install"],
-  "install": null,
-  "closed": "Wherefore is not public yet. The line that installs it appears here when it is."
+  "install": "curl -fsSL https://wherefore.sh | sh"
  },
  "status": {
   "labels": {
