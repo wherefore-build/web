@@ -60,8 +60,10 @@ engine does not list, or a newest release that is not the one pinned, stops it.
 
 THE CASE STUDY'S COUNTS ARE A DATED SNAPSHOT. facts/pendulum.json holds
 chaotic-pendulums-co's proofs, parts, print plates and the release they were
-counted at, counted once at the commit it names; nothing reads the pendulum
-again, and a person counts it afresh when the story is retold.
+counted at, counted once at the commit it names; nothing reads the pendulum's
+repository. Its public /release.json is read, by `wherefore check upstream`:
+when it names another release than the snapshot's, the build fails until the
+counts are taken again.
 Each stat names its count by `of`, and a count the copy does not have stops the
 build. That part's account of itself names the copy on a `from` line of its own.
 

@@ -217,13 +217,16 @@ the commit and on the day it names.
   few lines that frame it - a view drawn back far enough that the whole swing
   stays in a small frame, then a swing, unless the visitor asks for less
   motion. It stands on the brand colour `case.model.ground` names.
-- **The model is watched; the counts are not yet.** Its captured group names
+- **The model and the counts are both watched.** The model's captured group names
   an `upstream`: the pendulum's public home page, which embeds the same file.
   `wherefore check upstream` reads it whenever the site is compiled - so
   before every deploy - and fails when the pendulum has moved,
   until the copy is taken again - re-copy the file, record the commit and day
-  in `case.model.taken`, never the commit alone. The counts would need the
-  pendulum to publish its version (DECISIONS.md §5).
+  in `case.model.taken`, never the commit alone. The counts' group names
+  the pendulum's `/release.json`, a mark that changes when a release is cut
+  and says nothing else: when it no longer matches `captured.release`, count
+  again - proofs, parts, plates, the release - and record the new mark with
+  them (DECISIONS.md §5).
 
 ## CI
 

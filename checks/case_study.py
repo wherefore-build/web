@@ -12,8 +12,9 @@ wherefore.json), so this does for the snapshot what that does for the facts,
 and checks what only a snapshot needs:
 
   - THE STAMP. `captured` names the repository, the path, the commit (forty
-    hex digits) and the day (YYYY-MM-DD). A copy that cannot say where it came
-    from is a typed number with extra steps.
+    hex digits), the day (YYYY-MM-DD) and the release mark (sixteen hex
+    digits) the pendulum published for the release it was counted at. A copy
+    that cannot say where it came from is a typed number with extra steps.
   - THE COUNTS ARE COUNTS. proofs, parts and plates are whole numbers, and the
     pack has a version and an ISO date.
   - EVERY VALUE IS DECIDED. Each is either on the page or named in UNSHOWN
@@ -24,9 +25,10 @@ and checks what only a snapshot needs:
     differ. A number typed into the facts instead of read from the copy does
     not move, and fails.
 
-WHAT IT CANNOT SEE: whether the snapshot is current with the pendulum. It is
-not meant to be: the page says the day it was counted, and a person counts it
-again when the story is retold.
+WHAT IT CANNOT SEE: whether the snapshot is current with the pendulum - that
+is `wherefore check upstream`'s, which reads the pendulum's /release.json and
+fails when it names another release than captured.release. This one stays
+offline.
 
 Usage:  python3 checks/case_study.py
 """
@@ -47,6 +49,8 @@ UNSHOWN = {
     "captured.from": "where the copy was read from. The case study links the pendulum's live site; its repository is private",
     "captured.path": "the file the copy was read from, for whoever audits it",
     "captured.commit": "the pendulum commit the copy was read at, for whoever audits it. A visitor is told the release",
+    "captured.release": "the mark the pendulum's public site published for that release, which says nothing to a "
+                        "visitor: `wherefore check upstream` holds it to the site's /release.json",
     "counts.pack.date": "the day the release was cut. The page says the day the pendulum was counted, captured.on",
     "counts.pack.draft": "the draft open in the pendulum, if any. The counts are quoted at the release a draft stands "
                          "on, counts.pack.version, because a draft is not a pack anybody is handed",
@@ -73,6 +77,9 @@ def stamp_faults(doc):
             found.append(f"captured.{field} is missing: the copy does not say where it was read")
     if not re.fullmatch(r"[0-9a-f]{40}", str(c.get("commit", ""))):
         found.append(f"captured.commit is {c.get('commit')!r}, not a commit: the copy does not say what it was read at")
+    if not re.fullmatch(r"[0-9a-f]{16}", str(c.get("release", ""))):
+        found.append(f"captured.release is {c.get('release')!r}, not a release mark: nothing can tell when the "
+                     f"pendulum has cut another release")
     if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", str(c.get("on", ""))):
         found.append(f"captured.on is {c.get('on')!r}, not a day (YYYY-MM-DD)")
     n = doc.get("counts") or {}
