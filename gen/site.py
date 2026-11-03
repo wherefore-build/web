@@ -247,12 +247,19 @@ def part(render, f, inspect, also=()):
     return html.replace(SRC, f'<div class="src">{"".join(lines)}</div>')
 
 
+def nav(f, home=""):
+    """The site's links, in the order the home page shows them, and the changelog.
+    `home` is the way back to the home page from where the nav sits: "" on it."""
+    n = f["nav"]
+    return (f'<nav aria-label="The site"><a href="{home}#how">{esc(n["how"])}</a>'
+            f'<a href="{home}#does">{esc(n["does"])}</a><a href="{home}#case">{esc(f["case"]["eyebrow"])}</a>'
+            f'<a href="{home}changelog/">{esc(f["changelog"]["title"])}</a>'
+            f'<a class="pill" href="{home}#start">{esc(n["start"])}</a></nav>')
+
+
 def header(f):
-    w = f["why"]
     return (f'{banner(f)}<header class="top"><div class="wrap"><a class="name" href="#top">{esc(f["company"]["name"])}</a>\n'
-            f'<nav aria-label="On this page"><a href="#why">{esc(w["heading"])}</a><a href="#how">{esc(f["nav"]["how"])}</a>'
-            f'<a href="#case">{esc(f["case"]["eyebrow"])}</a><a class="pill" href="#start">{esc(f["nav"]["start"])}</a></nav></div>'
-            f'<div class="wrap">{SRC}</div></header>')
+            f'{nav(f)}</div><div class="wrap">{SRC}</div></header>')
 
 
 def key(f):
@@ -464,20 +471,69 @@ def ripple(f):
 </div></section>"""
 
 
+FLIP = 4          # seconds each question stands before the next, while they turn by themselves
+
+
+def flipping(n):
+    """The CSS that turns the questions by themselves, for `n` of them.
+
+    Still no script. A radio with no chip of its own, `ask-auto`, is the one
+    checked when the page loads, and while it is, each question stands for FLIP
+    seconds - a bar crossing its chip, turning the accent as it goes - then
+    flips to the next. Hovering holds it. Tapping any chip, the first included,
+    checks that chip's radio instead, and the turning stops on its question. A
+    visitor who asks for less motion is asked to pick one instead. The
+    percentages depend on how many questions there are, so they are written
+    here, from the facts, rather than in gen/page.css."""
+    slot = 100 / n
+    end = f"{slot - 0.01:.2f}"
+    shown = "\n".join(f"#ask-{i}:checked ~ .ask-panels .ask-panel-{i} {{ visibility: visible; }}" for i in range(n))
+    run = f"{n * FLIP}s calc(var(--i) * {FLIP}s) infinite"
+    return f"""<style>
+{shown}
+#ask-auto:checked ~ .ask-panels .ask-pick {{ visibility: visible; }}
+@media (prefers-reduced-motion: no-preference) {{
+  #ask-auto:checked ~ .ask-panels .ask-pick {{ visibility: hidden; }}
+  #ask-auto:checked ~ .ask-panels .ask-panel {{ animation: ask-flip {run}; }}
+  #ask-auto:checked ~ .tab {{ animation: ask-chip {run}; }}
+  #ask-auto:checked ~ .tab::after {{ animation: ask-bar {run}; }}
+  .asks:hover .ask-panel, .asks:hover .tab, .asks:hover .tab::after {{ animation-play-state: paused; }}
+}}
+@keyframes ask-flip {{
+  0% {{ visibility: visible; opacity: 0; transform: perspective(40rem) rotateX(-70deg); }}
+  {slot * 0.12:.2f}% {{ visibility: visible; opacity: 1; transform: none; }}
+  {end}% {{ visibility: visible; opacity: 1; transform: none; }}
+  {slot:.2f}%, 100% {{ visibility: hidden; opacity: 0; }}
+}}
+@keyframes ask-chip {{
+  0%, {end}% {{ border-color: var(--accent); }}
+  {slot:.2f}%, 100% {{ border-color: var(--line); }}
+}}
+@keyframes ask-bar {{
+  0% {{ transform: scaleX(0); background: var(--muted); }}
+  {end}% {{ transform: scaleX(1); background: var(--accent); }}
+  {slot:.2f}%, 100% {{ transform: scaleX(0); background: var(--muted); }}
+}}
+</style>"""
+
+
 def why(f):
     w, d = f["why"], f["demo"]
     values = dict(fact=d["fact"], before=d["before"], after=d["after"])
-    tabs = []
+    tabs = [f'<input class="state" type="radio" name="ask" id="ask-auto" checked aria-label="{esc(w["pick"])}">']
+    panels = [f'<div class="ask-panel ask-pick"><p class="ask-prompt">{esc(w["pick"])}</p></div>']
     for i, a in enumerate(w["asks"]):
         name = fill(a["name"], **values)
         title = esc(fill(w["ask"], name="\x00")).replace("\x00", f"<em>{esc(name)}</em>")
         tabs.append(
-            f'<input class="state" type="radio" name="ask" id="ask-{i}"' + (" checked" if i == 0 else "") + ">\n"
-            f'<label class="tab" for="ask-{i}">{esc(a["tab"])}</label>\n'
-            f'<div class="ask-panel"><h2>{title}</h2><dl class="answer">'
+            f'<input class="state" type="radio" name="ask" id="ask-{i}">\n'
+            f'<label class="tab" for="ask-{i}" style="--i: {i}">{esc(a["tab"])}</label>')
+        panels.append(
+            f'<div class="ask-panel ask-panel-{i}" style="--i: {i}"><h2>{title}</h2><dl class="answer">'
             f'<div class="answer-from"><dt>{esc(w["built_from"])}</dt><dd><code>{esc(fill(a["from"], **values))}</code></dd></div>'
             f'<div class="answer-because"><dt>{esc(w["because"])}</dt><dd>{esc(a["because"])}</dd></div>'
             f'</dl></div>')
+    tabs.append(f'<div class="ask-panels">\n{chr(10).join(panels)}\n</div>\n{flipping(len(panels))}')
     return f"""<section id="why" class="meaning"><div class="wrap">
 {SRC}
 <div class="meaning-grid">
@@ -573,7 +629,7 @@ def changelog_page(f):
 </head>
 <body>
 {banner()}<header class="top"><div class="wrap"><a class="name" href="../">{esc(name)}</a>
-<nav aria-label="Elsewhere"><a href="../#how">{esc(f["nav"]["how"])}</a><a class="pill" href="../#start">{esc(f["nav"]["start"])}</a></nav></div></header>
+{nav(f, "../")}</div></header>
 <main id="top">
 <section class="log-head"><div class="wrap">
 <p class="eyebrow">{esc(c["title"])} · {esc(name)} {esc(wherefore.__version__)}</p>
@@ -799,8 +855,8 @@ def page(f):
 {parts["hero"]}
 {parts["pains"]}
 {parts["demo"]}
-{parts["why"]}
 {parts["how"]}
+{parts["why"]}
 {parts["does"]}
 {parts["case"]}
 {parts["rule"]}

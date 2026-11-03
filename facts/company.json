@@ -22,6 +22,7 @@
  },
  "nav": {
   "how": "How it works",
+  "does": "What it does",
   "start": "Get started",
   "github": "View on GitHub"
  },
@@ -111,7 +112,7 @@
   "juliet": "Juliet wasn’t asking where Romeo was. She was asking why he had to be who he was.",
   "rule": "In a Wherefore repository every file has to answer her: generated from a source, written by a person for a stated reason, or captured and stamped with what it was made from. A file that cannot answer stops the change.",
   "pick": "Pick an asset to ask",
-  "ask": "Wherefore art thou, {name}?",
+  "ask": "Wherefore art thou {name}?",
   "built_from": "Built from",
   "because": "Because",
   "asks": [
@@ -145,17 +146,17 @@
   "intro": "Built from the release this page pins. Every feature it ships is here, in our words: a release that adds one this page does not describe stops the build until it does.",
   "new": "New in {version}",
   "words": {
-   "scan": "Point it at your site or your docs. It finds every value you state more than one way - a price, a trial length, a version - and shows where the copies disagree. Nothing to set up first.",
-   "start": "One command starts a repository, and the skill walks your agent through the first fact: said once, built into one asset, held by the gate.",
-   "gate": "On every push, every file is generated from a source, written for a stated reason, or captured and stamped. Anything stale or unaccounted for stops the change, and says why.",
-   "build": "Every asset regenerated from the source, the same way every time, compared with what is committed, so you see exactly what a change moves.",
-   "proofs": "No check is trusted until it has failed: each proof plants the fault its check exists to catch, and requires the check to catch it.",
-   "retired": "Retire a value once - the old price, the old name, the old limit - and nothing a person reads may say it again.",
-   "reach": "Every fact is moved, one at a time, and the page, deck or doc that states it must move with it. A fact that reaches nothing is caught.",
-   "claims": "A claim like \"SOC 2 certified\" may only be said as its rule allows, and the check refuses the rest.",
-   "upstream": "Some things you copy from where you can't pin them - a partner's spec sheet, another product's site. Say where each came from, and the deploy fails the day that source changes, until the copy is taken again.",
-   "hook": "A push that would ship a stale document stops before it leaves your machine, with the fix in one command.",
-   "skill": "Claude Code or Codex learns the rules from a skill that ships with each release, and sets up the first fact with you."
+   "scan": "Point it at your site or docs: it finds every value you state more than one way, and where the copies disagree.",
+   "start": "One command starts a repository; the skill walks your agent through the first fact.",
+   "gate": "On every push, every file is generated, written for a reason, or captured - or the change stops, and says why.",
+   "build": "Every asset rebuilt from the source, the same way every time, so you see exactly what a change moves.",
+   "proofs": "No check is trusted until it has failed: each proof plants the fault its check exists to catch.",
+   "retired": "Retire a value once - an old price, name or limit - and nothing a person reads may say it again.",
+   "reach": "Each fact is moved, one at a time, and everything that states it must move too.",
+   "claims": "A claim like \"SOC 2 certified\" may be said only as its rule allows.",
+   "upstream": "Copied something you can't pin, like a partner's spec sheet? The deploy fails the day its source changes.",
+   "hook": "A push that would ship a stale document stops before it leaves your machine.",
+   "skill": "Claude Code or Codex learns the rules from a skill that ships with each release."
   },
   "unshown": {}
  },
@@ -169,7 +170,7 @@
    "ground": "ink",
    "taken": {"from": "chaotic-pendulums-co", "file": "web/prototype/mk3-hero-public.html", "commit": "0a6a824b494cebd29edfd025b6457805fabe0b6e", "on": "2026-10-24"}
   },
-  "text": "Chaotic Pendulums is a small hardware company, started to test this idea on something with more surface area than software: a desk-sized double pendulum with milled parts, a bronze blade, bearings and a clamp. Wherefore was built alongside it, one rule at a time. If one source can hold machined parts, physics, suppliers and a storefront, it can hold your app, website and docs. One spec file holds the object. Everything a shop, a customer or a printer receives is built from it, and checked on every push.",
+  "text": "Chaotic Pendulums is a small hardware company, started to test this idea on something with more surface area than software: a desk-sized double pendulum with milled parts, a bronze blade, bearings and a clamp. Wherefore was built alongside it, one rule at a time. If one source can hold machined parts, physics, suppliers and a storefront, it can hold your app, website and docs.",
   "url": "https://chaoticpendulums.com/",
   "visit": "See the live site",
   "made_heading": "What it compiles",

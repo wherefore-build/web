@@ -238,7 +238,7 @@ em { font-style: italic; }
 .answers { color: var(--muted); max-width: 40ch; font-size: 0.9375rem; }
 .asks { flex: 1 1 30rem; min-width: 0; position: relative; display: flex; flex-wrap: wrap; gap: 0.5rem; align-content: flex-start; }
 .tab {
-  order: 0; display: inline-flex; align-items: center; min-height: var(--tap); padding: 0 1rem;
+  order: 0; position: relative; overflow: hidden; display: inline-flex; align-items: center; min-height: var(--tap); padding: 0 1rem;
   border: 1px solid var(--line); border-radius: var(--radius-control);
   color: var(--ink); font-weight: 500; font-size: 0.875rem; cursor: pointer;
   -webkit-tap-highlight-color: transparent; user-select: none;
@@ -246,8 +246,13 @@ em { font-style: italic; }
 .tab:hover { border-color: var(--muted); }
 .state:checked + .tab { background: var(--accent); border-color: var(--accent); color: var(--on-accent); font-weight: 600; }
 .state:focus-visible + .tab { outline: 2px solid var(--accent); outline-offset: 3px; }
-.ask-panel { order: 1; flex: 1 1 100%; display: none; margin-top: 0.75rem; }
-.state:checked + .tab + .ask-panel { display: block; }
+/* The bar that crosses a chip while its question stands (site.py flipping()). */
+.tab::after { content: ""; position: absolute; left: 1rem; right: 1rem; bottom: 0.45rem; height: 3px; border-radius: 2px; transform: scaleX(0); transform-origin: left; pointer-events: none; }
+/* Every answer in one place, so the page does not move as they turn: the
+   tallest sets the height, and the one whose radio is checked is the one seen. */
+.ask-panels { order: 1; flex: 1 1 100%; display: grid; margin-top: 0.75rem; }
+.ask-panel { grid-area: 1 / 1; visibility: hidden; }
+.ask-prompt { margin: 0; padding: 1.25rem 0; color: var(--muted); }
 .ask-panel h2 { margin: 0 0 1.25rem; font-size: clamp(2.125rem, 4.4vw, 3.5rem); }
 .ask-panel h2 em { color: var(--accent); }
 .answer { margin: 0; }

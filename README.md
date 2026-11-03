@@ -37,6 +37,7 @@ pin. The reasons are in the engine's `DIRECTIONS.md`, §13 and §14.
 | `checks/install_script.py` | the installer installs the pinned release with uv, pipx or pip, and refuses an old Python and an empty machine in words | authored |
 | `checks/controls_press.py` | every control on the site does something a visitor sees, pressed cold on a phone | authored |
 | `checks/case_study.py` | the snapshot says where and when it was counted, and each count on the page moves the page | authored |
+| `checks/questions_turn.py` | the questions beside "Why Wherefore" turn by themselves, stop on the chip a thumb taps, and hold still for a visitor who asks for less motion | authored |
 | `checks/model_turns.py` | the pendulum's model stands beside the case study's heading, draws, and turns under a thumb; only its frame may run a script | authored |
 | `checks/*_proof.py` | each check, and the gate, shown to fail | authored |
 | `wherefore.json` | what this repository is to the engine | authored |
@@ -165,6 +166,7 @@ wherefore check reach                # every fact reaches what a visitor receive
 python3 checks/self_contained.py     # nothing loaded from elsewhere, no dead links
 python3 checks/controls_press.py     # every control works under a thumb (needs the browser)
 python3 checks/model_turns.py        # the pendulum's model turns under a thumb (needs the browser)
+python3 checks/questions_turn.py     # the questions turn, and stop when one is picked (needs the browser)
 wherefore prove                      # each of those fails when it should
 ```
 
