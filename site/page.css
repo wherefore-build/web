@@ -89,6 +89,10 @@ em { font-style: italic; }
   font-weight: 600; text-decoration: none;
 }
 .button-quiet { background: transparent; color: var(--ink); border: 1px solid var(--line); font-weight: 500; }
+.button .out { width: 1em; height: 1em; margin-left: 0.6rem; flex: none; }
+@media (max-width: 40rem) {
+  .actions .button { flex: 1 1 auto; justify-content: center; padding: 0 1.25rem; }
+}
 
 /* The picture: code merges back, everything else forks for good, and
    Wherefore gives everything else code's shape. Drawn by gen/site.py as SVG;

@@ -54,7 +54,7 @@ jobs:
       - name: Every fact reaches what a visitor receives
         if: ${{ !cancelled() && steps.install.outcome == 'success' }}
         run: python3 -m wherefore check reach
-      - name: The case study's counts are the pendulum's, and each one reaches the page
+      - name: The case study's snapshot says when it was counted, and each count reaches the page
         if: ${{ !cancelled() && steps.install.outcome == 'success' }}
         run: python3 checks/case_study.py
       - name: The site loads nothing from elsewhere, and every link on it goes somewhere

@@ -375,15 +375,29 @@ def forks(f):
 </div>"""
 
 
+# The mark for a link that leaves the site: an arrow out of a box, drawn in the
+# text's own colour, and silent to a screen reader - the words say where it goes.
+OUT = ('<svg class="out" viewBox="0 0 16 16" aria-hidden="true" focusable="false">'
+       '<path d="M9 2h5v5M14 2 7.5 8.5M12 9.5V13a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3.5" '
+       'fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>')
+
 def hero(f):
+    """The headline, the lede, and the two things a visitor can do next.
+
+    The second button is the engine's repository once there is a public one to
+    show - `company.github` - and until then the way down the page. A null is a
+    fact not decided yet: no button points at a repository nobody can open."""
     h = f["hero"]
+    repo = f["company"]["github"]
+    second = (f'<a class="button button-quiet" href="{esc(repo)}">{esc(f["nav"]["github"])}{OUT}</a>' if repo
+              else f'<a class="button button-quiet" href="#how">{esc(f["nav"]["how"])}</a>')
     return f"""<section class="hero"><div class="wrap">
 {SRC}
 <p class="eyebrow">{esc(h["eyebrow"])} · Wherefore {esc(version())}</p>
 <h1>{esc(h["headline"])} <em>{esc(h["headline_end"])}</em></h1>
 <p class="lede">{esc(h["lede"])}</p>
+<p class="actions"><a class="button" href="#start">{esc(f["nav"]["start"])}</a>{second}</p>
 {forks(f)}
-<p class="actions"><a class="button" href="#start">{esc(f["nav"]["start"])}</a><a class="button button-quiet" href="#how">{esc(f["nav"]["how"])}</a></p>
 </div></section>"""
 
 
