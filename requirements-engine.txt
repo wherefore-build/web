@@ -8,4 +8,4 @@
 # from. Moved to the release itself before this is merged. The distribution is
 # named wherefore-build since wherefore#36: `wherefore` on PyPI is another
 # project's, and pip refuses a pin whose name does not match the package.
-wherefore-build @ git+https://github.com/zakholdsworth/wherefore@7bc11a729a3d97d89fb8255236671dc555d8aede
+wherefore-build @ git+https://github.com/zakholdsworth/wherefore@76bb067b0f91617efc844fc4e38395b1e7815cfe

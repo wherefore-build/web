@@ -1,0 +1,38 @@
+# WHAT THE SITE COPIED FROM ELSEWHERE, ASKED AGAIN EVERY DAY. The case study
+# carries a copy of the pendulum's 3D model, and the pendulum moves on its own
+# schedule. corpus.yml asks before every deploy; this asks each morning, so a
+# change upstream turns this red - and mails whoever runs it - on the day it
+# happens, not on the next push here. The fix is the same either way: take the
+# copy again (the skill's "When something fails" says how), never move the
+# recorded value alone.
+name: upstream
+
+on:
+  schedule:
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  upstream:
+    runs-on: ubuntu-latest
+    env:
+      PYTHONPATH: ${{ github.workspace }}/.wherefore-engine
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install the engine this corpus pins
+        env:
+          TOKEN: ${{ secrets.WHEREFORE_READ_TOKEN }}
+          GIT_CONFIG_COUNT: "1"
+          GIT_CONFIG_KEY_0: url.https://x-access-token:${{ secrets.WHEREFORE_READ_TOKEN }}@github.com/zakholdsworth/wherefore.insteadOf
+          GIT_CONFIG_VALUE_0: https://github.com/zakholdsworth/wherefore
+        run: |
+          if [ -z "$TOKEN" ]; then
+            echo "::error::WHEREFORE_READ_TOKEN is not a secret of this repository, so the engine it pins cannot be installed. README.md, under CI, says how to add it."
+            exit 1
+          fi
+          python3 -m pip install --quiet --no-deps --target .wherefore-engine -r requirements-engine.txt
+      - name: What the case study copied from the pendulum is still what the pendulum's site serves
+        run: python3 -m wherefore check upstream

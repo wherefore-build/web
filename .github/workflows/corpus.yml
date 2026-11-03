@@ -11,6 +11,12 @@
 # (README.md, "CI"). It is installed into the checkout, never into the
 # runner's Python, so a moved pin is always the engine that runs.
 #
+# One check reads the network: `wherefore check upstream` asks the pendulum's
+# public site whether the model the case study copied is still what it serves,
+# and fails when the pendulum has moved, until the copy is taken again. So a
+# deploy never ships a copy of something that has changed; upstream.yml asks
+# the same every day, so the change is noticed whether or not anyone pushes.
+#
 # THEN IT DEPLOYS what those checks passed, and nothing else: `deploy` needs
 # `corpus`. main goes to the site's address; every other branch to a preview
 # of its own, whose address is posted on its pull request. Cloudflare builds
@@ -54,6 +60,9 @@ jobs:
       - name: Every fact reaches what a visitor receives
         if: ${{ !cancelled() && steps.install.outcome == 'success' }}
         run: python3 -m wherefore check reach
+      - name: What the case study copied from the pendulum is still what the pendulum's site serves
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: python3 -m wherefore check upstream
       - name: The case study's snapshot says when it was counted, and each count reaches the page
         if: ${{ !cancelled() && steps.install.outcome == 'success' }}
         run: python3 checks/case_study.py

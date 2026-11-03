@@ -113,7 +113,13 @@
       "cases/pendulum/model.html"
      ],
      "no_stamp": "copied byte for byte from another repository, which this gate cannot see and deliberately does not read: facts/company.json case.model.taken names the file, the commit and the day, and the pendulum's own suite builds and judges it. The case study is a dated story, so a person copies it again when it is retold",
-     "why": "the pendulum's interactive 3D model, the same file its home page embeds, shown beside the case study's heading"
+     "why": "the pendulum's interactive 3D model, the same file its home page embeds, shown beside the case study's heading",
+     "upstream": {
+      "url": "https://chaoticpendulums.com/",
+      "read": {"pattern": "var HERO_B64=\"([A-Za-z0-9+/=]+)\"", "decode": "base64"},
+      "matches": "bytes",
+      "unreachable": "the pendulum's site being down is not the pendulum moving: a deploy goes ahead and says so, and the daily check reads it again"
+     }
     },
     "icon": {
      "files": [

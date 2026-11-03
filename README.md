@@ -198,10 +198,10 @@ The case study's numbers - the pendulum's proofs, parts, print plates, and the
 release they stand at - are not typed into the page. `facts/pendulum.json`
 holds them as a dated snapshot, counted once from `chaotic-pendulums-co` at
 the commit and on the day it names.
-- **Nothing reads the pendulum again.** The two repositories stay apart: the
-  pendulum may be open-sourced or split out, and should carry nothing for this
-  company, nor be readable from here. A case study is a dated story, so when
-  it is retold a person counts again and rewrites the snapshot.
+- **Nothing reads the pendulum's repository.** The two repositories stay
+  apart: the pendulum may be open-sourced or split out, and should carry
+  nothing for this company, nor be readable from here. A case study is a dated
+  story, so when it is retold a person counts again and rewrites the snapshot.
 - **Each stat names its count** (`case.stats[].of` in the facts), and the as-of
   line fills `{version}` and `{on}` from the snapshot. A count the snapshot does
   not have stops the build.
@@ -215,6 +215,13 @@ the commit and on the day it names.
   few lines that frame it - a view drawn back far enough that the whole swing
   stays in a small frame, then a swing, unless the visitor asks for less
   motion. It stands on the brand colour `case.model.ground` names.
+- **The model is watched; the counts are not yet.** Its captured group names
+  an `upstream`: the pendulum's public home page, which embeds the same file.
+  `wherefore check upstream` reads it before every deploy and each morning
+  (`.github/workflows/upstream.yml`), and fails when the pendulum has moved,
+  until the copy is taken again - re-copy the file, record the commit and day
+  in `case.model.taken`, never the commit alone. The counts would need the
+  pendulum to publish its version (DECISIONS.md §5).
 
 ## CI
 

@@ -43,9 +43,11 @@ at the commit case.model.taken names. It is written to site/pendulum/ with a
 few lines that frame it - the view, and a swing to start it moving - and shown
 in a sandboxed frame: the frame may run its script and nothing else, cannot
 reach this page, and is the only path the headers let run one. This page still
-runs none. Like the counts, it is a dated snapshot, copied again when the story
-is retold; checks/model_turns.py drags it, at a phone's width, and requires it
-to turn.
+runs none. Like the counts, it is a dated snapshot; unlike them, it is
+watched - its captured group names the pendulum's public home page as its
+upstream, and `wherefore check upstream` fails the deploy when the pendulum's
+model has moved, until it is copied again. checks/model_turns.py drags it, at
+a phone's width, and requires it to turn.
 
 THE CHANGELOG IS THE RELEASE'S OWN. site/changelog/ lists every release the
 pinned engine has cut - its version, its date, its title and sentence, and a
