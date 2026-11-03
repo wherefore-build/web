@@ -131,6 +131,10 @@ jobs:
             npx --yes "$WRANGLER" preview --name "$NAME"
           fi
           python3 .github/scripts/deployed.py "$WRANGLER_OUTPUT_FILE_PATH"
+      - name: The deployed site sends the policies site/_headers says
+        env:
+          URL: ${{ steps.deploy.outputs.url }}
+        run: python3 .github/scripts/served_headers.py "$URL"
       - name: Say where the preview is, on the pull request
         if: github.ref_name != 'main'
         env:
