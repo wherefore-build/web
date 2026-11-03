@@ -217,8 +217,8 @@ the commit and on the day it names.
   motion. It stands on the brand colour `case.model.ground` names.
 - **The model is watched; the counts are not yet.** Its captured group names
   an `upstream`: the pendulum's public home page, which embeds the same file.
-  `wherefore check upstream` reads it before every deploy and each morning
-  (`.github/workflows/upstream.yml`), and fails when the pendulum has moved,
+  `wherefore check upstream` reads it whenever the site is compiled - so
+  before every deploy - and fails when the pendulum has moved,
   until the copy is taken again - re-copy the file, record the commit and day
   in `case.model.taken`, never the commit alone. The counts would need the
   pendulum to publish its version (DECISIONS.md §5).

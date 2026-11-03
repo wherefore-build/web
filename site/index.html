@@ -106,7 +106,7 @@
 <p class="how-note">A command line, Python&#x27;s standard library, and one file that says what your corpus is.</p>
 </div></section>
 <section id="does"><div class="wrap">
-<div class="src"><p><span class="src-k">from</span> facts/company.json · 16 facts: does.{words.{scan, start, gate, build, proofs, retired, reach, claims, upstream, hook, skill, codex}, new, heading, intro} · changelog.link</p><p><span class="src-k">from</span> wherefore 0.5.0 · commands.json: wherefore scan, wherefore init, wherefore gate, wherefore build, wherefore prove, wherefore check retired, wherefore check reach, wherefore check claims, wherefore check upstream, wherefore hook install</p><p><span class="src-k">held by</span> gate · reach · brand · engine</p></div>
+<div class="src"><p><span class="src-k">from</span> facts/company.json · 15 facts: does.{words.{scan, start, gate, build, proofs, retired, reach, claims, upstream, hook, skill}, new, heading, intro} · changelog.link</p><p><span class="src-k">from</span> wherefore 0.5.0 · commands.json: wherefore scan, wherefore init, wherefore gate, wherefore build, wherefore prove, wherefore check retired, wherefore check reach, wherefore check claims, wherefore check upstream, wherefore hook install</p><p><span class="src-k">held by</span> gate · reach · brand · engine</p></div>
 <h2>Everything it does.</h2>
 <p class="does-intro">Built from the release this page pins. Every feature it ships is here, in our words: a release that adds one this page does not describe stops the build until it does. <a href="changelog/">Every release, and what it printed</a></p>
 <ul class="does">
@@ -120,8 +120,7 @@
 <li><p class="does-name">Claims</p><p>A claim like &quot;SOC 2 certified&quot; may only be said as its rule allows, and the check refuses the rest.</p><p class="does-cmd"><code>wherefore check claims</code></p></li>
 <li><p class="does-name">Derived from elsewhere <span class="chip chip-new">New in 0.5.0</span></p><p>Some things you copy from where you can&#x27;t pin them - a partner&#x27;s spec sheet, another product&#x27;s site. Say where each came from, and the deploy fails the day that source changes, until the copy is taken again.</p><p class="does-cmd"><code>wherefore check upstream</code></p></li>
 <li><p class="does-name">The pre-push hook</p><p>A push that would ship a stale document stops before it leaves your machine, with the fix in one command.</p><p class="does-cmd"><code>wherefore hook install</code></p></li>
-<li><p class="does-name">The skill, for Claude Code</p><p>Your coding agent learns the rules from a skill that ships with each release, and sets up the first fact with you.</p></li>
-<li><p class="does-name">The skill, for Codex</p><p>The same skill, where Codex reads it: whichever agent you use, it works by the same rules.</p></li>
+<li><p class="does-name">The skill, for Claude Code and Codex</p><p>Claude Code or Codex learns the rules from a skill that ships with each release, and sets up the first fact with you.</p></li>
 </ul>
 </div></section>
 <section id="case" class="case"><div class="wrap">
@@ -130,7 +129,7 @@
 <p class="eyebrow">Case study · Chaotic Pendulums</p>
 <h2>A hardware company, compiled from one spec file.</h2>
 <figure class="case-model"><iframe src="pendulum/?embed=1&amp;bg=EDEBE6" title="The MK3 pendulum in 3D: drag to turn it, or grab an arm and swing it" loading="lazy" sandbox="allow-scripts" style="background: var(--ink)"></iframe><figcaption>Drag to turn it</figcaption></figure>
-<p class="case-text">Chaotic Pendulums is a small hardware company our founder started to test this idea on something with more surface area than software: a desk-sized double pendulum with milled parts, a bronze blade, bearings and a clamp. Wherefore was built alongside it, one rule at a time. If one source can hold machined parts, physics, suppliers and a storefront, it can hold your app, website and docs. One spec file holds the object. Everything a shop, a customer or a printer receives is built from it, and checked on every push.</p>
+<p class="case-text">Chaotic Pendulums is a small hardware company, started to test this idea on something with more surface area than software: a desk-sized double pendulum with milled parts, a bronze blade, bearings and a clamp. Wherefore was built alongside it, one rule at a time. If one source can hold machined parts, physics, suppliers and a storefront, it can hold your app, website and docs. One spec file holds the object. Everything a shop, a customer or a printer receives is built from it, and checked on every push.</p>
 <p class="actions"><a class="button button-quiet" href="https://chaoticpendulums.com/">See the live site</a></p>
 </div>
 

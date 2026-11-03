@@ -118,7 +118,7 @@
       "url": "https://chaoticpendulums.com/",
       "read": {"pattern": "var HERO_B64=\"([A-Za-z0-9+/=]+)\"", "decode": "base64"},
       "matches": "bytes",
-      "unreachable": "the pendulum's site being down is not the pendulum moving: a deploy goes ahead and says so, and the daily check reads it again"
+      "unreachable": "the pendulum's site being down is not the pendulum moving: a deploy goes ahead and says so, and the next build reads it again"
      }
     },
     "icon": {
