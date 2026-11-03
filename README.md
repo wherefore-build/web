@@ -1,14 +1,15 @@
-# wherefore-co
+# web
 
 The company that makes Wherefore, as a corpus that compiles. Its first asset is
 the site, and every asset after it goes through the same process: it is
 generated from facts said once, and judged on every push by the engine release
 it pins.
 
-The engine and its own documents live in `zakholdsworth/wherefore`. This
-repository holds what the company says and shows, and moves at the company's
-pace: an engine release reaches the site only when this repository moves its
-pin. The reasons are in the engine's `DIRECTIONS.md`, §13 and §14.
+The engine lives in `wherefore-build/wherefore`. This repository holds what the
+company says and shows, and moves at the company's pace: an engine release
+reaches the site only when this repository moves its pin. The company's
+decisions - why the site and the product are as they are - are kept in its
+private repository, not here, so that none of them goes public with the site.
 
 ## Where everything is
 
@@ -226,7 +227,7 @@ the commit and on the day it names.
   the pendulum's `/release.json`, a mark that changes when a release is cut
   and says nothing else: when it no longer matches `captured.release`, count
   again - proofs, parts, plates, the release - and record the new mark with
-  them (DECISIONS.md §5).
+  them (the company's decisions, §5).
 
 ## CI
 
