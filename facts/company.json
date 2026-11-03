@@ -168,7 +168,7 @@
    "title": "The MK3 pendulum in 3D: drag to turn it, or grab an arm and swing it",
    "hint": "Drag to turn it",
    "ground": "ink",
-   "taken": {"from": "chaotic-pendulums-co", "file": "web/prototype/mk3-hero-public.html", "commit": "0a6a824b494cebd29edfd025b6457805fabe0b6e", "on": "2026-10-24"}
+   "taken": {"from": "chaotic-pendulums-co", "file": "web/prototype/mk3-hero-public.html", "commit": "eb21885f5989b2cf5a949e13caeae24bfdc9bd04", "on": "2026-11-02"}
   },
   "text": "Chaotic Pendulums is a small hardware company, started to test this idea on something with more surface area than software: a desk-sized double pendulum with milled parts, a bronze blade, bearings and a clamp. Wherefore was built alongside it, one rule at a time. If one source can hold machined parts, physics, suppliers and a storefront, it can hold your app, website and docs.",
   "url": "https://chaoticpendulums.com/",

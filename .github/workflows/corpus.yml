@@ -15,7 +15,7 @@
 # public site whether the model the case study copied is still what it serves,
 # and fails when the pendulum has moved, until the copy is taken again. So a
 # deploy never ships a copy of something that has changed. It is asked when the
-# site is compiled, and only then: the owner's call (DECISIONS.md §5).
+# site is compiled, and only then: the owner's call (the company's decisions, §5).
 #
 # THEN IT DEPLOYS what those checks passed, and nothing else: `deploy` needs
 # `corpus`. main goes to the site's address; every other branch to a preview
