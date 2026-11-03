@@ -15,6 +15,8 @@ requires the gate to fail in the words of the case.
             regenerated
           the icon changed in the brand and regenerated, and its PNG not
             shot again - the picture on every profile would be the old one
+          a feature the pinned release ships, with nothing on the page
+            about it - the build stops until the facts describe it
           a new file committed that nothing classifies
   passes  the repository as it is
 
@@ -85,6 +87,12 @@ def main():
                  ["what 'icon' was made from has moved", "brand/icon/icon-1024.png"])
     finally:
         regenerate_brand()
+
+    with Edit("facts/company.json") as p:
+        facts(p, lambda d: d["does"]["words"].pop("scan"))
+        gate(r, "a feature the release ships, and the page says nothing about it", True,
+             ["site.py failed while the gate ran it",
+              "ships the feature `scan`", "says nothing about it"])
 
     notes = ROOT / "notes.txt"
     notes.write_text("a file nobody declared\n", encoding="utf-8")

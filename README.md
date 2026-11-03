@@ -25,6 +25,7 @@ pin. The reasons are in the engine's `DIRECTIONS.md`, §13 and §14.
 | `gen/kit.py` | what the generators share: the sources, the draft banner, contrast | authored |
 | `site/index.html` | the page | generated |
 | `site/_headers` | what Cloudflare Pages serves with every file | generated |
+| `site/install.sh` | the one-line installer `wherefore.sh` serves, from the pinned release (`gen/install.py`) | generated |
 | `site/brand.css`, `site/fonts/` | the brand as custom properties, and the fonts it serves itself | generated |
 | `site/brand/` | the brand pack a person reads: every token, every contrast, the type, the icon, the licences | generated |
 | `checks/self_contained.py` | the site loads nothing from elsewhere, and every link on it goes somewhere | authored |
@@ -32,6 +33,7 @@ pin. The reasons are in the engine's `DIRECTIONS.md`, §13 and §14.
 | `checks/contrast.py` | every text colour reaches 4.5:1 on every ground it is set on | authored |
 | `checks/brand_reasons.py` | every colour, typeface and radius says what it is for and why, so does the icon, and the brand says its idea | authored |
 | `checks/install_line.py` | no install line on the site names the bare `wherefore` - another project's package; ours is `wherefore-build` | authored |
+| `checks/install_script.py` | the installer installs the pinned release with uv, pipx or pip, and refuses an old Python and an empty machine in words | authored |
 | `checks/controls_press.py` | every control on the site does something a visitor sees, pressed cold on a phone | authored |
 | `checks/case_study.py` | the snapshot says where and when it was counted, and each count on the page moves the page | authored |
 | `checks/*_proof.py` | each check, and the gate, shown to fail | authored |
@@ -226,15 +228,32 @@ failed never reaches Cloudflare, and nothing builds on Cloudflare's side.
   so. The custom domain is declared there too, and `main`'s deploy attaches it.
   If that deploy fails on the domain for want of a permission, the token needs
   *Zone · DNS · Edit* on `wherefore.build` as well.
-- The other two addresses redirect to it, by one Redirect Rule in each zone:
-  `getwherefore.com` and `wherefore.sh` → Rules → Redirect Rules → the
-  "Redirect from one domain to another" template, from every path to
-  `https://wherefore.build/` with the path kept. Status 301 for
-  `getwherefore.com`, which only ever redirects; 302 for `wherefore.sh`, which
-  is to serve the installer one day, since a browser keeps a 301 for good and
-  would go on redirecting after it changes. Each zone needs a proxied DNS
-  record for the rule to see a request: `AAAA @ 100::`, orange cloud on (and
-  the same for `www`, if it should redirect too).
+- The other two addresses redirect, by one Redirect Rule in each zone (Rules →
+  Redirect Rules):
+  - `getwherefore.com`: the "Redirect from one domain to another" template,
+    every path to `https://wherefore.build/` with the path kept, status 301 -
+    it only ever redirects.
+  - `wherefore.sh`: every request to `https://wherefore.build/install.sh`,
+    status 302, so `curl -fsSL https://wherefore.sh | sh` runs the installer
+    (curl's `-L` follows the redirect). A 302, not a 301: a browser keeps a 301
+    for good, and the address may serve something else one day.
+
+  Each zone needs a proxied DNS record for its rule to see a request: `AAAA @
+  100::`, orange cloud on (and the same for `www`, if it should redirect too).
+
+## The installer
+
+`site/install.sh` is what `curl -fsSL https://wherefore.sh | sh` runs.
+`gen/install.py` writes it from the release this site pins - the package's name
+(`wherefore-build`), the command, the oldest Python, and the words for the two
+commands it suggests next - so the installer moves with the pin. It installs
+with uv if it is there, else pipx, else Python's own pip for this user (after
+checking Python is new enough), and changes nothing else. `site/_headers`
+serves it as plain text, so a browser shows it to read.
+`checks/install_script.py` runs it under `sh` against stand-ins for uv, pipx and
+Python, so each path is exercised with no network, and its proof plants the
+wrong package, uv ignored, an old Python let through and a script `sh` cannot
+parse. It installs nothing real until the release is on PyPI.
 
 Previews open for anyone who has the address. The page asks not to be indexed
 while it is a draft.

@@ -131,6 +131,25 @@
   ],
   "note": "A command line, Python's standard library, and one file that says what your corpus is."
  },
+ "does": {
+  "heading": "Everything it does.",
+  "intro": "Built from the release this page pins. Every feature it ships is here, in our words: a release that adds one this page does not describe stops the build until it does.",
+  "new": "New in {version}",
+  "words": {
+   "scan": "Point it at your site or your docs. It finds every value you state more than one way - a price, a trial length, a version - and shows where the copies disagree. Nothing to set up first.",
+   "start": "One command starts a repository, and the skill walks your agent through the first fact: said once, built into one asset, held by the gate.",
+   "gate": "On every push, every file is generated from a source, written for a stated reason, or captured and stamped. Anything stale or unaccounted for stops the change, and says why.",
+   "build": "Every asset regenerated from the source, the same way every time, compared with what is committed, so you see exactly what a change moves.",
+   "proofs": "No check is trusted until it has failed: each proof plants the fault its check exists to catch, and requires the check to catch it.",
+   "retired": "Retire a value once - the old price, the old name, the old limit - and nothing a person reads may say it again.",
+   "reach": "Every fact is moved, one at a time, and the page, deck or doc that states it must move with it. A fact that reaches nothing is caught.",
+   "claims": "A claim like \"SOC 2 certified\" may only be said as its rule allows, and the check refuses the rest.",
+   "hook": "A push that would ship a stale document stops before it leaves your machine, with the fix in one command.",
+   "skill": "Your coding agent learns the rules from a skill that ships with each release, and sets up the first fact with you.",
+   "codex": "The same skill, where Codex reads it: whichever agent you use, it works by the same rules."
+  },
+  "unshown": {}
+ },
  "case": {
   "eyebrow": "Case study",
   "name": "Chaotic Pendulums",
@@ -172,7 +191,7 @@
   "ask": "Wherefore art thou?",
   "heading": "Start with one fact.",
   "text": "Install it beside your code, say one fact once, and let the gate hold everything that states it. Nothing to join, and nobody to call.",
-  "steps": ["wherefore init", "wherefore build", "wherefore hook install"],
+  "steps": ["wherefore scan", "wherefore init", "wherefore build", "wherefore hook install"],
   "install": null,
   "closed": "Wherefore is not public yet. The line that installs it appears here when it is."
  },
