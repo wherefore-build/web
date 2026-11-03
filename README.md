@@ -139,6 +139,18 @@ release does not have. So:
 - a new version reaches the site by moving the pin, in a pull request whose
   gate fails until the site is regenerated against it.
 
+The same holds for **what it does** and **every release**:
+
+- **Everything it does** lists each feature in the pinned release's
+  `features.json`, in our words (`does.words`). A feature with no words, or
+  words for one the release no longer ships, stops the build.
+- **The changelog** (`site/changelog/`) is built from the pinned release's
+  `releases.json`: each release's version, date, title and sentence, a
+  terminal card of what that release printed when it was run, and the
+  features it brought, in our words. A release is on it the moment the pin
+  moves to it, and the build stops if the engine names a feature in a release
+  it does not list, or the newest release it lists is not the one pinned.
+
 The site can never describe an engine it does not pin.
 
 ## Changing the site

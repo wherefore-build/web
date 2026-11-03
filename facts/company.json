@@ -11,6 +11,15 @@
   "title": "Wherefore — your company, compiled",
   "draft_banner": "Nothing on this page is launched, and nothing here is a promise yet."
  },
+ "changelog": {
+  "link": "Every release, and what it printed",
+  "title": "Changelog",
+  "heading": "Every release, newest first.",
+  "intro": "Built from the release this site pins, so a release is here the moment the site moves to it - and the build stops if a feature it ships has no words on this site.",
+  "arrived": "What arrived",
+  "printed": "What it printed",
+  "cut": "lines left out"
+ },
  "nav": {
   "how": "How it works",
   "start": "Get started",

@@ -3,9 +3,9 @@
 # and version from it, so moving this line is how a release reaches the site -
 # by a pull request, whose gate fails until the site is regenerated against it.
 #
-# Wherefore 0.4.0 (v0.4.0): the merge of wherefore#40, which ships
-# features.json - what the engine does, each of which this page must say -
-# and the skill for Codex. The distribution is named wherefore-build since
-# wherefore#36: `wherefore` on PyPI is another project's, and pip refuses a
-# pin whose name does not match the package.
-wherefore-build @ git+https://github.com/zakholdsworth/wherefore@61082f88b694e849e342fa8ed48e7ce9fc234eed
+# Wherefore 0.5.0, for now the head of wherefore#41 - not yet released - which
+# ships releases.json, every release as data, that the changelog page is built
+# from. Moved to the release itself before this is merged. The distribution is
+# named wherefore-build since wherefore#36: `wherefore` on PyPI is another
+# project's, and pip refuses a pin whose name does not match the package.
+wherefore-build @ git+https://github.com/zakholdsworth/wherefore@7bc11a729a3d97d89fb8255236671dc555d8aede
