@@ -28,4 +28,4 @@ looks identical to a fresh one), and stop.
 
 Never edit `site/` by hand. Change `facts/company.json`, or the generator, and
 regenerate. A fact about the product (a principle, a command, the version) is
-the engine's, so change it in `zakholdsworth/wherefore` and move the pin here.
+the engine's, so change it in `wherefore-build/wherefore` and move the pin here.

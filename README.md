@@ -18,8 +18,8 @@ private repository, not here, so that none of them goes public with the site.
 |---|---|---|
 | `facts/company.json` | **the source**: every fact the company states about itself, once | authored |
 | `brand/tokens.json` | **the brand**: every colour, typeface and radius, once, each with its role and reason | authored |
-| `facts/pendulum.json` | the case study's counts: a dated snapshot of `chaotic-pendulums-co`, counted once at the commit it names | captured, stamped inside |
-| `cases/pendulum/model.html` | the pendulum's interactive 3D model, copied byte for byte from `chaotic-pendulums-co` at the commit `case.model.taken` names | captured |
+| `facts/pendulum.json` | the case study's counts: a dated snapshot of the pendulum's own repository, which is private, counted once at the commit it names | captured, stamped inside |
+| `cases/pendulum/model.html` | the pendulum's interactive 3D model, the file https://chaoticpendulums.com/ embeds, copied byte for byte from the pendulum's repository at the commit `case.model.taken` names | captured |
 | `brand/fonts/` | the three typefaces and their licences (SIL OFL 1.1), unchanged | authored |
 | `brand/icon/icon-1024.png`, `brand/shoot_icon.py` | the icon as a PNG, for accounts that take only PNG, and the script that shoots it from `site/brand/icon.svg` | captured, stamped |
 | `gen/brand.py` | the brand pack's generator: the stylesheet, the fonts and the brand page | authored |
@@ -200,7 +200,8 @@ yet, and with no `case.quote` the case study quotes no one. Each appears when it
 
 The case study's numbers - the pendulum's proofs, parts, print plates, and the
 release they stand at - are not typed into the page. `facts/pendulum.json`
-holds them as a dated snapshot, counted once from `chaotic-pendulums-co` at
+holds them as a dated snapshot, counted once from the pendulum's own
+repository - private; its public face is https://chaoticpendulums.com/ - at
 the commit and on the day it names.
 - **Nothing reads the pendulum's repository.** The two repositories stay
   apart: the pendulum may be open-sourced or split out, and should carry
