@@ -89,6 +89,8 @@ em { font-style: italic; }
   font-weight: 600; text-decoration: none;
 }
 .button-quiet { background: transparent; color: var(--ink); border: 1px solid var(--line); font-weight: 500; }
+/* An icon that says a link leaves the site is the size of the words it follows, wherever it is: unsized, an SVG fills its line's whole width. */
+.out { width: 1em; height: 1em; margin-left: 0.25em; vertical-align: -0.125em; }
 .button .out { width: 1em; height: 1em; margin-left: 0.6rem; flex: none; }
 @media (max-width: 40rem) {
   .actions .button { flex: 1 1 auto; justify-content: center; padding: 0 1.25rem; }
@@ -250,7 +252,8 @@ em { font-style: italic; }
 .tab::after { content: ""; position: absolute; left: 1rem; right: 1rem; bottom: 0.45rem; height: 3px; border-radius: 2px; transform: scaleX(0); transform-origin: left; pointer-events: none; }
 /* Every answer in one place, so the page does not move as they turn: the
    tallest sets the height, and the one whose radio is checked is the one seen. */
-.ask-panels { order: 1; flex: 1 1 100%; display: grid; margin-top: 0.75rem; }
+/* overflow-x: clip - a question tipping in through perspective projects wider than the column for a moment, and on a phone that widened the whole page. Clip, not hidden: nothing scrolls, and the vertical is left alone. */
+.ask-panels { order: 1; flex: 1 1 100%; display: grid; margin-top: 0.75rem; overflow-x: clip; }
 .ask-panel { grid-area: 1 / 1; visibility: hidden; }
 .ask-prompt { margin: 0; padding: 1.25rem 0; color: var(--muted); }
 .ask-panel h2 { margin: 0 0 1.25rem; font-size: clamp(2.125rem, 4.4vw, 3.5rem); }

@@ -89,6 +89,9 @@ jobs:
       - name: The questions turn by themselves, and stop on the chip a thumb taps
         if: ${{ !cancelled() && steps.browser.outcome == 'success' }}
         run: python3 checks/questions_turn.py
+      - name: Every page fits a phone's width, moving or still, and no icon outgrows its words
+        if: ${{ !cancelled() && steps.browser.outcome == 'success' }}
+        run: python3 checks/fits_phone.py
       - name: And each of those fails when it should
         if: ${{ !cancelled() && steps.install.outcome == 'success' }}
         run: python3 -m wherefore prove
