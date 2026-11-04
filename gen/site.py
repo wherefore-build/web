@@ -268,7 +268,9 @@ def key(f):
     """What the checks named under each part do, shown with them."""
     i = f["inspect"]
     rows = "".join(f'<div><dt>{esc(k)}</dt><dd>{esc(i["checks"][k])}</dd></div>' for k in i["checks"])
-    return (f'<div class="src-key"><div class="wrap"><p>{esc(i["intro"])}</p>'
+    source = f["company"]["source"]
+    link = f' <a href="{esc(source)}">{esc(i["source"])}{OUT}</a>' if source else ""
+    return (f'<div class="src-key"><div class="wrap"><p>{esc(i["intro"])}{link}</p>'
             f'<dl>{rows}</dl></div></div>')
 
 
@@ -621,6 +623,8 @@ def changelog_page(f):
 </div>
 </li>""")
     name = company["name"]
+    source = (f' · <a href="{esc(company["source"])}">{esc(f["inspect"]["source"])}{OUT}</a>'
+              if company["source"] else "")
     lines = [head(f'{c["title"]} — {name}', c["intro"], "../brand.css"), '<link rel="stylesheet" href="../page.css">']
     if company["domain"]:
         lines.append(f'<link rel="canonical" href="https://{esc(company["domain"])}/changelog/">')
@@ -645,7 +649,7 @@ def changelog_page(f):
 </div></section>
 </main>
 <footer><div class="wrap"><div class="footer-row"><p><span class="footer-name">{esc(name)}</span> · {esc(f["colophon"])}</p>
-<p class="footer-meta"><a href="../">{esc(name)}</a> · <a href="../brand/">Brand</a></p></div></div></footer>
+<p class="footer-meta"><a href="../">{esc(name)}</a> · <a href="../brand/">Brand</a>{source}</p></div></div></footer>
 </body>
 </html>
 """
@@ -828,6 +832,8 @@ def footer(f):
     meta = f'<a href="changelog/">Wherefore {esc(version())}</a> · <a href="brand/">Brand</a>'
     if company["contact"]:
         meta += f' · <a href="mailto:{esc(company["contact"])}">{esc(company["contact"])}</a>'
+    if company["source"]:
+        meta += f' · <a href="{esc(company["source"])}">{esc(f["inspect"]["source"])}{OUT}</a>'
     if company["domain"]:
         meta += f' · {esc(company["domain"])}'
     return (f'<footer><div class="wrap">{SRC}<div class="footer-row"><p><span class="footer-name">{esc(company["name"])}</span>'
