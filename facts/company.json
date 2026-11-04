@@ -4,7 +4,8 @@
   "name": "Wherefore",
   "domain": "wherefore.build",
   "contact": null,
-  "github": "https://github.com/wherefore-build/wherefore"
+  "github": "https://github.com/wherefore-build/wherefore",
+  "source": "https://github.com/wherefore-build/web"
  },
  "site": {
   "status": "draft",
@@ -226,6 +227,7 @@
   "toggle": "How this page is built",
   "ask": "show how it is built",
   "intro": "Every part of this page is generated. Each now names the facts it is built from, and the checks that hold it on every push.",
+  "source": "Read every file it is built from",
   "from": "from",
   "facts": "{n} facts",
   "held": "held by",
