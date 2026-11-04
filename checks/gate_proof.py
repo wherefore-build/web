@@ -56,7 +56,7 @@ def main():
     r = []
     with Edit("site/index.html") as p:
         p.write_text(p.read_text(encoding="utf-8").replace(
-            "<em>compiled.</em>", "<em>shipped.</em>", 1), encoding="utf-8")
+            "<h1>Your product changes. <em>", "<h1>Your product ships. <em>", 1), encoding="utf-8")
         gate(r, "the page edited by hand, instead of the facts", True, [PAGE])
 
     with Edit("facts/company.json") as p:

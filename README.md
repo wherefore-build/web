@@ -26,7 +26,8 @@ private repository, not here, so that none of them goes public with the site.
 | `gen/site.py` | the site's generator: layout, filled from the facts and the pinned engine | authored |
 | `gen/page.css` | the site's layout; every colour and face in it is a `var(--…)` from the brand | authored |
 | `gen/kit.py` | what the generators share: the sources, the draft banner, contrast | authored |
-| `site/index.html` | the page | generated |
+| `site/index.html` | the home page | generated |
+| `site/features/`, `site/about/`, `site/changelog/` | everything it does and what's next, why Wherefore, and every release | generated |
 | `site/_headers` | what Cloudflare Pages serves with every file | generated |
 | `site/install.sh` | the one-line installer `wherefore.sh` serves, from the pinned release (`gen/install.py`) | generated |
 | `site/brand.css`, `site/fonts/` | the brand as custom properties, and the fonts it serves itself | generated |
@@ -39,7 +40,7 @@ private repository, not here, so that none of them goes public with the site.
 | `checks/install_script.py` | the installer installs the pinned release with uv, pipx or pip, and refuses an old Python and an empty machine in words | authored |
 | `checks/controls_press.py` | every control on the site does something a visitor sees, pressed cold on a phone | authored |
 | `checks/case_study.py` | the snapshot says where and when it was counted, and each count on the page moves the page | authored |
-| `checks/questions_turn.py` | the questions beside "Why Wherefore" turn by themselves, stop on the chip a thumb taps, and hold still for a visitor who asks for less motion | authored |
+| `checks/questions_turn.py` | the questions on "Why Wherefore" turn by themselves, stop on the chip a thumb taps, and hold still for a visitor who asks for less motion | authored |
 | `checks/fits_phone.py` | every page fits a phone's width, moving or still and with "how this page is built" open, and no icon is bigger than the words it follows | authored |
 | `checks/model_turns.py` | the pendulum's model stands beside the case study's heading, draws, and turns under a thumb; only its frame may run a script | authored |
 | `checks/*_proof.py` | each check, and the gate, shown to fail | authored |
@@ -76,41 +77,44 @@ brand pack at `site/brand/`.
   is shot again -
   `python3 brand/shoot_icon.py`, regenerate, then `wherefore gate --restamp icon`.
 
-## The page
+## The pages
 
-It leads with the pain, then shows the cure working.
-- **The picture.** Three panels under the headline, drawn by the generator:
-  your code branches, is tested and merges back; everything else forks and
-  never comes back; with Wherefore, everything else has code's shape - one
-  source, built into every asset, through the gate. Its assets are the demo's
-  own, and the commands it names are checked against the engine.
-- **Sound familiar?** Three pains in the words of the teams who have them -
-  no shared picture of what is current, features that ship and never reach the
-  site or the docs, six copies and no telling which is true - and what
-  Wherefore does about them.
+**The home page** says why before what, then shows it working.
+- **The headline and the try.** Your product changes; your site, docs and deck
+  don't. Beside it, a real `wherefore scan` from the pinned release's own
+  `releases.json`, and under it the two lines that run one on your site - no
+  setup, no account.
 - **The demo.** One fact (a made-up company renaming Workspaces to Projects)
-  and the seven assets that state it - the feature page, the demo video's
-  captions, the deck, the docs, the app's button, the onboarding email and a
-  help article. Three steps: today, the rename, and the fix for the one asset
-  written by hand. The page says it is an illustration, and names
-  the real commands behind it.
-- **Why "Wherefore".** The word means *why*. Beside it, five tabs ask an asset
-  of the same made-up company "Wherefore art thou?" and show what it was built
-  from, and why.
-- **How it works**, in three steps.
+  and the six assets that state it - the feature page, the demo video's
+  captions, the deck, the docs, the app's button and a help article. Three
+  steps: today, the rename, and the fix for the one asset written by hand. The
+  page says it is an illustration, and names the real commands behind it.
+- **How it works**, in three steps: scan, build, gate.
+- **The rule.** Agents already run your code's pipeline; Wherefore lets them
+  run the rest.
+- **What else it catches**: three of the release's features, and the way to
+  all of them.
 - **The case study**: Chaotic Pendulums, the small hardware company the founder
-  started to test the idea, with Wherefore built alongside it - what it compiles, what holds it, and a link
-  to the live site. Its counts are stated with the release they were counted at.
-- **The rule, and getting started**: no pilot to join - the install line (once
-  there is one) and the release's own commands, with what is available, next
-  and later.
+  started to test the idea - its counts, stated with the release they were
+  counted at, and what it builds and what holds it, behind one press.
+- **Getting started**: the install line and the release's own commands.
 
-**How this page is built.** A switch at the bottom of the screen (and a
-second label for it beside the questions) shows, above every part of the
-page, the facts it was built from and the checks that hold it, with a key at
-the top. It is not a description typed beside the page: `gen/site.py` renders
-each part through a view of the facts that records every fact it reads and
-every command it asks the engine for, and that record is what the part shows.
+**Features** (`site/features/`) lists everything the pinned release does, each
+with the release it arrived in, and **what's next** - the items `planned` in the
+facts, each marked next or later. The build stops if a planned item is one the
+pinned release already ships: an item leaves the roadmap the day it arrives.
+
+**Why Wherefore** (`site/about/`) has the picture - your code branches, is
+tested and merges back; everything else forks and never comes back - and the
+word: it means *why*, and five tabs ask an asset of the made-up company
+"Wherefore art thou?" and show what it was built from, and why.
+
+**How this page is built.** A switch at the bottom of the screen shows, above
+every part of the page, the facts it was built from and the checks that hold
+it, with a key at the top. It is not a description typed beside the page:
+`gen/site.py` renders each part through a view of the facts that records every
+fact it reads and every command it asks the engine for, and that record is what
+the part shows.
 
 Every line is in `facts/company.json`. A number appears in the facts once: a
 line that mentions it names it as `{before}`, `{after}`, `{total}` and the
@@ -118,7 +122,7 @@ rest, and the generator fills it in. An unknown name stops the build.
 
 **No script runs on the site's own pages.** The switch, the demo's steps and the tabs are
 checkboxes, radio buttons and their labels, and `gen/page.css` shows what the checked one
-selects. `checks/controls_press.py` loads every page in a real browser at 390
+selects; the case study's list opens as a `<details>`. `checks/controls_press.py` loads every page in a real browser at 390
 by 844 with touch, presses each control on a fresh load, and fails one that
 cannot be pressed, is smaller than 44 by 44, presses nothing, or shows nothing
 new on the screen.

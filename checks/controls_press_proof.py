@@ -11,7 +11,8 @@ in the words of the case, or, for the case that must not fire, to pass.
           the demo's steps hidden at a phone's width
           the tabs shrunk below a thumb
           an answer that opens below the fold
-  passes  the site as it is
+          the case study's list hidden when it is opened
+  passes  the site as it is, its case study's list closed until pressed
 
 Usage:  python3 checks/controls_press_proof.py
 """
@@ -26,6 +27,7 @@ from wherefore.prove import Edit, check, report                   # noqa: E402
 
 CHECK = "checks/controls_press.py"
 PAGE = "site/index.html"
+ABOUT = "site/about/index.html"            # the questions live on /about/
 CSS = "site/page.css"
 PASS = "every control on the site does something a visitor can see"
 
@@ -50,7 +52,7 @@ def main():
     with Edit(CSS) as p:
         plant(p, "#inspect:checked ~ * .src { display: block; }\n#inspect:checked ~ main .src-key { display: block; }", "")
         check(r, "the switch shows nothing", CHECK, True, ["'How this page is built'", "showed nothing new"])
-    with Edit(PAGE) as p:
+    with Edit(ABOUT) as p:
         plant(p, 'id="ask-3"', 'id="ask-three"')
         check(r, "a tab whose radio button was renamed", CHECK, True,
               ["presses nothing: no control is called ask-3"])
@@ -65,6 +67,11 @@ def main():
         append(p, ".ask-panel { margin-top: 300vh; }\n")
         check(r, "an answer that opens below the fold", CHECK, True,
               ["changed only what is off the screen"])
+    with Edit(CSS) as p:
+        append(p, ".case-more[open] .case-grid { display: none; }\n")
+        check(r, "the case study's list hidden when opened", CHECK, True,
+              ["'What it builds, and what holds it'", "showed nothing new"])
+    # Chromium lays a closed <details>'s content out unseen; counted as showing, it made this press look empty
     check(r, "the site as it is", CHECK, False, [PASS])
     return report(r)
 
