@@ -158,9 +158,7 @@
    "site"
   ],
   "exclude": [],
-  "exempt": {
-   "nav.github": "the words on the button to the engine's public repository, which the page shows only once company.github names one. Until the repository is public nothing reads them; take this out when it is"
-  },
+  "exempt": {},
   "unconsumed": {},
   "probes": [
    {

@@ -5,9 +5,10 @@ the site, and every asset after it goes through the same process: it is
 generated from facts said once, and judged on every push by the engine release
 it pins.
 
-The engine lives in `wherefore-build/wherefore`. This repository holds what the
-company says and shows, and moves at the company's pace: an engine release
-reaches the site only when this repository moves its pin. The company's
+The engine lives in `wherefore-build/wherefore` and is published on PyPI as
+`wherefore-build`. This repository holds what the company says and shows, and
+moves at the company's pace: an engine release reaches the site only when this
+repository moves its pin (`requirements-engine.txt`). The company's
 decisions - why the site and the product are as they are - are kept in its
 private repository, not here, so that none of them goes public with the site.
 
@@ -227,22 +228,15 @@ the commit and on the day it names.
   the pendulum's `/release.json`, a mark that changes when a release is cut
   and says nothing else: when it no longer matches `captured.release`, count
   again - proofs, parts, plates, the release - and record the new mark with
-  them (the company's decisions, §5).
+  them.
 
 ## CI
 
 `.github/workflows/corpus.yml` runs on every push, on a hosted runner, in about
-two minutes, most of it installing the browser the press check drives. The engine's repository is private, so CI reads it with a token.
-
-**One-time setup (owner).** Create a fine-grained token, *Contents: read* on
-`zakholdsworth/wherefore` only:
-- GitHub → Settings → Developer settings → Fine-grained tokens → Generate new token
-- Repository access: Only select repositories, `wherefore`
-- Permissions: Contents, Read-only
-
-Then save it in this repository: Settings → Secrets and variables → Actions → New repository
-secret, named `WHEREFORE_READ_TOKEN`. Until the secret exists, CI fails at its
-first step and says that this is the reason.
+two minutes, most of it installing the browser the press check drives. It
+installs the engine release `requirements-engine.txt` pins from PyPI, so it
+needs no secret to read it; the one secret it holds is the deploy's,
+`CLOUDFLARE_API_TOKEN` (below).
 
 ## Hosting
 
@@ -271,8 +265,11 @@ failed never reaches Cloudflare, and nothing builds on Cloudflare's side.
   so. The custom domain is declared there too, and `main`'s deploy attaches it.
   If that deploy fails on the domain for want of a permission, the token needs
   *Zone · DNS · Edit* on `wherefore.build` as well.
-- The other two addresses redirect, by one Redirect Rule in each zone (Rules →
+- The other addresses redirect, by one Redirect Rule in each zone (Rules →
   Redirect Rules):
+  - `www.wherefore.build`: the "Redirect from WWW to root" template in the
+    `wherefore.build` zone, every path to `https://wherefore.build` with the
+    path and query kept, status 301.
   - `getwherefore.com`: the "Redirect from one domain to another" template,
     every path to `https://wherefore.build/` with the path kept, status 301 -
     it only ever redirects.
@@ -282,7 +279,8 @@ failed never reaches Cloudflare, and nothing builds on Cloudflare's side.
     for good, and the address may serve something else one day.
 
   Each zone needs a proxied DNS record for its rule to see a request: `AAAA @
-  100::`, orange cloud on (and the same for `www`, if it should redirect too).
+  100::`, orange cloud on - and in the `wherefore.build` zone, `AAAA www 100::`,
+  since `@` there is the Worker's own.
 
 ## The installer
 
