@@ -38,7 +38,7 @@ the facts.
 
 THE ONE PAGE THAT RUNS A SCRIPT IS THE PENDULUM'S OWN. Beside the case study's
 heading stands the pendulum's interactive model: cases/pendulum/model.html, a
-byte-for-byte copy of the file chaotic-pendulums-co's home page embeds, taken
+byte-for-byte copy of the file the pendulum's home page embeds, taken
 at the commit case.model.taken names. It is written to site/pendulum/ with a
 few lines that frame it - the view, and a swing to start it moving - and shown
 in a sandboxed frame: the frame may run its script and nothing else, cannot
@@ -59,7 +59,7 @@ than the pin is not here until the pin moves to it; a feature whose release the
 engine does not list, or a newest release that is not the one pinned, stops it.
 
 THE CASE STUDY'S COUNTS ARE A DATED SNAPSHOT. facts/pendulum.json holds
-chaotic-pendulums-co's proofs, parts, print plates and the release they were
+the pendulum's proofs, parts, print plates and the release they were
 counted at, counted once at the commit it names; nothing reads the pendulum's
 repository. Its public /release.json is read, by `wherefore check upstream`:
 when it names another release than the snapshot's, the build fails until the

@@ -16,7 +16,7 @@
   "pendulum": {
    "path": "facts/pendulum.json",
    "adapter": "leaves",
-   "why": "THE CASE STUDY'S COUNTS: a dated snapshot of chaotic-pendulums-co, counted once at the commit it names. The release this corpus pins sweeps only the first source for reach, so checks/case_study.py moves each of these"
+   "why": "THE CASE STUDY'S COUNTS: a dated snapshot of the pendulum's own repository, counted once at the commit it names. The release this corpus pins sweeps only the first source for reach, so checks/case_study.py moves each of these"
   }
  },
  "generators": [
@@ -106,7 +106,7 @@
       "facts/pendulum.json"
      ],
      "no_stamp": "counted from another repository, which this gate cannot see and deliberately does not read: the file names the commit and the day it was counted at, and a case study is a dated story, so a person counts again when it is retold",
-     "why": "the case study's counts, a snapshot of chaotic-pendulums-co at one commit",
+     "why": "the case study's counts, a snapshot of the pendulum's repository at one commit",
      "upstream": {
       "url": "https://chaoticpendulums.com/release.json",
       "read": {"json": "/release"},

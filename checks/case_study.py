@@ -3,7 +3,7 @@
 
 facts/pendulum.json is the case study's counts - the pendulum's proofs, parts,
 print plates and the release they stand at - counted once from
-chaotic-pendulums-co at the commit it names, and gen/site.py reads the case
+the pendulum's own repository at the commit it names, and gen/site.py reads the case
 study's numbers from it. Nothing reads the pendulum again: the owner decided
 the two repositories stay apart, since the pendulum may be open-sourced or
 split out, and a case study is a dated story anyway. The release this corpus
