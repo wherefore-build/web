@@ -1,324 +1,325 @@
 {
- "note": "THE SOURCE for the company's site. Every fact the site states about the company is said here, once. What it states about the product - the version, the licence, the commands it names, every feature and every release - is the engine's, read from the release requirements-engine.txt pins, and never typed here. A null is a fact not decided yet: the page leaves out what depends on it. The demo, and the questions under Why Wherefore, are an illustration - an example company's plan and the assets that state it - and the pages say so; `{name}` in a line is a value the generator fills from beside it, so no number is said twice. The case study's counts are not here at all: the pendulum counts them itself, facts/pendulum.json is the copy, and each stat names the count it shows by `of`.",
- "company": {
-  "name": "Wherefore",
-  "domain": "wherefore.build",
-  "contact": "hello@wherefore.build",
-  "github": "https://github.com/wherefore-build/wherefore",
-  "source": "https://github.com/wherefore-build/web"
- },
- "site": {
-  "status": "draft",
-  "title": "Wherefore — your company, compiled",
-  "draft_banner": "Nothing on this page is launched, and nothing here is a promise yet."
- },
- "changelog": {
-  "link": "Every release, and what it printed",
-  "title": "Changelog",
-  "heading": "Every release, newest first.",
-  "intro": "Built from the release this site pins, so a release is here the moment the site moves to it - and the build stops if a feature it ships has no words on this site.",
-  "arrived": "What arrived",
-  "printed": "What it printed",
-  "cut": "lines left out"
- },
- "nav": {
-  "how": "How it works",
-  "does": "Features",
-  "why": "Why Wherefore",
-  "start": "Get started",
-  "github": "View on GitHub"
- },
- "hero": {
-  "eyebrow": "Open-source CLI",
-  "headline": "Your product changes.",
-  "headline_end": "Your site, docs and deck don't.",
-  "lede": "Everything your company says is a copy of a copy, and every copy drifts. Wherefore gives the rest of your company the pipeline your code already has: change something once, and everything that says it follows.",
-  "try": "See what has already drifted on your site. No setup, no account.",
-  "pip": "Or with pip:",
-  "shows": "Real output, on an example company. One trial, two lengths: you decide which is true, and Wherefore keeps it that way."
- },
- "forks": {
-  "code": {
-   "title": "Your code",
-   "caption": "Every change branches off, is tested, and merges back. There is one main, and it is the truth.",
-   "main": "main",
-   "tests": "tests",
-   "ships": "ships"
+  "note": "THE SOURCE for the company's site. Every fact the site states about the company is said here, once. What it states about the product - the version, the licence, the commands it names, every feature and every release - is the engine's, read from the release requirements-engine.txt pins, and never typed here. A null is a fact not decided yet: the page leaves out what depends on it. The demo, and the questions under Why Wherefore, are an illustration - an example company's plan and the assets that state it - and the pages say so; `{name}` in a line is a value the generator fills from beside it, so no number is said twice. The case study's counts are not here at all: the pendulum counts them itself, facts/pendulum.json is the copy, and each stat names the count it shows by `of`.",
+  "company": {
+    "name": "Wherefore",
+    "domain": "wherefore.build",
+    "contact": "hello@wherefore.build",
+    "github": "https://github.com/wherefore-build/wherefore",
+    "source": "https://github.com/wherefore-build/web"
   },
-  "drift": {
-   "title": "Everything else",
-   "caption": "Every copy forks, then forks again, and nothing ever merges back. Each version drifts on its own, for good.",
-   "sting": "That is how the website goes out of date, and the sales team ends up with the wrong deck.",
-   "start": "a decision",
-   "copies": [
-    "deck_final_v2.key",
-    "demo video (old UI).mp4",
-    "help: still says Workspace",
-    "site, last spring"
-   ]
+  "site": {
+    "status": "draft",
+    "title": "Wherefore — your company, compiled",
+    "draft_banner": "Nothing on this page is launched, and nothing here is a promise yet."
   },
-  "compiled": {
-   "title": "With Wherefore",
-   "caption": "Everything else gets what code already has. Change a fact once: your feature pages, docs, deck and demo video follow it, and nothing ships that still says the old thing.",
-   "source": "source",
-   "ships": "ships"
+  "changelog": {
+    "link": "Every release, and what it printed",
+    "title": "Changelog",
+    "heading": "Every release, newest first.",
+    "intro": "Built from the release this site pins, so a release is here the moment the site moves to it - and the build stops if a feature it ships has no words on this site.",
+    "arrived": "What arrived",
+    "printed": "What it printed",
+    "cut": "lines left out"
   },
-  "heading": "Code got one source of truth years ago. Nothing else did."
- },
- "demo": {
-  "heading": "Change it once. Every copy follows.",
-  "label": "An example company renames a feature. Tap each step.",
-  "source": "source",
-  "fact": "product.json · names.workspace",
-  "before": "Workspace",
-  "after": "Project",
-  "stages": [
-   "Today",
-   "Rename {before} to {after}",
-   "Fix the {hand}"
-  ],
-  "assets": [
-   {
-    "name": "Feature page",
-    "made": "built from the source",
-    "says": "Every {value} keeps its own roles and history."
-   },
-   {
-    "name": "Docs",
-    "made": "built from the source",
-    "says": "Create a {value} from the sidebar."
-   },
-   {
-    "name": "App button",
-    "made": "built from the source",
-    "says": "New {value}"
-   },
-   {
-    "name": "Sales deck · slide 4",
-    "made": "built from the source",
-    "says": "One {value} per client, set up in a minute."
-   },
-   {
-    "name": "Demo video · captions",
-    "made": "built from the source",
-    "says": "Click New {value} to get started."
-   },
-   {
-    "name": "Help article",
-    "made": "written by hand",
-    "says": "Open the {value} menu to rename it.",
-    "by_hand": true
-   }
-  ],
-  "badges": {
-   "live": "live",
-   "rebuilt": "rebuilt",
-   "caught": "caught",
-   "fixed": "fixed"
+  "nav": {
+    "how": "How it works",
+    "does": "Features",
+    "why": "Why Wherefore",
+    "start": "Get started",
+    "github": "View on GitHub"
   },
-  "said": [
-   "One name, said in {total} places.",
-   "{rebuilt} rebuilt from the source. The {hand} was written by hand and still says “{before}”, so CI fails.",
-   "All {total} agree with the source. Ready to ship."
-  ],
-  "note": "The checks are real:",
-  "checks": [
-   "wherefore gate",
-   "wherefore check retired"
-  ]
- },
- "why": {
-  "heading": "Why “Wherefore”",
-  "word": "wherefore",
-  "part": "adverb",
-  "meaning": "for what reason; why.",
-  "juliet": "Juliet wasn’t asking where Romeo was. She was asking why he had to be who he was.",
-  "rule": "In a Wherefore repository every file has to answer her: generated from a source, written by a person for a stated reason, or captured and stamped with what it was made from. A file that cannot answer stops the change.",
-  "pick": "Pick an asset to ask",
-  "ask": "Wherefore art thou {name}?",
-  "built_from": "Built from",
-  "because": "Because",
-  "asks": [
-   {
-    "tab": "feature page",
-    "name": "{after}",
-    "from": "{fact} = “{after}”",
-    "because": "Customers kept calling them projects; only we said workspace. The reason was written down with the change, so it ships with it."
-   },
-   {
-    "tab": "demo video",
-    "name": "demo video",
-    "from": "product.json · script.json · captions template",
-    "because": "My script and captions are built from the same names as the app, so I never point at a button the product no longer has."
-   },
-   {
-    "tab": "deck",
-    "name": "slide 4",
-    "from": "product.json · claims.json · deck template",
-    "because": "I read the same names and claims as the feature pages, so the slide and the site cannot drift apart."
-   },
-   {
-    "tab": "brand",
-    "name": "orange",
-    "from": "brand.json · accent",
-    "because": "The accent is said once. Every page, slide and social card is built from it, so a rebrand is one line."
-   },
-   {
-    "tab": "claim",
-    "name": "“SOC 2 certified”",
-    "from": "claims.json · compliance",
-    "because": "I am not allowed yet. Until the audit is signed, the most any page may say is “SOC 2 in progress”, and the check refuses the rest."
-   }
-  ],
-  "note": "The same example company as the demo above."
- },
- "how": {
-  "heading": "It lives in your repo, and runs in your CI.",
-  "steps": [
-   {
-    "command": "wherefore scan",
-    "name": "Find what has drifted.",
-    "text": "Point it at your site or docs. It lists every value stated more than one way, and where each copy lives."
-   },
-   {
-    "command": "wherefore build",
-    "name": "Say each fact once.",
-    "text": "Prices, names and limits move into one source file. Your coding agent writes the small scripts that build each page from it."
-   },
-   {
-    "command": "wherefore gate",
-    "name": "Keep it that way.",
-    "text": "On every push, CI rebuilds everything. A stale page, or a file nobody can account for, fails the build, and the error says why."
-   }
-  ],
-  "note": "One command-line tool, on Python. No server and no account."
- },
- "does": {
-  "heading": "Everything it does, and what's next.",
-  "intro": "Every feature in the release this site pins, tagged with the release it arrived in. When a release adds a feature, this site has to describe it before it can build.",
-  "new": "New in {version}",
-  "words": {
-   "scan": "Point it at your site or docs: it finds every value you state more than one way, and where the copies disagree.",
-   "start": "One command starts a repository; the skill walks your agent through the first fact.",
-   "gate": "On every push, each file must be built from the source, written by a person for a stated reason, or a capture stamped with what it shows. Anything else stops the change, and says why.",
-   "build": "Every asset rebuilt from the source, the same way every time, so you see exactly what a change moves.",
-   "proofs": "No check is trusted until it has failed: each proof plants the fault its check exists to catch.",
-   "retired": "Retire an old price, name or limit once, and nothing a person reads may say it again.",
-   "reach": "Wherefore changes each fact, one at a time, and checks that everything stating it changes too.",
-   "claims": "Give a claim like “SOC 2 certified” a rule, and no page can say more than the rule allows.",
-   "upstream": "Copied something you can't pin, like a partner's spec sheet? The deploy fails the day its source changes.",
-   "hook": "A push that would ship a stale document stops before it leaves your machine.",
-   "skill": "Claude Code or Codex learns the rules from a skill that ships with each release.",
-   "graph": "A page for every repository: each file, how it is made, and what changes when a source does. One command draws it, and changes nothing."
+  "hero": {
+    "eyebrow": "Open-source CLI",
+    "headline": "Your product changes.",
+    "headline_end": "Your site, docs and deck don't.",
+    "lede": "Everything your company says is a copy of a copy, and every copy drifts. Wherefore gives the rest of your company the pipeline your code already has: change something once, and everything that says it follows.",
+    "try": "See what has already drifted on your site. No setup, no account.",
+    "pip": "Or with pip:",
+    "shows": "Real output, on an example company. One trial, two lengths: you decide which is true, and Wherefore keeps it that way."
   },
-  "unshown": {},
-  "home": [
-   "retired",
-   "claims",
-   "upstream"
-  ],
-  "home_heading": "What else it catches.",
-  "all": "All {n} features, and what's next",
-  "since": "since {version}"
- },
- "case": {
-  "eyebrow": "Case study",
-  "name": "Chaotic Pendulums",
-  "heading": "A hardware company, built from one spec file.",
-  "model": {
-   "title": "The MK3 pendulum in 3D: drag to turn it, or grab an arm and swing it",
-   "hint": "Drag to turn it",
-   "ground": "ink",
-   "taken": {
-    "from": "chaotic-pendulums-co",
-    "file": "web/prototype/mk3-hero-public.html",
-    "commit": "eb21885f5989b2cf5a949e13caeae24bfdc9bd04",
-    "on": "2026-11-02"
-   }
+  "forks": {
+    "code": {
+      "title": "Your code",
+      "caption": "Every change branches off, is tested, and merges back. There is one main, and it is the truth.",
+      "main": "main",
+      "tests": "tests",
+      "ships": "ships"
+    },
+    "drift": {
+      "title": "Everything else",
+      "caption": "Every copy forks, then forks again, and nothing ever merges back. Each version drifts on its own, for good.",
+      "sting": "That is how the website goes out of date, and the sales team ends up with the wrong deck.",
+      "start": "a decision",
+      "copies": [
+        "deck_final_v2.key",
+        "demo video (old UI).mp4",
+        "help: still says Workspace",
+        "site, last spring"
+      ]
+    },
+    "compiled": {
+      "title": "With Wherefore",
+      "caption": "Everything else gets what code already has. Change a fact once: your feature pages, docs, deck and demo video follow it, and nothing ships that still says the old thing.",
+      "source": "source",
+      "ships": "ships"
+    },
+    "heading": "Code got one source of truth years ago. Nothing else did."
   },
-  "text": "Chaotic Pendulums makes a desk-sized double pendulum. Its part drawings, 3D print files, parts list, supplier pack and website are all built from one spec file, and Wherefore was built alongside it. If one source can hold machined parts, it can hold your app and docs.",
-  "url": "https://chaoticpendulums.com/",
-  "visit": "See the live site",
-  "made_heading": "What it builds",
-  "made": [
-   "Part drawings a machine shop quotes and inspects against, each with its cut file and its solid model",
-   "Print-ready 3D files for a prototype, laid out plate by plate",
-   "A bill of materials, and a quote bundle a shop’s online tool takes in one drag",
-   "The engineering hand-over, frozen at every release so a shop can always find the pack it quoted",
-   "The brand: the mark, the hero and the renders, drawn from the object’s own dimensions",
-   "The website, and the 3D pendulum that swings on it"
-  ],
-  "held_heading": "What holds it",
-  "held": [
-   "Load simulations, worked from the real parts’ masses, prove every mount setup holds the pendulum at a torque a hand can give.",
-   "Worst-case tolerance stacks prove every screw clamps and never bottoms, at every extreme of every band.",
-   "A sweep proves the blade turns a full circle and touches nothing.",
-   "The swing on the website is integrated from the physics of the object as it is today, and a check holds every mass and length to the parts.",
-   "Move any dimension, and a probe requires every file a supplier receives to move with it, or the change is refused."
-  ],
-  "stats": [
-   {
-    "of": "proofs",
-    "what": "checks, each proven to catch the fault it is for"
-   },
-   {
-    "of": "parts",
-    "what": "parts, each drawn, cut and modelled from the spec"
-   },
-   {
-    "of": "plates",
-    "what": "print plates, ready to make a prototype"
-   }
-  ],
-  "as_of": "Counted at V{version} of the pack, on {on}.",
-  "quote": null,
-  "more": "What it builds, and what holds it"
- },
- "rule": {
-  "line": "Agents already run your code's pipeline.",
-  "end": "Wherefore lets them run the rest.",
-  "text": "Claude Code and Codex are good at CI: writing checks, fixing what fails, keeping the build green. Wherefore is the scaffolding that lets them do the same for your site, docs, deck and app. The build they write is plain code that runs the same every time and never calls a model."
- },
- "start": {
-  "heading": "Your company, compiled.",
-  "text": "Start with one scan. If it finds nothing, good: the rest of Wherefore keeps it that way.",
-  "install": "curl -fsSL https://wherefore.sh | sh",
-  "steps": [
-   {
-    "command": "wherefore scan",
-    "args": "https://your-site.example",
-    "says": "See what has drifted. Nothing to set up."
-   },
-   {
-    "command": "wherefore init",
-    "says": "When you're ready: set up the repository, then ask your coding agent to set up Wherefore."
-   }
-  ],
-  "free": "Open source under {licence}."
- },
- "inspect": {
-  "toggle": "How this page is built",
-  "intro": "Every part of this page is generated. Each now names the facts it is built from, and the checks that hold it on every push.",
-  "source": "Read every file it is built from",
-  "from": "from",
-  "facts": "{n} facts",
-  "held": "held by",
-  "checks": {
-   "gate": "rebuilt from its sources on every push, and refused if it differs from what is committed",
-   "reach": "each of these facts is moved, one at a time, and the page must change with it",
-   "press": "every control here is tapped on a fresh load, at a phone’s width, and must show something new",
-   "engine": "every command named here must be one the pinned release has",
-   "brand": "every colour and face is a brand token, and every text colour reads at 4.5:1 on its ground",
-   "snapshot": "these counts were taken from the pendulum once, at the commit and day they name; each is moved, one at a time, and the page must change with it"
+  "demo": {
+    "heading": "Change it once. Every copy follows.",
+    "label": "An example company renames a feature. Tap each step.",
+    "source": "source",
+    "fact": "product.json · names.workspace",
+    "before": "Workspace",
+    "after": "Project",
+    "stages": [
+      "Today",
+      "Rename {before} to {after}",
+      "Fix the {hand} (probe)"
+    ],
+    "assets": [
+      {
+        "name": "Feature page",
+        "made": "built from the source",
+        "says": "Every {value} keeps its own roles and history."
+      },
+      {
+        "name": "Docs",
+        "made": "built from the source",
+        "says": "Create a {value} from the sidebar."
+      },
+      {
+        "name": "App button",
+        "made": "built from the source",
+        "says": "New {value}"
+      },
+      {
+        "name": "Sales deck · slide 4",
+        "made": "built from the source",
+        "says": "One {value} per client, set up in a minute."
+      },
+      {
+        "name": "Demo video · captions",
+        "made": "built from the source",
+        "says": "Click New {value} to get started."
+      },
+      {
+        "name": "Help article",
+        "made": "written by hand",
+        "says": "Open the {value} menu to rename it.",
+        "by_hand": true
+      }
+    ],
+    "badges": {
+      "live": "live",
+      "rebuilt": "rebuilt",
+      "caught": "caught",
+      "fixed": "fixed"
+    },
+    "said": [
+      "One name, said in {total} places.",
+      "{rebuilt} rebuilt from the source. The {hand} was written by hand and still says “{before}”, so CI fails.",
+      "All {total} agree with the source. Ready to ship."
+    ],
+    "note": "The checks are real:",
+    "checks": [
+      "wherefore gate",
+      "wherefore check retired"
+    ]
+  },
+  "why": {
+    "heading": "Why “Wherefore”",
+    "word": "wherefore",
+    "part": "adverb",
+    "meaning": "for what reason; why.",
+    "juliet": "Juliet wasn’t asking where Romeo was. She was asking why he had to be who he was.",
+    "rule": "In a Wherefore repository every file has to answer her: generated from a source, written by a person for a stated reason, or captured and stamped with what it was made from. A file that cannot answer stops the change.",
+    "pick": "Pick an asset to ask",
+    "ask": "Wherefore art thou {name}?",
+    "built_from": "Built from",
+    "because": "Because",
+    "asks": [
+      {
+        "tab": "feature page",
+        "name": "{after}",
+        "from": "{fact} = “{after}”",
+        "because": "Customers kept calling them projects; only we said workspace. The reason was written down with the change, so it ships with it."
+      },
+      {
+        "tab": "demo video",
+        "name": "demo video",
+        "from": "product.json · script.json · captions template",
+        "because": "My script and captions are built from the same names as the app, so I never point at a button the product no longer has."
+      },
+      {
+        "tab": "deck",
+        "name": "slide 4",
+        "from": "product.json · claims.json · deck template",
+        "because": "I read the same names and claims as the feature pages, so the slide and the site cannot drift apart."
+      },
+      {
+        "tab": "brand",
+        "name": "orange",
+        "from": "brand.json · accent",
+        "because": "The accent is said once. Every page, slide and social card is built from it, so a rebrand is one line."
+      },
+      {
+        "tab": "claim",
+        "name": "“SOC 2 certified”",
+        "from": "claims.json · compliance",
+        "because": "I am not allowed yet. Until the audit is signed, the most any page may say is “SOC 2 in progress”, and the check refuses the rest."
+      }
+    ],
+    "note": "The same example company as the demo above."
+  },
+  "how": {
+    "heading": "It lives in your repo, and runs in your CI.",
+    "steps": [
+      {
+        "command": "wherefore scan",
+        "name": "Find what has drifted.",
+        "text": "Point it at your site or docs. It lists every value stated more than one way, and where each copy lives."
+      },
+      {
+        "command": "wherefore build",
+        "name": "Say each fact once.",
+        "text": "Prices, names and limits move into one source file. Your coding agent writes the small scripts that build each page from it."
+      },
+      {
+        "command": "wherefore gate",
+        "name": "Keep it that way.",
+        "text": "On every push, CI rebuilds everything. A stale page, or a file nobody can account for, fails the build, and the error says why."
+      }
+    ],
+    "note": "One command-line tool, on Python. No server and no account."
+  },
+  "does": {
+    "heading": "Everything it does, and what's next.",
+    "intro": "Every feature in the release this site pins, tagged with the release it arrived in. When a release adds a feature, this site has to describe it before it can build.",
+    "new": "New in {version}",
+    "words": {
+      "scan": "Point it at your site or docs: it finds every value you state more than one way, and where the copies disagree.",
+      "start": "One command starts a repository; the skill walks your agent through the first fact.",
+      "gate": "On every push, each file must be built from the source, written by a person for a stated reason, or a capture stamped with what it shows. Anything else stops the change, and says why.",
+      "build": "Every asset rebuilt from the source, the same way every time, so you see exactly what a change moves.",
+      "proofs": "No check is trusted until it has failed: each proof plants the fault its check exists to catch.",
+      "retired": "Retire an old price, name or limit once, and nothing a person reads may say it again.",
+      "reach": "Wherefore changes each fact, one at a time, and checks that everything stating it changes too.",
+      "claims": "Give a claim like “SOC 2 certified” a rule, and no page can say more than the rule allows.",
+      "upstream": "Copied something you can't pin, like a partner's spec sheet? The deploy fails the day its source changes.",
+      "hook": "A push that would ship a stale document stops before it leaves your machine.",
+      "skill": "Claude Code or Codex learns the rules from a skill that ships with each release.",
+      "graph": "A page for every repository: each file, how it is made, and what changes when a source does. One command draws it, and changes nothing.",
+      "palette": "Your brand lives in one file. Type a colour anywhere else and the build names the file and the line, unless the file says, with a reason, that the colour is somebody else's."
+    },
+    "unshown": {},
+    "home": [
+      "retired",
+      "claims",
+      "upstream"
+    ],
+    "home_heading": "What else it catches.",
+    "all": "All {n} features, and what's next",
+    "since": "since {version}"
+  },
+  "case": {
+    "eyebrow": "Case study",
+    "name": "Chaotic Pendulums",
+    "heading": "A hardware company, built from one spec file.",
+    "model": {
+      "title": "The MK3 pendulum in 3D: drag to turn it, or grab an arm and swing it",
+      "hint": "Drag to turn it",
+      "ground": "ink",
+      "taken": {
+        "from": "chaotic-pendulums-co",
+        "file": "web/prototype/mk3-hero-public.html",
+        "commit": "eb21885f5989b2cf5a949e13caeae24bfdc9bd04",
+        "on": "2026-11-02"
+      }
+    },
+    "text": "Chaotic Pendulums makes a desk-sized double pendulum. Its part drawings, 3D print files, parts list, supplier pack and website are all built from one spec file, and Wherefore was built alongside it. If one source can hold machined parts, it can hold your app and docs.",
+    "url": "https://chaoticpendulums.com/",
+    "visit": "See the live site",
+    "made_heading": "What it builds",
+    "made": [
+      "Part drawings a machine shop quotes and inspects against, each with its cut file and its solid model",
+      "Print-ready 3D files for a prototype, laid out plate by plate",
+      "A bill of materials, and a quote bundle a shop’s online tool takes in one drag",
+      "The engineering hand-over, frozen at every release so a shop can always find the pack it quoted",
+      "The brand: the mark, the hero and the renders, drawn from the object’s own dimensions",
+      "The website, and the 3D pendulum that swings on it"
+    ],
+    "held_heading": "What holds it",
+    "held": [
+      "Load simulations, worked from the real parts’ masses, prove every mount setup holds the pendulum at a torque a hand can give.",
+      "Worst-case tolerance stacks prove every screw clamps and never bottoms, at every extreme of every band.",
+      "A sweep proves the blade turns a full circle and touches nothing.",
+      "The swing on the website is integrated from the physics of the object as it is today, and a check holds every mass and length to the parts.",
+      "Move any dimension, and a probe requires every file a supplier receives to move with it, or the change is refused."
+    ],
+    "stats": [
+      {
+        "of": "proofs",
+        "what": "checks, each proven to catch the fault it is for"
+      },
+      {
+        "of": "parts",
+        "what": "parts, each drawn, cut and modelled from the spec"
+      },
+      {
+        "of": "plates",
+        "what": "print plates, ready to make a prototype"
+      }
+    ],
+    "as_of": "Counted at V{version} of the pack, on {on}.",
+    "quote": null,
+    "more": "What it builds, and what holds it"
+  },
+  "rule": {
+    "line": "Agents already run your code's pipeline.",
+    "end": "Wherefore lets them run the rest.",
+    "text": "Claude Code and Codex are good at CI: writing checks, fixing what fails, keeping the build green. Wherefore is the scaffolding that lets them do the same for your site, docs, deck and app. The build they write is plain code that runs the same every time and never calls a model."
+  },
+  "start": {
+    "heading": "Your company, compiled.",
+    "text": "Start with one scan. If it finds nothing, good: the rest of Wherefore keeps it that way.",
+    "install": "curl -fsSL https://wherefore.sh | sh",
+    "steps": [
+      {
+        "command": "wherefore scan",
+        "args": "https://your-site.example",
+        "says": "See what has drifted. Nothing to set up."
+      },
+      {
+        "command": "wherefore init",
+        "says": "When you're ready: set up the repository, then ask your coding agent to set up Wherefore."
+      }
+    ],
+    "free": "Open source under {licence}."
+  },
+  "inspect": {
+    "toggle": "How this page is built",
+    "intro": "Every part of this page is generated. Each now names the facts it is built from, and the checks that hold it on every push.",
+    "source": "Read every file it is built from",
+    "from": "from",
+    "facts": "{n} facts",
+    "held": "held by",
+    "checks": {
+      "gate": "rebuilt from its sources on every push, and refused if it differs from what is committed",
+      "reach": "each of these facts is moved, one at a time, and the page must change with it",
+      "press": "every control here is tapped on a fresh load, at a phone’s width, and must show something new",
+      "engine": "every command named here must be one the pinned release has",
+      "brand": "every colour and face is a brand token, and every text colour reads at 4.5:1 on its ground",
+      "snapshot": "these counts were taken from the pendulum once, at the commit and day they name; each is moved, one at a time, and the page must change with it"
+    }
+  },
+  "colophon": "This site is built with Wherefore, from one source file and the release it pins.",
+  "planned": {
+    "heading": "What's next",
+    "source": "The open-source engine's roadmap, as its repository states it.",
+    "labels": {
+      "next": "Next",
+      "later": "Later"
+    }
   }
- },
- "colophon": "This site is built with Wherefore, from one source file and the release it pins.",
- "planned": {
-  "heading": "What's next",
-  "source": "The open-source engine's roadmap, as its repository states it.",
-  "labels": {
-   "next": "Next",
-   "later": "Later"
-  }
- }
 }

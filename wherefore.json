@@ -2,6 +2,15 @@
  "wherefore": 1,
  "name": "web",
  "note": "The company: its site and its brand now, and every asset after them. Each asset is generated from facts/company.json, from brand/tokens.json and from the engine it pins - what the product is (its principles, its commands, its version) is read from that release, never retyped here.",
+ "palette": {
+  "source": "brand/tokens.json",
+  "read": ["gen/**", "site/**", "facts/**", "brand/**", "cases/**"],
+  "not_ours": {
+   "cases/pendulum/model.html": "the pendulum's page, taken from its repository as it serves it; its own suite holds its brand",
+   "site/pendulum/index.html": "the same page, copied to where the site serves it",
+   "site/changelog/index.html": "quotes each release's picture as the engine printed it, and the 0.10.0 picture is the palette check catching a stray colour - so the page says that colour as text, never as a style; its styles are page.css and brand.css, read above"
+  }
+ },
  "sources": {
   "facts": {
    "path": "facts/company.json",
