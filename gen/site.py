@@ -878,7 +878,7 @@ def planned(f):
         issue = (f' <a class="road-issue" href="{esc(it["issue"])}">#{esc(it["issue"].rsplit("/", 1)[-1])}</a>'
                  if it.get("issue") else "")
         if it.get("asked_by"):
-            issue = (f' <span class="road-asked">{esc(p["asked"])} '
+            issue = (f' <span class="road-asked">{esc(p["labels"]["asked"])} '
                      f'<a href="https://github.com/{esc(it["asked_by"])}">@{esc(it["asked_by"])}</a></span>' + issue)
         items.append(f'<li id="{esc(it["id"])}"><p class="does-name">{esc(it["name"])} <span class="chip chip-{esc(it["state"])}">'
                      f'{esc(p["labels"][it["state"]])}</span>{issue}</p><p>{esc(it["words"])}</p></li>')
