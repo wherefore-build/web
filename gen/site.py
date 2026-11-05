@@ -873,8 +873,13 @@ def planned(f):
                              f"which {ENGINE} ships: take the copy again from the engine, where it has left")
         if it["state"] not in p["labels"]:
             raise SystemExit(f"roadmap item `{it['id']}` is {it['state']!r}, which planned.labels does not name")
+        # Who asked, when the engine's roadmap says: the person's GitHub login, which the
+        # issue they asked in already shows, so the site says nothing the issue does not.
         issue = (f' <a class="road-issue" href="{esc(it["issue"])}">#{esc(it["issue"].rsplit("/", 1)[-1])}</a>'
                  if it.get("issue") else "")
+        if it.get("asked_by"):
+            issue = (f' <span class="road-asked">{esc(p["asked"])} '
+                     f'<a href="https://github.com/{esc(it["asked_by"])}">@{esc(it["asked_by"])}</a></span>' + issue)
         items.append(f'<li id="{esc(it["id"])}"><p class="does-name">{esc(it["name"])} <span class="chip chip-{esc(it["state"])}">'
                      f'{esc(p["labels"][it["state"]])}</span>{issue}</p><p>{esc(it["words"])}</p></li>')
     return f"""<section id="next"><div class="wrap">
