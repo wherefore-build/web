@@ -208,7 +208,8 @@
    "claims": "Give a claim like “SOC 2 certified” a rule, and no page can say more than the rule allows.",
    "upstream": "Copied something you can't pin, like a partner's spec sheet? The deploy fails the day its source changes.",
    "hook": "A push that would ship a stale document stops before it leaves your machine.",
-   "skill": "Claude Code or Codex learns the rules from a skill that ships with each release."
+   "skill": "Claude Code or Codex learns the rules from a skill that ships with each release.",
+   "graph": "A page for every repository: each file, how it is made, and what changes when a source does. One command draws it, and changes nothing."
   },
   "unshown": {},
   "home": [
@@ -319,12 +320,6 @@
    "later": "Later"
   },
   "items": [
-   {
-    "id": "graph",
-    "state": "next",
-    "name": "What builds what",
-    "words": "A page for every repository: each file, how it is made, and what changes when a source does."
-   },
    {
     "id": "docs",
     "state": "next",

@@ -4,7 +4,8 @@
 # a release reaches the site - by a pull request, whose gate fails until the
 # site is regenerated against it.
 #
-# Wherefore 0.6.0: a generator can be any command (`run`), beside a Python
-# script. The distribution is wherefore-build because `wherefore` on PyPI is
-# another project's; what is imported and typed is `wherefore`.
-wherefore-build==0.6.0
+# Wherefore 0.7.0: `wherefore graph`, what builds what - every file, how it
+# is made, and what changes when a source does. The distribution is
+# wherefore-build because `wherefore` on PyPI is another project's; what is
+# imported and typed is `wherefore`.
+wherefore-build==0.7.0
