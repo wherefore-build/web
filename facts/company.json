@@ -240,8 +240,8 @@
    "taken": {
     "from": "chaotic-pendulums-co",
     "file": "web/prototype/mk3-hero-public.html",
-    "commit": "eb21885f5989b2cf5a949e13caeae24bfdc9bd04",
-    "on": "2026-11-02"
+    "commit": "c4f5fa7e93dbf272ff4023554e0576e1525d521f",
+    "on": "2026-11-05"
    }
   },
   "text": "Chaotic Pendulums makes a desk-sized double pendulum. Its drawings, print files, parts list, supplier pack and website are built from one spec file, with Wherefore built alongside it. Move one dimension and every file a supplier receives moves with it, or the change is refused. If one source can hold machined parts, it can hold your app and docs.",
