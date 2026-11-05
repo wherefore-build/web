@@ -71,7 +71,23 @@ jobs:
         run: |
           sed -i "s/^wherefore-build==.*$/wherefore-build==$V/" requirements-engine.txt
           rm -rf .wherefore-engine
-          python3 -m pip install --quiet --no-deps --target .wherefore-engine -r requirements-engine.txt
+          # PyPI serves a release a little after the upload says it is done,
+          # and the engine tells this site the moment the upload is done: the
+          # first run of 0.8.0 found only 0.7.0. So ask again, for up to ten
+          # minutes, before calling the release missing.
+          for attempt in $(seq 1 60); do
+            if python3 -m pip install --quiet --no-deps --no-cache-dir --target .wherefore-engine -r requirements-engine.txt 2>pip.err; then
+              break
+            fi
+            if [ "$attempt" = "60" ]; then
+              cat pip.err
+              echo "::error::PyPI did not serve wherefore-build==$V within ten minutes"
+              exit 1
+            fi
+            echo "PyPI does not serve $V yet (attempt $attempt); asking again in ten seconds"
+            sleep 10
+          done
+          rm -f pip.err
           export PYTHONPATH="$PWD/.wherefore-engine"
           # build regenerates and reports what moved, which here is every page
           # with the version on it; the gate afterwards is the judge, and it
