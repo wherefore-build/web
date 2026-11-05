@@ -36,7 +36,12 @@ jobs:
   pin:
     runs-on: ubuntu-latest
     steps:
+      # The checkout must not leave the workflow's own token in the git
+      # config: it would speak for every push, over the token the last step
+      # sets, and the push would be refused as github-actions[bot] (it was).
       - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
       - name: Which release, and whether the pin is already there
         id: which
         env:
