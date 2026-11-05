@@ -51,7 +51,9 @@ UNSHOWN = {
     "captured.commit": "the pendulum commit the copy was read at, for whoever audits it. A visitor is told the release",
     "captured.release": "the mark the pendulum's public site published for that release, which says nothing to a "
                         "visitor: `wherefore check upstream` holds it to the site's /release.json",
-    "counts.pack.date": "the day the release was cut. The page says the day the pendulum was counted, captured.on",
+    "counts.pack.date": "the day the release was cut. The owner took the dated line off the page (5 November 2026); the counts are held current by `wherefore check upstream` instead",
+    "counts.pack.version": "the pack's version. The owner took the dated line off the page (5 November 2026): a visitor reads the counts, and `wherefore check upstream` holds them to the release the pendulum's site publishes",
+    "captured.on": "the day the pendulum was counted. The owner took the dated line off the page (5 November 2026); the stamp stays in the copy, for whoever audits it",
     "counts.pack.draft": "the draft open in the pendulum, if any. The counts are quoted at the release a draft stands "
                          "on, counts.pack.version, because a draft is not a pack anybody is handed",
 }
