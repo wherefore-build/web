@@ -264,29 +264,25 @@
   "stats": [
    {
     "of": "proofs",
-    "what": "checks, each proven to catch the fault it is for",
-    "snap": "plate",
-    "alt": "The engraved plate, dimensioned: every measure held to the spec"
+    "what": "checks, each proven to catch the fault it is for"
    },
    {
     "of": "parts",
-    "what": "parts, each drawn, cut and modelled from the spec",
-    "snap": "drawing",
-    "alt": "A part drawing a machine shop quotes against, one of nine"
+    "what": "parts, each drawn, cut and modelled from the spec"
    },
    {
     "of": "plates",
-    "what": "print plates, ready to make a prototype",
-    "snap": "exploded",
-    "alt": "The pendulum taken apart, every part in its place"
+    "what": "print plates, ready to make a prototype"
    }
   ],
-  "snaps": {
-   "note": "Three small pictures from the pendulum's own files, shot at thumbnail size: a snap, not the drawing, so the pack a shop is handed stays the pack's",
+  "part": {
+   "title": "The mounting plate, as machined and anodised: drag to turn it",
+   "hint": "One of the nine parts · drag to turn it",
+   "ground": "ink",
    "taken": {
-    "from": "zakholdsworth/chaotic-pendulums-co",
-    "files": "brand/plate/cp-plate-dimensioned.svg, product/Engineering Pack/DRAWINGS/P-001_mounting_plate.svg, brand/public-sheets/cp-side-exploded-plain.svg",
-    "commit": "adddc46ecf01921c485409edef6a053fdbfc6ddf",
+    "from": "chaotic-pendulums-co",
+    "file": "web/prototype/mk3-plate-public.html",
+    "commit": "f97c638aadc46329b0c301a1b312c42fde48fa93",
     "on": "2026-11-05"
    }
   },

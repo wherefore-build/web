@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
-"""The pendulum's model stands beside the case study's heading, and turns under a thumb.
+"""The pendulum's model stands beside the case study's heading, its plate beside the counts, and each turns under a thumb.
 
 The case study's heading has the pendulum's own interactive model beside it:
-a copy of the file its home page embeds, in a frame (gen/site.py). Nothing in
-the page's bytes says the model draws, sits where it should at a phone's
-width, or does anything when touched - and the company's first client learned,
-by thumb, that a control can pass every check and still do nothing when
-pressed. So this does what the thumb does, on the site served with the headers
-site/_headers gives it.
+a copy of the file its home page embeds, in a frame (gen/site.py); and its
+counts have the mounting plate beside them, the same model opened on that one
+part, in a second frame. Nothing in the page's bytes says either draws, sits
+where it should at a phone's width, or does anything when touched - and the
+company's first client learned, by thumb, that a control can pass every check
+and still do nothing when pressed. So this does what the thumb does, on the
+site served with the headers site/_headers gives it.
 
 It fails:
 
@@ -19,15 +20,16 @@ It fails:
 
 and, at 390 by 844 with touch, and at 1280 by 900:
 
-  - a frame that is not to the right of the heading, beside it rather than
-    below it, and on the screen;
-  - a model that draws nothing within a few seconds: inside the frame,
-    nothing unlike its commonest colour;
-  - a model that stands on a ground other than the one its frame names - the
-    brand colour case.model.ground says;
-  - a model that does not turn when dragged - by touch on the phone, by a
-    mouse on the desktop - with motion reduced, so the swing cannot be
-    mistaken for the turn.
+  - a model's frame that is not to the right of the heading, beside it rather
+    than below it, and on the screen; a plate's frame that is not beside the
+    counts - to their left on a wide screen, above them on a phone;
+  - a model or a plate that draws nothing within a few seconds: inside the
+    frame, nothing unlike its commonest colour;
+  - one that stands on a ground other than the one its frame names - the
+    brand colour case.model.ground, or case.part.ground, says;
+  - one that does not turn when dragged - by touch on the phone, by a mouse
+    on the desktop - with motion reduced, so the swing cannot be mistaken for
+    the turn, and the plate's own slow turn is still.
 
 WHAT IT CANNOT SEE: Cloudflare's own reading of site/_headers. This reads it
 the way Cloudflare documents it - every rule whose path matches adds its
@@ -131,17 +133,22 @@ def static_faults():
     if page.scripts:
         found.append(f"site/index.html has {page.scripts} <script>: the page runs none; only the "
                      f"pendulum's frame may")
-    if len(page.frames) != 1:
-        found.append(f"site/index.html has {len(page.frames)} frames; the case study has one, the model")
+    if len(page.frames) != 2:
+        found.append(f"site/index.html has {len(page.frames)} frames; the case study has two, the model and the plate")
         return found, None
-    frame = page.frames[0]
-    if (frame.get("sandbox") or "").split() != ["allow-scripts"]:
-        found.append(f"the model's frame is sandboxed {frame.get('sandbox')!r}: it may run its script and "
-                     f"nothing else - `allow-scripts`, alone")
-    src = urllib.parse.urlsplit(frame.get("src", ""))
-    model = "/" + src.path.lstrip("/")
+    frames = dict(zip(FRAMES, page.frames))
+    for what, frame in frames.items():
+        if (frame.get("sandbox") or "").split() != ["allow-scripts"]:
+            found.append(f"the {what}'s frame is sandboxed {frame.get('sandbox')!r}: it may run its script and "
+                         f"nothing else - `allow-scripts`, alone")
+    paths = {what: "/" + urllib.parse.urlsplit(f.get("src", "")).path.lstrip("/") for what, f in frames.items()}
+    model = paths["model"]
+    if not paths["plate"].startswith(model):
+        found.append(f"the plate's frame is at {paths['plate']}, outside the model's path {model}, which is the "
+                     f"one path a script may run on")
     table = rules()
-    for path in ("/", "/index.html", "/brand/", "/page.css", model, model + "index.html"):
+    for path in ("/", "/index.html", "/brand/", "/page.css", model, model + "index.html",
+                 paths["plate"], paths["plate"] + "index.html"):
         policies = served(path, table).get("content-security-policy", [])
         if len(policies) != 1:
             found.append(f"{path} is served {len(policies)} policies; it needs exactly one")
@@ -153,7 +160,7 @@ def static_faults():
             found.append(f"{path} is served a policy that lets a script run: only the model's path may")
         if path.startswith(model) and "frame-ancestors 'self'" not in policies[0]:
             found.append(f"{path} may be framed by other sites: its policy needs frame-ancestors 'self'")
-    return found, (frame, table)
+    return found, (frames, table)
 
 
 class Served(http.server.SimpleHTTPRequestHandler):
@@ -176,27 +183,42 @@ def serve(table):
     return server
 
 
-def look(browser, base, ground, name, viewport, touch):
-    """What is wrong with the model at this size, or None."""
+FRAMES = ("model", "plate")        # the order the two frames come in the page
+WHERE = {"model": ("#case .case-model iframe", "#case h2"),
+         "plate": ("#case .case-part iframe", "#case .stats li")}
+
+
+def look(browser, base, ground, name, viewport, touch, what="model"):
+    """What is wrong with the model, or the plate, at this size, or None."""
     ctx = browser.new_context(viewport=viewport, is_mobile=touch, has_touch=touch, reduced_motion="reduce")
     try:
         page = ctx.new_page()
         page.goto(base, wait_until="load")
-        heading = page.locator("#case h2")
-        heading.scroll_into_view_if_needed()
-        frame = page.locator("#case iframe")
+        beside = page.locator(WHERE[what][1]).first
+        beside.scroll_into_view_if_needed()
+        frame = page.locator(WHERE[what][0])
         frame.scroll_into_view_if_needed()
         page.wait_for_timeout(300)
-        h, f = heading.bounding_box(), frame.bounding_box()
+        h, f = beside.bounding_box(), frame.bounding_box()
         if not f or f["width"] < 60 or f["height"] < 60:
-            return f"at {name}, the model's frame is not shown, or too small to touch: {f}"
-        if f["x"] < h["x"] + h["width"] - 1:
-            return (f"at {name}, the model is not to the right of the heading: the heading ends at "
-                    f"{h['x'] + h['width']:.0f} px and the model starts at {f['x']:.0f}")
-        if f["y"] >= h["y"] + h["height"]:
-            return f"at {name}, the model is below the heading, not beside it"
+            return f"at {name}, the {what}'s frame is not shown, or too small to touch: {f}"
+        if what == "model":
+            if f["x"] < h["x"] + h["width"] - 1:
+                return (f"at {name}, the model is not to the right of the heading: the heading ends at "
+                        f"{h['x'] + h['width']:.0f} px and the model starts at {f['x']:.0f}")
+            if f["y"] >= h["y"] + h["height"]:
+                return f"at {name}, the model is below the heading, not beside it"
+        elif touch:
+            if f["y"] + f["height"] > h["y"] + 1:
+                return f"at {name}, the plate is not above the counts: it ends at {f['y'] + f['height']:.0f} px and the first count starts at {h['y']:.0f}"
+        else:
+            if f["x"] + f["width"] > h["x"] + 1:
+                return (f"at {name}, the plate is not to the left of the counts: it ends at "
+                        f"{f['x'] + f['width']:.0f} px and the first count starts at {h['x']:.0f}")
+            if f["y"] + f["height"] < h["y"] or f["y"] > h["y"] + h["height"]:
+                return f"at {name}, the plate is not beside the counts"
         if f["x"] + f["width"] > viewport["width"] + 1:
-            return f"at {name}, the model runs off the right of the screen"
+            return f"at {name}, the {what} runs off the right of the screen"
         # The inside of the frame only: its rounded corners show the page's own ground.
         inside = {"x": f["x"] + f["width"] * 0.1, "y": f["y"] + f["height"] * 0.1,
                   "width": f["width"] * 0.8, "height": f["height"] * 0.8}
@@ -213,11 +235,11 @@ def look(browser, base, ground, name, viewport, touch):
                 break
         if drawn < DRAWN:
             judge.close()
-            return f"at {name}, the model drew nothing in 15 seconds: {drawn:.2%} of its frame is unlike its ground"
+            return f"at {name}, the {what} drew nothing in 15 seconds: {drawn:.2%} of its frame is unlike its ground"
         want = [int(ground[k:k + 2], 16) for k in (0, 2, 4)]
         if any(abs(a - b) > 12 for a, b in zip(stands, want)):
             judge.close()
-            return (f"at {name}, the model stands on rgb{tuple(stands)}, not the ground its frame names, "
+            return (f"at {name}, the {what} stands on rgb{tuple(stands)}, not the ground its frame names, "
                     f"#{ground}")
         page.wait_for_timeout(1500)
         before = picture()
@@ -244,13 +266,13 @@ def look(browser, base, ground, name, viewport, touch):
         if abs(moved_to["y"] - f["y"]) > 1 or abs(moved_to["x"] - f["x"]) > 1:
             judge.close()
             how = "a thumb" if touch else "a mouse"
-            return f"at {name}, dragging {how} across the model moved the page, not the model"
+            return f"at {name}, dragging {how} across the {what} moved the page, not the {what}"
         after = picture()
         moved = judge.evaluate(MEASURE, [before, after])
         judge.close()
         if moved < TURNED:
             how = "a thumb" if touch else "a mouse"
-            return f"at {name}, the model did not turn when {how} dragged across it: {moved:.2%} of it changed"
+            return f"at {name}, the {what} did not turn when {how} dragged across it: {moved:.2%} of it changed"
         return None
     finally:
         ctx.close()
@@ -265,30 +287,35 @@ def main():
             print("::error::checks/model_turns.py needs Playwright: "
                   "pip install -r requirements-browser.txt && python3 -m playwright install chromium")
             return 1
-        frame, table = seen
-        ground = dict(urllib.parse.parse_qsl(urllib.parse.urlsplit(frame["src"]).query)).get("bg", "")
-        if not re.fullmatch(r"[0-9A-Fa-f]{6}", ground):
-            found.append(f"the model's frame names no ground it can be told apart from: {frame['src']!r}")
-        else:
+        frames, table = seen
+        grounds = {}
+        for what, frame in frames.items():
+            ground = dict(urllib.parse.parse_qsl(urllib.parse.urlsplit(frame["src"]).query)).get("bg", "")
+            if not re.fullmatch(r"[0-9A-Fa-f]{6}", ground):
+                found.append(f"the {what}'s frame names no ground it can be told apart from: {frame['src']!r}")
+            else:
+                grounds[what] = ground
+        if grounds:
             server = serve(table)
             base = f"http://127.0.0.1:{server.server_port}/"
             with sync_playwright() as p:
                 browser = p.chromium.launch()
                 for name, viewport, touch in ((f"{PHONE['width']} px", PHONE, True),
                                               (f"{DESK['width']} px", DESK, False)):
-                    fault = look(browser, base, ground, name, viewport, touch)
-                    if fault:
-                        found.append(fault)
+                    for what, ground in grounds.items():
+                        fault = look(browser, base, ground, name, viewport, touch, what)
+                        if fault:
+                            found.append(fault)
                 browser.close()
             server.shutdown()
     if found:
-        print("::error::the pendulum's model is not where it should be, or does not turn:\n")
+        print("::error::the pendulum's model or its plate is not where it should be, or does not turn:\n")
         for f in found:
             print(f"   {f}")
         return 1
-    print(f"ok   the pendulum's model stands to the right of the case study's heading, draws, and turns "
-          f"under a thumb at {PHONE['width']} px and a mouse at {DESK['width']} px; the page runs no "
-          f"script, and only the model's frame may")
+    print(f"ok   the pendulum's model stands to the right of the case study's heading and its plate beside "
+          f"the counts; each draws, and turns under a thumb at {PHONE['width']} px and a mouse at "
+          f"{DESK['width']} px; the page runs no script, and only their frames may")
     return 0
 
 

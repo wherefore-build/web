@@ -21,7 +21,7 @@ private repository, not here, so that none of them goes public with the site.
 | `facts/pendulum.json` | the case study's counts: a dated snapshot of the pendulum's own repository, which is private, counted once at the commit it names | captured, stamped inside |
 | `facts/roadmap.json` | the engine's roadmap, byte for byte the `roadmap.json` beside its code; What's next is built from it, and `wherefore check upstream` fails the deploy when the engine's file has moved | captured |
 | `cases/pendulum/model.html` | the pendulum's interactive 3D model, the file https://chaoticpendulums.com/ embeds, copied byte for byte from the pendulum's repository at the commit `case.model.taken` names | captured |
-| `cases/pendulum/thumbs/` | three snaps of the pendulum's own files - a dimensioned plate, a part drawing, the exploded side view - shot at thumbnail size at the commit `case.snaps.taken` names; snaps, not the drawings | captured |
+| `cases/pendulum/plate.html` | the pendulum's mounting plate alone: its public model opened on one part, the same bytes after one line, copied byte for byte at the commit `case.part.taken` names | captured |
 | `brand/fonts/` | the three typefaces and their licences (SIL OFL 1.1), unchanged | authored |
 | `brand/icon/icon-1024.png`, `brand/shoot_icon.py` | the icon as a PNG, for accounts that take only PNG, and the script that shoots it from `site/brand/icon.svg` | captured, stamped |
 | `gen/brand.py` | the brand pack's generator: the stylesheet, the fonts and the brand page | authored |
@@ -44,7 +44,7 @@ private repository, not here, so that none of them goes public with the site.
 | `checks/case_study.py` | the snapshot says where and when it was counted, and each count on the page moves the page | authored |
 | `checks/questions_turn.py` | the questions on "Why Wherefore" turn by themselves, stop on the chip a thumb taps, and hold still for a visitor who asks for less motion | authored |
 | `checks/fits_phone.py` | every page fits a phone's width, moving or still and with "how this page is built" open, and no icon is bigger than the words it follows | authored |
-| `checks/model_turns.py` | the pendulum's model stands beside the case study's heading, draws, and turns under a thumb; only its frame may run a script | authored |
+| `checks/model_turns.py` | the pendulum's model stands beside the case study's heading and its plate beside the counts; each draws, and turns under a thumb; only their frames may run a script | authored |
 | `checks/*_proof.py` | each check, and the gate, shown to fail | authored |
 | `wherefore.json` | what this repository is to the engine | authored |
 | `requirements-engine.txt` | the engine release this is built and judged by | authored |
@@ -99,10 +99,10 @@ brand pack at `site/brand/`.
   else it catches: three of the release's features in a line each, and the
   way to all of them.
 - **The case study**: Chaotic Pendulums, the small hardware company the founder
-  started to test the idea - its counts, three snaps from its own files
-  (`cases/pendulum/thumbs/`, shot at thumbnail size at the commit
-  `case.snaps.taken` names), and what it builds and what holds it,
-  behind one press.
+  started to test the idea - its counts, with one of its parts beside them
+  (`cases/pendulum/plate.html`, the mounting plate, machined and anodised,
+  turning in a frame a visitor can take hold of), and what it builds and
+  what holds it, behind one press.
 - **The rule.** Agents already run your code's pipeline; Wherefore lets them
   run the rest.
 - **Why Wherefore**: the word means *why*, and five tabs ask an asset of the

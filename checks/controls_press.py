@@ -52,6 +52,8 @@ NOT_OURS = {
     "pendulum/index.html": "the pendulum's own model, framed beside the case study with its controls "
                            "hidden; its own suite presses them, and checks/model_turns.py does what a thumb "
                            "does to it here - drags it",
+    "pendulum/plate/index.html": "the pendulum's plate, the same model opened on one part with its "
+                                 "controls hidden; checks/model_turns.py drags it too",
 }
 
 # Every rendered run of text, where it sits on the page, and whether it is on the screen.

@@ -33,7 +33,7 @@
   {
    "script": "site.py",
    "cwd": "gen",
-   "makes": "site/index.html, site/page.css, site/_headers and the pendulum's framed model and the three snaps site/pendulum/, from the facts, the pendulum's counts and model, the brand and the pinned engine"
+   "makes": "site/index.html, site/page.css, site/_headers and the pendulum's framed model and its framed plate site/pendulum/, from the facts, the pendulum's counts, model and plate, the brand and the pinned engine"
   },
   {
    "script": "install.py",
@@ -162,12 +162,12 @@
       "unreachable": "GitHub not answering is not the roadmap moving: a deploy goes ahead and says so, and the next build reads it again"
      }
     },
-    "pendulum-snaps": {
+    "pendulum-part": {
      "files": [
-      "cases/pendulum/thumbs/*.png"
+      "cases/pendulum/plate.html"
      ],
-     "no_stamp": "shot at thumbnail size, in a browser, from three of the pendulum's own files - a dimensioned plate, a part drawing, the exploded side view - which this gate cannot see and deliberately does not read: facts/company.json case.snaps.taken names the files, the commit and the day. Snaps, not the drawings: a shop's pack stays the pack's. A person shoots them again when the story is retold",
-     "why": "three small pictures under the case study's counts, so the counts have something to look at"
+     "no_stamp": "copied byte for byte from another repository, which this gate cannot see and deliberately does not read: facts/company.json case.part.taken names the file, the commit and the day. It is the pendulum's public hero opened on one part - the same bytes after one line - so it says nothing the pendulum's home page does not, and the pendulum's own suite holds it. The pendulum does not serve it, so there is no upstream to read; a person copies it again when the story is retold",
+     "why": "the mounting plate alone, machined and anodised, turning beside the case study's counts: one real part a visitor can take hold of, in place of pictures"
     }
    }
   }

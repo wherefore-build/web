@@ -74,7 +74,8 @@ quotes no one. Each appears when its fact does.
 
 Run from gen/, as wherefore.json says, after brand.py. Writes site/index.html,
 site/page.css, site/_headers, the features page, site/features/index.html, the
-changelog, site/changelog/index.html, and the framed model, site/pendulum/index.html.
+changelog, site/changelog/index.html, the framed model, site/pendulum/index.html, and
+the framed plate, site/pendulum/plate/index.html.
 """
 import json
 import re
@@ -902,8 +903,33 @@ def model(m):
             f'<figcaption>{esc(m["hint"])}</figcaption></figure>')
 
 
-SNAPS = ROOT / "cases/pendulum/thumbs"
-SNAPS_PAGE = "pendulum/thumbs/"
+# The plate alone: the pendulum's public hero opened on one made part, the
+# mounting plate, which the pendulum writes for exactly this frame. Its own
+# script hides everything but the part, fits it to the frame and turns it; the
+# frame adds only the overflow rule, so no scrollbar ever shows beside it.
+PART = ROOT / "cases/pendulum/plate.html"
+PART_PAGE = "pendulum/plate/"
+PART_FRAMING = "\n<style>html,body{overflow:hidden}</style>\n"
+
+
+def plate(m):
+    """The pendulum's mounting plate in a frame that may run its script and nothing else."""
+    g = m["ground"]
+    return (f'<figure class="case-part"><iframe src="{PART_PAGE}?bg={ground(g)}" '
+            f'title="{esc(m["title"])}" loading="lazy" sandbox="allow-scripts" '
+            f'style="background: var(--{esc(g)})"></iframe>'
+            f'<figcaption>{esc(m["hint"])}</figcaption></figure>')
+
+
+def part_page(f):
+    """site/pendulum/plate/index.html: the pendulum's plate, byte for byte, and what frames it."""
+    t = f["case"]["part"]["taken"]
+    said = f'{t["from"]} {t["file"]} at {t["commit"]}, {t["on"]}'
+    if "--" in said:
+        raise SystemExit(f"case.part.taken cannot be written in a comment: {said!r}")
+    return (f"<!doctype html>\n<!-- The pendulum's mounting plate, alone: {said}, copied byte for byte into "
+            f"cases/pendulum/plate.html, and framed for the case study by gen/site.py. -->\n"
+            f'<html lang="en">\n' + PART.read_text(encoding="utf-8") + PART_FRAMING)
 
 
 def model_page(f):
@@ -922,11 +948,8 @@ def case(f, p):
     made = "".join(f"<li>{esc(m)}</li>" for m in c["made"])
     held = "".join(f"<li>{esc(m)}</li>" for m in c["held"])
     counts = p["counts"]
-    stats = "".join(f'<li><img class="stat-snap" src="{SNAPS_PAGE}{esc(s["snap"])}.png" alt="{esc(s["alt"])}" loading="lazy">'
-                    f'<span class="stat-n">{counted(counts, s["of"])}</span> {esc(s["what"])}</li>'
+    stats = "".join(f'<li><span class="stat-n">{counted(counts, s["of"])}</span> {esc(s["what"])}</li>'
                     for s in c["stats"])
-    t = c["snaps"]["taken"]
-    taken = f'<!-- The three snaps: {t["from"]} {t["files"]} at {t["commit"]}, {t["on"]}, shot at thumbnail size into cases/pendulum/thumbs/. {c["snaps"]["note"]}. -->'
     quote = ""
     if c["quote"]:
         quote = (f'<blockquote class="case-quote"><p>{esc(c["quote"]["text"])}</p>'
@@ -941,8 +964,10 @@ def case(f, p):
 <p class="actions"><a class="button button-quiet" href="{esc(c["url"])}">{esc(c["visit"])}</a></p>
 </div>
 {quote}
-{taken}
+<div class="counts">
+{plate(c["part"])}
 <ul class="stats">{stats}</ul>
+</div>
 <details class="case-more"><summary>{esc(c["more"])}</summary>
 <div class="case-grid">
 <div class="case-col"><h3>{esc(c["made_heading"])}</h3><ul class="case-list">{made}</ul></div>
@@ -1067,9 +1092,8 @@ def main():
     (SITE / "features/index.html").write_text(features_page(FACTS), encoding="utf-8")
     (SITE / MODEL_PAGE).mkdir(exist_ok=True)
     (SITE / MODEL_PAGE / "index.html").write_text(model_page(FACTS), encoding="utf-8")
-    (SITE / SNAPS_PAGE).mkdir(exist_ok=True)
-    for png in sorted(SNAPS.glob("*.png")):
-        shutil.copyfile(png, SITE / SNAPS_PAGE / png.name)
+    (SITE / PART_PAGE).mkdir(exist_ok=True)
+    (SITE / PART_PAGE / "index.html").write_text(part_page(FACTS), encoding="utf-8")
 
 
 if __name__ == "__main__":
