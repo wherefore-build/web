@@ -73,8 +73,8 @@ line it says Wherefore is not public yet, and with no quote the case study
 quotes no one. Each appears when its fact does.
 
 Run from gen/, as wherefore.json says, after brand.py. Writes site/index.html,
-site/page.css, site/_headers, the changelog, site/changelog/index.html, and
-the framed model, site/pendulum/index.html.
+site/page.css, site/_headers, the features page, site/features/index.html, the
+changelog, site/changelog/index.html, and the framed model, site/pendulum/index.html.
 """
 import json
 import re
@@ -277,7 +277,7 @@ def nav(f, home=""):
     n = f["nav"]
     return (f'<nav aria-label="The site"><a href="{home}#how">{esc(n["how"])}</a>'
             f'<a href="{home}features/">{esc(n["does"])}</a><a href="{home}#case">{esc(f["case"]["eyebrow"])}</a>'
-            f'<a href="{home}about/">{esc(n["why"])}</a><a href="{home}changelog/">{esc(f["changelog"]["title"])}</a>'
+            f'<a href="{home}#why">{esc(n["why"])}</a><a href="{home}changelog/">{esc(f["changelog"]["title"])}</a>'
             f'<a class="pill" href="{home}#start">{esc(n["start"])}</a></nav>')
 
 
@@ -286,7 +286,7 @@ def foot_nav(f, home=""):
     n = f["nav"]
     return (f'<nav class="foot-nav" aria-label="The site, again"><a href="{home}#how">{esc(n["how"])}</a>'
             f'<a href="{home}features/">{esc(n["does"])}</a><a href="{home}#case">{esc(f["case"]["eyebrow"])}</a>'
-            f'<a href="{home}about/">{esc(n["why"])}</a><a href="{home}changelog/">{esc(f["changelog"]["title"])}</a></nav>')
+            f'<a href="{home}#why">{esc(n["why"])}</a><a href="{home}changelog/">{esc(f["changelog"]["title"])}</a></nav>')
 
 
 def header(f):
@@ -468,6 +468,10 @@ OUT = ('<svg class="out" viewBox="0 0 16 16" aria-hidden="true" focusable="false
 def hero(f):
     """What it is, why it matters, and the two commands that try it on your own site - with real output beside them.
 
+    The headline runs the whole width; under it the lede and the two commands
+    take one column and the scan's output the other, once there is room for
+    its longest line (gen/page.css, .hero-grid).
+
     The eyebrow's licence and version, the package pip installs and the scan's
     output are the pinned release's own; the commands are start's, so the hero
     and Get started state them once between them. The second button is the
@@ -481,10 +485,10 @@ def hero(f):
               if repo else "")
     return f"""<section class="hero"><div class="wrap">
 {SRC}
-<div class="hero-grid">
-<div class="hero-copy">
 <p class="eyebrow">{esc(h["eyebrow"])} · {esc(licence)} · {esc(version())}</p>
 <h1>{esc(h["headline"])} <em>{esc(h["headline_end"])}</em></h1>
+<div class="hero-grid">
+<div class="hero-copy">
 <p class="lede">{esc(h["lede"])}</p>
 <p class="try-label">{esc(h["try"])}</p>
 <div class="try"><code class="cmd"><span class="term-prompt">$</span> {esc(st["install"])}</code><code class="cmd"><span class="term-prompt">$</span> {esc(run)}</code></div>
@@ -494,6 +498,16 @@ def hero(f):
 <figure class="term hero-term"><pre><code>{terminal(scan_shown(), f["changelog"]["cut"])}</code></pre>
 <figcaption>{esc(h["shows"])}</figcaption></figure>
 </div>
+</div></section>"""
+
+
+def opening(f):
+    """The picture, right after the headline (owner, 5 November 2026): code merges back,
+    everything else forks for good, and Wherefore gives everything else code's shape."""
+    return f"""<section id="forks" class="opening"><div class="wrap">
+{SRC}
+<h2>{esc(f["forks"]["heading"])}</h2>
+{forks(f)}
 </div></section>"""
 
 
@@ -731,13 +745,6 @@ def features_page(f):
                     d["heading"], None, does(f) + planned(f))
 
 
-def about_page(f):
-    """site/about/index.html: why "Wherefore" - code's shape and everything else's, then what the word asks."""
-    k = f["forks"]
-    body = f'<section class="about-forks"><div class="wrap">{forks(f)}</div></section>\n' + why(f)
-    return sub_page(f, "about", f["nav"]["why"], k["heading"], None, body)
-
-
 def short(usage):
     """`wherefore gate [--keep]` -> `wherefore gate`: the command, without what it takes."""
     return " ".join(w for w in usage.split()
@@ -959,9 +966,9 @@ def page(f):
     if company["domain"]:
         lines.append(f'<link rel="canonical" href="https://{esc(company["domain"])}/">')
     parts = {name: part(render, f, inspect, *also) for name, render, *also in (
-        ("header", header), ("hero", hero), ("demo", ripple), ("how", how), ("rule", rule), ("more", more),
+        ("header", header), ("hero", hero), ("forks", opening), ("demo", ripple), ("how", how),
         ("case", case, (("facts/pendulum.json", PENDULUM),)),
-        ("start", start), ("footer", footer))}
+        ("more", more), ("rule", rule), ("why", why), ("start", start), ("footer", footer))}
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -973,11 +980,13 @@ def page(f):
 <main id="top">
 {key(f)}
 {parts["hero"]}
+{parts["forks"]}
 {parts["demo"]}
 {parts["how"]}
-{parts["rule"]}
-{parts["more"]}
 {parts["case"]}
+{parts["more"]}
+{parts["rule"]}
+{parts["why"]}
 {parts["start"]}
 </main>
 {parts["footer"]}
@@ -1017,9 +1026,8 @@ def main():
     (SITE / "_headers").write_text(headers(), encoding="utf-8")
     (SITE / "changelog").mkdir(exist_ok=True)
     (SITE / "changelog/index.html").write_text(changelog_page(FACTS), encoding="utf-8")
-    for slug, render in (("features", features_page), ("about", about_page)):
-        (SITE / slug).mkdir(exist_ok=True)
-        (SITE / slug / "index.html").write_text(render(FACTS), encoding="utf-8")
+    (SITE / "features").mkdir(exist_ok=True)
+    (SITE / "features/index.html").write_text(features_page(FACTS), encoding="utf-8")
     (SITE / MODEL_PAGE).mkdir(exist_ok=True)
     (SITE / MODEL_PAGE / "index.html").write_text(model_page(FACTS), encoding="utf-8")
 

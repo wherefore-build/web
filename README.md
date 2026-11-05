@@ -27,7 +27,7 @@ private repository, not here, so that none of them goes public with the site.
 | `gen/page.css` | the site's layout; every colour and face in it is a `var(--…)` from the brand | authored |
 | `gen/kit.py` | what the generators share: the sources, the draft banner, contrast | authored |
 | `site/index.html` | the home page | generated |
-| `site/features/`, `site/about/`, `site/changelog/` | everything it does and what's next, why Wherefore, and every release | generated |
+| `site/features/`, `site/changelog/` | everything it does and what's next, and every release | generated |
 | `site/_headers` | what Cloudflare Pages serves with every file | generated |
 | `site/install.sh` | the one-line installer `wherefore.sh` serves, from the pinned release (`gen/install.py`) | generated |
 | `site/brand.css`, `site/fonts/` | the brand as custom properties, and the fonts it serves itself | generated |
@@ -81,33 +81,34 @@ brand pack at `site/brand/`.
 
 **The home page** says why before what, then shows it working.
 - **The headline and the try.** Your product changes; your site, docs and deck
-  don't. Beside it, a real `wherefore scan` from the pinned release's own
-  `releases.json`, and under it the two lines that run one on your site - no
-  setup, no account.
+  don't. Under it, the two lines that run a real `wherefore scan` on your site -
+  no setup, no account - beside what one printed on a sample company, from the
+  pinned release's own `releases.json`.
+- **The picture.** Your code branches, is tested and merges back; everything
+  else forks and never comes back; with Wherefore, everything else gets code's
+  shape.
 - **The demo.** One fact (a made-up company renaming Workspaces to Projects)
   and the six assets that state it - the feature page, the demo video's
   captions, the deck, the docs, the app's button and a help article. Three
   steps: today, the rename, and the fix for the one asset written by hand. The
   page says it is an illustration, and names the real commands behind it.
 - **How it works**, in three steps: scan, build, gate.
-- **The rule.** Agents already run your code's pipeline; Wherefore lets them
-  run the rest.
-- **What else it catches**: three of the release's features, and the way to
-  all of them.
 - **The case study**: Chaotic Pendulums, the small hardware company the founder
   started to test the idea - its counts, stated with the release they were
   counted at, and what it builds and what holds it, behind one press.
+- **What else it catches**: three of the release's features, and the way to
+  all of them.
+- **The rule.** Agents already run your code's pipeline; Wherefore lets them
+  run the rest.
+- **Why Wherefore**: the word means *why*, and five tabs ask an asset of the
+  made-up company "Wherefore art thou?" and show what it was built from, and
+  why.
 - **Getting started**: the install line and the release's own commands.
 
 **Features** (`site/features/`) lists everything the pinned release does, each
 with the release it arrived in, and **what's next** - the items `planned` in the
 facts, each marked next or later. The build stops if a planned item is one the
 pinned release already ships: an item leaves the roadmap the day it arrives.
-
-**Why Wherefore** (`site/about/`) has the picture - your code branches, is
-tested and merges back; everything else forks and never comes back - and the
-word: it means *why*, and five tabs ask an asset of the made-up company
-"Wherefore art thou?" and show what it was built from, and why.
 
 **How this page is built.** A switch at the bottom of the screen shows, above
 every part of the page, the facts it was built from and the checks that hold

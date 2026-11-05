@@ -27,7 +27,6 @@ from wherefore.prove import Edit, check, report                   # noqa: E402
 
 CHECK = "checks/controls_press.py"
 PAGE = "site/index.html"
-ABOUT = "site/about/index.html"            # the questions live on /about/
 CSS = "site/page.css"
 PASS = "every control on the site does something a visitor can see"
 
@@ -52,7 +51,7 @@ def main():
     with Edit(CSS) as p:
         plant(p, "#inspect:checked ~ * .src { display: block; }\n#inspect:checked ~ main .src-key { display: block; }", "")
         check(r, "the switch shows nothing", CHECK, True, ["'How this page is built'", "showed nothing new"])
-    with Edit(ABOUT) as p:
+    with Edit(PAGE) as p:
         plant(p, 'id="ask-3"', 'id="ask-three"')
         check(r, "a tab whose radio button was renamed", CHECK, True,
               ["presses nothing: no control is called ask-3"])

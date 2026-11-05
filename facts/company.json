@@ -1,5 +1,5 @@
 {
- "note": "THE SOURCE for the company's site. Every fact the site states about the company is said here, once. What it states about the product - the version, the licence, the commands it names, every feature and every release - is the engine's, read from the release requirements-engine.txt pins, and never typed here. A null is a fact not decided yet: the page leaves out what depends on it. The demo, and the questions on the Why Wherefore page, are an illustration - a made-up company's plan and the assets that state it - and the pages say so; `{name}` in a line is a value the generator fills from beside it, so no number is said twice. The case study's counts are not here at all: the pendulum counts them itself, facts/pendulum.json is the copy, and each stat names the count it shows by `of`.",
+ "note": "THE SOURCE for the company's site. Every fact the site states about the company is said here, once. What it states about the product - the version, the licence, the commands it names, every feature and every release - is the engine's, read from the release requirements-engine.txt pins, and never typed here. A null is a fact not decided yet: the page leaves out what depends on it. The demo, and the questions under Why Wherefore, are an illustration - a made-up company's plan and the assets that state it - and the pages say so; `{name}` in a line is a value the generator fills from beside it, so no number is said twice. The case study's counts are not here at all: the pendulum counts them itself, facts/pendulum.json is the copy, and each stat names the count it shows by `of`.",
  "company": {
   "name": "Wherefore",
   "domain": "wherefore.build",
@@ -32,7 +32,7 @@
   "eyebrow": "Open-source CLI",
   "headline": "Your product changes.",
   "headline_end": "Your site, docs and deck don't.",
-  "lede": "Code has one source of truth and a pipeline that checks every change. Everything else your company says is a copy of a copy, and every copy drifts. Wherefore gives the rest of your company the pipeline your code already has: change something once, and everything that says it follows.",
+  "lede": "Everything your company says is a copy of a copy, and every copy drifts. Wherefore gives the rest of your company the pipeline your code already has: change something once, and everything that says it follows.",
   "try": "See what has already drifted on your site. No setup, no account.",
   "pip": "Or with pip:",
   "shows": "Real output, on a sample company. One trial, two lengths: you decide which is true, and Wherefore keeps it that way."
@@ -170,7 +170,7 @@
     "because": "I am not allowed yet. Until the audit is signed, the most any page may say is “SOC 2 in progress”, and the check refuses the rest."
    }
   ],
-  "note": "The same made-up company as the demo on the home page."
+  "note": "The same made-up company as the demo above."
  },
  "how": {
   "heading": "It lives in your repo, and runs in your CI.",

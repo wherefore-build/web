@@ -23,7 +23,7 @@ _copy.fresh()
 from wherefore.prove import Edit, check, report                   # noqa: E402
 
 CHECK = "checks/questions_turn.py"
-PAGE = "site/about/index.html"
+PAGE = "site/index.html"
 PASS = "the questions turn by themselves"
 
 
