@@ -7,4 +7,4 @@
 # request itself (.github/workflows/pin.yml); a person may too. The
 # distribution is wherefore-build because `wherefore` on PyPI is another
 # project's; what is imported and typed is `wherefore`.
-wherefore-build==0.9.0
+wherefore-build==0.11.0

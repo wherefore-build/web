@@ -66,6 +66,7 @@
   --ground: var(--brand-ground); --surface: var(--brand-surface); --line: var(--brand-line);
   --ink: var(--brand-ink); --muted: var(--brand-muted);
   --accent: var(--brand-ink); --accent-ink: var(--brand-ground); --lit: var(--brand-accent);
+  --mark: var(--brand-accent); --em: var(--brand-ink); --em-mark: var(--brand-accent);
   --gen: var(--brand-accent); --capt: var(--brand-caution); --hand: var(--brand-muted);
   --unk: var(--brand-fail); --bad: var(--brand-fail);
   --sans: var(--font-body); --serif: var(--font-display); --mono: var(--font-mono); --r: var(--radius-card);

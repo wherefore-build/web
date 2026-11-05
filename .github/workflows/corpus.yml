@@ -67,6 +67,7 @@ jobs:
       - name: The brand is said once, and every text colour is readable on its ground
         if: ${{ !cancelled() && steps.install.outcome == 'success' }}
         run: |
+          python3 -m wherefore check palette
           python3 checks/one_palette.py
           python3 checks/contrast.py
           python3 checks/brand_reasons.py

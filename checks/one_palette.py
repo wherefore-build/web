@@ -39,6 +39,11 @@ TOKENS = ROOT / "brand/tokens.json"
 NOT_OURS = {
     "site/pendulum/index.html": "the pendulum's own model, byte for byte, with the pendulum's own colours in it; "
                                 "its own suite holds its brand, and the frame keeps it apart from this page",
+    "site/pendulum/plate/index.html": "the pendulum's model again, opened on one part, with the same colours in it; "
+                                      "the same suite and the same frame",
+    "site/changelog/index.html": "quotes each release's picture as the engine printed it, and the 0.10.0 picture is "
+                                 "the palette check catching a stray colour: the page says that colour as text, "
+                                 "never as a style - its styles are page.css and brand.css, read above",
 }
 
 HEX = re.compile(r"(?<![\w&])#(?:[0-9A-Fa-f]{8}|[0-9A-Fa-f]{6}|[0-9A-Fa-f]{3,4})\b")

@@ -305,7 +305,8 @@ def nav(f, home=""):
     n = f["nav"]
     return (f'<nav aria-label="The site"><a href="{home}#how">{esc(n["how"])}</a>'
             f'<a href="{home}features/">{esc(n["does"])}</a><a href="{home}#case">{esc(f["case"]["eyebrow"])}</a>'
-            f'<a href="{home}#why">{esc(n["why"])}</a><a href="{home}changelog/">{esc(f["changelog"]["title"])}</a></nav>')
+            f'<a href="{home}#why">{esc(n["why"])}</a><a href="{home}changelog/">{esc(f["changelog"]["title"])}</a>'
+            f'<a href="{home}{MAP_PAGE}">{esc(n["map"])}</a></nav>')
 
 
 def topbar(f, home=""):
@@ -324,7 +325,8 @@ def foot_nav(f, home=""):
     n = f["nav"]
     return (f'<nav class="foot-nav" aria-label="The site, again"><a href="{home}#how">{esc(n["how"])}</a>'
             f'<a href="{home}features/">{esc(n["does"])}</a><a href="{home}#case">{esc(f["case"]["eyebrow"])}</a>'
-            f'<a href="{home}#why">{esc(n["why"])}</a><a href="{home}changelog/">{esc(f["changelog"]["title"])}</a></nav>')
+            f'<a href="{home}#why">{esc(n["why"])}</a><a href="{home}changelog/">{esc(f["changelog"]["title"])}</a>'
+            f'<a href="{home}{MAP_PAGE}">{esc(n["map"])}</a></nav>')
 
 
 def header(f):

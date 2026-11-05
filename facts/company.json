@@ -27,6 +27,7 @@
   "why": "Why Wherefore",
   "start": "Get started",
   "github": "View on GitHub",
+  "map": "Map",
   "menu": "Menu"
  },
  "hero": {
@@ -210,7 +211,8 @@
    "upstream": "Copied something you can't pin, like a partner's spec sheet? The deploy fails the day its source changes.",
    "hook": "A push that would ship a stale document stops before it leaves your machine.",
    "skill": "Claude Code or Codex learns the rules from a skill that ships with each release.",
-   "graph": "A page for every repository: each file, how it is made, and what changes when a source does. One command draws it, and changes nothing."
+   "graph": "A page for every repository: each file, how it is made, and what changes when a source does. One command draws it, and changes nothing.",
+   "palette": "Your brand lives in one file. Type a colour anywhere else and the build names the file and the line, unless the file says, with a reason, that the colour is somebody else's."
   },
   "unshown": {},
   "home": [
@@ -315,7 +317,7 @@
   "toggle": "How this page is built",
   "intro": "Every part of this page is generated. Each now names the facts it is built from, and the checks that hold it on every push.",
   "source": "Read every file it is built from",
-  "map": "See the whole map: every file on this site, how it is made, and what changes when a source does",
+  "map": "See the map of this repository: every file on this site, how it is made, and what changes when a source does",
   "map_short": "Map",
   "from": "from",
   "facts": "{n} facts",
