@@ -1,6 +1,6 @@
 {
  "wherefore": 1,
- "name": "wherefore-co",
+ "name": "web",
  "note": "The company: its site and its brand now, and every asset after them. Each asset is generated from facts/company.json, from brand/tokens.json and from the engine it pins - what the product is (its principles, its commands, its version) is read from that release, never retyped here.",
  "sources": {
   "facts": {

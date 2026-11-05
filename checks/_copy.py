@@ -25,7 +25,7 @@ def git(root, *args):
 
 def fresh():
     files = git(ROOT, "ls-files", "-z", "--cached", "--others", "--exclude-standard").stdout
-    root = pathlib.Path(tempfile.mkdtemp(prefix="wherefore-co-")) / "wherefore-co"
+    root = pathlib.Path(tempfile.mkdtemp(prefix="web-")) / "web"
     for rel in sorted({p for p in files.split("\0") if p and (ROOT / p).is_file()}):
         (root / rel).parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(ROOT / rel, root / rel)
@@ -34,6 +34,6 @@ def fresh():
     git(root, "-c", "user.email=proof@wherefore", "-c", "user.name=proof",
         "-c", "commit.gpgsign=false", "commit", "-qm", "this repository, as it stands")
     from wherefore import prove
-    prove.set_root(root, temp_prefix="wherefore-co-")
+    prove.set_root(root, temp_prefix="web-")
     os.environ["WHEREFORE_ROOT"] = str(root)
     return root
