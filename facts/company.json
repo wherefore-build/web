@@ -212,7 +212,8 @@
    "hook": "A push that would ship a stale document stops before it leaves your machine.",
    "skill": "Claude Code or Codex learns the rules from a skill that ships with each release.",
    "graph": "A page for every repository: each file, how it is made, and what changes when a source does. One command draws it, and changes nothing.",
-   "palette": "Your brand lives in one file. Type a colour anywhere else and the build names the file and the line, unless the file says, with a reason, that the colour is somebody else's."
+   "palette": "Your brand lives in one file. Type a colour anywhere else and the build names the file and the line, unless the file says, with a reason, that the colour is somebody else's.",
+   "report": "Stuck, or missing something? Tell your agent to tell us: one command writes the report, with the release, the shape of your repository and your words, nothing private, and opens it with the people who make Wherefore."
   },
   "unshown": {},
   "home": [
@@ -337,7 +338,8 @@
   "source": "The open-source engine's roadmap, as its repository states it.",
   "labels": {
    "next": "Next",
-   "later": "Later"
+   "later": "Later",
+   "asked": "asked for by"
   }
  }
 }

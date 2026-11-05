@@ -521,6 +521,8 @@ footer p { margin: 0; }
 .chip-since { min-width: 0; }
 .chip-next { color: var(--caution); border-color: var(--caution); min-width: 0; }
 .chip-later { min-width: 0; }
+.road-asked { font: 400 0.8125rem/1.4 var(--font-mono); color: var(--muted); margin-left: 0.5rem; }
+.road-asked a { color: var(--muted); }
 #next { padding-top: 0; border-top: 0; }
 
 /* The case study's two lists, folded behind one tap: the story and the counts stay in view. */
