@@ -94,16 +94,34 @@ MODEL_PAGE = "pendulum/"
 # What frames the pendulum's model on this site, appended after its source -
 # which has no closing tags, so it is appended to, never edited. A three-quarter
 # view drawn back far enough, with the pivot high, that the whole swing stays in
-# a small frame; the arms in the pose the home page shows; then a swing from it.
-# A visitor who asks for less motion gets the pose alone.
-FRAMING = """
-<style>html,body{overflow:hidden}</style>
+# a small frame; the arms in the pose the home page shows; then, the moment the
+# frame scrolls into view, a swing from it with a kick (owner, 5 November 2026:
+# a big spin, so it looks interesting when a visitor reaches it). The kick is
+# the two arms' starting speeds in radians a second; at these the outer arm
+# turns over several times in its first seconds. The frame is lazy, so it may
+# load long before it is seen, and the observer holds the kick until it is;
+# a browser without one kicks on load. A visitor who asks for less motion
+# gets the pose alone.
+KICK = (6, 14)
+FRAMING = f"""
+<style>html,body{{overflow:hidden}}</style>
 <script>
-addEventListener('load', function () {
+addEventListener('load', function () {{
   var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  CP.go({view: {yaw: 30, pitch: -14, fov: 30, tx: 0, ty: -100, app: 580}, pose: 'house', dur: 1})
-    .then(function () { if (!still) return CP.swing(); });
-});
+  var posed = CP.go({{view: {{yaw: 30, pitch: -14, fov: 30, tx: 0, ty: -100, app: 580}}, pose: 'house', dur: 1}});
+  if (still) return;
+  var kicked = false;
+  function kick() {{
+    if (kicked) return;
+    kicked = true;
+    posed.then(function () {{ return CP.swing({{kick: [{KICK[0]}, {KICK[1]}]}}); }});
+  }}
+  if (!('IntersectionObserver' in window)) return kick();
+  var seen = new IntersectionObserver(function (entries) {{
+    if (entries.some(function (e) {{ return e.isIntersecting; }})) {{ seen.disconnect(); kick(); }}
+  }}, {{threshold: 0.5}});
+  seen.observe(document.body);
+}});
 </script>
 """
 
