@@ -1,5 +1,5 @@
 {
- "note": "THE SOURCE for the company's site. Every fact the site states about the company is said here, once. What it states about the product - the version, the licence, the commands it names, every feature and every release - is the engine's, read from the release requirements-engine.txt pins, and never typed here. A null is a fact not decided yet: the page leaves out what depends on it. The demo, and the questions under Why Wherefore, are an illustration - a made-up company's plan and the assets that state it - and the pages say so; `{name}` in a line is a value the generator fills from beside it, so no number is said twice. The case study's counts are not here at all: the pendulum counts them itself, facts/pendulum.json is the copy, and each stat names the count it shows by `of`.",
+ "note": "THE SOURCE for the company's site. Every fact the site states about the company is said here, once. What it states about the product - the version, the licence, the commands it names, every feature and every release - is the engine's, read from the release requirements-engine.txt pins, and never typed here. A null is a fact not decided yet: the page leaves out what depends on it. The demo, and the questions under Why Wherefore, are an illustration - an example company's plan and the assets that state it - and the pages say so; `{name}` in a line is a value the generator fills from beside it, so no number is said twice. The case study's counts are not here at all: the pendulum counts them itself, facts/pendulum.json is the copy, and each stat names the count it shows by `of`.",
  "company": {
   "name": "Wherefore",
   "domain": "wherefore.build",
@@ -35,7 +35,7 @@
   "lede": "Everything your company says is a copy of a copy, and every copy drifts. Wherefore gives the rest of your company the pipeline your code already has: change something once, and everything that says it follows.",
   "try": "See what has already drifted on your site. No setup, no account.",
   "pip": "Or with pip:",
-  "shows": "Real output, on a sample company. One trial, two lengths: you decide which is true, and Wherefore keeps it that way."
+  "shows": "Real output, on an example company. One trial, two lengths: you decide which is true, and Wherefore keeps it that way."
  },
  "forks": {
   "code": {
@@ -48,7 +48,7 @@
   "drift": {
    "title": "Everything else",
    "caption": "Every copy forks, then forks again, and nothing ever merges back. Each version drifts on its own, for good.",
-   "sting": "That is how a customer ends up quoting you last year’s price.",
+   "sting": "That is how the website goes out of date, and the sales team ends up with the wrong deck.",
    "start": "a decision",
    "copies": [
     "deck_final_v2.key",
@@ -67,7 +67,7 @@
  },
  "demo": {
   "heading": "Change it once. Every copy follows.",
-  "label": "A made-up company renames a feature. Tap each step.",
+  "label": "An example company renames a feature. Tap each step.",
   "source": "source",
   "fact": "product.json · names.workspace",
   "before": "Workspace",
@@ -170,7 +170,7 @@
     "because": "I am not allowed yet. Until the audit is signed, the most any page may say is “SOC 2 in progress”, and the check refuses the rest."
    }
   ],
-  "note": "The same made-up company as the demo above."
+  "note": "The same example company as the demo above."
  },
  "how": {
   "heading": "It lives in your repo, and runs in your CI.",
@@ -294,7 +294,7 @@
     "says": "When you're ready: set up the repository, then ask your coding agent to set up Wherefore."
    }
   ],
-  "free": "Free and open source under {licence}. Nothing to join, and nobody to call."
+  "free": "Open source under {licence}."
  },
  "inspect": {
   "toggle": "How this page is built",

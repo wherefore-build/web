@@ -35,7 +35,7 @@ import threading
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 SITE = ROOT / "site"
 PHONE = {"width": 390, "height": 844}
-TURN = 4            # seconds a question stands: gen/site.py FLIP
+TURN = 7            # seconds a question stands: gen/site.py FLIP
 
 # The text of the question showing now: the panel that is visible and opaque.
 SHOWING = """() => {
