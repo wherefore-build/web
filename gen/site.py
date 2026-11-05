@@ -508,7 +508,7 @@ OUT = ('<svg class="out" viewBox="0 0 16 16" aria-hidden="true" focusable="false
        'fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>')
 
 def hero(f):
-    """What it is, why it matters, and the two commands that try it on your own site - with real output beside them.
+    """What it is, why it matters, and the commands that try it on your own site - and on your site and your app together - with real output beside them.
 
     The headline runs the whole width; under it the lede and the two commands
     take one column and the scan's output the other, once there is room for
@@ -522,6 +522,11 @@ def hero(f):
     name, licence = release_meta()
     first = st["steps"][0]
     run = f'{command(first["command"])} {first.get("args", "")}'.strip()
+    # The same scan, pointed at two places at once (owner, 5 November 2026):
+    # the output beside it reads a site and an app together, so the command
+    # that does that stands under the one-site command, ready to copy.
+    also = (f'<code class="cmd"><span class="term-prompt">$</span> {esc(command(first["command"]))} {esc(first["also"])}</code>'
+            if first.get("also") else "")
     repo = f["company"]["github"]
     github = (f'<p class="actions"><a class="button button-quiet" href="{esc(repo)}">{esc(f["nav"]["github"])}{OUT}</a></p>'
               if repo else "")
@@ -533,7 +538,7 @@ def hero(f):
 <div class="hero-copy">
 <p class="lede">{esc(h["lede"])}</p>
 <p class="try-label">{esc(h["try"])}</p>
-<div class="try"><code class="cmd"><span class="term-prompt">$</span> {esc(st["install"])}</code><code class="cmd"><span class="term-prompt">$</span> {esc(run)}</code></div>
+<div class="try"><code class="cmd"><span class="term-prompt">$</span> {esc(st["install"])}</code><code class="cmd"><span class="term-prompt">$</span> {esc(run)}</code>{also}</div>
 <p class="try-pip">{esc(h["pip"])} <code>pip install {esc(name)}</code></p>
 {github}
 </div>

@@ -35,7 +35,7 @@
   "headline": "Your product changes.",
   "headline_end": "Your site, docs and deck don't.",
   "lede": "Everything your company says is a copy of a copy, and every copy drifts. Wherefore gives the rest of your company the pipeline your code already has.",
-  "try": "See what has already drifted on your site. No setup, no account.",
+  "try": "See what has already drifted on your site, or on your site and your app together. No setup, no account.",
   "pip": "Or with pip:",
   "shows": "Real output, on an example company. One trial, two lengths: you decide which is true, and Wherefore keeps it that way."
  },
@@ -307,6 +307,7 @@
    {
     "command": "wherefore scan",
     "args": "https://your-site.example",
+    "also": "https://your-site.example https://your-app.example",
     "says": "See what has drifted. Nothing to set up."
    },
    {
