@@ -515,8 +515,11 @@ footer p { margin: 0; }
 .hero .lede { max-width: 40ch; }
 .try-label { margin: 1.75rem 0 0.6rem; font: 400 0.875rem/1.4 var(--font-mono); color: var(--muted); }
 .try { display: grid; gap: 0.35rem; padding: 1rem 1.25rem; border: 1px solid var(--accent); border-radius: 12px; background: var(--surface); overflow-x: auto; }
-/* One tap selects a whole command, so it can be copied as it stands. */
-.try .cmd { display: block; font: 400 0.9375rem/1.5 var(--font-mono); white-space: pre; user-select: all; -webkit-user-select: all; }
+/* One tap selects a whole command, so it can be copied as it stands. A command
+   longer than the box wraps under its own first word, the prompt hanging in
+   the margin, rather than running off the right where a visitor cannot read
+   its end: the two-address scan does, on every screen. */
+.try .cmd { display: block; font: 400 0.9375rem/1.5 var(--font-mono); white-space: pre-wrap; overflow-wrap: anywhere; padding-left: 1.3em; text-indent: -1.3em; user-select: all; -webkit-user-select: all; }
 .try-pip { margin: 0.6rem 0 0; font: 400 0.8125rem/1.4 var(--font-mono); color: var(--muted); }
 .try-pip code { color: var(--ink); user-select: all; -webkit-user-select: all; }
 .hero .actions { margin-top: 1.5rem; }
