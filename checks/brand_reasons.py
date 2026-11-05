@@ -50,6 +50,8 @@ def faults():
     if "light" in t:
         if not str(t["light"].get("why", "")).strip():
             found.append("the light scheme has no `why`")
+        if not t["light"].get("contrast", {}).get("pairs"):
+            found.append("the light scheme declares no contrast pairs of its own (light.contrast.pairs)")
         light = t["light"].get("color", {})
         for name in t.get("color", {}):
             if name not in light:

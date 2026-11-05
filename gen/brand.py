@@ -59,8 +59,9 @@ def map_theme(t):
     every face and radius the tokens hold, the way site/brand.css does - the
     fonts one level up, since the map lives at /map/ - with the colours of the
     light scheme, paper, and then names the map's properties as the brand's:
-    generated is the accent, captured is caution, written by hand is muted,
-    unknown is fail. Nothing here is a value;
+    what the map writes with is the ink, what it marks with is the accent,
+    captured is caution, written by hand is muted, unknown is fail. Nothing
+    here is a value;
     checks/one_palette.py reads this file."""
     faces = []
     for role, face in t["type"].items():
@@ -74,14 +75,22 @@ def map_theme(t):
                 f'  src: url("../fonts/{f["file"]}") format("woff2");\n'
                 "}\n")
     # The light scheme, `light` in the tokens: the map is read on paper, as the
-    # app will be (owner, 5 November 2026). Every role keeps its name.
-    props = [f"  --{name}: var(--{c['same_as']});" if "same_as" in c else f"  --{name}: {c['value']};"
+    # app will be (owner, 5 November 2026). The brand's roles are written as
+    # --brand-*, and the map's own properties are named as them. The map
+    # writes with --accent - its headline, its traced lines, a chosen card's
+    # border - and on paper the accent is a highlighter that never writes, so
+    # what the map writes with is the ink, and what it marks with (--lit, the
+    # chosen card; --gen, what a script made) is the accent.
+    props = [f"  --brand-{name}: var(--brand-{c['same_as']});" if "same_as" in c else f"  --brand-{name}: {c['value']};"
              for name, c in t["light"]["color"].items()]
     props += [f'  --font-{role}: "{face["family"]}", {face["fallback"]};'
               for role, face in t["type"].items()]
     props += [f"  --radius-{name}: {r['value']};" for name, r in t["radius"].items()]
-    props += ["  --accent-ink: var(--on-accent); --lit: var(--surface);",
-              "  --gen: var(--accent); --capt: var(--caution); --hand: var(--muted); --unk: var(--fail); --bad: var(--fail);",
+    props += ["  --ground: var(--brand-ground); --surface: var(--brand-surface); --line: var(--brand-line);",
+              "  --ink: var(--brand-ink); --muted: var(--brand-muted);",
+              "  --accent: var(--brand-ink); --accent-ink: var(--brand-ground); --lit: var(--brand-accent);",
+              "  --gen: var(--brand-accent); --capt: var(--brand-caution); --hand: var(--brand-muted);",
+              "  --unk: var(--brand-fail); --bad: var(--brand-fail);",
               "  --sans: var(--font-body); --serif: var(--font-display); --mono: var(--font-mono); --r: var(--radius-card);",
               "  color-scheme: light;"]
     return (CSS_HEADER.replace("site/brand.css", "site/brand/map.css") if "site/brand.css" in CSS_HEADER else CSS_HEADER) \
@@ -176,7 +185,7 @@ def page(t):
         f'<td class="sample-cell" style="color: var(--{esc(p["text"])}); background: var(--{esc(p["on"])})">Aa {esc(name)}</td>'
         f'<td class="num">{contrast(light[p["text"]], light[p["on"]]):.1f}:1</td>'
         f'<td class="num">{p["min"]:g}:1</td></tr>'
-        for p in t["contrast"]["pairs"])
+        for p in t["light"]["contrast"]["pairs"])
     samples = {"display": f'{FACTS["hero"]["headline"]} {FACTS["hero"]["headline_end"]}', "body": FACTS["hero"]["lede"],
                "mono": "$ " + gate_usage()}
     specimens = "\n".join(

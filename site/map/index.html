@@ -57,22 +57,25 @@
   src: url("../fonts/jetbrains-mono/jetbrains-mono-latin-500-normal.woff2") format("woff2");
 }
 :root {
-  --ground: #F7F6F2;
-  --surface: #FFFFFF;
-  --line: #D9D7D0;
-  --ink: #17181B;
-  --muted: #5C5F66;
-  --accent: #3F6B00;
-  --on-accent: var(--surface);
-  --caution: #7A5E00;
-  --fail: #B3261E;
+  --brand-ground: #FFFFFF;
+  --brand-surface: #F6F5F1;
+  --brand-line: #DAD8D2;
+  --brand-ink: #0B0C0E;
+  --brand-muted: #5F6269;
+  --brand-accent: #C3FF0F;
+  --brand-on-accent: var(--brand-ink);
+  --brand-caution: #F4D35E;
+  --brand-fail: #C8401F;
   --font-display: "Instrument Serif", Georgia, 'Times New Roman', serif;
   --font-body: "Inter", system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
   --radius-card: 16px;
   --radius-control: 999px;
-  --accent-ink: var(--on-accent); --lit: var(--surface);
-  --gen: var(--accent); --capt: var(--caution); --hand: var(--muted); --unk: var(--fail); --bad: var(--fail);
+  --ground: var(--brand-ground); --surface: var(--brand-surface); --line: var(--brand-line);
+  --ink: var(--brand-ink); --muted: var(--brand-muted);
+  --accent: var(--brand-ink); --accent-ink: var(--brand-ground); --lit: var(--brand-accent);
+  --gen: var(--brand-accent); --capt: var(--brand-caution); --hand: var(--brand-muted);
+  --unk: var(--brand-fail); --bad: var(--brand-fail);
   --sans: var(--font-body); --serif: var(--font-display); --mono: var(--font-mono); --r: var(--radius-card);
   color-scheme: light;
 }
