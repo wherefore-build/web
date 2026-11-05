@@ -29,6 +29,7 @@ private repository, not here, so that none of them goes public with the site.
 | `gen/kit.py` | what the generators share: the sources, the draft banner, contrast | authored |
 | `site/index.html` | the home page | generated |
 | `site/features/`, `site/changelog/` | everything it does and what's next, and every release | generated |
+| `site/map/` | the site's own map, written by `wherefore graph` run as a generator: every source, the scripts that read it, and every file they make, from a real run | generated |
 | `site/_headers` | what Cloudflare Pages serves with every file | generated |
 | `site/install.sh` | the one-line installer `wherefore.sh` serves, from the pinned release (`gen/install.py`) | generated |
 | `site/brand.css`, `site/fonts/` | the brand as custom properties, and the fonts it serves itself | generated |
@@ -116,7 +117,11 @@ ships: an item leaves the roadmap in the change that ships it.
 
 **How this page is built.** A switch at the bottom of the screen shows, above
 every part of the page, the facts it was built from and the checks that hold
-it, with a key at the top. It is not a description typed beside the page:
+it, with a key at the top. The key links the map (`site/map/`): the whole
+chain, every source, the scripts that read it and every file they make, drawn
+by the pinned engine from a real run of every generator - `wherefore graph`
+is itself a generator of this site, which the gate runs like any command and
+which `wherefore graph` credits rather than runs. It is not a description typed beside the page:
 `gen/site.py` renders each part through a view of the facts that records every
 fact it reads and every command it asks the engine for, and that record is what
 the part shows.

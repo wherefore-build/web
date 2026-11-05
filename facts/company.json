@@ -300,6 +300,8 @@
   "toggle": "How this page is built",
   "intro": "Every part of this page is generated. Each now names the facts it is built from, and the checks that hold it on every push.",
   "source": "Read every file it is built from",
+  "map": "See the whole map: every file on this site, how it is made, and what changes when a source does",
+  "map_short": "Map",
   "from": "from",
   "facts": "{n} facts",
   "held": "held by",

@@ -49,6 +49,8 @@ CONTROLS = "label, button, summary"
 
 # A page whose controls are not this site's to press, and why.
 NOT_OURS = {
+    "map/index.html": "the engine's own page, written by `wherefore graph` as a generator of this site; its "
+                      "controls are the engine's, and the engine's suite presses them",
     "pendulum/index.html": "the pendulum's own model, framed beside the case study with its controls "
                            "hidden; its own suite presses them, and checks/model_turns.py does what a thumb "
                            "does to it here - drags it",

@@ -44,6 +44,18 @@
    "script": "-m wherefore.skill",
    "cwd": ".",
    "makes": ".claude/skills/wherefore/, the skill the pinned release ships, for every coding agent that works here"
+  },
+  {
+   "run": [
+    "python3",
+    "-m",
+    "wherefore",
+    "graph",
+    "--html",
+    "site/map/index.html"
+   ],
+   "cwd": ".",
+   "makes": "site/map/, the map of this repository: every source, the scripts that read it, and every file they make, drawn by the pinned engine from a real run - the gate runs it like any command, and `wherefore graph` credits it rather than running it"
   }
  ],
  "inventory": {
