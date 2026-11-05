@@ -1067,7 +1067,7 @@ def page(f):
 {parts["start"]}
 </main>
 {parts["footer"]}
-<label class="inspect-switch" for="inspect"><span class="switch-track" aria-hidden="true"></span>{esc(inspect["toggle"])}</label>
+<label class="inspect-switch" for="inspect"><span class="switch-track" aria-hidden="true"></span><span class="switch-long">{esc(inspect["toggle"])}</span><span class="switch-short">{esc(inspect["toggle_short"])}</span></label>
 </body>
 </html>
 """

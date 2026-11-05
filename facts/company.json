@@ -314,7 +314,8 @@
   "free": "Open source under {licence}."
  },
  "inspect": {
-  "toggle": "How this page is built",
+  "toggle": "How Wherefore compiled this page",
+  "toggle_short": "Compiled by Wherefore",
   "intro": "Every part of this page is generated. Each now names the facts it is built from, and the checks that hold it on every push.",
   "source": "Read every file it is built from",
   "map": "See the map of this repository: every file on this site, how it is made, and what changes when a source does",
