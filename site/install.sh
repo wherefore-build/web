@@ -39,5 +39,5 @@ else
 fi
 say ""
 say "Next:"
-say '  wherefore scan .    where each stated value appears, and where the copies disagree; needs no setup'
+say '  wherefore scan .    where each stated value appears, and where the copies disagree; needs no setup. Given two places - a site and an app - what both state, and where they differ'
 say '  wherefore init      write a wherefore.json that declares nothing yet'
