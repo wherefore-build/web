@@ -51,6 +51,12 @@ def head(title, description, css):
     ]
     if status() == "draft":
         lines.append('<meta name="robots" content="noindex, nofollow">')
+    # The icon, from the brand pack beside the page: the SVG gen/brand.py
+    # writes, and the PNG shot from it for the devices that take only PNG
+    # (owner, 5 November 2026). `css` says how far down the page sits.
+    up = css[:css.rfind("/") + 1]
+    lines.append(f'<link rel="icon" href="{up}brand/icon.svg" type="image/svg+xml">')
+    lines.append(f'<link rel="apple-touch-icon" href="{up}brand/icon-1024.png">')
     lines.append(f'<link rel="stylesheet" href="{css}">')
     return "\n".join(lines)
 
