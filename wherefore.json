@@ -33,7 +33,7 @@
   {
    "script": "site.py",
    "cwd": "gen",
-   "makes": "site/index.html, site/page.css, site/_headers and the pendulum's framed model site/pendulum/, from the facts, the pendulum's counts and model, the brand and the pinned engine"
+   "makes": "site/index.html, site/page.css, site/_headers and the pendulum's framed model and its side view site/pendulum/, from the facts, the pendulum's counts and model, the brand and the pinned engine"
   },
   {
    "script": "install.py",
@@ -161,6 +161,13 @@
       "matches": "bytes",
       "unreachable": "GitHub not answering is not the roadmap moving: a deploy goes ahead and says so, and the next build reads it again"
      }
+    },
+    "pendulum-sheet": {
+     "files": [
+      "cases/pendulum/side-exploded.svg"
+     ],
+     "no_stamp": "copied byte for byte from the pendulum's repository, which this gate cannot see and deliberately does not read: facts/company.json case.sheet.taken names the file, the commit and the day, and the pendulum's own suite draws and judges it. The pendulum inlines it into its home page, so there is no address of its own to hold it to; a person copies it again when the story is retold",
+     "why": "the pendulum's exploded side view without its callouts, the public cut its own home page draws, shown under the case study's counts"
     }
    }
   }

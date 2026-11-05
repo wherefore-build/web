@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Wherefore — your company, compiled</title>
-<meta name="description" content="Everything your company says is a copy of a copy, and every copy drifts. Wherefore gives the rest of your company the pipeline your code already has: change something once, and everything that says it follows.">
+<meta name="description" content="Everything your company says is a copy of a copy, and every copy drifts. Wherefore gives the rest of your company the pipeline your code already has.">
 <meta name="color-scheme" content="dark">
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" href="brand/icon.svg" type="image/svg+xml">
@@ -16,8 +16,8 @@
 <body>
 <input class="state inspect-state" type="checkbox" id="inspect">
 <div class="draft" role="note"><span class="draft-mark">Draft</span> Nothing on this page is launched, and nothing here is a promise yet.</div>
-<header class="top"><div class="wrap"><a class="name" href="#top">Wherefore</a>
-<nav aria-label="The site"><a href="#how">How it works</a><a href="features/">Features</a><a href="#case">Case study</a><a href="#why">Why Wherefore</a><a href="changelog/">Changelog</a><a class="pill" href="#start">Get started</a></nav></div><div class="wrap"><div class="src"><p><span class="src-k">from</span> facts/company.json · 9 facts: site.{status, draft_banner} · company.name · nav.{how, does, why, start} · case.eyebrow · changelog.title</p><p><span class="src-k">held by</span> gate · reach · brand</p></div></div></header>
+<header class="top"><div class="wrap"><input class="state menu-state" type="checkbox" id="menu"><a class="name" href="#top">Wherefore</a>
+<label class="menu-switch" for="menu">Menu</label><nav aria-label="The site"><a href="#how">How it works</a><a href="features/">Features</a><a href="#case">Case study</a><a href="#why">Why Wherefore</a><a href="changelog/">Changelog</a></nav><a class="pill" href="#start">Get started</a></div><div class="wrap"><div class="src"><p><span class="src-k">from</span> facts/company.json · 10 facts: site.{status, draft_banner} · company.name · nav.{menu, how, does, why, start} · case.eyebrow · changelog.title</p><p><span class="src-k">held by</span> gate · reach · brand · press</p></div></div></header>
 <main id="top">
 <div class="src-key"><div class="wrap"><p>Every part of this page is generated. Each now names the facts it is built from, and the checks that hold it on every push. <a target="_blank" rel="noopener" href="https://github.com/wherefore-build/web">Read every file it is built from<svg class="out" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M9 2h5v5M14 2 7.5 8.5M12 9.5V13a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p><dl><div><dt>gate</dt><dd>rebuilt from its sources on every push, and refused if it differs from what is committed</dd></div><div><dt>reach</dt><dd>each of these facts is moved, one at a time, and the page must change with it</dd></div><div><dt>press</dt><dd>every control here is tapped on a fresh load, at a phone’s width, and must show something new</dd></div><div><dt>engine</dt><dd>every command named here must be one the pinned release has</dd></div><div><dt>brand</dt><dd>every colour and face is a brand token, and every text colour reads at 4.5:1 on its ground</dd></div><div><dt>snapshot</dt><dd>these counts were taken from the pendulum once, at the commit and day they name; each is moved, one at a time, and the page must change with it</dd></div></dl></div></div>
 <section class="hero"><div class="wrap">
@@ -26,7 +26,7 @@
 <h1>Your product changes. <em>Your site, docs and deck don&#x27;t.</em></h1>
 <div class="hero-grid">
 <div class="hero-copy">
-<p class="lede">Everything your company says is a copy of a copy, and every copy drifts. Wherefore gives the rest of your company the pipeline your code already has: change something once, and everything that says it follows.</p>
+<p class="lede">Everything your company says is a copy of a copy, and every copy drifts. Wherefore gives the rest of your company the pipeline your code already has.</p>
 <p class="try-label">See what has already drifted on your site. No setup, no account.</p>
 <div class="try"><code class="cmd"><span class="term-prompt">$</span> curl -fsSL https://wherefore.sh | sh</code><code class="cmd"><span class="term-prompt">$</span> wherefore scan https://your-site.example</code></div>
 <p class="try-pip">Or with pip: <code>pip install wherefore-build</code></p>
@@ -79,7 +79,7 @@
 </div>
 </div></section>
 <section id="how"><div class="wrap">
-<div class="src"><p><span class="src-k">from</span> facts/company.json · 11 facts: how.{steps[].{command, name, text}, heading, note}</p><p><span class="src-k">from</span> wherefore 0.7.0 · commands.json: wherefore scan, wherefore build, wherefore gate</p><p><span class="src-k">held by</span> gate · reach · brand · engine</p></div>
+<div class="src"><p><span class="src-k">from</span> facts/company.json · 19 facts: how.{steps[].{command, name, text}, heading, note} · does.{home[], short.{retired, claims, upstream}, home_heading, all}</p><p><span class="src-k">from</span> wherefore 0.7.0 · commands.json: wherefore scan, wherefore build, wherefore gate</p><p><span class="src-k">held by</span> gate · reach · brand · engine</p></div>
 <h2>It lives in your repo, and runs in your CI.</h2>
 <ol class="steps">
 <li><p class="step-label">01 · <code>wherefore scan</code></p><h3>Find what has drifted.</h3><p>Point it at your site or docs. It lists every value stated more than one way, and where each copy lives.</p></li>
@@ -87,35 +87,32 @@
 <li><p class="step-label">03 · <code>wherefore gate</code></p><h3>Keep it that way.</h3><p>On every push, CI rebuilds everything. A stale page, or a file nobody can account for, fails the build, and the error says why.</p></li>
 </ol>
 <p class="how-note">One command-line tool, on Python. No server and no account.</p>
+<h3 class="catches">What else it catches.</h3>
+<ul class="does does-three">
+<li><p class="does-name">Retired facts</p><p>Retire an old price or name once, and nothing may say it again.</p></li>
+<li><p class="does-name">Claims</p><p>Give a claim a rule, and no page can say more than it allows.</p></li>
+<li><p class="does-name">Derived from elsewhere</p><p>Copied a partner&#x27;s spec? The deploy fails the day their source changes.</p></li>
+</ul>
+<p class="more-all"><a href="features/">All 12 features, and what&#x27;s next</a></p>
 </div></section>
 <section id="case" class="case"><div class="wrap">
-<div class="src"><p><span class="src-k">from</span> facts/company.json · 31 facts: case.{made[], held[], stats[].{of, what}, as_of, quote, eyebrow, name, heading, model.{ground, title, hint}, text, url, visit, more, made_heading, held_heading}</p><p><span class="src-k">from</span> facts/pendulum.json · 5 facts: counts.{proofs, parts, plates, pack.version} · captured.on</p><p><span class="src-k">held by</span> gate · reach · brand · snapshot</p></div>
+<div class="src"><p><span class="src-k">from</span> facts/company.json · 31 facts: case.{made[], held[], stats[].{of, what}, quote, eyebrow, name, heading, model.{ground, title, hint}, text, url, visit, more, made_heading, held_heading, sheet.{alt, caption}}</p><p><span class="src-k">from</span> facts/pendulum.json · 3 facts: counts.{proofs, parts, plates}</p><p><span class="src-k">held by</span> gate · reach · brand · snapshot</p></div>
 <div class="case-head">
 <p class="eyebrow">Case study · Chaotic Pendulums</p>
 <h2>A hardware company, built from one spec file.</h2>
 <figure class="case-model"><iframe src="pendulum/?embed=1&amp;bg=EDEBE6" title="The MK3 pendulum in 3D: drag to turn it, or grab an arm and swing it" loading="lazy" sandbox="allow-scripts" style="background: var(--ink)"></iframe><figcaption>Drag to turn it</figcaption></figure>
-<p class="case-text">Chaotic Pendulums makes a desk-sized double pendulum. Its part drawings, 3D print files, parts list, supplier pack and website are all built from one spec file, and Wherefore was built alongside it. If one source can hold machined parts, it can hold your app and docs.</p>
+<p class="case-text">Chaotic Pendulums makes a desk-sized double pendulum. Its drawings, print files, parts list, supplier pack and website are built from one spec file, with Wherefore built alongside it. Move one dimension and every file a supplier receives moves with it, or the change is refused. If one source can hold machined parts, it can hold your app and docs.</p>
 <p class="actions"><a class="button button-quiet" href="https://chaoticpendulums.com/">See the live site</a></p>
 </div>
 
 <ul class="stats"><li><span class="stat-n">50</span> checks, each proven to catch the fault it is for</li><li><span class="stat-n">9</span> parts, each drawn, cut and modelled from the spec</li><li><span class="stat-n">5</span> print plates, ready to make a prototype</li></ul>
-<p class="as-of">Counted at V84 of the pack, on 3 November 2026.</p>
 <details class="case-more"><summary>What it builds, and what holds it</summary>
 <div class="case-grid">
 <div class="case-col"><h3>What it builds</h3><ul class="case-list"><li>Part drawings a machine shop quotes and inspects against, each with its cut file and its solid model</li><li>Print-ready 3D files for a prototype, laid out plate by plate</li><li>A bill of materials, and a quote bundle a shop’s online tool takes in one drag</li><li>The engineering hand-over, frozen at every release so a shop can always find the pack it quoted</li><li>The brand: the mark, the hero and the renders, drawn from the object’s own dimensions</li><li>The website, and the 3D pendulum that swings on it</li></ul></div>
-<div class="case-col"><h3>What holds it</h3><ul class="case-list case-held"><li>Load simulations, worked from the real parts’ masses, prove every mount setup holds the pendulum at a torque a hand can give.</li><li>Worst-case tolerance stacks prove every screw clamps and never bottoms, at every extreme of every band.</li><li>A sweep proves the blade turns a full circle and touches nothing.</li><li>The swing on the website is integrated from the physics of the object as it is today, and a check holds every mass and length to the parts.</li><li>Move any dimension, and a probe requires every file a supplier receives to move with it, or the change is refused.</li></ul></div>
+<div class="case-col"><h3>What holds it</h3><ul class="case-list case-held"><li>Load simulations, worked from the real parts’ masses, prove every mount setup holds the pendulum at a torque a hand can give.</li><li>Worst-case tolerance stacks prove every screw clamps and never bottoms, at every extreme of every band.</li><li>A sweep proves the blade turns a full circle and touches nothing.</li><li>The swing on the website is integrated from the physics of the object as it is today, and a check holds every mass and length to the parts.</li></ul></div>
 </div>
 </details>
-</div></section>
-<section id="more"><div class="wrap">
-<div class="src"><p><span class="src-k">from</span> facts/company.json · 8 facts: does.{home[], words.{retired, claims, upstream}, home_heading, all}</p><p><span class="src-k">held by</span> gate · reach · brand</p></div>
-<h2>What else it catches.</h2>
-<ul class="does does-three">
-<li><p class="does-name">Retired facts</p><p>Retire an old price, name or limit once, and nothing a person reads may say it again.</p></li>
-<li><p class="does-name">Claims</p><p>Give a claim like “SOC 2 certified” a rule, and no page can say more than the rule allows.</p></li>
-<li><p class="does-name">Derived from elsewhere</p><p>Copied something you can&#x27;t pin, like a partner&#x27;s spec sheet? The deploy fails the day its source changes.</p></li>
-</ul>
-<p class="more-all"><a href="features/">All 12 features, and what&#x27;s next</a></p>
+<figure class="case-sheet"><img src="pendulum/side-exploded.svg" alt="The pendulum from the side, taken apart: every part in its place, drawn from the spec" loading="lazy"><figcaption>The pendulum from the side, taken apart, as its own home page draws it: one of the drawings a supplier receives, every part placed from the spec.</figcaption></figure>
 </div></section>
 <section class="rule"><div class="wrap">
 <div class="src"><p><span class="src-k">from</span> facts/company.json · 3 facts: rule.{line, end, text}</p><p><span class="src-k">held by</span> gate · reach · brand</p></div>

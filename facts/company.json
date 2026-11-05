@@ -26,13 +26,14 @@
   "does": "Features",
   "why": "Why Wherefore",
   "start": "Get started",
-  "github": "View on GitHub"
+  "github": "View on GitHub",
+  "menu": "Menu"
  },
  "hero": {
   "eyebrow": "Open-source CLI",
   "headline": "Your product changes.",
   "headline_end": "Your site, docs and deck don't.",
-  "lede": "Everything your company says is a copy of a copy, and every copy drifts. Wherefore gives the rest of your company the pipeline your code already has: change something once, and everything that says it follows.",
+  "lede": "Everything your company says is a copy of a copy, and every copy drifts. Wherefore gives the rest of your company the pipeline your code already has.",
   "try": "See what has already drifted on your site. No setup, no account.",
   "pip": "Or with pip:",
   "shows": "Real output, on an example company. One trial, two lengths: you decide which is true, and Wherefore keeps it that way."
@@ -218,6 +219,11 @@
    "upstream"
   ],
   "home_heading": "What else it catches.",
+  "short": {
+   "retired": "Retire an old price or name once, and nothing may say it again.",
+   "claims": "Give a claim a rule, and no page can say more than it allows.",
+   "upstream": "Copied a partner's spec? The deploy fails the day their source changes."
+  },
   "all": "All {n} features, and what's next",
   "since": "since {version}"
  },
@@ -236,7 +242,7 @@
     "on": "2026-11-02"
    }
   },
-  "text": "Chaotic Pendulums makes a desk-sized double pendulum. Its part drawings, 3D print files, parts list, supplier pack and website are all built from one spec file, and Wherefore was built alongside it. If one source can hold machined parts, it can hold your app and docs.",
+  "text": "Chaotic Pendulums makes a desk-sized double pendulum. Its drawings, print files, parts list, supplier pack and website are built from one spec file, with Wherefore built alongside it. Move one dimension and every file a supplier receives moves with it, or the change is refused. If one source can hold machined parts, it can hold your app and docs.",
   "url": "https://chaoticpendulums.com/",
   "visit": "See the live site",
   "made_heading": "What it builds",
@@ -253,8 +259,7 @@
    "Load simulations, worked from the real parts’ masses, prove every mount setup holds the pendulum at a torque a hand can give.",
    "Worst-case tolerance stacks prove every screw clamps and never bottoms, at every extreme of every band.",
    "A sweep proves the blade turns a full circle and touches nothing.",
-   "The swing on the website is integrated from the physics of the object as it is today, and a check holds every mass and length to the parts.",
-   "Move any dimension, and a probe requires every file a supplier receives to move with it, or the change is refused."
+   "The swing on the website is integrated from the physics of the object as it is today, and a check holds every mass and length to the parts."
   ],
   "stats": [
    {
@@ -270,8 +275,17 @@
     "what": "print plates, ready to make a prototype"
    }
   ],
-  "as_of": "Counted at V{version} of the pack, on {on}.",
   "quote": null,
+  "sheet": {
+   "alt": "The pendulum from the side, taken apart: every part in its place, drawn from the spec",
+   "caption": "The pendulum from the side, taken apart, as its own home page draws it: one of the drawings a supplier receives, every part placed from the spec.",
+   "taken": {
+    "from": "zakholdsworth/chaotic-pendulums-co",
+    "file": "brand/public-sheets/cp-side-exploded-plain.svg",
+    "commit": "adddc46ecf01921c485409edef6a053fdbfc6ddf",
+    "on": "2026-11-05"
+   }
+  },
   "more": "What it builds, and what holds it"
  },
  "rule": {

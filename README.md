@@ -21,6 +21,7 @@ private repository, not here, so that none of them goes public with the site.
 | `facts/pendulum.json` | the case study's counts: a dated snapshot of the pendulum's own repository, which is private, counted once at the commit it names | captured, stamped inside |
 | `facts/roadmap.json` | the engine's roadmap, byte for byte the `roadmap.json` beside its code; What's next is built from it, and `wherefore check upstream` fails the deploy when the engine's file has moved | captured |
 | `cases/pendulum/model.html` | the pendulum's interactive 3D model, the file https://chaoticpendulums.com/ embeds, copied byte for byte from the pendulum's repository at the commit `case.model.taken` names | captured |
+| `cases/pendulum/side-exploded.svg` | the pendulum's exploded side view without its callouts, the public cut its home page draws, copied byte for byte at the commit `case.sheet.taken` names | captured |
 | `brand/fonts/` | the three typefaces and their licences (SIL OFL 1.1), unchanged | authored |
 | `brand/icon/icon-1024.png`, `brand/shoot_icon.py` | the icon as a PNG, for accounts that take only PNG, and the script that shoots it from `site/brand/icon.svg` | captured, stamped |
 | `gen/brand.py` | the brand pack's generator: the stylesheet, the fonts and the brand page | authored |
@@ -94,12 +95,14 @@ brand pack at `site/brand/`.
   captions, the deck, the docs, the app's button and a help article. Three
   steps: today, the rename, and the fix for the one asset written by hand. The
   page says it is an illustration, and names the real commands behind it.
-- **How it works**, in three steps: scan, build, gate.
+- **How it works**, in three steps: scan, build, gate - and under it, what
+  else it catches: three of the release's features in a line each, and the
+  way to all of them.
 - **The case study**: Chaotic Pendulums, the small hardware company the founder
-  started to test the idea - its counts, stated with the release they were
-  counted at, and what it builds and what holds it, behind one press.
-- **What else it catches**: three of the release's features, and the way to
-  all of them.
+  started to test the idea - its counts, the exploded side view its own home
+  page draws (`cases/pendulum/side-exploded.svg`, a public cut copied at the
+  commit `case.sheet.taken` names), and what it builds and what holds it,
+  behind one press.
 - **The rule.** Agents already run your code's pipeline; Wherefore lets them
   run the rest.
 - **Why Wherefore**: the word means *why*, and five tabs ask an asset of the

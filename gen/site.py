@@ -290,13 +290,22 @@ def part(render, f, inspect, also=()):
 
 
 def nav(f, home=""):
-    """The site's links. `home` is the way back to the home page from where the nav sits: "" on it.
-    On a phone only the name and Get started show; foot_nav carries the rest."""
+    """The site's links. `home` is the way back to the home page from where the nav sits: "" on it."""
     n = f["nav"]
     return (f'<nav aria-label="The site"><a href="{home}#how">{esc(n["how"])}</a>'
             f'<a href="{home}features/">{esc(n["does"])}</a><a href="{home}#case">{esc(f["case"]["eyebrow"])}</a>'
-            f'<a href="{home}#why">{esc(n["why"])}</a><a href="{home}changelog/">{esc(f["changelog"]["title"])}</a>'
-            f'<a class="pill" href="{home}#start">{esc(n["start"])}</a></nav>')
+            f'<a href="{home}#why">{esc(n["why"])}</a><a href="{home}changelog/">{esc(f["changelog"]["title"])}</a></nav>')
+
+
+def topbar(f, home=""):
+    """The name, the links, Get started - and on a phone a Menu that opens the links
+    (owner, 5 November 2026: they were in the footer only, and nobody found them).
+    The menu is a checkbox and its label, no script, as every control here is."""
+    n = f["nav"]
+    return (f'<div class="wrap"><input class="state menu-state" type="checkbox" id="menu">'
+            f'<a class="name" href="{home or "#top"}">{esc(f["company"]["name"])}</a>\n'
+            f'<label class="menu-switch" for="menu">{esc(n["menu"])}</label>'
+            f'{nav(f, home)}<a class="pill" href="{home}#start">{esc(n["start"])}</a></div>')
 
 
 def foot_nav(f, home=""):
@@ -308,8 +317,7 @@ def foot_nav(f, home=""):
 
 
 def header(f):
-    return (f'{banner(f)}<header class="top"><div class="wrap"><a class="name" href="#top">{esc(f["company"]["name"])}</a>\n'
-            f'{nav(f)}</div><div class="wrap">{SRC}</div></header>')
+    return f'{banner(f)}<header class="top">{topbar(f)}<div class="wrap">{SRC}</div></header>'
 
 
 def key(f):
@@ -634,7 +642,22 @@ def how(f):
 {chr(10).join(steps)}
 </ol>
 <p class="how-note">{esc(h["note"])}</p>
+{catches(f)}
 </div></section>"""
+
+
+def catches(f):
+    """What else it catches, in one line each: three of the release's features, and the way to every one.
+    Under how it works, not a section of its own (owner, 5 November 2026)."""
+    d = f["does"]
+    byid = {x["id"]: x for x in FEATURES}
+    items = []
+    for k in d["home"]:
+        if k not in byid:
+            raise SystemExit(f"does.home names `{k}`, which {ENGINE} does not ship")
+        items.append(f'<li><p class="does-name">{esc(byid[k]["name"])}</p><p>{esc(d["short"][k])}</p></li>')
+    return (f'<h3 class="catches">{esc(d["home_heading"])}</h3>\n<ul class="does does-three">\n{chr(10).join(items)}\n</ul>\n'
+            f'<p class="more-all"><a href="features/">{esc(fill(d["all"], n=len(FEATURES)))}</a></p>')
 
 
 def releases():
@@ -698,8 +721,7 @@ def changelog_page(f):
 {chr(10).join(lines)}
 </head>
 <body>
-{banner()}<header class="top"><div class="wrap"><a class="name" href="../">{esc(name)}</a>
-{nav(f, "../")}</div></header>
+{banner()}<header class="top">{topbar(f, "../")}</header>
 <main id="top">
 <section class="log-head"><div class="wrap">
 <p class="eyebrow">{esc(c["title"])} · {esc(name)} {esc(wherefore.__version__)}</p>
@@ -742,8 +764,7 @@ def sub_page(f, slug, eyebrow, heading, lede, body):
 {chr(10).join(lines)}
 </head>
 <body>
-{banner()}<header class="top"><div class="wrap"><a class="name" href="../">{esc(name)}</a>
-{nav(f, "../")}</div></header>
+{banner()}<header class="top">{topbar(f, "../")}</header>
 <main id="top">
 <section class="log-head"><div class="wrap">
 <p class="eyebrow">{esc(eyebrow)}</p>
@@ -817,25 +838,6 @@ def does(f):
 </div></section>"""
 
 
-def more(f):
-    """Three of the release's features on the home page, in our words, and a link to every one."""
-    d = f["does"]
-    byid = {x["id"]: x for x in FEATURES}
-    items = []
-    for k in d["home"]:
-        if k not in byid:
-            raise SystemExit(f"does.home names `{k}`, which {ENGINE} does not ship")
-        items.append(f'<li><p class="does-name">{esc(byid[k]["name"])}</p><p>{esc(d["words"][k])}</p></li>')
-    return f"""<section id="more"><div class="wrap">
-{SRC}
-<h2>{esc(d["home_heading"])}</h2>
-<ul class="does does-three">
-{chr(10).join(items)}
-</ul>
-<p class="more-all"><a href="features/">{esc(fill(d["all"], n=len(FEATURES)))}</a></p>
-</div></section>"""
-
-
 def planned(f):
     """What is next: the engine's own roadmap, from the copy of it this site holds (facts/roadmap.json).
 
@@ -900,6 +902,28 @@ def model(m):
             f'<figcaption>{esc(m["hint"])}</figcaption></figure>')
 
 
+SHEET = ROOT / "cases/pendulum/side-exploded.svg"
+SHEET_PAGE = "pendulum/side-exploded.svg"
+
+
+def sheet(s):
+    """The pendulum's exploded side view under the counts: the public cut its own home page draws."""
+    return (f'<figure class="case-sheet"><img src="{SHEET_PAGE}" alt="{esc(s["alt"])}" loading="lazy">'
+            f'<figcaption>{esc(s["caption"])}</figcaption></figure>')
+
+
+def sheet_file(f):
+    """site/pendulum/side-exploded.svg: the pendulum's drawing, byte for byte, with where it was taken from
+    in a comment first, so the copy says what it is."""
+    t = f["case"]["sheet"]["taken"]
+    said = f'{t["from"]} {t["file"]} at {t["commit"]}, {t["on"]}'
+    if "--" in said:
+        raise SystemExit(f"case.sheet.taken cannot be written in a comment: {said!r}")
+    return (f"<!-- The pendulum's side view, cut for its own home page: {said}, copied byte for byte into "
+            f"cases/pendulum/side-exploded.svg and shown under the case study's counts by gen/site.py. -->\n"
+            + SHEET.read_text(encoding="utf-8"))
+
+
 def model_page(f):
     """site/pendulum/index.html: the pendulum's own model, byte for byte, and what frames it."""
     t = f["case"]["model"]["taken"]
@@ -918,7 +942,6 @@ def case(f, p):
     counts = p["counts"]
     stats = "".join(f'<li><span class="stat-n">{counted(counts, s["of"])}</span> {esc(s["what"])}</li>'
                     for s in c["stats"])
-    as_of = fill(c["as_of"], version=counts["pack"]["version"], on=long_date(p["captured"]["on"]))
     quote = ""
     if c["quote"]:
         quote = (f'<blockquote class="case-quote"><p>{esc(c["quote"]["text"])}</p>'
@@ -934,13 +957,13 @@ def case(f, p):
 </div>
 {quote}
 <ul class="stats">{stats}</ul>
-<p class="as-of">{esc(as_of)}</p>
 <details class="case-more"><summary>{esc(c["more"])}</summary>
 <div class="case-grid">
 <div class="case-col"><h3>{esc(c["made_heading"])}</h3><ul class="case-list">{made}</ul></div>
 <div class="case-col"><h3>{esc(c["held_heading"])}</h3><ul class="case-list case-held">{held}</ul></div>
 </div>
 </details>
+{sheet(c["sheet"])}
 </div></section>"""
 
 
@@ -998,7 +1021,7 @@ def page(f):
     parts = {name: part(render, f, inspect, *also) for name, render, *also in (
         ("header", header), ("hero", hero), ("forks", opening), ("demo", ripple), ("how", how),
         ("case", case, (("facts/pendulum.json", PENDULUM),)),
-        ("more", more), ("rule", rule), ("why", why), ("start", start), ("footer", footer))}
+        ("rule", rule), ("why", why), ("start", start), ("footer", footer))}
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -1014,7 +1037,6 @@ def page(f):
 {parts["demo"]}
 {parts["how"]}
 {parts["case"]}
-{parts["more"]}
 {parts["rule"]}
 {parts["why"]}
 {parts["start"]}
@@ -1060,6 +1082,7 @@ def main():
     (SITE / "features/index.html").write_text(features_page(FACTS), encoding="utf-8")
     (SITE / MODEL_PAGE).mkdir(exist_ok=True)
     (SITE / MODEL_PAGE / "index.html").write_text(model_page(FACTS), encoding="utf-8")
+    (SITE / SHEET_PAGE).write_text(sheet_file(FACTS), encoding="utf-8")
 
 
 if __name__ == "__main__":

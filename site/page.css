@@ -61,11 +61,12 @@ section, footer { scroll-margin-top: 4.5rem; }
 nav { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem 1.375rem; font-size: 0.9375rem; }
 nav a { color: var(--muted); text-decoration: none; padding: 0.6rem 0; }
 nav a:hover { color: var(--ink); }
-nav .pill {
+.pill {
   display: inline-flex; align-items: center; min-height: var(--tap); padding: 0 1.25rem;
   border-radius: var(--radius-control); background: var(--accent); color: var(--on-accent); font-weight: 600;
+  text-decoration: none; font-size: 0.9375rem;
 }
-nav .pill:hover { color: var(--on-accent); }
+.pill:hover { color: var(--on-accent); }
 
 section { padding: clamp(3.5rem, 8vw, 6.5rem) 0; border-top: 1px solid var(--line); }
 h1, h2 { font-family: var(--font-display); font-weight: 400; letter-spacing: -0.02em; }
@@ -197,6 +198,15 @@ em { font-style: italic; }
 #stage-0:focus-visible ~ .stepper .step-0, #stage-1:focus-visible ~ .stepper .step-1, #stage-2:focus-visible ~ .stepper .step-2 {
   outline: 2px solid var(--accent); outline-offset: 3px;
 }
+/* An invitation (owner, 5 November 2026): while the demo still shows today, the
+   next step pulses gently, so a visitor knows it is there to press. It stops
+   the moment a step is chosen, and never runs for a visitor who asks for less motion. */
+#stage-0:checked ~ .stepper .step-1 { border-color: var(--accent); animation: invite 2.4s ease-in-out infinite; }
+@keyframes invite {
+  0%, 100% { box-shadow: 0 0 0 0 var(--accent); }
+  50% { box-shadow: 0 0 0 0.5rem transparent; }
+}
+@media (prefers-reduced-motion: reduce) { #stage-0:checked ~ .stepper .step-1 { animation: none; } }
 
 .demo-said { margin: 1.25rem 0 1rem; min-height: 3.2em; font-size: 1.0625rem; line-height: 1.5; max-width: none; }
 .said-plain { color: var(--muted); }
@@ -361,7 +371,11 @@ em { font-style: italic; }
 .stats { list-style: none; margin: 2rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr)); gap: 1rem; }
 .stats li { color: var(--muted); font-size: 0.9375rem; line-height: 1.4; }
 .stat-n { display: block; font: 400 clamp(2.75rem, 6vw, 4rem)/1 var(--font-display); color: var(--ink); margin-bottom: 0.4rem; }
-.as-of { margin: 1.25rem 0 0; font: 400 0.8125rem/1.4 var(--font-mono); color: var(--muted); }
+/* The pendulum's side view under the counts: a tall drawing, held to a modest height, with its caption beside it on a wide screen. */
+.case-sheet { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 1rem 2rem; margin: 2.5rem 0 0; }
+.case-sheet img { display: block; max-width: 100%; height: auto; max-height: 26rem; width: auto; }
+@media (max-width: 45rem) { .case-sheet img { max-height: 18rem; } }
+.case-sheet figcaption { flex: 1 1 18rem; max-width: 34ch; font-size: 0.9375rem; line-height: 1.5; color: var(--muted); }
 
 /* How this page is built. One checkbox, first in the page, held in place on
    the screen so that pressing either of its labels never scrolls; checked, it
@@ -485,7 +499,8 @@ footer p { margin: 0; }
 .try-pip code { color: var(--ink); user-select: all; -webkit-user-select: all; }
 .hero .actions { margin-top: 1.5rem; }
 
-/* What else it catches: three features, then the way to all of them. */
+/* What else it catches, under how it works: three features in a line each, then the way to all of them. */
+.catches { margin: 3rem 0 1rem; }
 .does-three { grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr)); }
 .more-all { margin: 1.5rem 0 0; }
 .more-all a { color: var(--accent); }
@@ -504,13 +519,29 @@ footer p { margin: 0; }
 
 .start-free { margin: 1.5rem 0 0; color: var(--muted); }
 
-/* Every link again at the foot: on a phone the header shows only the name and Get started. */
+/* Every link again at the foot, where a phone's header has no room for them. */
 .foot-nav { display: flex; flex-wrap: wrap; gap: 0.25rem 1.375rem; margin: 0 0 1.5rem; }
 .foot-nav a { color: var(--muted); text-decoration: none; padding: 0.6rem 0; }
 .foot-nav a:hover { color: var(--ink); }
+/* The header on a phone (owner, 5 November 2026): the name, Menu and Get
+   started in one row, and the links drop below when Menu is pressed - a
+   checkbox and its label, no script. Wider than a phone the links sit in the
+   row and Menu is not there. */
+.menu-switch { display: none; }
+header.top nav { order: 1; }
+header.top .pill { order: 2; }
 @media (max-width: 45rem) {
-  header.top nav a:not(.pill) { display: none; }
-  header.top .wrap { flex-wrap: nowrap; }
+  header.top .wrap { flex-wrap: wrap; gap: 0.5rem 0.75rem; }
+  .menu-switch {
+    display: inline-flex; align-items: center; min-height: var(--tap); padding: 0 0.9rem; margin-left: auto;
+    border: 1px solid var(--line); border-radius: var(--radius-control); color: var(--ink); font-weight: 500; font-size: 0.875rem;
+    cursor: pointer; -webkit-tap-highlight-color: transparent; user-select: none;
+  }
+  #menu:checked ~ .menu-switch { border-color: var(--accent); color: var(--accent); }
+  #menu:focus-visible ~ .menu-switch { outline: 2px solid var(--accent); outline-offset: 3px; }
+  header.top nav { display: none; order: 3; flex-basis: 100%; flex-direction: column; align-items: stretch; gap: 0; padding-bottom: 0.5rem; }
+  #menu:checked ~ nav { display: flex; }
+  header.top nav a { padding: 0.8rem 0; border-top: 1px solid var(--line); font-size: 1.0625rem; }
 }
 /* The picture, part of the opening (owner, 5 November 2026): no line above it, so it reads on from the hero. */
 .opening { border-top: 0; padding-top: 0; }
