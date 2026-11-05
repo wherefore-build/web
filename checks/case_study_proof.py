@@ -5,7 +5,7 @@ Each case breaks a copy of this repository (checks/_copy.py) and requires the
 check to fail in the words of the case, or, for the case that must not fire, to
 pass.
 
-  fails   the release typed into the facts' as-of line instead of read
+  fails   a count typed into the generator instead of read from the copy
           a count the pendulum started making that nobody decided about
           the copy's stamp without its commit
           the copy's stamp with a version where its release mark goes
@@ -38,14 +38,18 @@ def change(p, how):
 
 def main():
     r = []
-    # The release the snapshot stands at, read rather than typed: a proof that
-    # named V83 broke the day the pendulum cut V84.
-    v = json.loads(pathlib.Path(_copy.ROOT, COPY).read_text(encoding="utf-8"))["counts"]["pack"]["version"]
-    with Edit("facts/company.json") as p:
+    # A count read from the copy, not typed: the generator is made to print the
+    # number of proofs as it stands today instead of reading it, which looks
+    # right until the pendulum adds a check. The number is read here rather
+    # than written down, for the same reason - a proof that named 50 would
+    # break the day the pendulum proved a 51st.
+    v = json.loads(pathlib.Path(_copy.ROOT, COPY).read_text(encoding="utf-8"))["counts"]["proofs"]
+    with Edit("gen/site.py") as p:
         text = p.read_text(encoding="utf-8")
-        p.write_text(text.replace("at V{version} of the pack", f"at V{v} of the pack", 1), encoding="utf-8")
-        check(r, "the release typed into the as-of line", CHECK, True,
-              [f"counts.pack.version moved ({v} -> {v + 1000}) and the page did not"])
+        p.write_text(text.replace('counted(counts, s["of"])',
+                                  f'({v} if s["of"] == "proofs" else counted(counts, s["of"]))', 1), encoding="utf-8")
+        check(r, "a count typed into the generator instead of read", CHECK, True,
+              [f"counts.proofs moved ({v} -> {v + 1000}) and the page did not"])
     with Edit(COPY) as p:
         change(p, lambda d: d["counts"].update(welds=12))
         check(r, "a new count nobody decided about", CHECK, True,
