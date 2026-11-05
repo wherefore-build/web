@@ -97,12 +97,12 @@ MODEL_PAGE = "pendulum/"
 # a small frame; the arms in the pose the home page shows; then, the moment the
 # frame scrolls into view, a swing from it with a kick (owner, 5 November 2026:
 # a big spin, so it looks interesting when a visitor reaches it). The kick is
-# the two arms' starting speeds in radians a second; at these the outer arm
+# the two arms' starting speeds in radians a second (doubled at the owner's word, 5 November); at these the outer arm
 # turns over several times in its first seconds. The frame is lazy, so it may
 # load long before it is seen, and the observer holds the kick until it is;
 # a browser without one kicks on load. A visitor who asks for less motion
 # gets the pose alone.
-KICK = (6, 14)
+KICK = (12, 28)
 FRAMING = f"""
 <style>html,body{{overflow:hidden}}</style>
 <script>
@@ -537,7 +537,7 @@ def ripple(f):
 </div></section>"""
 
 
-FLIP = 4          # seconds each question stands before the next, while they turn by themselves
+FLIP = 7          # seconds each question stands before the next, while they turn by themselves (owner, 5 November: slower)
 
 
 def flipping(n):
@@ -546,7 +546,9 @@ def flipping(n):
     Still no script. A radio with no chip of its own, `ask-auto`, is the one
     checked when the page loads, and while it is, each question stands for FLIP
     seconds - a bar crossing its chip, turning the accent as it goes - then
-    flips to the next. Hovering holds it. Tapping any chip, the first included,
+    flips to the next. `n` is the number of questions: the prompt panel that
+    asks a visitor to pick is not in the cycle, or the cycle would show a
+    blank turn once round (the owner saw it, 5 November). Hovering holds it. Tapping any chip, the first included,
     checks that chip's radio instead, and the turning stops on its question. A
     visitor who asks for less motion is asked to pick one instead. The
     percentages depend on how many questions there are, so they are written
@@ -560,7 +562,7 @@ def flipping(n):
 #ask-auto:checked ~ .ask-panels .ask-pick {{ visibility: visible; }}
 @media (prefers-reduced-motion: no-preference) {{
   #ask-auto:checked ~ .ask-panels .ask-pick {{ visibility: hidden; }}
-  #ask-auto:checked ~ .ask-panels .ask-panel {{ animation: ask-flip {run}; }}
+  #ask-auto:checked ~ .ask-panels .ask-panel:not(.ask-pick) {{ animation: ask-flip {run}; }}
   #ask-auto:checked ~ .tab {{ animation: ask-chip {run}; }}
   #ask-auto:checked ~ .tab::after {{ animation: ask-bar {run}; }}
   .asks:hover .ask-panel, .asks:hover .tab, .asks:hover .tab::after {{ animation-play-state: paused; }}
@@ -599,7 +601,7 @@ def why(f):
             f'<div class="answer-from"><dt>{esc(w["built_from"])}</dt><dd><code>{esc(fill(a["from"], **values))}</code></dd></div>'
             f'<div class="answer-because"><dt>{esc(w["because"])}</dt><dd>{esc(a["because"])}</dd></div>'
             f'</dl></div>')
-    tabs.append(f'<div class="ask-panels">\n{chr(10).join(panels)}\n</div>\n{flipping(len(panels))}')
+    tabs.append(f'<div class="ask-panels">\n{chr(10).join(panels)}\n</div>\n{flipping(len(w["asks"]))}')
     return f"""<section id="why" class="meaning"><div class="wrap">
 {SRC}
 <div class="meaning-grid">

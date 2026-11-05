@@ -37,14 +37,14 @@ def plant(p, before, after):
 def main():
     r = []
     with Edit(PAGE) as p:
-        plant(p, "#ask-auto:checked ~ .ask-panels .ask-panel { animation:", "#ask-auto:checked ~ .ask-panels .nothing { animation:")
+        plant(p, "#ask-auto:checked ~ .ask-panels .ask-panel:not(.ask-pick) { animation:", "#ask-auto:checked ~ .ask-panels .nothing { animation:")
         check(r, "the timer gone", CHECK, True, ["did not turn by themselves"])
     with Edit(PAGE) as p:
         plant(p, 'id="ask-auto" checked', 'id="ask-auto"')
         plant(p, 'id="ask-0">', 'id="ask-0" checked>')
         check(r, "the first chip checked on load", CHECK, True, ["did not turn by themselves"])
     with Edit(PAGE) as p:
-        plant(p, "#ask-auto:checked ~ .ask-panels .ask-panel { animation:", ".ask-panels .ask-panel { animation:")
+        plant(p, "#ask-auto:checked ~ .ask-panels .ask-panel:not(.ask-pick) { animation:", ".ask-panels .ask-panel:not(.ask-pick) { animation:")
         check(r, "the timer still running after a pick", CHECK, True, ["tapping the first chip did not stop"])
     with Edit(PAGE) as p:
         plant(p, "@media (prefers-reduced-motion: no-preference) {", "@media all {")

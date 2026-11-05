@@ -84,12 +84,12 @@ brand pack at `site/brand/`.
 **The home page** says why before what, then shows it working.
 - **The headline and the try.** Your product changes; your site, docs and deck
   don't. Under it, the two lines that run a real `wherefore scan` on your site -
-  no setup, no account - beside what one printed on a sample company, from the
+  no setup, no account - beside what one printed on an example company, from the
   pinned release's own `releases.json`.
 - **The picture.** Your code branches, is tested and merges back; everything
   else forks and never comes back; with Wherefore, everything else gets code's
   shape.
-- **The demo.** One fact (a made-up company renaming Workspaces to Projects)
+- **The demo.** One fact (an example company renaming Workspaces to Projects)
   and the six assets that state it - the feature page, the demo video's
   captions, the deck, the docs, the app's button and a help article. Three
   steps: today, the rename, and the fix for the one asset written by hand. The
@@ -103,7 +103,7 @@ brand pack at `site/brand/`.
 - **The rule.** Agents already run your code's pipeline; Wherefore lets them
   run the rest.
 - **Why Wherefore**: the word means *why*, and five tabs ask an asset of the
-  made-up company "Wherefore art thou?" and show what it was built from, and
+  example company "Wherefore art thou?" and show what it was built from, and
   why.
 - **Getting started**: the install line and the release's own commands.
 
