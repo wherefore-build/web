@@ -1,5 +1,5 @@
 {
- "note": "THE ROADMAP, beside the code it plans, so that the people and the agents working on the engine plan from it. Each item has an id, a name, one line on what it does, and a state - next or later - and may link the issue it answers. It is a file, not a tracker, because a file is diffed, gated and read by a build with no token: the company's site copies it and holds the copy with `wherefore check upstream`, so what the site says is coming is what is written here. An item leaves in the same change that ships it: tests/test_roadmap.py fails an item whose id src/wherefore/features.json already has. Requests arrive as issues; an item here may name the one it answers.",
+ "note": "THE ROADMAP, beside the code it plans, so that the people and the agents working on the engine plan from it. Each item has an id, a name, one line on what it does, and a state - next or later - and may link the issue it answers (`issue`) and say who asked for it there (`asked_by`, a GitHub login). It is a file, not a tracker, because a file is diffed, gated and read by a build with no token: the company's site copies it and holds the copy with `wherefore check upstream`, so what the site says is coming is what is written here. An item leaves in the same change that ships it: tests/test_roadmap.py fails an item whose id src/wherefore/features.json already has. Requests arrive as issues; an item here may name the one it answers.",
  "items": [
   {
    "id": "docs",
@@ -8,28 +8,24 @@
    "words": "The product's docs, compiled from the release they describe."
   },
   {
-   "id": "pins",
-   "state": "next",
-   "name": "Releases that reach every client",
-   "words": "When the engine ships, every repository that pins it gets a pull request moving its pin, and the checks say what it still has to describe."
-  },
-  {
    "id": "launch",
    "state": "later",
    "name": "Launches that wait",
    "words": "A launch that holds until its page, docs and demo agree."
   },
   {
-   "id": "scan2",
-   "state": "later",
-   "name": "Scan two repositories at once",
-   "words": "Point the scan at your site and your app together, and see every value they both state and where the two disagree."
-  },
-  {
    "id": "drift",
    "state": "later",
    "name": "Drift, on the map",
    "words": "What the scan finds - a value stated in several places that no source holds - drawn on the map beside the files that say it, so what is not yet tracked is seen, and seen shrinking."
+  },
+  {
+   "id": "app",
+   "state": "later",
+   "name": "Your things, in one place",
+   "words": "An app you log in to and see every repository you connected: what each builds, what is held, and what is drifting.",
+   "issue": "https://github.com/wherefore-build/wherefore/issues/12",
+   "asked_by": "zakholdsworth"
   }
  ]
 }
