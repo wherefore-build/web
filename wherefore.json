@@ -17,6 +17,11 @@
    "path": "facts/pendulum.json",
    "adapter": "leaves",
    "why": "THE CASE STUDY'S COUNTS: a dated snapshot of the pendulum's own repository, counted once at the commit it names. The release this corpus pins sweeps only the first source for reach, so checks/case_study.py moves each of these"
+  },
+  "roadmap": {
+   "path": "facts/roadmap.json",
+   "adapter": "leaves",
+   "why": "THE ENGINE'S ROADMAP, copied: what is next and what is later for the open-source engine, byte for byte the roadmap.json beside its code. The site owns no roadmap; What's next is built from this copy, and `wherefore check upstream` fails the deploy when the engine's file has moved, until the copy is taken again"
   }
  },
  "generators": [
@@ -109,8 +114,13 @@
      "why": "the case study's counts, a snapshot of the pendulum's repository at one commit",
      "upstream": {
       "url": "https://chaoticpendulums.com/release.json",
-      "read": {"json": "/release"},
-      "matches": {"file": "facts/pendulum.json", "at": "captured.release"},
+      "read": {
+       "json": "/release"
+      },
+      "matches": {
+       "file": "facts/pendulum.json",
+       "at": "captured.release"
+      },
       "unreachable": "the pendulum's site being down is not a new release: a deploy goes ahead and says so, and the next build reads it again"
      }
     },
@@ -122,7 +132,10 @@
      "why": "the pendulum's interactive 3D model, the same file its home page embeds, shown beside the case study's heading",
      "upstream": {
       "url": "https://chaoticpendulums.com/",
-      "read": {"pattern": "var HERO_B64=\"([A-Za-z0-9+/=]+)\"", "decode": "base64"},
+      "read": {
+       "pattern": "var HERO_B64=\"([A-Za-z0-9+/=]+)\"",
+       "decode": "base64"
+      },
       "matches": "bytes",
       "unreachable": "the pendulum's site being down is not the pendulum moving: a deploy goes ahead and says so, and the next build reads it again"
      }
@@ -136,6 +149,18 @@
      ],
      "why": "the icon as a picture, for the accounts that take only PNG. Setting type into pixels takes a browser, which the build does not run, so brand/shoot_icon.py shoots it from the SVG gen/brand.py writes. When that SVG moves, shoot it again and run `wherefore gate --restamp icon`",
      "stamp": "18d5bc6ba9d722ed"
+    },
+    "roadmap": {
+     "files": [
+      "facts/roadmap.json"
+     ],
+     "no_stamp": "copied byte for byte from the engine's repository, which this gate cannot see and deliberately does not read: the engine's own tests hold the file honest, and its upstream below holds this copy to it",
+     "why": "the engine's roadmap, the same file that sits beside its code, which What's next on the features page is built from",
+     "upstream": {
+      "url": "https://raw.githubusercontent.com/wherefore-build/wherefore/main/roadmap.json",
+      "matches": "bytes",
+      "unreachable": "GitHub not answering is not the roadmap moving: a deploy goes ahead and says so, and the next build reads it again"
+     }
     }
    }
   }

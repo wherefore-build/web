@@ -83,7 +83,7 @@ import string
 from importlib.resources import files
 
 import wherefore
-from kit import FACTS, PENDULUM, ROOT, SITE, banner, colours, esc, head, status
+from kit import FACTS, PENDULUM, ROADMAP, ROOT, SITE, banner, colours, esc, head, status
 
 ENGINE = f"wherefore {wherefore.__version__}"
 MONTHS = ("January", "February", "March", "April", "May", "June", "July", "August",
@@ -835,21 +835,31 @@ def more(f):
 
 
 def planned(f):
-    """What is next, as this company plans it. A planned feature the pinned release already ships stops
-    the build: the roadmap may not promise what is already here, so it moves to the list above."""
+    """What is next: the engine's own roadmap, from the copy of it this site holds (facts/roadmap.json).
+
+    THE SITE OWNS NO ROADMAP. The engine's sits beside its code, public, where
+    the people and agents working on it plan from it; this site keeps a copy,
+    byte for byte, and `wherefore check upstream` fails the deploy when the
+    engine's file has moved, until the copy is taken again. The heading and
+    the labels are this site's words; every item is the engine's. An item the
+    pinned release already ships stops the build: the roadmap may not promise
+    what is already here, and the engine's own test refuses the same."""
     p = f["planned"]
     shipped = {x["id"]: x for x in FEATURES}
     items = []
-    for it in p["items"]:
+    for it in ROADMAP["items"]:
         if it["id"] in shipped:
-            raise SystemExit(f"planned.items still lists `{it['id']}` ({it['name']}), which {ENGINE} ships: "
-                             f"it is under the features now, so take it off the roadmap")
+            raise SystemExit(f"the roadmap copied in facts/roadmap.json still lists `{it['id']}` ({it['name']}), "
+                             f"which {ENGINE} ships: take the copy again from the engine, where it has left")
         if it["state"] not in p["labels"]:
-            raise SystemExit(f"planned item `{it['id']}` is {it['state']!r}, which planned.labels does not name")
+            raise SystemExit(f"roadmap item `{it['id']}` is {it['state']!r}, which planned.labels does not name")
+        issue = (f' <a class="road-issue" href="{esc(it["issue"])}">#{esc(it["issue"].rsplit("/", 1)[-1])}</a>'
+                 if it.get("issue") else "")
         items.append(f'<li id="{esc(it["id"])}"><p class="does-name">{esc(it["name"])} <span class="chip chip-{esc(it["state"])}">'
-                     f'{esc(p["labels"][it["state"]])}</span></p><p>{esc(it["words"])}</p></li>')
+                     f'{esc(p["labels"][it["state"]])}</span>{issue}</p><p>{esc(it["words"])}</p></li>')
     return f"""<section id="next"><div class="wrap">
 <h2>{esc(p["heading"])}</h2>
+<p class="does-intro">{esc(p["source"])}</p>
 <ul class="does">
 {chr(10).join(items)}
 </ul>
