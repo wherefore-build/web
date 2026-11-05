@@ -198,15 +198,20 @@ em { font-style: italic; }
 #stage-0:focus-visible ~ .stepper .step-0, #stage-1:focus-visible ~ .stepper .step-1, #stage-2:focus-visible ~ .stepper .step-2 {
   outline: 2px solid var(--accent); outline-offset: 3px;
 }
-/* An invitation (owner, 5 November 2026): while the demo still shows today, the
-   next step pulses gently, so a visitor knows it is there to press. It stops
-   the moment a step is chosen, and never runs for a visitor who asks for less motion. */
-#stage-0:checked ~ .stepper .step-1 { border-color: var(--accent); animation: invite 2.4s ease-in-out infinite; }
+/* An invitation (owner, 5 November 2026): whatever the demo shows, the next
+   step pulses gently, so a visitor knows it is there to press - the rename while
+   it shows today, the fix once the rename is in. It stops at the last step, and
+   never runs for a visitor who asks for less motion. */
+#stage-0:checked ~ .stepper .step-1, #stage-1:checked ~ .stepper .step-2 {
+  border-color: var(--accent); animation: invite 2.4s ease-in-out infinite;
+}
 @keyframes invite {
   0%, 100% { box-shadow: 0 0 0 0 var(--accent); }
   50% { box-shadow: 0 0 0 0.5rem transparent; }
 }
-@media (prefers-reduced-motion: reduce) { #stage-0:checked ~ .stepper .step-1 { animation: none; } }
+@media (prefers-reduced-motion: reduce) {
+  #stage-0:checked ~ .stepper .step-1, #stage-1:checked ~ .stepper .step-2 { animation: none; }
+}
 
 .demo-said { margin: 1.25rem 0 1rem; min-height: 3.2em; font-size: 1.0625rem; line-height: 1.5; max-width: none; }
 .said-plain { color: var(--muted); }
