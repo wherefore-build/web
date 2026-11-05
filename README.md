@@ -48,6 +48,7 @@ private repository, not here, so that none of them goes public with the site.
 | `requirements-engine.txt` | the engine release this is built and judged by | authored |
 | `requirements-browser.txt` | the browser library the press check drives | authored |
 | `wrangler.jsonc` | the hosting: Cloudflare serves `site/` as committed | authored |
+| `.github/workflows/pin.yml` | a release reaches the site by a pull request the release opens: the engine sends `engine-released`, this moves the pin, rebuilds, and opens a draft whose checks say what the site still has to describe | authored |
 
 Never edit `site/` by hand. The gate fails a page that is not what its sources
 make.

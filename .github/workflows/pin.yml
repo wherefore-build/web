@@ -1,0 +1,122 @@
+# A RELEASE REACHES THIS SITE BY A PULL REQUEST, OPENED BY THE RELEASE.
+# The engine's release workflow sends `engine-released` with the version once
+# it is on PyPI (wherefore-build/wherefore, release.yml). This moves
+# requirements-engine.txt to it, rebuilds what the release lets through, and
+# opens a draft pull request whose checks say what the site still has to
+# describe: a feature the release ships with no words here stops the build,
+# and the pull request quotes it. Nothing merges by itself; the owner does.
+# A person can run it too (workflow_dispatch), naming a version, or none for
+# PyPI's newest.
+#
+# It pushes the branch and opens the pull request with CLIENT_TOKEN, a
+# fine-grained token the owner makes with contents and pull requests write on
+# this repository, because a branch pushed with the workflow's own token runs
+# no checks - and the checks are the point. Without the token it rebuilds,
+# says what it would have opened, and stops.
+name: pin
+
+on:
+  repository_dispatch:
+    types: [engine-released]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: the engine release to pin (default, the newest on PyPI)
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pin
+  cancel-in-progress: false
+
+jobs:
+  pin:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Which release, and whether the pin is already there
+        id: which
+        env:
+          ASKED: ${{ github.event.client_payload.version || inputs.version }}
+        run: |
+          V="$ASKED"
+          if [ -z "$V" ]; then
+            V=$(curl -fsS https://pypi.org/pypi/wherefore-build/json | python3 -c 'import json, sys; print(json.load(sys.stdin)["info"]["version"])')
+          fi
+          NOW=$(sed -n 's/^wherefore-build==\(.*\)$/\1/p' requirements-engine.txt)
+          echo "version=$V" >> "$GITHUB_OUTPUT"
+          if [ "$V" = "$NOW" ]; then
+            echo "already pinned to $V - nothing to open"
+            echo "move=false" >> "$GITHUB_OUTPUT"
+          elif git ls-remote --exit-code --heads origin "engine/$V" >/dev/null; then
+            echo "a branch engine/$V is already pushed - its pull request is the one to finish"
+            echo "move=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "moving the pin from $NOW to $V"
+            echo "move=true" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Move the pin, and rebuild what the release lets through
+        if: steps.which.outputs.move == 'true'
+        id: build
+        env:
+          V: ${{ steps.which.outputs.version }}
+        run: |
+          sed -i "s/^wherefore-build==.*$/wherefore-build==$V/" requirements-engine.txt
+          rm -rf .wherefore-engine
+          python3 -m pip install --quiet --no-deps --target .wherefore-engine -r requirements-engine.txt
+          export PYTHONPATH="$PWD/.wherefore-engine"
+          # build regenerates and reports what moved, which here is every page
+          # with the version on it; the gate afterwards is the judge, and it
+          # passes only if every generator ran and what they made is what is
+          # now in the tree. A generator the release stops - a feature with no
+          # words here - fails it, in its own words.
+          python3 -m wherefore build || true
+          set +e
+          python3 -m wherefore gate > gate.txt 2>&1
+          STATUS=$?
+          set -e
+          cat gate.txt
+          echo "status=$STATUS" >> "$GITHUB_OUTPUT"
+          {
+            echo "said<<WHEREFORE"
+            grep -v '^\s*$' gate.txt | tail -n 30
+            echo "WHEREFORE"
+          } >> "$GITHUB_OUTPUT"
+          rm -f gate.txt
+      - name: Open the pull request
+        if: steps.which.outputs.move == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.CLIENT_TOKEN }}
+          V: ${{ steps.which.outputs.version }}
+          STATUS: ${{ steps.build.outputs.status }}
+          SAID: ${{ steps.build.outputs.said }}
+        run: |
+          if [ -z "$GH_TOKEN" ]; then
+            echo "::error::No CLIENT_TOKEN, so the pull request for $V is not opened. Make a fine-grained token with contents and pull requests write on this repository, and save it as CLIENT_TOKEN in its secrets."
+            git status --short
+            exit 1
+          fi
+          git config user.name "Wherefore release"
+          git config user.email "noreply@wherefore.build"
+          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git checkout -b "engine/$V"
+          git add -A
+          if [ "$STATUS" = "0" ]; then
+            git commit -q -m "Wherefore $V" -m "The engine pin moves to $V, on PyPI, and every page is rebuilt against it. Opened by the release itself (.github/workflows/pin.yml)."
+            NOTE="**It builds.** Every page is rebuilt against $V; the checks here judge it as they judge any change."
+          else
+            git commit -q -m "Wherefore $V: the pin moves, and the site has words to add" -m "The engine pin moves to $V, on PyPI. The build stopped, so the pages are not yet rebuilt; the pull request says what the site has to describe first. Opened by the release itself (.github/workflows/pin.yml)."
+            NOTE="**The build stopped.** The release ships something this site does not describe yet, or a page did not rebuild. Add the words in \`facts/company.json\` - \`does.words\` for each feature it names, and any planned item it ships comes off What's next - then regenerate and push here. What the build said:"$'\n\n```\n'"$SAID"$'\n```'
+          fi
+          git push -u origin "engine/$V"
+          {
+            echo "Wherefore $V is on PyPI, and this moves the site's pin to it. Opened by the engine's release, not by a person; draft, and nothing merges by itself."
+            echo
+            echo "$NOTE"
+            echo
+            echo "Release notes: https://github.com/wherefore-build/wherefore/releases/tag/v$V"
+          } > body.md
+          gh pr create --draft --base main --head "engine/$V" --title "Wherefore $V" --body-file body.md
