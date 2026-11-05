@@ -43,15 +43,20 @@ dfn { font-style: italic; }
   white-space: nowrap;
 }
 
+/* The header floats (owner, 5 November 2026): it stays at the top of the
+   screen as the page scrolls, on the ground's own colour so the page passes
+   under it, and everything a link jumps to leaves room for it. */
+header.top { position: sticky; top: 0; z-index: 20; background: var(--ground); border-bottom: 1px solid var(--line); }
 .top .wrap {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem 1.5rem;
-  padding-top: 1.25rem;
-  padding-bottom: 1.25rem;
+  padding-top: 0.875rem;
+  padding-bottom: 0.875rem;
 }
+section, footer { scroll-margin-top: 4.5rem; }
 .name { font: italic 400 1.875rem/1 var(--font-display); text-decoration: none; letter-spacing: -0.01em; }
 nav { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem 1.375rem; font-size: 0.9375rem; }
 nav a { color: var(--muted); text-decoration: none; padding: 0.6rem 0; }
@@ -75,7 +80,7 @@ em { font-style: italic; }
   line-height: 0.95;
   letter-spacing: -0.025em;
   margin: 0 0 1.75rem;
-  max-width: 15ch;
+  text-wrap: balance;
 }
 .hero h1 em { color: var(--accent); }
 .eyebrow { font: 400 0.875rem/1.4 var(--font-mono); color: var(--accent); margin-bottom: 1.25rem; }
@@ -460,3 +465,53 @@ footer p { margin: 0; }
 .icons { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 1.25rem; margin-bottom: 1.25rem; }
 .icon-show { display: block; border: 1px solid var(--line); }
 .icon-round { border-radius: 50%; }
+
+/* The simpler home page (owner, 4 November 2026). The headline runs the whole
+   width; under it the lede and the two commands to try it stand beside the
+   scan's own output: two columns once there is room for the terminal's
+   longest line whole, one column below that. min-width: 0 on both, or the
+   command block widens the page past a phone's screen. */
+.hero-grid { display: grid; gap: 2.5rem 3.5rem; align-items: start; }
+.hero-grid > * { min-width: 0; }
+/* The scan's longest line is 78 characters, 616 px at this size: the wider of two columns holds it whole from 75rem up, so it never scrolls sideways beside the copy. */
+@media (min-width: 75rem) { .hero-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); }
+  .hero-term pre { font-size: 0.75rem; } }
+.hero .lede { max-width: 40ch; }
+.try-label { margin: 1.75rem 0 0.6rem; font: 400 0.875rem/1.4 var(--font-mono); color: var(--muted); }
+.try { display: grid; gap: 0.35rem; padding: 1rem 1.25rem; border: 1px solid var(--accent); border-radius: 12px; background: var(--surface); overflow-x: auto; }
+/* One tap selects a whole command, so it can be copied as it stands. */
+.try .cmd { display: block; font: 400 0.9375rem/1.5 var(--font-mono); white-space: pre; user-select: all; -webkit-user-select: all; }
+.try-pip { margin: 0.6rem 0 0; font: 400 0.8125rem/1.4 var(--font-mono); color: var(--muted); }
+.try-pip code { color: var(--ink); user-select: all; -webkit-user-select: all; }
+.hero .actions { margin-top: 1.5rem; }
+
+/* What else it catches: three features, then the way to all of them. */
+.does-three { grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr)); }
+.more-all { margin: 1.5rem 0 0; }
+.more-all a { color: var(--accent); }
+.chip-since { min-width: 0; }
+.chip-next { color: var(--caution); border-color: var(--caution); min-width: 0; }
+.chip-later { min-width: 0; }
+#next { padding-top: 0; border-top: 0; }
+
+/* The case study's two lists, folded behind one tap: the story and the counts stay in view. */
+.case-more { margin-top: 2rem; }
+.case-more summary { display: inline-flex; align-items: center; min-height: var(--tap); padding: 0 1.25rem; border: 1px solid var(--line); border-radius: var(--radius-control); cursor: pointer; font-weight: 500; list-style: none; }
+.case-more summary::-webkit-details-marker { display: none; }
+.case-more summary::after { content: "+"; margin-left: 0.75rem; color: var(--accent); font: 400 1.25rem/1 var(--font-mono); }
+.case-more[open] summary::after { content: "−"; }
+.case-more .case-grid { margin-top: 1.5rem; }
+
+.start-free { margin: 1.5rem 0 0; color: var(--muted); }
+
+/* Every link again at the foot: on a phone the header shows only the name and Get started. */
+.foot-nav { display: flex; flex-wrap: wrap; gap: 0.25rem 1.375rem; margin: 0 0 1.5rem; }
+.foot-nav a { color: var(--muted); text-decoration: none; padding: 0.6rem 0; }
+.foot-nav a:hover { color: var(--ink); }
+@media (max-width: 45rem) {
+  header.top nav a:not(.pill) { display: none; }
+  header.top .wrap { flex-wrap: nowrap; }
+}
+/* The picture, part of the opening (owner, 5 November 2026): no line above it, so it reads on from the hero. */
+.opening { border-top: 0; padding-top: 0; }
+.opening h2 { max-width: 22ch; }

@@ -73,8 +73,8 @@ line it says Wherefore is not public yet, and with no quote the case study
 quotes no one. Each appears when its fact does.
 
 Run from gen/, as wherefore.json says, after brand.py. Writes site/index.html,
-site/page.css, site/_headers, the changelog, site/changelog/index.html, and
-the framed model, site/pendulum/index.html.
+site/page.css, site/_headers, the features page, site/features/index.html, the
+changelog, site/changelog/index.html, and the framed model, site/pendulum/index.html.
 """
 import json
 import re
@@ -125,6 +125,26 @@ FEATURES = engine("features.json", since="0.4.0")["features"]
 def version():
     ASKED.append("version")
     return wherefore.__version__
+
+
+def release_meta():
+    """The pinned release's distribution name and licence, from its installed metadata - never typed."""
+    import importlib.metadata as md
+    meta = md.metadata("wherefore-build")
+    licence = meta.get("License-Expression") or meta.get("License")
+    if not licence:
+        raise SystemExit(f"{ENGINE} declares no licence in its metadata, and the page says which one it is under")
+    ASKED.append("licence")
+    return meta["Name"], licence
+
+
+def scan_shown():
+    """What `wherefore scan` printed, as the release that brought it recorded it: the hero's real output."""
+    for r in engine("releases.json", since="0.5.0")["releases"]:
+        if r["shows"]["run"].startswith("wherefore scan"):
+            ASKED.append("releases")
+            return r["shows"]
+    raise SystemExit(f"{ENGINE} records no release whose picture is a run of `wherefore scan`, and the hero shows one")
 
 
 def entry(usage):
@@ -242,7 +262,9 @@ def part(render, f, inspect, also=()):
         lines.append(f'<p><span class="src-k">{esc(inspect["from"])}</span> {esc(file)} · '
                      f'{esc(fill(inspect["facts"], n=len(read)))}: {esc(" · ".join(tree(read)))}</p>')
     if ASKED:
-        asked = (["version"] if "version" in ASKED else []) + ([f"commands.json: {', '.join(commands)}"] if commands else [])
+        asked = ((["version"] if "version" in ASKED else []) + (["licence"] if "licence" in ASKED else [])
+                 + (["releases.json"] if "releases" in ASKED else [])
+                 + ([f"commands.json: {', '.join(commands)}"] if commands else []))
         lines.append(f'<p><span class="src-k">{esc(inspect["from"])}</span> {esc(ENGINE)} · '
                      f'{esc(" · ".join(asked))}</p>')
     lines.append(f'<p><span class="src-k">{esc(inspect["held"])}</span> {esc(" · ".join(held))}</p>')
@@ -250,13 +272,21 @@ def part(render, f, inspect, also=()):
 
 
 def nav(f, home=""):
-    """The site's links, in the order the home page shows them, and the changelog.
-    `home` is the way back to the home page from where the nav sits: "" on it."""
+    """The site's links. `home` is the way back to the home page from where the nav sits: "" on it.
+    On a phone only the name and Get started show; foot_nav carries the rest."""
     n = f["nav"]
     return (f'<nav aria-label="The site"><a href="{home}#how">{esc(n["how"])}</a>'
-            f'<a href="{home}#does">{esc(n["does"])}</a><a href="{home}#case">{esc(f["case"]["eyebrow"])}</a>'
-            f'<a href="{home}changelog/">{esc(f["changelog"]["title"])}</a>'
+            f'<a href="{home}features/">{esc(n["does"])}</a><a href="{home}#case">{esc(f["case"]["eyebrow"])}</a>'
+            f'<a href="{home}#why">{esc(n["why"])}</a><a href="{home}changelog/">{esc(f["changelog"]["title"])}</a>'
             f'<a class="pill" href="{home}#start">{esc(n["start"])}</a></nav>')
+
+
+def foot_nav(f, home=""):
+    """Every page's links again, at the foot, where a phone's header has no room for them."""
+    n = f["nav"]
+    return (f'<nav class="foot-nav" aria-label="The site, again"><a href="{home}#how">{esc(n["how"])}</a>'
+            f'<a href="{home}features/">{esc(n["does"])}</a><a href="{home}#case">{esc(f["case"]["eyebrow"])}</a>'
+            f'<a href="{home}#why">{esc(n["why"])}</a><a href="{home}changelog/">{esc(f["changelog"]["title"])}</a></nav>')
 
 
 def header(f):
@@ -436,35 +466,48 @@ OUT = ('<svg class="out" viewBox="0 0 16 16" aria-hidden="true" focusable="false
        'fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>')
 
 def hero(f):
-    """The headline, the lede, and the two things a visitor can do next.
+    """What it is, why it matters, and the two commands that try it on your own site - with real output beside them.
 
-    The second button is the engine's repository once there is a public one to
-    show - `company.github` - and until then the way down the page. A null is a
-    fact not decided yet: no button points at a repository nobody can open."""
-    h = f["hero"]
+    The headline runs the whole width; under it the lede and the two commands
+    take one column and the scan's output the other, once there is room for
+    its longest line (gen/page.css, .hero-grid).
+
+    The eyebrow's licence and version, the package pip installs and the scan's
+    output are the pinned release's own; the commands are start's, so the hero
+    and Get started state them once between them. The second button is the
+    engine's public repository, once there is one: company.github."""
+    h, st = f["hero"], f["start"]
+    name, licence = release_meta()
+    first = st["steps"][0]
+    run = f'{command(first["command"])} {first.get("args", "")}'.strip()
     repo = f["company"]["github"]
-    second = (f'<a class="button button-quiet" href="{esc(repo)}">{esc(f["nav"]["github"])}{OUT}</a>' if repo
-              else f'<a class="button button-quiet" href="#how">{esc(f["nav"]["how"])}</a>')
+    github = (f'<p class="actions"><a class="button button-quiet" href="{esc(repo)}">{esc(f["nav"]["github"])}{OUT}</a></p>'
+              if repo else "")
     return f"""<section class="hero"><div class="wrap">
 {SRC}
-<p class="eyebrow">{esc(h["eyebrow"])} · Wherefore {esc(version())}</p>
+<p class="eyebrow">{esc(h["eyebrow"])} · {esc(licence)} · {esc(version())}</p>
 <h1>{esc(h["headline"])} <em>{esc(h["headline_end"])}</em></h1>
+<div class="hero-grid">
+<div class="hero-copy">
 <p class="lede">{esc(h["lede"])}</p>
-<p class="actions"><a class="button" href="#start">{esc(f["nav"]["start"])}</a>{second}</p>
-{forks(f)}
+<p class="try-label">{esc(h["try"])}</p>
+<div class="try"><code class="cmd"><span class="term-prompt">$</span> {esc(st["install"])}</code><code class="cmd"><span class="term-prompt">$</span> {esc(run)}</code></div>
+<p class="try-pip">{esc(h["pip"])} <code>pip install {esc(name)}</code></p>
+{github}
+</div>
+<figure class="term hero-term"><pre><code>{terminal(scan_shown(), f["changelog"]["cut"])}</code></pre>
+<figcaption>{esc(h["shows"])}</figcaption></figure>
+</div>
 </div></section>"""
 
 
-def pains(f):
-    """What drift costs, in the words of the teams it costs, and what Wherefore does about it."""
-    p = f["pains"]
-    items = "".join(f'<li class="pain"><p class="pain-head">{esc(i["pain"])}</p><p class="pain-detail">{esc(i["detail"])}</p></li>'
-                    for i in p["items"])
-    return f"""<section class="pains"><div class="wrap">
+def opening(f):
+    """The picture, right after the headline (owner, 5 November 2026): code merges back,
+    everything else forks for good, and Wherefore gives everything else code's shape."""
+    return f"""<section id="forks" class="opening"><div class="wrap">
 {SRC}
-<h2>{esc(p["heading"])}</h2>
-<ul class="pain-list">{items}</ul>
-<p class="pain-answer">{esc(p["answer"])}</p>
+<h2>{esc(f["forks"]["heading"])}</h2>
+{forks(f)}
 </div></section>"""
 
 
@@ -551,7 +594,7 @@ def why(f):
 </div>
 <div class="asks" role="group" aria-label="{esc(w["pick"])}">
 {chr(10).join(tabs)}
-<p class="ask-note">{esc(w["note"])} <label class="inline-switch" for="inspect">{esc(f["inspect"]["ask"])}</label></p>
+<p class="ask-note">{esc(w["note"])}</p>
 </div>
 </div>
 </div></section>"""
@@ -649,11 +692,57 @@ def changelog_page(f):
 </ol>
 </div></section>
 </main>
-<footer><div class="wrap"><div class="footer-row"><p><span class="footer-name">{esc(name)}</span> · {esc(f["colophon"])}</p>
-<p class="footer-meta"><a href="../">{esc(name)}</a> · <a href="../brand/">Brand</a>{source}</p></div></div></footer>
+{sub_footer(f)}
 </body>
 </html>
 """
+
+
+def sub_footer(f):
+    """The footer of a page one level down: every link, the colophon, the source."""
+    company = f["company"]
+    name = company["name"]
+    source = (f' · <a target="_blank" rel="noopener" href="{esc(company["source"])}">{esc(f["inspect"]["source"])}{OUT}</a>'
+              if company["source"] else "")
+    return (f'<footer><div class="wrap">{foot_nav(f, "../")}<div class="footer-row"><p><span class="footer-name">{esc(name)}</span>'
+            f' · {esc(f["colophon"])}</p>\n<p class="footer-meta"><a href="../">{esc(name)}</a> · <a href="../brand/">Brand</a>{source}</p></div></div></footer>')
+
+
+def sub_page(f, slug, eyebrow, heading, lede, body):
+    """A page one level down, in the changelog's shell: the draft banner, the nav, its head, its body."""
+    company = f["company"]
+    name = company["name"]
+    lines = [head(f"{heading} — {name}", lede or heading, "../brand.css"), '<link rel="stylesheet" href="../page.css">']
+    if company["domain"]:
+        lines.append(f'<link rel="canonical" href="https://{esc(company["domain"])}/{slug}/">')
+    lede_html = f'<p class="lede">{esc(lede)}</p>' if lede else ""
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+{chr(10).join(lines)}
+</head>
+<body>
+{banner()}<header class="top"><div class="wrap"><a class="name" href="../">{esc(name)}</a>
+{nav(f, "../")}</div></header>
+<main id="top">
+<section class="log-head"><div class="wrap">
+<p class="eyebrow">{esc(eyebrow)}</p>
+<h1>{esc(heading)}</h1>
+{lede_html}
+</div></section>
+{body.replace(SRC, "")}
+</main>
+{sub_footer(f)}
+</body>
+</html>
+"""
+
+
+def features_page(f):
+    """site/features/index.html: every feature the release ships, tagged with the release it arrived in, then what is next."""
+    d = f["does"]
+    return sub_page(f, "features", f'{f["nav"]["does"]} · {f["company"]["name"]} {wherefore.__version__}',
+                    d["heading"], None, does(f) + planned(f))
 
 
 def short(usage):
@@ -697,12 +786,52 @@ def does(f):
                if x["since"] == newest else "")
         cmd = (f'<p class="does-cmd"><code>{esc(command(short(x["commands"][0])))}</code></p>'
                if x.get("commands") else "")
-        items.append(f'<li><p class="does-name">{esc(x["name"])}{new}</p>'
+        since = f' <span class="chip chip-since">{esc(fill(d["since"], version=x["since"]))}</span>'
+        items.append(f'<li><p class="does-name">{esc(x["name"])}{since}{new}</p>'
                      f'<p>{esc(words[x["id"]])}</p>{cmd}</li>')
     return f"""<section id="does"><div class="wrap">
+<p class="does-intro">{esc(d["intro"])} <a href="../changelog/">{esc(f["changelog"]["link"])}</a></p>
+<ul class="does">
+{chr(10).join(items)}
+</ul>
+</div></section>"""
+
+
+def more(f):
+    """Three of the release's features on the home page, in our words, and a link to every one."""
+    d = f["does"]
+    byid = {x["id"]: x for x in FEATURES}
+    items = []
+    for k in d["home"]:
+        if k not in byid:
+            raise SystemExit(f"does.home names `{k}`, which {ENGINE} does not ship")
+        items.append(f'<li><p class="does-name">{esc(byid[k]["name"])}</p><p>{esc(d["words"][k])}</p></li>')
+    return f"""<section id="more"><div class="wrap">
 {SRC}
-<h2>{esc(d["heading"])}</h2>
-<p class="does-intro">{esc(d["intro"])} <a href="changelog/">{esc(f["changelog"]["link"])}</a></p>
+<h2>{esc(d["home_heading"])}</h2>
+<ul class="does does-three">
+{chr(10).join(items)}
+</ul>
+<p class="more-all"><a href="features/">{esc(fill(d["all"], n=len(FEATURES)))}</a></p>
+</div></section>"""
+
+
+def planned(f):
+    """What is next, as this company plans it. A planned feature the pinned release already ships stops
+    the build: the roadmap may not promise what is already here, so it moves to the list above."""
+    p = f["planned"]
+    shipped = {x["id"]: x for x in FEATURES}
+    items = []
+    for it in p["items"]:
+        if it["id"] in shipped:
+            raise SystemExit(f"planned.items still lists `{it['id']}` ({it['name']}), which {ENGINE} ships: "
+                             f"it is under the features now, so take it off the roadmap")
+        if it["state"] not in p["labels"]:
+            raise SystemExit(f"planned item `{it['id']}` is {it['state']!r}, which planned.labels does not name")
+        items.append(f'<li id="{esc(it["id"])}"><p class="does-name">{esc(it["name"])} <span class="chip chip-{esc(it["state"])}">'
+                     f'{esc(p["labels"][it["state"]])}</span></p><p>{esc(it["words"])}</p></li>')
+    return f"""<section id="next"><div class="wrap">
+<h2>{esc(p["heading"])}</h2>
 <ul class="does">
 {chr(10).join(items)}
 </ul>
@@ -774,12 +903,14 @@ def case(f, p):
 <p class="actions"><a class="button button-quiet" href="{esc(c["url"])}">{esc(c["visit"])}</a></p>
 </div>
 {quote}
+<ul class="stats">{stats}</ul>
+<p class="as-of">{esc(as_of)}</p>
+<details class="case-more"><summary>{esc(c["more"])}</summary>
 <div class="case-grid">
 <div class="case-col"><h3>{esc(c["made_heading"])}</h3><ul class="case-list">{made}</ul></div>
 <div class="case-col"><h3>{esc(c["held_heading"])}</h3><ul class="case-list case-held">{held}</ul></div>
 </div>
-<ul class="stats">{stats}</ul>
-<p class="as-of">{esc(as_of)}</p>
+</details>
 </div></section>"""
 
 
@@ -795,35 +926,22 @@ def rule(f):
 
 
 def start(f):
-    """Getting started, by yourself: the install line once there is one, then the release's own commands."""
-    st, s = f["start"], f["status"]
-    lines = []
-    if st["install"]:
-        lines.append(f'<li><code>{esc(st["install"])}</code></li>')
-    for usage in st["steps"]:
-        c = entry(usage)
-        lines.append(f'<li><code>{esc(c["usage"])}</code><span class="does">{esc(c["does"])}</span></li>')
-    closed = "" if st["install"] else f'<p class="start-closed">{esc(st["closed"])}</p>'
-    labels, road = s["labels"], []
-    for it in s["items"]:
-        state = it["state"]
-        if state not in labels:
-            raise SystemExit(f"status item {it['text']!r} is {state!r}, which status.labels does not name")
-        road.append(f'<li class="road-{esc(state)}"><span class="chip">{esc(labels[state])}</span> '
-                    f'{esc(fill(it["text"], version=version()))}</li>')
+    """Getting started: install, scan, init - in this company's words; the licence and package are the release's."""
+    st, h = f["start"], f["hero"]
+    name, licence = release_meta()
+    lines = [f'<li><code>{esc(st["install"])}</code><span class="does">{esc(h["pip"])} <code>pip install {esc(name)}</code></span></li>']
+    for s in st["steps"]:
+        run = f'{command(s["command"])} {s.get("args", "")}'.strip()
+        lines.append(f'<li><code>{esc(run)}</code><span class="does">{esc(s["says"])}</span></li>')
     return f"""<section id="start"><div class="wrap">
 {SRC}
 <div class="start-box">
-<p class="start-ask">{esc(st["ask"])}</p>
 <h2>{esc(st["heading"])}</h2>
 <p class="start-text">{esc(st["text"])}</p>
 <ol class="start-steps">
 {chr(10).join(lines)}
 </ol>
-{closed}
-<ul class="road">
-{chr(10).join(road)}
-</ul>
+<p class="start-free">{esc(fill(st["free"], licence=licence))}</p>
 </div>
 </div></section>"""
 
@@ -837,7 +955,7 @@ def footer(f):
         meta += f' · <a target="_blank" rel="noopener" href="{esc(company["source"])}">{esc(f["inspect"]["source"])}{OUT}</a>'
     if company["domain"]:
         meta += f' · {esc(company["domain"])}'
-    return (f'<footer><div class="wrap">{SRC}<div class="footer-row"><p><span class="footer-name">{esc(company["name"])}</span>'
+    return (f'<footer><div class="wrap">{SRC}{foot_nav(f)}<div class="footer-row"><p><span class="footer-name">{esc(company["name"])}</span>'
             f' · {esc(f["colophon"])}</p><p class="footer-meta">{meta}</p></div></div></footer>')
 
 
@@ -848,9 +966,9 @@ def page(f):
     if company["domain"]:
         lines.append(f'<link rel="canonical" href="https://{esc(company["domain"])}/">')
     parts = {name: part(render, f, inspect, *also) for name, render, *also in (
-        ("header", header), ("hero", hero), ("pains", pains), ("demo", ripple), ("why", why), ("how", how), ("does", does),
+        ("header", header), ("hero", hero), ("forks", opening), ("demo", ripple), ("how", how),
         ("case", case, (("facts/pendulum.json", PENDULUM),)),
-        ("rule", rule), ("start", start), ("footer", footer))}
+        ("more", more), ("rule", rule), ("why", why), ("start", start), ("footer", footer))}
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -862,13 +980,13 @@ def page(f):
 <main id="top">
 {key(f)}
 {parts["hero"]}
-{parts["pains"]}
+{parts["forks"]}
 {parts["demo"]}
 {parts["how"]}
-{parts["why"]}
-{parts["does"]}
 {parts["case"]}
+{parts["more"]}
 {parts["rule"]}
+{parts["why"]}
 {parts["start"]}
 </main>
 {parts["footer"]}
@@ -908,6 +1026,8 @@ def main():
     (SITE / "_headers").write_text(headers(), encoding="utf-8")
     (SITE / "changelog").mkdir(exist_ok=True)
     (SITE / "changelog/index.html").write_text(changelog_page(FACTS), encoding="utf-8")
+    (SITE / "features").mkdir(exist_ok=True)
+    (SITE / "features/index.html").write_text(features_page(FACTS), encoding="utf-8")
     (SITE / MODEL_PAGE).mkdir(exist_ok=True)
     (SITE / MODEL_PAGE / "index.html").write_text(model_page(FACTS), encoding="utf-8")
 

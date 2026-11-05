@@ -60,7 +60,8 @@ SEEN = """() => {
   const walk = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
   for (let n = walk.nextNode(); n; n = walk.nextNode()) {
     const t = n.textContent.replace(/\\s+/g, ' ').trim();
-    if (!t || getComputedStyle(n.parentElement).visibility === 'hidden') continue;
+    // checkVisibility() is false inside a closed <details>: Chromium lays its content out unseen
+    if (!t || !n.parentElement.checkVisibility({visibilityProperty: true})) continue;
     const r = document.createRange(); r.selectNodeContents(n);
     const boxes = [...r.getClientRects()].filter(b => b.width > 0 && b.height > 0);
     if (!boxes.length) continue;
