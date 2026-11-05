@@ -19,6 +19,7 @@ private repository, not here, so that none of them goes public with the site.
 | `facts/company.json` | **the source**: every fact the company states about itself, once | authored |
 | `brand/tokens.json` | **the brand**: every colour, typeface and radius, once, each with its role and reason | authored |
 | `facts/pendulum.json` | the case study's counts: a dated snapshot of the pendulum's own repository, which is private, counted once at the commit it names | captured, stamped inside |
+| `facts/roadmap.json` | the engine's roadmap, byte for byte the `roadmap.json` beside its code; What's next is built from it, and `wherefore check upstream` fails the deploy when the engine's file has moved | captured |
 | `cases/pendulum/model.html` | the pendulum's interactive 3D model, the file https://chaoticpendulums.com/ embeds, copied byte for byte from the pendulum's repository at the commit `case.model.taken` names | captured |
 | `brand/fonts/` | the three typefaces and their licences (SIL OFL 1.1), unchanged | authored |
 | `brand/icon/icon-1024.png`, `brand/shoot_icon.py` | the icon as a PNG, for accounts that take only PNG, and the script that shoots it from `site/brand/icon.svg` | captured, stamped |
@@ -107,9 +108,11 @@ brand pack at `site/brand/`.
 - **Getting started**: the install line and the release's own commands.
 
 **Features** (`site/features/`) lists everything the pinned release does, each
-with the release it arrived in, and **what's next** - the items `planned` in the
-facts, each marked next or later. The build stops if a planned item is one the
-pinned release already ships: an item leaves the roadmap the day it arrives.
+with the release it arrived in, and **what's next** - the engine's own roadmap,
+from the copy this site holds (`facts/roadmap.json`), each item marked next or
+later. The site owns no roadmap: the engine's sits beside its code, and the copy
+is held to it. The build stops if an item is one the pinned release already
+ships: an item leaves the roadmap in the change that ships it.
 
 **How this page is built.** A switch at the bottom of the screen shows, above
 every part of the page, the facts it was built from and the checks that hold
