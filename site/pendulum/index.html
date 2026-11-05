@@ -5871,7 +5871,18 @@ bSw.addEventListener('click',function(){
 <script>
 addEventListener('load', function () {
   var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  CP.go({view: {yaw: 30, pitch: -14, fov: 30, tx: 0, ty: -100, app: 580}, pose: 'house', dur: 1})
-    .then(function () { if (!still) return CP.swing(); });
+  var posed = CP.go({view: {yaw: 30, pitch: -14, fov: 30, tx: 0, ty: -100, app: 580}, pose: 'house', dur: 1});
+  if (still) return;
+  var kicked = false;
+  function kick() {
+    if (kicked) return;
+    kicked = true;
+    posed.then(function () { return CP.swing({kick: [6, 14]}); });
+  }
+  if (!('IntersectionObserver' in window)) return kick();
+  var seen = new IntersectionObserver(function (entries) {
+    if (entries.some(function (e) { return e.isIntersecting; })) { seen.disconnect(); kick(); }
+  }, {threshold: 0.5});
+  seen.observe(document.body);
 });
 </script>
