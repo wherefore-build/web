@@ -3,7 +3,7 @@
  "company": {
   "name": "Wherefore",
   "domain": "wherefore.build",
-  "contact": null,
+  "contact": "hello@wherefore.build",
   "github": "https://github.com/wherefore-build/wherefore",
   "source": "https://github.com/wherefore-build/web"
  },
