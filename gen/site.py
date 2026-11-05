@@ -76,6 +76,9 @@ Run from gen/, as wherefore.json says, after brand.py. Writes site/index.html,
 site/page.css, site/_headers, the features page, site/features/index.html, the
 changelog, site/changelog/index.html, the framed model, site/pendulum/index.html, and
 the framed plate, site/pendulum/plate/index.html.
+The map, site/map/index.html, is the engine's: `wherefore graph` run as a
+generator of its own (wherefore.json), which the gate runs like any command
+and `wherefore graph` itself credits rather than runs.
 """
 import json
 import re
@@ -92,6 +95,13 @@ MONTHS = ("January", "February", "March", "April", "May", "June", "July", "Augus
 ASKED = []          # what the part being rendered asked the engine for
 MODEL = ROOT / "cases/pendulum/model.html"
 MODEL_PAGE = "pendulum/"
+# The site's own map, written by `wherefore graph` run as a generator (wherefore.json):
+# every source, the scripts that read it, and every file they make, in the
+# brand's own colours (--theme site/brand/map.css, which gen/brand.py writes
+# from the tokens). The engine's page, with the engine's script in it, so its
+# path is served a policy that lets its own script run and load the brand's
+# fonts, like the model's.
+MAP_PAGE = "map/"
 # What frames the pendulum's model on this site, appended after its source -
 # which has no closing tags, so it is appended to, never edited. A three-quarter
 # view drawn back far enough, with the pivot high, that the whole swing stays in
@@ -295,7 +305,8 @@ def nav(f, home=""):
     n = f["nav"]
     return (f'<nav aria-label="The site"><a href="{home}#how">{esc(n["how"])}</a>'
             f'<a href="{home}features/">{esc(n["does"])}</a><a href="{home}#case">{esc(f["case"]["eyebrow"])}</a>'
-            f'<a href="{home}#why">{esc(n["why"])}</a><a href="{home}changelog/">{esc(f["changelog"]["title"])}</a></nav>')
+            f'<a href="{home}#why">{esc(n["why"])}</a><a href="{home}changelog/">{esc(f["changelog"]["title"])}</a>'
+            f'<a href="{home}{MAP_PAGE}">{esc(n["map"])}</a></nav>')
 
 
 def topbar(f, home=""):
@@ -314,7 +325,8 @@ def foot_nav(f, home=""):
     n = f["nav"]
     return (f'<nav class="foot-nav" aria-label="The site, again"><a href="{home}#how">{esc(n["how"])}</a>'
             f'<a href="{home}features/">{esc(n["does"])}</a><a href="{home}#case">{esc(f["case"]["eyebrow"])}</a>'
-            f'<a href="{home}#why">{esc(n["why"])}</a><a href="{home}changelog/">{esc(f["changelog"]["title"])}</a></nav>')
+            f'<a href="{home}#why">{esc(n["why"])}</a><a href="{home}changelog/">{esc(f["changelog"]["title"])}</a>'
+            f'<a href="{home}{MAP_PAGE}">{esc(n["map"])}</a></nav>')
 
 
 def header(f):
@@ -328,6 +340,9 @@ def key(f):
     source = f["company"]["source"]
     # The source opens in a new tab, so a visitor reading how the page is built keeps the page (owner).
     link = f' <a target="_blank" rel="noopener" href="{esc(source)}">{esc(i["source"])}{OUT}</a>' if source else ""
+    # The map: the whole chain, drawn by the pinned engine from a real run of
+    # every generator (MAP_PAGE, a generator in wherefore.json).
+    link += f' <a href="{MAP_PAGE}">{esc(i["map"])}</a>'
     return (f'<div class="src-key"><div class="wrap"><p>{esc(i["intro"])}{link}</p>'
             f'<dl>{rows}</dl></div></div>')
 
@@ -748,7 +763,7 @@ def sub_footer(f):
     source = (f' · <a target="_blank" rel="noopener" href="{esc(company["source"])}">{esc(f["inspect"]["source"])}{OUT}</a>'
               if company["source"] else "")
     return (f'<footer><div class="wrap">{foot_nav(f, "../")}<div class="footer-row"><p><span class="footer-name">{esc(name)}</span>'
-            f' · {esc(f["colophon"])}</p>\n<p class="footer-meta"><a href="../">{esc(name)}</a> · <a href="../brand/">Brand</a>{source}</p></div></div></footer>')
+            f' · {esc(f["colophon"])}</p>\n<p class="footer-meta"><a href="../">{esc(name)}</a> · <a href="../brand/">Brand</a> · <a href="../{MAP_PAGE}">{esc(f["inspect"]["map_short"])}</a>{source}</p></div></div></footer>')
 
 
 def sub_page(f, slug, eyebrow, heading, lede, body):
@@ -1011,7 +1026,7 @@ def start(f):
 
 def footer(f):
     company = f["company"]
-    meta = f'<a href="changelog/">Wherefore {esc(version())}</a> · <a href="brand/">Brand</a>'
+    meta = f'<a href="changelog/">Wherefore {esc(version())}</a> · <a href="brand/">Brand</a> · <a href="{MAP_PAGE}">{esc(f["inspect"]["map_short"])}</a>'
     if company["contact"]:
         meta += f' · <a href="mailto:{esc(company["contact"])}">{esc(company["contact"])}</a>'
     if company["source"]:
@@ -1078,6 +1093,11 @@ def headers():
     lines += ["", f"/{MODEL_PAGE}*", "  ! Content-Security-Policy",
               "  Content-Security-Policy: default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; "
               "img-src data:; font-src data:; base-uri 'none'; form-action 'none'; frame-ancestors 'self'"]
+    # The map: the engine's own page, one file with its style and its script
+    # inside it, loading nothing; its path may run that script and nothing else.
+    lines += ["", f"/{MAP_PAGE}*", "  ! Content-Security-Policy",
+              "  Content-Security-Policy: default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; "
+              "font-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'"]
     return "\n".join(lines) + "\n"
 
 

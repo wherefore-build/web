@@ -1,6 +1,17 @@
 {
  "wherefore": 1,
- "name": "web",
+ "name": "wherefore.build",
+ "palette": {
+  "source": "brand/tokens.json",
+  "read": ["gen/**", "site/**", "facts/**", "brand/**", "cases/**"],
+  "not_ours": {
+   "cases/pendulum/model.html": "the pendulum's page, taken from its repository as it serves it; its own suite holds its brand",
+   "site/pendulum/index.html": "the same page, copied to where the site serves it",
+   "cases/pendulum/plate.html": "the pendulum's plate, the same page opened on one part; its own suite holds its brand",
+   "site/pendulum/plate/index.html": "the same page, copied to where the site serves it",
+   "site/changelog/index.html": "quotes each release's picture as the engine printed it, and the 0.10.0 picture is the palette check catching a stray colour - so the page says that colour as text, never as a style; its styles are page.css and brand.css, read above"
+  }
+ },
  "note": "The company: its site and its brand now, and every asset after them. Each asset is generated from facts/company.json, from brand/tokens.json and from the engine it pins - what the product is (its principles, its commands, its version) is read from that release, never retyped here.",
  "sources": {
   "facts": {
@@ -28,7 +39,7 @@
   {
    "script": "brand.py",
    "cwd": "gen",
-   "makes": "site/brand.css, site/fonts/ and the brand page site/brand/ with the icon, from the brand tokens"
+   "makes": "site/brand.css, the map's theme site/brand/map.css, site/fonts/ and the brand page site/brand/ with the icon, from the brand tokens"
   },
   {
    "script": "site.py",
@@ -44,6 +55,23 @@
    "script": "-m wherefore.skill",
    "cwd": ".",
    "makes": ".claude/skills/wherefore/, the skill the pinned release ships, for every coding agent that works here"
+  },
+  {
+   "run": [
+    "python3",
+    "-m",
+    "wherefore",
+    "graph",
+    "--html",
+    "site/map/index.html",
+    "--theme",
+    "site/brand/map.css",
+    "--home",
+    "../",
+    "wherefore.build"
+   ],
+   "cwd": ".",
+   "makes": "site/map/, the map of this repository: every source, the scripts that read it, and every file they make, drawn by the pinned engine from a real run in the brand's own colours (site/brand/map.css) - the gate runs it like any command, and `wherefore graph` credits it rather than running it"
   }
  ],
  "inventory": {

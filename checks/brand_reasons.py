@@ -45,6 +45,26 @@ def faults():
             found.append(f"color.{name} says both `same_as` and `value`: it is one colour or the other")
         elif "same_as" in c and c["same_as"] not in t["color"]:
             found.append(f"color.{name} is the same as {c['same_as']!r}, which brand/tokens.json does not define")
+    # The light scheme, paper: it says why it exists, every colour of the brand
+    # is in it with why, and nothing is in it that the brand does not have.
+    if "light" in t:
+        if not str(t["light"].get("why", "")).strip():
+            found.append("the light scheme has no `why`")
+        if not t["light"].get("contrast", {}).get("pairs"):
+            found.append("the light scheme declares no contrast pairs of its own (light.contrast.pairs)")
+        light = t["light"].get("color", {})
+        for name in t.get("color", {}):
+            if name not in light:
+                found.append(f"color.{name} has no value on paper: light.color.{name} is missing")
+        for name, c in light.items():
+            if name not in t.get("color", {}):
+                found.append(f"light.color.{name} is a colour the brand does not have")
+            if not str(c.get("why", "")).strip():
+                found.append(f"light.color.{name} has no `why`")
+            if "same_as" in c and "value" in c:
+                found.append(f"light.color.{name} says both `same_as` and `value`")
+            elif "same_as" in c and c["same_as"] not in light:
+                found.append(f"light.color.{name} is the same as {c['same_as']!r}, which the light scheme does not define")
     icon = t.get("icon")
     if icon is not None:
         for field in ("role", "why"):
@@ -72,7 +92,7 @@ def main():
         for f in found:
             print(f"   {f}")
         return 1
-    print("ok   every colour, typeface and radius says what it is for and why, so does the icon, "
+    print("ok   every colour, typeface and radius says what it is for and why, on the ground and on paper, so does the icon, "
           "and the brand says its idea")
     return 0
 

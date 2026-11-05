@@ -30,12 +30,13 @@ private repository, not here, so that none of them goes public with the site.
 | `gen/kit.py` | what the generators share: the sources, the draft banner, contrast | authored |
 | `site/index.html` | the home page | generated |
 | `site/features/`, `site/changelog/` | everything it does and what's next, and every release | generated |
+| `site/map/` | the site's own map, written by `wherefore graph` run as a generator: every source, the scripts that read it, and every file they make, from a real run, in the brand's own colours (`--theme site/brand/map.css`) | generated |
 | `site/_headers` | what Cloudflare Pages serves with every file | generated |
 | `site/install.sh` | the one-line installer `wherefore.sh` serves, from the pinned release (`gen/install.py`) | generated |
 | `site/brand.css`, `site/fonts/` | the brand as custom properties, and the fonts it serves itself | generated |
 | `site/brand/` | the brand pack a person reads: every token, every contrast, the type, the icon, the licences | generated |
 | `checks/self_contained.py` | the site loads nothing from elsewhere, and every link on it goes somewhere | authored |
-| `checks/one_palette.py` | no colour or typeface is said anywhere but the brand | authored |
+| `checks/one_palette.py` | no colour or typeface is said anywhere but the brand, and no page a visitor receives carries a colour that is not the brand's, unless it is named as another's with the reason | authored |
 | `checks/contrast.py` | every text colour reaches 4.5:1 on every ground it is set on | authored |
 | `checks/brand_reasons.py` | every colour, typeface and radius says what it is for and why, so does the icon, and the brand says its idea | authored |
 | `checks/install_line.py` | no install line on the site names the bare `wherefore` - another project's package; ours is `wherefore-build` | authored |
@@ -65,8 +66,13 @@ brand pack at `site/brand/`.
   `#hex`, an `rgb()` or a typeface written into a stylesheet or a generator.
   Change the accent in one place and every page follows when it is rebuilt.
 - **Every text colour stays readable.** `checks/contrast.py` computes each pair
-  `contrast.pairs` lists and fails one under its minimum. The brand page prints
-  the same numbers.
+  `contrast.pairs` lists and fails one under its minimum; the light scheme
+  lists its own pairs, because on paper the accent is a fill under text, never
+  text. The brand page prints the same numbers.
+- **One brand, two grounds.** `light` in the tokens is the same brand on paper:
+  every role keeps its name, the neutrals invert, the accent and the caution
+  keep their values as a highlighter, and only fail is deepened to read as
+  text. The map is drawn on it (`site/brand/map.css`); the app inherits it.
 - **Every decision carries its reason.** Each colour, typeface and radius says
   what it is for and why, and `idea` says what the whole look follows.
   `checks/brand_reasons.py` fails a token without its reason. A colour that is
@@ -119,7 +125,11 @@ ships: an item leaves the roadmap in the change that ships it.
 
 **How this page is built.** A switch at the bottom of the screen shows, above
 every part of the page, the facts it was built from and the checks that hold
-it, with a key at the top. It is not a description typed beside the page:
+it, with a key at the top. The key links the map (`site/map/`): the whole
+chain, every source, the scripts that read it and every file they make, drawn
+by the pinned engine from a real run of every generator - `wherefore graph`
+is itself a generator of this site, which the gate runs like any command and
+which `wherefore graph` credits rather than runs. It is not a description typed beside the page:
 `gen/site.py` renders each part through a view of the facts that records every
 fact it reads and every command it asks the engine for, and that record is what
 the part shows.
