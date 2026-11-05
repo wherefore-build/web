@@ -9,6 +9,8 @@ to pass.
           an rgba() colour typed into a generator
           a named colour on a border
           a typeface named outright
+          a colour on a page a visitor receives that is not the brand's
+          the map carrying the engine's own palette
   passes  a new rule that takes its colour and face from the brand
           the stylesheets and generators as they are
 
@@ -48,6 +50,15 @@ def main():
         append(p, ".quote { font-family: Georgia, serif; }\n")
         check(r, "a typeface named outright", CHECK, True,
               ["font-family: Georgia, serif", "a typeface said outside brand/tokens.json"])
+    with Edit("site/index.html") as p:
+        append(p, "<style>.promo { color: #ff3355; }</style>\n")
+        check(r, "a colour on a page a visitor receives that is not the brand's", CHECK, True,
+              ["site/index.html:", "#ff3355", "not one of the brand's"])
+    with Edit("site/map/index.html") as p:
+        text = p.read_text(encoding="utf-8")
+        p.write_text(text.replace("<style>", "<style>\n:root { --ground: #F7F6F2; --accent: #3F6B00; }", 1), encoding="utf-8")
+        check(r, "the map carrying the engine's own palette", CHECK, True,
+              ["site/map/index.html:", "#F7F6F2", "not one of the brand's"])
     with Edit(CSS) as p:
         append(p, ".quote { color: var(--accent); font: italic 400 2rem/1.2 var(--font-display); }\n")
         check(r, "a rule that takes everything from the brand - must not fire", CHECK, False, [PASS])

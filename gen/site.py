@@ -95,9 +95,11 @@ ASKED = []          # what the part being rendered asked the engine for
 MODEL = ROOT / "cases/pendulum/model.html"
 MODEL_PAGE = "pendulum/"
 # The site's own map, written by `wherefore graph` run as a generator (wherefore.json):
-# every source, the scripts that read it, and every file they make. The
-# engine's page, with the engine's script in it, so its path is served a
-# policy that lets its own script run, like the model's.
+# every source, the scripts that read it, and every file they make, in the
+# brand's own colours (--theme site/brand/map.css, which gen/brand.py writes
+# from the tokens). The engine's page, with the engine's script in it, so its
+# path is served a policy that lets its own script run and load the brand's
+# fonts, like the model's.
 MAP_PAGE = "map/"
 # What frames the pendulum's model on this site, appended after its source -
 # which has no closing tags, so it is appended to, never edited. A three-quarter
@@ -1061,7 +1063,7 @@ def headers():
     # inside it, loading nothing; its path may run that script and nothing else.
     lines += ["", f"/{MAP_PAGE}*", "  ! Content-Security-Policy",
               "  Content-Security-Policy: default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; "
-              "base-uri 'none'; form-action 'none'; frame-ancestors 'none'"]
+              "font-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'"]
     return "\n".join(lines) + "\n"
 
 

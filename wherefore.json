@@ -28,7 +28,7 @@
   {
    "script": "brand.py",
    "cwd": "gen",
-   "makes": "site/brand.css, site/fonts/ and the brand page site/brand/ with the icon, from the brand tokens"
+   "makes": "site/brand.css, the map's theme site/brand/map.css, site/fonts/ and the brand page site/brand/ with the icon, from the brand tokens"
   },
   {
    "script": "site.py",
@@ -52,10 +52,12 @@
     "wherefore",
     "graph",
     "--html",
-    "site/map/index.html"
+    "site/map/index.html",
+    "--theme",
+    "site/brand/map.css"
    ],
    "cwd": ".",
-   "makes": "site/map/, the map of this repository: every source, the scripts that read it, and every file they make, drawn by the pinned engine from a real run - the gate runs it like any command, and `wherefore graph` credits it rather than running it"
+   "makes": "site/map/, the map of this repository: every source, the scripts that read it, and every file they make, drawn by the pinned engine from a real run in the brand's own colours (site/brand/map.css) - the gate runs it like any command, and `wherefore graph` credits it rather than running it"
   }
  ],
  "inventory": {

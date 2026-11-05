@@ -49,6 +49,42 @@ def stylesheet(t):
     return CSS_HEADER + "".join(faces) + ":root {\n" + "\n".join(props) + "\n}\n"
 
 
+def map_theme(t):
+    """site/brand/map.css: the brand as the map's own custom properties.
+
+    THE MAP IN THE BRAND'S COLOURS. `wherefore graph --theme` puts a stylesheet
+    where the engine's own palettes were, and the map's rules read --ground,
+    --surface, --line, --ink, --muted, --accent, --accent-ink, --lit, --gen,
+    --capt, --hand, --unk, --bad, --sans, --serif, --mono and --r. This writes
+    every colour, face and radius the tokens hold, the way site/brand.css does
+    - the fonts one level up, since the map lives at /map/ - and then names the
+    map's properties as the brand's: generated is the accent, captured is
+    caution, written by hand is muted, unknown is fail. Nothing here is a value;
+    checks/one_palette.py reads this file."""
+    faces = []
+    for role, face in t["type"].items():
+        for f in face["faces"]:
+            faces.append(
+                "@font-face {\n"
+                f'  font-family: "{face["family"]}";\n'
+                f'  font-style: {f["style"]};\n'
+                f'  font-weight: {f["weight"]};\n'
+                "  font-display: swap;\n"
+                f'  src: url("../fonts/{f["file"]}") format("woff2");\n'
+                "}\n")
+    props = [f"  --{name}: var(--{c['same_as']});" if "same_as" in c else f"  --{name}: {c['value']};"
+             for name, c in t["color"].items()]
+    props += [f'  --font-{role}: "{face["family"]}", {face["fallback"]};'
+              for role, face in t["type"].items()]
+    props += [f"  --radius-{name}: {r['value']};" for name, r in t["radius"].items()]
+    props += ["  --accent-ink: var(--on-accent); --lit: var(--surface);",
+              "  --gen: var(--accent); --capt: var(--caution); --hand: var(--muted); --unk: var(--fail); --bad: var(--fail);",
+              "  --sans: var(--font-body); --serif: var(--font-display); --mono: var(--font-mono); --r: var(--radius-card);",
+              "  color-scheme: dark;"]
+    return (CSS_HEADER.replace("site/brand.css", "site/brand/map.css") if "site/brand.css" in CSS_HEADER else CSS_HEADER) \
+        + "".join(faces) + ":root {\n" + "\n".join(props) + "\n}\n"
+
+
 def fonts(t):
     """Copy every face and licence the tokens name, and nothing else."""
     out = SITE / "fonts"
@@ -215,6 +251,7 @@ def main():
     t = TOKENS
     SITE.mkdir(exist_ok=True)
     (SITE / "brand.css").write_text(stylesheet(t), encoding="utf-8")
+    (SITE / "brand/map.css").write_text(map_theme(t), encoding="utf-8")
     fonts(t)
     (SITE / "brand").mkdir(exist_ok=True)
     shutil.copyfile(ROOT / "brand/tokens.json", SITE / "brand/tokens.json")

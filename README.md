@@ -29,13 +29,13 @@ private repository, not here, so that none of them goes public with the site.
 | `gen/kit.py` | what the generators share: the sources, the draft banner, contrast | authored |
 | `site/index.html` | the home page | generated |
 | `site/features/`, `site/changelog/` | everything it does and what's next, and every release | generated |
-| `site/map/` | the site's own map, written by `wherefore graph` run as a generator: every source, the scripts that read it, and every file they make, from a real run | generated |
+| `site/map/` | the site's own map, written by `wherefore graph` run as a generator: every source, the scripts that read it, and every file they make, from a real run, in the brand's own colours (`--theme site/brand/map.css`) | generated |
 | `site/_headers` | what Cloudflare Pages serves with every file | generated |
 | `site/install.sh` | the one-line installer `wherefore.sh` serves, from the pinned release (`gen/install.py`) | generated |
 | `site/brand.css`, `site/fonts/` | the brand as custom properties, and the fonts it serves itself | generated |
 | `site/brand/` | the brand pack a person reads: every token, every contrast, the type, the icon, the licences | generated |
 | `checks/self_contained.py` | the site loads nothing from elsewhere, and every link on it goes somewhere | authored |
-| `checks/one_palette.py` | no colour or typeface is said anywhere but the brand | authored |
+| `checks/one_palette.py` | no colour or typeface is said anywhere but the brand, and no page a visitor receives carries a colour that is not the brand's, unless it is named as another's with the reason | authored |
 | `checks/contrast.py` | every text colour reaches 4.5:1 on every ground it is set on | authored |
 | `checks/brand_reasons.py` | every colour, typeface and radius says what it is for and why, so does the icon, and the brand says its idea | authored |
 | `checks/install_line.py` | no install line on the site names the bare `wherefore` - another project's package; ours is `wherefore-build` | authored |
