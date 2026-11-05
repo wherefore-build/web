@@ -980,8 +980,8 @@ def case(f, p):
 </div>
 {quote}
 <div class="counts">
-{plate(c["part"])}
 <ul class="stats">{stats}</ul>
+{plate(c["part"])}
 </div>
 <details class="case-more"><summary>{esc(c["more"])}</summary>
 <div class="case-grid">
