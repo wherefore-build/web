@@ -264,28 +264,33 @@
   "stats": [
    {
     "of": "proofs",
-    "what": "checks, each proven to catch the fault it is for"
+    "what": "checks, each proven to catch the fault it is for",
+    "snap": "plate",
+    "alt": "The engraved plate, dimensioned: every measure held to the spec"
    },
    {
     "of": "parts",
-    "what": "parts, each drawn, cut and modelled from the spec"
+    "what": "parts, each drawn, cut and modelled from the spec",
+    "snap": "drawing",
+    "alt": "A part drawing a machine shop quotes against, one of nine"
    },
    {
     "of": "plates",
-    "what": "print plates, ready to make a prototype"
+    "what": "print plates, ready to make a prototype",
+    "snap": "exploded",
+    "alt": "The pendulum taken apart, every part in its place"
    }
   ],
-  "quote": null,
-  "sheet": {
-   "alt": "The pendulum from the side, taken apart: every part in its place, drawn from the spec",
-   "caption": "The pendulum from the side, taken apart, as its own home page draws it: one of the drawings a supplier receives, every part placed from the spec.",
+  "snaps": {
+   "note": "Three small pictures from the pendulum's own files, shot at thumbnail size: a snap, not the drawing, so the pack a shop is handed stays the pack's",
    "taken": {
     "from": "zakholdsworth/chaotic-pendulums-co",
-    "file": "brand/public-sheets/cp-side-exploded-plain.svg",
+    "files": "brand/plate/cp-plate-dimensioned.svg, product/Engineering Pack/DRAWINGS/P-001_mounting_plate.svg, brand/public-sheets/cp-side-exploded-plain.svg",
     "commit": "adddc46ecf01921c485409edef6a053fdbfc6ddf",
     "on": "2026-11-05"
    }
   },
+  "quote": null,
   "more": "What it builds, and what holds it"
  },
  "rule": {

@@ -21,7 +21,7 @@ private repository, not here, so that none of them goes public with the site.
 | `facts/pendulum.json` | the case study's counts: a dated snapshot of the pendulum's own repository, which is private, counted once at the commit it names | captured, stamped inside |
 | `facts/roadmap.json` | the engine's roadmap, byte for byte the `roadmap.json` beside its code; What's next is built from it, and `wherefore check upstream` fails the deploy when the engine's file has moved | captured |
 | `cases/pendulum/model.html` | the pendulum's interactive 3D model, the file https://chaoticpendulums.com/ embeds, copied byte for byte from the pendulum's repository at the commit `case.model.taken` names | captured |
-| `cases/pendulum/side-exploded.svg` | the pendulum's exploded side view without its callouts, the public cut its home page draws, copied byte for byte at the commit `case.sheet.taken` names | captured |
+| `cases/pendulum/thumbs/` | three snaps of the pendulum's own files - a dimensioned plate, a part drawing, the exploded side view - shot at thumbnail size at the commit `case.snaps.taken` names; snaps, not the drawings | captured |
 | `brand/fonts/` | the three typefaces and their licences (SIL OFL 1.1), unchanged | authored |
 | `brand/icon/icon-1024.png`, `brand/shoot_icon.py` | the icon as a PNG, for accounts that take only PNG, and the script that shoots it from `site/brand/icon.svg` | captured, stamped |
 | `gen/brand.py` | the brand pack's generator: the stylesheet, the fonts and the brand page | authored |
@@ -99,9 +99,9 @@ brand pack at `site/brand/`.
   else it catches: three of the release's features in a line each, and the
   way to all of them.
 - **The case study**: Chaotic Pendulums, the small hardware company the founder
-  started to test the idea - its counts, the exploded side view its own home
-  page draws (`cases/pendulum/side-exploded.svg`, a public cut copied at the
-  commit `case.sheet.taken` names), and what it builds and what holds it,
+  started to test the idea - its counts, three snaps from its own files
+  (`cases/pendulum/thumbs/`, shot at thumbnail size at the commit
+  `case.snaps.taken` names), and what it builds and what holds it,
   behind one press.
 - **The rule.** Agents already run your code's pipeline; Wherefore lets them
   run the rest.

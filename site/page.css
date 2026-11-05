@@ -371,11 +371,8 @@ em { font-style: italic; }
 .stats { list-style: none; margin: 2rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr)); gap: 1rem; }
 .stats li { color: var(--muted); font-size: 0.9375rem; line-height: 1.4; }
 .stat-n { display: block; font: 400 clamp(2.75rem, 6vw, 4rem)/1 var(--font-display); color: var(--ink); margin-bottom: 0.4rem; }
-/* The pendulum's side view under the counts: a tall drawing, held to a modest height, with its caption beside it on a wide screen. */
-.case-sheet { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 1rem 2rem; margin: 2.5rem 0 0; }
-.case-sheet img { display: block; max-width: 100%; height: auto; max-height: 26rem; width: auto; }
-@media (max-width: 45rem) { .case-sheet img { max-height: 18rem; } }
-.case-sheet figcaption { flex: 1 1 18rem; max-width: 34ch; font-size: 0.9375rem; line-height: 1.5; color: var(--muted); }
+/* A snap above each count (owner, 5 November 2026): thumbnail size, the pendulum's own files, shot on the ground's colour. */
+.stat-snap { display: block; width: 100%; max-width: 20rem; height: 9rem; object-fit: contain; object-position: left bottom; margin: 0 0 1rem; border-radius: 8px; }
 
 /* How this page is built. One checkbox, first in the page, held in place on
    the screen so that pressing either of its labels never scrolls; checked, it

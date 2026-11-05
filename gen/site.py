@@ -902,26 +902,8 @@ def model(m):
             f'<figcaption>{esc(m["hint"])}</figcaption></figure>')
 
 
-SHEET = ROOT / "cases/pendulum/side-exploded.svg"
-SHEET_PAGE = "pendulum/side-exploded.svg"
-
-
-def sheet(s):
-    """The pendulum's exploded side view under the counts: the public cut its own home page draws."""
-    return (f'<figure class="case-sheet"><img src="{SHEET_PAGE}" alt="{esc(s["alt"])}" loading="lazy">'
-            f'<figcaption>{esc(s["caption"])}</figcaption></figure>')
-
-
-def sheet_file(f):
-    """site/pendulum/side-exploded.svg: the pendulum's drawing, byte for byte, with where it was taken from
-    in a comment first, so the copy says what it is."""
-    t = f["case"]["sheet"]["taken"]
-    said = f'{t["from"]} {t["file"]} at {t["commit"]}, {t["on"]}'
-    if "--" in said:
-        raise SystemExit(f"case.sheet.taken cannot be written in a comment: {said!r}")
-    return (f"<!-- The pendulum's side view, cut for its own home page: {said}, copied byte for byte into "
-            f"cases/pendulum/side-exploded.svg and shown under the case study's counts by gen/site.py. -->\n"
-            + SHEET.read_text(encoding="utf-8"))
+SNAPS = ROOT / "cases/pendulum/thumbs"
+SNAPS_PAGE = "pendulum/thumbs/"
 
 
 def model_page(f):
@@ -940,8 +922,11 @@ def case(f, p):
     made = "".join(f"<li>{esc(m)}</li>" for m in c["made"])
     held = "".join(f"<li>{esc(m)}</li>" for m in c["held"])
     counts = p["counts"]
-    stats = "".join(f'<li><span class="stat-n">{counted(counts, s["of"])}</span> {esc(s["what"])}</li>'
+    stats = "".join(f'<li><img class="stat-snap" src="{SNAPS_PAGE}{esc(s["snap"])}.png" alt="{esc(s["alt"])}" loading="lazy">'
+                    f'<span class="stat-n">{counted(counts, s["of"])}</span> {esc(s["what"])}</li>'
                     for s in c["stats"])
+    t = c["snaps"]["taken"]
+    taken = f'<!-- The three snaps: {t["from"]} {t["files"]} at {t["commit"]}, {t["on"]}, shot at thumbnail size into cases/pendulum/thumbs/. {c["snaps"]["note"]}. -->'
     quote = ""
     if c["quote"]:
         quote = (f'<blockquote class="case-quote"><p>{esc(c["quote"]["text"])}</p>'
@@ -956,6 +941,7 @@ def case(f, p):
 <p class="actions"><a class="button button-quiet" href="{esc(c["url"])}">{esc(c["visit"])}</a></p>
 </div>
 {quote}
+{taken}
 <ul class="stats">{stats}</ul>
 <details class="case-more"><summary>{esc(c["more"])}</summary>
 <div class="case-grid">
@@ -963,7 +949,6 @@ def case(f, p):
 <div class="case-col"><h3>{esc(c["held_heading"])}</h3><ul class="case-list case-held">{held}</ul></div>
 </div>
 </details>
-{sheet(c["sheet"])}
 </div></section>"""
 
 
@@ -1082,7 +1067,9 @@ def main():
     (SITE / "features/index.html").write_text(features_page(FACTS), encoding="utf-8")
     (SITE / MODEL_PAGE).mkdir(exist_ok=True)
     (SITE / MODEL_PAGE / "index.html").write_text(model_page(FACTS), encoding="utf-8")
-    (SITE / SHEET_PAGE).write_text(sheet_file(FACTS), encoding="utf-8")
+    (SITE / SNAPS_PAGE).mkdir(exist_ok=True)
+    for png in sorted(SNAPS.glob("*.png")):
+        shutil.copyfile(png, SITE / SNAPS_PAGE / png.name)
 
 
 if __name__ == "__main__":

@@ -33,7 +33,7 @@
   {
    "script": "site.py",
    "cwd": "gen",
-   "makes": "site/index.html, site/page.css, site/_headers and the pendulum's framed model and its side view site/pendulum/, from the facts, the pendulum's counts and model, the brand and the pinned engine"
+   "makes": "site/index.html, site/page.css, site/_headers and the pendulum's framed model and the three snaps site/pendulum/, from the facts, the pendulum's counts and model, the brand and the pinned engine"
   },
   {
    "script": "install.py",
@@ -162,12 +162,12 @@
       "unreachable": "GitHub not answering is not the roadmap moving: a deploy goes ahead and says so, and the next build reads it again"
      }
     },
-    "pendulum-sheet": {
+    "pendulum-snaps": {
      "files": [
-      "cases/pendulum/side-exploded.svg"
+      "cases/pendulum/thumbs/*.png"
      ],
-     "no_stamp": "copied byte for byte from the pendulum's repository, which this gate cannot see and deliberately does not read: facts/company.json case.sheet.taken names the file, the commit and the day, and the pendulum's own suite draws and judges it. The pendulum inlines it into its home page, so there is no address of its own to hold it to; a person copies it again when the story is retold",
-     "why": "the pendulum's exploded side view without its callouts, the public cut its own home page draws, shown under the case study's counts"
+     "no_stamp": "shot at thumbnail size, in a browser, from three of the pendulum's own files - a dimensioned plate, a part drawing, the exploded side view - which this gate cannot see and deliberately does not read: facts/company.json case.snaps.taken names the files, the commit and the day. Snaps, not the drawings: a shop's pack stays the pack's. A person shoots them again when the story is retold",
+     "why": "three small pictures under the case study's counts, so the counts have something to look at"
     }
    }
   }
