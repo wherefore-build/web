@@ -50,7 +50,7 @@ def main():
         check(r, "the step pressed is never shown", CHECK, True, ["pressing", "showed nothing new"])
     with Edit(CSS) as p:
         plant(p, "#inspect:checked ~ * .src { display: block; }\n#inspect:checked ~ main .src-key { display: block; }", "")
-        check(r, "the switch shows nothing", CHECK, True, ["'How this page is built'", "showed nothing new"])
+        check(r, "the switch shows nothing", CHECK, True, ["'Compiled by Wherefore'", "showed nothing new"])
     with Edit(PAGE) as p:
         plant(p, 'id="ask-3"', 'id="ask-three"')
         check(r, "a tab whose radio button was renamed", CHECK, True,

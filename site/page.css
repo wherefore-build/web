@@ -419,6 +419,14 @@ footer .src { margin: 0 0 1.25rem; }
   color: var(--ink); font-weight: 500; font-size: 0.875rem; cursor: pointer;
   -webkit-tap-highlight-color: transparent; user-select: none;
 }
+/* On a phone the switch floats over the first screen's buttons (owner, 5 November 2026:
+   keep it floating, shrink it): the short label, tighter padding, the same thumb-sized height. */
+.switch-short { display: none; }
+@media (max-width: 40rem) {
+  .switch-long { display: none; }
+  .switch-short { display: inline-block; max-width: 6.5rem; line-height: 1.15; }
+  .inspect-switch { gap: 0.5rem; padding: 0.3rem 0.85rem 0.3rem 0.6rem; font-size: 0.8125rem; }
+}
 .switch-track { position: relative; width: 2.25rem; height: 1.3rem; border-radius: var(--radius-control); background: var(--line); transition: background 0.2s ease; }
 .switch-track::after { content: ""; position: absolute; top: 0.15rem; left: 0.15rem; width: 1rem; height: 1rem; border-radius: var(--radius-control); background: var(--ink); transition: transform 0.2s ease; }
 #inspect:checked ~ .inspect-switch { border-color: var(--accent); }
