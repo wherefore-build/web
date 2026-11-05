@@ -332,10 +332,22 @@
     "words": "The product's docs, compiled from the release they describe."
    },
    {
+    "id": "pins",
+    "state": "next",
+    "name": "Releases that reach every client",
+    "words": "When the engine ships, every repository that pins it gets a pull request moving its pin, and the checks say what it still has to describe."
+   },
+   {
     "id": "launch",
     "state": "later",
     "name": "Launches that wait",
     "words": "A launch that holds until its page, docs and demo agree."
+   },
+   {
+    "id": "scan2",
+    "state": "later",
+    "name": "Scan two repositories at once",
+    "words": "Point the scan at your site and your app together, and see every value they both state and where the two disagree."
    }
   ]
  }
