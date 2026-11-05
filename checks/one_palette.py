@@ -52,8 +52,9 @@ FONT = re.compile(r"\bfont(?:-family)?\s*:([^;]*)", re.I)
 def brand_values():
     """Every colour value the tokens hold, upper-cased: the only literals a served page may carry."""
     import json
-    tokens = json.loads(TOKENS.read_text(encoding="utf-8"))["color"]
-    return {c["value"].upper() for c in tokens.values() if "value" in c}
+    tokens = json.loads(TOKENS.read_text(encoding="utf-8"))
+    both = list(tokens["color"].values()) + list(tokens.get("light", {}).get("color", {}).values())
+    return {c["value"].upper() for c in both if "value" in c}
 
 
 def served_faults():

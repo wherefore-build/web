@@ -56,10 +56,11 @@ def map_theme(t):
     where the engine's own palettes were, and the map's rules read --ground,
     --surface, --line, --ink, --muted, --accent, --accent-ink, --lit, --gen,
     --capt, --hand, --unk, --bad, --sans, --serif, --mono and --r. This writes
-    every colour, face and radius the tokens hold, the way site/brand.css does
-    - the fonts one level up, since the map lives at /map/ - and then names the
-    map's properties as the brand's: generated is the accent, captured is
-    caution, written by hand is muted, unknown is fail. Nothing here is a value;
+    every face and radius the tokens hold, the way site/brand.css does - the
+    fonts one level up, since the map lives at /map/ - with the colours of the
+    light scheme, paper, and then names the map's properties as the brand's:
+    generated is the accent, captured is caution, written by hand is muted,
+    unknown is fail. Nothing here is a value;
     checks/one_palette.py reads this file."""
     faces = []
     for role, face in t["type"].items():
@@ -72,15 +73,17 @@ def map_theme(t):
                 "  font-display: swap;\n"
                 f'  src: url("../fonts/{f["file"]}") format("woff2");\n'
                 "}\n")
+    # The light scheme, `light` in the tokens: the map is read on paper, as the
+    # app will be (owner, 5 November 2026). Every role keeps its name.
     props = [f"  --{name}: var(--{c['same_as']});" if "same_as" in c else f"  --{name}: {c['value']};"
-             for name, c in t["color"].items()]
+             for name, c in t["light"]["color"].items()]
     props += [f'  --font-{role}: "{face["family"]}", {face["fallback"]};'
               for role, face in t["type"].items()]
     props += [f"  --radius-{name}: {r['value']};" for name, r in t["radius"].items()]
     props += ["  --accent-ink: var(--on-accent); --lit: var(--surface);",
               "  --gen: var(--accent); --capt: var(--caution); --hand: var(--muted); --unk: var(--fail); --bad: var(--fail);",
               "  --sans: var(--font-body); --serif: var(--font-display); --mono: var(--font-mono); --r: var(--radius-card);",
-              "  color-scheme: dark;"]
+              "  color-scheme: light;"]
     return (CSS_HEADER.replace("site/brand.css", "site/brand/map.css") if "site/brand.css" in CSS_HEADER else CSS_HEADER) \
         + "".join(faces) + ":root {\n" + "\n".join(props) + "\n}\n"
 
@@ -158,6 +161,22 @@ def page(t):
         f'<td class="num">{contrast(value[p["text"]], value[p["on"]]):.1f}:1</td>'
         f'<td class="num">{p["min"]:g}:1</td></tr>'
         for p in t["contrast"]["pairs"])
+    # On paper: the light scheme, set on the section itself as the same
+    # properties, so every swatch and sample below reads var(--…) as the site does.
+    light = colours({"color": t["light"]["color"]})
+    paper_vars = "; ".join(f"--{k}: {v}" for k, v in light.items())
+    paper = "\n".join(
+        f'<li class="swatch"><div class="swatch-chip" style="background: var(--{esc(k)})"></div>'
+        f'<div class="swatch-text"><p class="swatch-name">{esc(k)} <code>'
+        + (f'same as {esc(c["same_as"])}' if "same_as" in c else esc(c["value"]))
+        + f'</code></p><p class="swatch-role">{esc(t["color"][k]["role"])}</p><p class="why">{esc(c["why"])}</p></div></li>'
+        for k, c in t["light"]["color"].items())
+    paper_pairs = "\n".join(
+        f'<tr><td><code>{esc(p["text"])}</code></td><td><code>{esc(p["on"])}</code></td>'
+        f'<td class="sample-cell" style="color: var(--{esc(p["text"])}); background: var(--{esc(p["on"])})">Aa {esc(name)}</td>'
+        f'<td class="num">{contrast(light[p["text"]], light[p["on"]]):.1f}:1</td>'
+        f'<td class="num">{p["min"]:g}:1</td></tr>'
+        for p in t["contrast"]["pairs"])
     samples = {"display": f'{FACTS["hero"]["headline"]} {FACTS["hero"]["headline_end"]}', "body": FACTS["hero"]["lede"],
                "mono": "$ " + gate_usage()}
     specimens = "\n".join(
@@ -202,6 +221,20 @@ def page(t):
 <thead><tr><th scope="col">Text</th><th scope="col">On</th><th scope="col">Sample</th><th scope="col">Contrast</th><th scope="col">At least</th></tr></thead>
 <tbody>
 {pairs}
+</tbody>
+</table></div>
+</div></section>
+<section id="paper" class="paper" style="{paper_vars}"><div class="wrap">
+<h2>On paper</h2>
+<p class="why">{esc(t["light"]["why"])}</p>
+<ul class="swatches">
+{paper}
+</ul>
+<h3>Every text colour, on every ground it is set on</h3>
+<div class="table-box"><table class="pairs">
+<thead><tr><th scope="col">Text</th><th scope="col">On</th><th scope="col">Sample</th><th scope="col">Contrast</th><th scope="col">At least</th></tr></thead>
+<tbody>
+{paper_pairs}
 </tbody>
 </table></div>
 </div></section>

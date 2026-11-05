@@ -431,6 +431,8 @@ footer p { margin: 0; }
 .footer-name { font: italic 400 1.375rem/1 var(--font-display); color: var(--ink); }
 .footer-meta { font-family: var(--font-mono); font-size: 0.8125rem; }
 
+/* The brand page: the paper section carries the light scheme on itself, so its swatches and samples read the same properties. */
+.paper { background: var(--ground); color: var(--ink); }
 /* The brand page */
 .wordmark { font: italic 400 clamp(3.5rem, 11vw, 7rem)/1 var(--font-display); letter-spacing: -0.02em; margin: 0 0 1.5rem; }
 .files { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; font-family: var(--font-mono); font-size: 0.875rem; }

@@ -65,8 +65,11 @@ brand pack at `site/brand/`.
   `#hex`, an `rgb()` or a typeface written into a stylesheet or a generator.
   Change the accent in one place and every page follows when it is rebuilt.
 - **Every text colour stays readable.** `checks/contrast.py` computes each pair
-  `contrast.pairs` lists and fails one under its minimum. The brand page prints
-  the same numbers.
+  `contrast.pairs` lists and fails one under its minimum, on the ground and on
+  paper. The brand page prints the same numbers.
+- **One brand, two grounds.** `light` in the tokens is the same brand on paper:
+  every role keeps its name and only the value changes, where paper needs it.
+  The map is drawn on it (`site/brand/map.css`); the app will be.
 - **Every decision carries its reason.** Each colour, typeface and radius says
   what it is for and why, and `idea` says what the whole look follows.
   `checks/brand_reasons.py` fails a token without its reason. A colour that is

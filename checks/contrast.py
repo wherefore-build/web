@@ -45,17 +45,34 @@ def faults():
             colours[k] = c["value"]
     found += [f"{k} is {v!r}, which is not a #RRGGBB colour" for k, v in colours.items()
               if not HEX.fullmatch(v)]
-    for p in t["contrast"]["pairs"]:
-        missing = [n for n in (p["text"], p["on"]) if n not in colours]
-        if missing:
-            found += [f"a pair names {n}, which brand/tokens.json does not define" for n in missing]
-            continue
-        if not all(HEX.fullmatch(colours[n]) for n in (p["text"], p["on"])):
-            continue
-        r = contrast(colours[p["text"]], colours[p["on"]])
-        if r + 1e-9 < p["min"]:
-            found.append(f"{p['text']} on {p['on']} reaches {r:.2f}:1; it must reach {p['min']:g}:1")
-    return found, len(t["contrast"]["pairs"])
+    schemes = {"": colours}
+    # The light scheme, `light` in the tokens: the same pairs, on paper.
+    if "light" in t:
+        light = {}
+        for k, c in t["light"]["color"].items():
+            if "same_as" in c:
+                target = t["light"]["color"].get(c["same_as"], {})
+                if "value" not in target:
+                    found.append(f"on paper, {k} is the same as {c['same_as']}, which the light scheme gives no value")
+                    continue
+                light[k] = target["value"]
+            else:
+                light[k] = c["value"]
+        found += [f"on paper, {k} is {v!r}, which is not a #RRGGBB colour" for k, v in light.items()
+                  if not HEX.fullmatch(v)]
+        schemes["on paper, "] = light
+    for where, cs in schemes.items():
+        for p in t["contrast"]["pairs"]:
+            missing = [n for n in (p["text"], p["on"]) if n not in cs]
+            if missing:
+                found += [f"{where}a pair names {n}, which brand/tokens.json does not define" for n in missing]
+                continue
+            if not all(HEX.fullmatch(cs[n]) for n in (p["text"], p["on"])):
+                continue
+            r = contrast(cs[p["text"]], cs[p["on"]])
+            if r + 1e-9 < p["min"]:
+                found.append(f"{where}{p['text']} on {p['on']} reaches {r:.2f}:1; it must reach {p['min']:g}:1")
+    return found, len(t["contrast"]["pairs"]) * len(schemes)
 
 
 def main():
@@ -65,7 +82,7 @@ def main():
         for f in found:
             print(f"   {f}")
         return 1
-    print(f"ok   every text colour reaches its contrast on every ground it is set on ({n} pairs)")
+    print(f"ok   every text colour reaches its contrast on every ground it is set on ({n} pairs, on the ground and on paper)")
     return 0
 
 
