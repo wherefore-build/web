@@ -8,7 +8,7 @@ requires the gate to fail in the words of the case.
 
   fails   the page edited by hand, instead of the facts
           the headline changed in the facts, the page not regenerated
-          the site launched in the facts, and neither the page nor its
+          the launch status moved in the facts, and neither the page nor its
             headers regenerated - the banner and the noindex would stay up
           a launch status nobody has defined
           the accent changed in the brand, its stylesheet and page not
@@ -64,8 +64,9 @@ def main():
         gate(r, "the headline changed in the facts, the page not regenerated", True, [PAGE])
 
     with Edit("facts/company.json") as p:
-        facts(p, lambda d: d["site"].update(status="launched"))
-        gate(r, "launched in the facts, the page and its headers not regenerated", True,
+        # whichever way the site is, the other way: the banner and the robots header both move
+        facts(p, lambda d: d["site"].update(status="draft" if d["site"]["status"] == "launched" else "launched"))
+        gate(r, "the launch status moved in the facts, the page and its headers not regenerated", True,
              [PAGE, HEADERS])
 
     with Edit("facts/company.json") as p:

@@ -218,7 +218,9 @@
    "site"
   ],
   "exclude": [],
-  "exempt": {},
+  "exempt": {
+   "site.draft_banner": "said on every page while site.status is draft, and nowhere once the site is launched - which is the launch. The gate's proof moves the status either way and requires the banner to go and come back"
+  },
   "unconsumed": {},
   "probes": [
    {
