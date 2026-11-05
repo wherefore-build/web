@@ -1,6 +1,6 @@
 {
  "wherefore": 1,
- "name": "web",
+ "name": "wherefore.build",
  "palette": {
   "source": "brand/tokens.json",
   "read": ["gen/**", "site/**", "facts/**", "brand/**", "cases/**"],
