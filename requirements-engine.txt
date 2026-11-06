@@ -3,8 +3,8 @@
 # commands, features, releases and version from it, so moving this line is how
 # a release reaches the site - by a pull request, whose gate fails until the
 # site is regenerated against it, and whose build stops until the site
-# describes everything the release ships. The engine's release opens that pull
-# request itself (.github/workflows/pin.yml); a person may too. The
+# describes everything the release ships. This repository's own watch opens
+# that pull request (.github/workflows/wherefore-pin.yml); a person may too. The
 # distribution is wherefore-build because `wherefore` on PyPI is another
 # project's; what is imported and typed is `wherefore`.
 wherefore-build==0.19.0

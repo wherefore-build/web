@@ -28,7 +28,9 @@ engine prints, the page carries every word), checks/motion_for_every_feature.py
 
 Writes site/motion/<id>/index.html and motion/<id>/storyboard.json; the
 storyboards sit out of site/ because they quote what a command printed,
-and the palette check reads site/.
+and the palette check reads site/. And site/motion/<id>/poster.svg, the same
+clip as one SVG that plays wherever an image is shown (gen/motion_poster.py):
+the engine's inbox embeds it on the issue the feature answered.
 """
 import collections
 import html
@@ -44,6 +46,7 @@ from importlib.resources import files
 import wherefore
 from wherefore import docs as wherefore_docs
 from kit import FACTS, ROADMAP, ROOT, SITE, esc
+from motion_poster import poster
 
 ELIDED = "…"
 CLAIM_WORDS = 12
@@ -227,7 +230,9 @@ def gather():
                     "shown": list(dict.fromkeys(label(p) for p in pages))[:PAGES_SHOWN],
                     "probe": {"fact": probe["fact"], "files": len(probe["files"])} if probe else None}
 
-    got = scan.scan([str(SITE)])
+    # The site without its clips: a clip states these very numbers, and a scan
+    # that read the clips would count what they say about it.
+    got = scan.scan([str(p) for p in sorted(SITE.iterdir()) if p.name != "motion"])
     data["compare"] = {"places": ["site"], "stated": got["stated"], "files": got["sources"],
                        "disagree": len(got["disagree"]), "says": [g["says"] for g in got["disagree"][:2]]}
 
@@ -579,10 +584,12 @@ def main():
         d = OUT / b["id"]
         d.mkdir(parents=True, exist_ok=True)
         (d / "index.html").write_text(page(b, os.path.relpath(CSS, d), os.path.relpath(ICON, d)), encoding="utf-8")
+        (d / "poster.svg").write_text(poster(b), encoding="utf-8")
         j = BOARDS / b["id"]
         j.mkdir(parents=True, exist_ok=True)
         (j / "storyboard.json").write_text(json.dumps(b, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
-    print(f"wrote site/motion/ and motion/: {len(boards)} clips, each a page in motion, played by the frame it is shown in")
+    print(f"wrote site/motion/ and motion/: {len(boards)} clips, each a page in motion, played by the frame it is shown in, "
+          f"and each an SVG that plays where an image is shown")
 
 
 if __name__ == "__main__":

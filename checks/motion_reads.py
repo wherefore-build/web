@@ -2,15 +2,16 @@
 """Every clip reads: the right length, no scene faster than a reader, a command the CLI has, output the engine prints, every word on the page.
 
 A CLIP IS COMPILED FROM FACTS, so what can go wrong is the compiling. This
-reads every storyboard the build wrote (motion/<id>/storyboard.json) and the
-page beside it (site/motion/<id>/index.html), and fails:
+reads every storyboard the build wrote (motion/<id>/storyboard.json), the
+page beside it (site/motion/<id>/index.html) and the poster (poster.svg, the
+same clip as one SVG for the places that show an image), and fails:
 
   TOO SHORT / TOO LONG   a clip under MIN_SECONDS or over MAX_SECONDS
   TOO FAST               a scene asking more words a second than its kind allows
   NOT A COMMAND          the command run is not one the pinned engine's CLI has
   NEVER PRINTED          a printed line is one no release picture or docs example prints
   CLAIM                  the claim is over twelve words, or not a sentence
-  DROPPED                the page lacks a word a scene says
+  DROPPED                the page, or the poster beside it, lacks a word a scene says
 
 Usage:  python3 checks/motion_reads.py
 """
@@ -48,6 +49,14 @@ def texts(sc):
     return out + sc.get("lines", [])
 
 
+def poster_text(svg):
+    """What a poster shows, as text: its faces and animations out, and a word
+    set a letter at a time (the wordmark's tspans) put back together."""
+    svg = re.sub(r"<style>.*?</style>", " ", svg, flags=re.S)
+    svg = re.sub(r"<animate [^>]*/>|</?tspan[^>]*>", "", svg)
+    return re.sub(r"<[^>]+>", " ", svg)
+
+
 def printed_lines():
     from wherefore import docs
     out = set()
@@ -69,6 +78,8 @@ def faults():
         fid = b["id"]
         page = SITE / "motion" / fid / "index.html"
         text = page.read_text(encoding="utf-8") if page.is_file() else ""
+        svg = page.with_name("poster.svg")
+        shown = {"page": text, "poster": poster_text(svg.read_text(encoding="utf-8")) if svg.is_file() else ""}
         if b["duration"] < MIN_SECONDS:
             found.append(f"TOO SHORT      {fid} runs {b['duration']} s; a clip says something in {MIN_SECONDS:.0f}")
         if b["duration"] > MAX_SECONDS:
@@ -92,8 +103,10 @@ def faults():
                 # typed a line at a time, the claim a word at a time: every word must be on the page,
                 # as a word - `accounted` inside `unaccounted` does not count
                 for w in t.split():
-                    if not re.search(r"(?<![A-Za-z])" + re.escape(html.escape(w)) + r"(?![A-Za-z])", text):
-                        found.append(f"DROPPED        {fid}/{sc['kind']}: the page lacks `{w}`")
+                    lacks = [where for where, body in shown.items()
+                             if not re.search(r"(?<![A-Za-z])" + re.escape(html.escape(w)) + r"(?![A-Za-z])", body)]
+                    if lacks:
+                        found.append(f"DROPPED        {fid}/{sc['kind']}: the {' and the '.join(lacks)} lacks `{w}`")
                         break
     return found, len(boards)
 
@@ -106,7 +119,7 @@ def main():
         print(f"\n{len(found)} fault(s): a clip must read")
         return 1
     print(f"ok   every one of the {n} clips runs {MIN_SECONDS:.0f} to {MAX_SECONDS:.0f} s, no scene outruns a reader, "
-          f"every command run is one the CLI has, every printed line is one the engine prints, and every word is on the page")
+          f"every command run is one the CLI has, every printed line is one the engine prints, and every word is on the page and its poster")
     return 0
 
 
