@@ -2,7 +2,7 @@
  "id": "gate",
  "name": "The gate",
  "version": "0.1.0",
- "duration": 29.5,
+ "duration": 30.0,
  "frames": [
   "portrait",
   "landscape"
@@ -62,10 +62,12 @@
   {
    "kind": "close",
    "start": 26.0,
-   "end": 29.5,
+   "end": 30.0,
    "home": "wherefore.build",
-   "install": "pip install wherefore-build==0.1.0",
-   "url": "wherefore.build/features/#gate"
+   "install": "pip install wherefore-build",
+   "url": "wherefore.build/features/#gate",
+   "tagline": "Your company, compiled.",
+   "icon": "../../brand/icon.svg"
   }
  ]
 }

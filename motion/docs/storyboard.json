@@ -2,7 +2,7 @@
  "id": "docs",
  "name": "Docs from each release",
  "version": "0.19.0",
- "duration": 18.5,
+ "duration": 20.0,
  "frames": [
   "portrait",
   "landscape"
@@ -25,7 +25,7 @@
   {
    "kind": "mechanism",
    "start": 6.0,
-   "end": 11.0,
+   "end": 12.0,
    "eyebrow": "what it hands over",
    "mechanism": "handover",
    "data": {
@@ -43,17 +43,19 @@
   },
   {
    "kind": "claim",
-   "start": 11.0,
-   "end": 15.0,
+   "start": 12.0,
+   "end": 16.0,
    "text": "The docs of the release you run, and no other."
   },
   {
    "kind": "close",
-   "start": 15.0,
-   "end": 18.5,
+   "start": 16.0,
+   "end": 20.0,
    "home": "wherefore.build",
-   "install": "pip install wherefore-build==0.19.0",
-   "url": "wherefore.build/features/#docs"
+   "install": "pip install wherefore-build",
+   "url": "wherefore.build/features/#docs",
+   "tagline": "Your company, compiled.",
+   "icon": "../../brand/icon.svg"
   }
  ]
 }

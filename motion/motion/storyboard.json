@@ -2,7 +2,7 @@
  "id": "motion",
  "name": "Every feature, in motion",
  "version": "0.20.0",
- "duration": 26.5,
+ "duration": 28.0,
  "frames": [
   "portrait",
   "landscape"
@@ -41,7 +41,7 @@
   {
    "kind": "mechanism",
    "start": 14.0,
-   "end": 19.0,
+   "end": 20.0,
    "eyebrow": "what it hands over",
    "mechanism": "handover",
    "data": {
@@ -59,17 +59,19 @@
   },
   {
    "kind": "claim",
-   "start": 19.0,
-   "end": 23.0,
+   "start": 20.0,
+   "end": 24.0,
    "text": "Every feature, in motion, every word a fact."
   },
   {
    "kind": "close",
-   "start": 23.0,
-   "end": 26.5,
+   "start": 24.0,
+   "end": 28.0,
    "home": "wherefore.build",
-   "install": "pip install wherefore-build==0.20.0",
-   "url": "wherefore.build/features/#motion"
+   "install": "pip install wherefore-build",
+   "url": "wherefore.build/features/#motion",
+   "tagline": "Your company, compiled.",
+   "icon": "../../brand/icon.svg"
   }
  ]
 }

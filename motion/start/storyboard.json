@@ -2,7 +2,7 @@
  "id": "start",
  "name": "Start a corpus",
  "version": "0.1.0",
- "duration": 22.5,
+ "duration": 24.0,
  "frames": [
   "portrait",
   "landscape"
@@ -32,7 +32,7 @@
   {
    "kind": "mechanism",
    "start": 10.0,
-   "end": 15.0,
+   "end": 16.0,
    "eyebrow": "what it hands over",
    "mechanism": "handover",
    "data": {
@@ -50,17 +50,19 @@
   },
   {
    "kind": "claim",
-   "start": 15.0,
-   "end": 19.0,
+   "start": 16.0,
+   "end": 20.0,
    "text": "A wherefore.json that declares nothing yet, and a skill beside it."
   },
   {
    "kind": "close",
-   "start": 19.0,
-   "end": 22.5,
+   "start": 20.0,
+   "end": 24.0,
    "home": "wherefore.build",
-   "install": "pip install wherefore-build==0.1.0",
-   "url": "wherefore.build/features/#start"
+   "install": "pip install wherefore-build",
+   "url": "wherefore.build/features/#start",
+   "tagline": "Your company, compiled.",
+   "icon": "../../brand/icon.svg"
   }
  ]
 }

@@ -2,7 +2,7 @@
  "id": "report",
  "name": "Tell us",
  "version": "0.12.0",
- "duration": 30.5,
+ "duration": 32.5,
  "frames": [
   "portrait",
   "landscape"
@@ -25,14 +25,14 @@
   {
    "kind": "command",
    "start": 6.0,
-   "end": 13.0,
+   "end": 12.5,
    "eyebrow": "the command",
    "typed": "wherefore report feature the scan across two repositories --show"
   },
   {
    "kind": "answer",
-   "start": 13.0,
-   "end": 18.0,
+   "start": 12.5,
+   "end": 18.5,
    "eyebrow": "the answer",
    "lines": [
     "--show: nothing was sent. Run it again without --show to open the issue."
@@ -40,8 +40,8 @@
   },
   {
    "kind": "mechanism",
-   "start": 18.0,
-   "end": 23.0,
+   "start": 18.5,
+   "end": 24.5,
    "eyebrow": "what it hands over",
    "mechanism": "handover",
    "data": {
@@ -59,17 +59,19 @@
   },
   {
    "kind": "claim",
-   "start": 23.0,
-   "end": 27.0,
+   "start": 24.5,
+   "end": 28.5,
    "text": "A bug, a question or a request, nothing private, sent once."
   },
   {
    "kind": "close",
-   "start": 27.0,
-   "end": 30.5,
+   "start": 28.5,
+   "end": 32.5,
    "home": "wherefore.build",
-   "install": "pip install wherefore-build==0.12.0",
-   "url": "wherefore.build/features/#report"
+   "install": "pip install wherefore-build",
+   "url": "wherefore.build/features/#report",
+   "tagline": "Your company, compiled.",
+   "icon": "../../brand/icon.svg"
   }
  ]
 }

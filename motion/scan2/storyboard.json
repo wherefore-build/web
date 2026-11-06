@@ -2,7 +2,7 @@
  "id": "scan2",
  "name": "Scan any number of repositories at once",
  "version": "0.13.0",
- "duration": 27.5,
+ "duration": 29.5,
  "frames": [
   "portrait",
   "landscape"
@@ -32,7 +32,7 @@
   {
    "kind": "answer",
    "start": 10.0,
-   "end": 15.0,
+   "end": 16.0,
    "eyebrow": "the answer",
    "lines": [
     "  agree   \"plans from {} dollars a\"  site: 9 (1x) · app: 9 (1x)"
@@ -40,8 +40,8 @@
   },
   {
    "kind": "mechanism",
-   "start": 15.0,
-   "end": 20.0,
+   "start": 16.0,
+   "end": 21.5,
    "eyebrow": "what it compares",
    "mechanism": "compare",
    "data": {
@@ -57,17 +57,19 @@
   },
   {
    "kind": "claim",
-   "start": 20.0,
-   "end": 24.0,
+   "start": 21.5,
+   "end": 25.5,
    "text": "Your site, your app, your docs, scanned together."
   },
   {
    "kind": "close",
-   "start": 24.0,
-   "end": 27.5,
+   "start": 25.5,
+   "end": 29.5,
    "home": "wherefore.build",
-   "install": "pip install wherefore-build==0.13.0",
-   "url": "wherefore.build/features/#scan2"
+   "install": "pip install wherefore-build",
+   "url": "wherefore.build/features/#scan2",
+   "tagline": "Your company, compiled.",
+   "icon": "../../brand/icon.svg"
   }
  ]
 }

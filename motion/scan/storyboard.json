@@ -2,7 +2,7 @@
  "id": "scan",
  "name": "Scan",
  "version": "0.3.0",
- "duration": 26.5,
+ "duration": 27.5,
  "frames": [
   "portrait",
   "landscape"
@@ -41,7 +41,7 @@
   {
    "kind": "mechanism",
    "start": 14.0,
-   "end": 19.0,
+   "end": 19.5,
    "eyebrow": "what it compares",
    "mechanism": "compare",
    "data": {
@@ -57,17 +57,19 @@
   },
   {
    "kind": "claim",
-   "start": 19.0,
-   "end": 23.0,
+   "start": 19.5,
+   "end": 23.5,
    "text": "Where every value is stated, and where the copies disagree."
   },
   {
    "kind": "close",
-   "start": 23.0,
-   "end": 26.5,
+   "start": 23.5,
+   "end": 27.5,
    "home": "wherefore.build",
-   "install": "pip install wherefore-build==0.3.0",
-   "url": "wherefore.build/features/#scan"
+   "install": "pip install wherefore-build",
+   "url": "wherefore.build/features/#scan",
+   "tagline": "Your company, compiled.",
+   "icon": "../../brand/icon.svg"
   }
  ]
 }

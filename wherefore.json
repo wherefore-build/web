@@ -251,6 +251,10 @@
   "out": "site/motion",
   "css": "site/brand.css",
   "storyboards": "motion",
-  "roadmap": "facts/roadmap.json"
+  "roadmap": "facts/roadmap.json",
+  "icon": "site/brand/icon.svg",
+  "tagline": {
+   "fact": "start.heading"
+  }
  }
 }

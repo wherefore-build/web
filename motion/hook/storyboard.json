@@ -2,7 +2,7 @@
  "id": "hook",
  "name": "The pre-push hook",
  "version": "0.1.0",
- "duration": 25.5,
+ "duration": 26.0,
  "frames": [
   "portrait",
   "landscape"
@@ -53,10 +53,12 @@
   {
    "kind": "close",
    "start": 22.0,
-   "end": 25.5,
+   "end": 26.0,
    "home": "wherefore.build",
-   "install": "pip install wherefore-build==0.1.0",
-   "url": "wherefore.build/features/#hook"
+   "install": "pip install wherefore-build",
+   "url": "wherefore.build/features/#hook",
+   "tagline": "Your company, compiled.",
+   "icon": "../../brand/icon.svg"
   }
  ]
 }

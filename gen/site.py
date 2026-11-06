@@ -720,7 +720,8 @@ def changelog_page(f):
         arrived = ""
         if brought:
             names = "".join(f'<li><span class="arrived-name">{esc(x["name"])}</span> '
-                            f'{esc(d["words"][x["id"]]) if x["id"] in d["words"] else ""}</li>'
+                            f'{esc(d["words"][x["id"]]) if x["id"] in d["words"] else ""}'
+                            f'{clip_frame(x, d) if x["id"] in d["words"] else ""}</li>'
                             for x in brought)
             arrived = f'<h3>{esc(c["arrived"])}</h3><ul class="arrived">{names}</ul>'
         # WHAT THE RELEASE ANSWERED, from the engine's ledger (owner, 6 November
@@ -895,6 +896,14 @@ def short(usage):
                     if not (w[:1] in "[-." or w.endswith("]") or w.isupper() or "|" in w))
 
 
+def clip_frame(x, d, up="../"):
+    """The feature's clip, the page the pinned engine wrote into site/motion/,
+    played in a landscape frame; the same facts, in time. No caption (owner,
+    6 November 2026): the clip says what it is."""
+    return (f'<figure class="does-motion"><iframe src="{up}motion/{esc(x["id"])}/index.html" loading="lazy" '
+            f'title="{esc(x["name"])}, {esc(d["watch"].lower())}"></iframe></figure>')
+
+
 def does(f):
     """Every feature the pinned release ships, in this company's words.
 
@@ -952,9 +961,7 @@ def does(f):
                   f'<span class="is-open">{esc(d["less"])}</span></span>')
         # THE FEATURE IN MOTION: its clip, the page the pinned engine wrote into
         # site/motion/, played in a frame on the card - the same facts, in time.
-        clip = (f'<figure class="does-motion"><iframe src="../motion/{esc(x["id"])}/index.html" loading="lazy" '
-                f'title="{esc(x["name"])}, {esc(d["watch"].lower())}"></iframe>'
-                f'<figcaption>{esc(d["watch"])}</figcaption></figure>')
+        clip = clip_frame(x, d)
         # The command stays on the closed card (owner, 6 November 2026), the
         # clip opens with the details, in a landscape frame that takes the
         # card's width.
@@ -1244,7 +1251,7 @@ def headers():
     # frame showed nothing - the page refused the card under the policy above).
     lines += ["", "/motion/*", "  ! Content-Security-Policy",
               "  Content-Security-Policy: default-src 'none'; style-src 'self' 'unsafe-inline'; font-src 'self'; "
-              "base-uri 'none'; form-action 'none'; frame-ancestors 'self'"]
+              "img-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'self'"]
     # The map: the engine's own page, one file with its style and its script
     # inside it, loading nothing; its path may run that script and nothing else.
     lines += ["", f"/{MAP_PAGE}*", "  ! Content-Security-Policy",

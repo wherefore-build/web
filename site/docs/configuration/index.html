@@ -125,9 +125,12 @@
            &quot;css&quot;: &quot;site/brand.css&quot;,
            &quot;vars&quot;: {&quot;accent&quot;: &quot;--brand-accent&quot;},
            &quot;name&quot;: &quot;Wherefore&quot;,
-           &quot;install&quot;: &quot;pip install wherefore-build=={version}&quot;,
-           &quot;site&quot;: &quot;https://wherefore.build/&quot;}</code></pre>
-<p><code>out</code> is the directory the clips are written to (default <code>motion/</code>), and <code>storyboards</code> where their JSON goes (default beside the pages; elsewhere when the pages' folder is one a palette check reads, since a storyboard quotes what a command printed). <code>css</code> is a stylesheet the clip links, relative to the corpus root, for the brand's variables and fonts; without one the clip carries plain colours. <code>vars</code> names the variable a role reads when the stylesheet names it differently from <code>--ground</code>, <code>--surface</code>, <code>--line</code>, <code>--ink</code>, <code>--muted</code>, <code>--accent</code>, <code>--font-display</code>, <code>--font-body</code> and <code>--font-mono</code>. <code>name</code> is the product's (default Wherefore), <code>install</code> the install line with <code>{version}</code> where the version goes, and <code>site</code> where the feature pages are.</p>
+           &quot;install&quot;: &quot;pip install wherefore-build&quot;,
+           &quot;site&quot;: &quot;https://wherefore.build/&quot;,
+           &quot;roadmap&quot;: &quot;facts/roadmap.json&quot;,
+           &quot;icon&quot;: &quot;site/brand/icon.svg&quot;,
+           &quot;tagline&quot;: {&quot;fact&quot;: &quot;compiled.heading&quot;}}</code></pre>
+<p><code>out</code> is the directory the clips are written to (default <code>motion/</code>), and <code>storyboards</code> where their JSON goes (default beside the pages; elsewhere when the pages' folder is one a palette check reads, since a storyboard quotes what a command printed). <code>css</code> is a stylesheet the clip links, relative to the corpus root, for the brand's variables and fonts; without one the clip carries plain colours. <code>vars</code> names the variable a role reads when the stylesheet names it differently from <code>--ground</code>, <code>--surface</code>, <code>--line</code>, <code>--ink</code>, <code>--muted</code>, <code>--accent</code>, <code>--font-display</code>, <code>--font-body</code> and <code>--font-mono</code>. <code>name</code> is the product's (default Wherefore), <code>install</code> the install line, with <code>{version}</code> where the version goes if it should name one, and <code>site</code> where the feature pages are. <code>roadmap</code> is the corpus's copy of the engine's ledger, so the ask scene says who asked; <code>icon</code> the brand's mark, shown at the close; <code>tagline</code> the line under the address at the close, a string or a fact out of the source, so the clip says what the site says.</p>
 <h3 id="proofs">proofs</h3>
 <p>Where the corpus's proofs are: <code>{&quot;glob&quot;: &quot;proofs/*_proof.py&quot;}</code>. <code>wherefore prove</code> runs each, one at a time, in place.</p>
 <h3 id="hook">hook</h3>
