@@ -25,6 +25,7 @@
  "nav": {
   "how": "How it works",
   "does": "Features & roadmap",
+  "docs": "Docs",
   "why": "Why Wherefore",
   "start": "Get started",
   "github": "View on GitHub",
@@ -213,6 +214,7 @@
    "published": "A page nobody builds - your site on a hosted CMS - declared with the facts it states. Wherefore reads it live and fails when it says otherwise, quoting the page: a copy held by reading until it can be built.",
    "hook": "A push that would ship a stale document stops before it leaves your machine.",
    "skill": "Claude Code or Codex learns the rules from a skill that ships with each release.",
+   "docs": "Every release ships its own docs - start, commands, configuration, checks and proofs, reporting - held to the code by the engine's tests, and this site shows the docs of the release it pins.",
    "graph": "A page for every repository: each file, how it is made, and what changes when a source does. One command draws it, and changes nothing.",
    "palette": "Your brand lives in one file. Type a colour anywhere else and the build names the file and the line, unless the file says, with a reason, that the colour is somebody else's.",
    "report": "Stuck, or missing something? Tell your agent to tell us: one command writes the report, with the release, the shape of your repository and your words, nothing private, and opens it with the people who make Wherefore.",
@@ -356,5 +358,12 @@
    "asked": "asked for by",
    "plan": "The plan"
   }
+ },
+ "docs": {
+  "title": "Docs",
+  "heading": "Every page, from the release this site pins.",
+  "intro": "The docs ship inside each release of the engine, held to its code by the engine's own tests: every command has its section, every section of the configuration is documented, and every example is run again before a release. This site renders the docs of the release it pins.",
+  "pages": "The pages",
+  "on_this_page": "On this page"
  }
 }

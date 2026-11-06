@@ -387,6 +387,36 @@ em { font-style: italic; }
 .case-part iframe { display: block; width: 100%; aspect-ratio: 4 / 5; border: 0; border-radius: var(--radius-card); }
 .case-part figcaption { margin-top: 0.5rem; font: 400 0.75rem/1.4 var(--font-mono); color: var(--muted); text-align: center; }
 
+/* The docs (6 November 2026): the engine's pages in this site's shell. The
+   pages listed beside the text on a wide screen, above it on a phone; the
+   text's own headings under that. Code blocks are the terminal's. */
+.docs { padding-top: 0; border-top: 0; }
+.docs-grid { display: grid; grid-template-columns: 14rem minmax(0, 1fr); gap: 2.5rem 3.5rem; align-items: start; }
+.docs-nav { position: sticky; top: 5.5rem; font-size: 0.9375rem; }
+.docs-nav ul { list-style: none; margin: 0 0 1.5rem; padding: 0; display: grid; gap: 0.35rem; }
+.docs-nav a { color: var(--muted); text-decoration: none; }
+.docs-nav a:hover, .docs-nav li.here a { color: var(--ink); }
+.docs-nav li.here a { font-weight: 600; }
+.docs-nav-title { font: 500 0.75rem/1.2 var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin: 0 0 0.6rem; }
+.docs-on-page { font-size: 0.875rem; }
+.docs-page { max-width: 46rem; min-width: 0; }
+.docs-page h2 { font-size: clamp(2rem, 4vw, 2.75rem); line-height: 1.05; margin: 0 0 1rem; }
+.docs-page h3 { font-size: 1.375rem; margin: 2.5rem 0 0.75rem; scroll-margin-top: 5.5rem; }
+.docs-page h4 { font-size: 1.0625rem; margin: 1.75rem 0 0.5rem; }
+.docs-page p, .docs-page li { color: var(--muted); line-height: 1.6; }
+.docs-page strong { color: var(--ink); }
+.docs-page ul, .docs-page ol { padding-left: 1.25rem; display: grid; gap: 0.4rem; margin: 0 0 1.25rem; }
+.docs-page pre { margin: 1rem 0 1.5rem; padding: 1rem 1.25rem; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); overflow-x: auto; }
+.docs-page pre code { font: 400 0.875rem/1.55 var(--font-mono); color: var(--ink); white-space: pre; }
+.docs-page p code, .docs-page li code { font: 400 0.9em var(--font-mono); color: var(--ink); }
+.docs-page blockquote { margin: 1rem 0 1.5rem; padding-left: 1rem; border-left: 2px solid var(--accent); }
+.docs-page a { color: var(--accent); }
+@media (max-width: 60rem) {
+  .docs-grid { grid-template-columns: minmax(0, 1fr); }
+  .docs-nav { position: static; }
+  .docs-nav .docs-on-page, .docs-nav .docs-nav-title:has(+ .docs-on-page) { display: none; }
+}
+
 /* How this page is built. One checkbox, first in the page, held in place on
    the screen so that pressing either of its labels never scrolls; checked, it
    shows the key at the top of the page and each part's account of itself. */

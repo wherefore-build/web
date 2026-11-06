@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Checks and proofs · Docs — Wherefore</title>
+<meta name="description" content="The docs ship inside each release of the engine, held to its code by the engine&#x27;s own tests: every command has its section, every section of the configuration is documented, and every example is run again before a release. This site renders the docs of the release it pins.">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="../../brand/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../brand/icon-1024.png">
+<link rel="stylesheet" href="../../brand.css">
+<link rel="stylesheet" href="../../page.css">
+<link rel="canonical" href="https://wherefore.build/docs/checks/">
+</head>
+<body>
+<header class="top"><div class="wrap"><input class="state menu-state" type="checkbox" id="menu"><a class="name" href="../../">Wherefore</a>
+<label class="menu-switch" for="menu">Menu</label><nav aria-label="The site"><a href="../../#how">How it works</a><a href="../../#case">Case study</a><a href="../../#why">Why Wherefore</a><a href="../../features/">Features &amp; roadmap</a><a href="../../changelog/">Changelog</a><a href="../../docs/">Docs</a><a href="../../map/">Map</a></nav><a class="pill" href="../../#start">Get started</a></div></header>
+<main id="top">
+<section class="log-head"><div class="wrap">
+<p class="eyebrow">Docs · Wherefore 0.19.0</p>
+<h1>Every page, from the release this site pins.</h1>
+<p class="lede">The docs ship inside each release of the engine, held to its code by the engine&#x27;s own tests: every command has its section, every section of the configuration is documented, and every example is run again before a release. This site renders the docs of the release it pins.</p>
+</div></section>
+<section class="docs"><div class="wrap docs-grid"><aside class="docs-nav"><p class="docs-nav-title">The pages</p><ul><li><a href="../../docs/">Start</a></li><li><a href="../../docs/commands/">Commands</a></li><li><a href="../../docs/configuration/">Configuration</a></li><li class="here"><a href="../../docs/checks/">Checks and proofs</a></li><li><a href="../../docs/reporting/">Reporting</a></li></ul><p class="docs-nav-title">On this page</p><ul class="docs-on-page"><li><a href="#what-each-check-holds">What each check holds</a></li><li><a href="#writing-a-check">Writing a check</a></li><li><a href="#proving-a-check">Proving a check</a></li><li><a href="#when-a-check-and-a-person-disagree">When a check and a person disagree</a></li></ul></aside><article class="docs-page"><h2 id="checks-and-proofs">Checks and proofs</h2>
+<p>A corpus is held by checks, and a check is not trusted until it has been shown to fail. This page says what each check holds, how it fails, and how to prove one.</p>
+<h3 id="what-each-check-holds">What each check holds</h3>
+<ul><li><strong>The gate</strong> (<code>wherefore gate</code>): every tracked file is generated during the gate's own run, authored under a rule with a reason, or captured and stamped with what it was made from; every generated file is what is committed; the corpus settles on a second run. It fails naming the file nobody wrote and nobody claimed, or the generated file that differs.</li><li><strong>Reach</strong> (<code>wherefore check reach</code>): every fact, moved one at a time, changes something a visitor receives. It fails naming the fact that moved nothing - dead, or copied by hand into a generator - and the probe that named a file which did not move.</li><li><strong>Retired</strong> (<code>wherefore check retired</code>): nothing a person reads still says a retired value or phrase. It fails naming the file and the line.</li><li><strong>Claims</strong> (<code>wherefore check claims</code>): no page claims more than a claim's rule allows. It fails naming the page and the claim.</li><li><strong>Upstream</strong> (<code>wherefore check upstream</code>): every copy taken from elsewhere still matches where it was taken from. It fails MOVED, NO LONGER SAYS or UNREACHABLE, and says what to take again.</li><li><strong>Palette</strong> (<code>wherefore check palette</code>): every colour said anywhere is one the brand's source holds, or excused with why. It fails by file and line.</li><li><strong>Published</strong> (<code>wherefore check published</code>): every page the company publishes but cannot build still states the source's facts, read live. It fails SAYS OTHERWISE, quoting the page, NOT SAID, or UNREACHABLE.</li><li><strong>Your own checks</strong>: a script in the corpus that reads the tree and exits 1 with a reason, run by CI beside the engine's. The company's site has a dozen: every control pressed cold on a phone, every page fitting a phone's width, every text colour readable on its ground.</li></ul>
+<p>The gate, reach, retired, claims and palette read nothing outside the repository, so the same tree always gives the same answer, and they run on every push and in the pre-push hook. Upstream and published go to the network, so they run before a deploy, and on a schedule if the client wants one, never in the gate.</p>
+<h3 id="writing-a-check">Writing a check</h3>
+<p>A check is a script: read what it judges, print one line per thing it finds with the file and the reason, exit 1 if it found anything and 0 if not, with one line saying what held. Name it for what it holds, not for what it does - <code>controls_press.py</code>, not <code>check_buttons.py</code> - and put the reason the check exists at the top of the file, with the day it was found wanting.</p>
+<h3 id="proving-a-check">Proving a check</h3>
+<p>A proof plants the fault the check exists to catch, runs the check, requires it to fail naming the fault, and puts the tree back exactly. The engine's <code>prove</code> module gives the pieces:</p>
+<pre><code class="lang-python">import sys
+from wherefore.prove import Edit, check, report
+
+r = []
+r += check(&quot;a page that says the old price&quot;,
+           Edit(&quot;site/pricing.html&quot;, &quot;89&quot;, &quot;79&quot;),
+           run=[&quot;python3&quot;, &quot;-m&quot;, &quot;wherefore&quot;, &quot;check&quot;, &quot;retired&quot;],
+           wants=[&quot;site/pricing.html&quot;, &quot;79&quot;])
+r += check(&quot;the tree as it is - must not fire&quot;,
+           run=[&quot;python3&quot;, &quot;-m&quot;, &quot;wherefore&quot;, &quot;check&quot;, &quot;retired&quot;], passes=True)
+raise SystemExit(report(r))</code></pre>
+<p><code>Edit</code> is one planted fault: a file, what to find in it, what to put there. <code>check</code> runs the command with the fault in place, requires every string in <code>wants</code> in the output and exit 1, and restores the file; with <code>passes=True</code> it requires exit 0 instead, which is how a proof shows the check does not fire on the tree as it is. <code>report</code> prints PASS or MISS per case and returns the exit status. <code>wherefore prove</code> runs every proof the corpus declares, one at a time, in place - two at once in one checkout would plant faults over each other.</p>
+<p>A proof that passes before the check is written is a proof of nothing: write the proof, watch it MISS, write the check, watch it PASS. Then break the check and watch the proof MISS again.</p>
+<h3 id="when-a-check-and-a-person-disagree">When a check and a person disagree</h3>
+<p>The check is usually right, and it is the one to go and fix when it is not. Never widen a tolerance, add an exemption or skip a check to get green; say what does not fit and why. Every exemption in <code>wherefore.json</code> carries a <code>why</code>, and the engine refuses one without it.</p></article></div></section>
+</main>
+<footer><div class="wrap"><nav class="foot-nav" aria-label="The site, again"><a href="../../#how">How it works</a><a href="../../#case">Case study</a><a href="../../#why">Why Wherefore</a><a href="../../features/">Features &amp; roadmap</a><a href="../../changelog/">Changelog</a><a href="../../docs/">Docs</a><a href="../../map/">Map</a></nav><div class="footer-row"><p><span class="footer-name">Wherefore</span> · This site is built with Wherefore, from one source file and the release it pins.</p>
+<p class="footer-meta"><a href="../../">Wherefore</a> · <a href="../../brand/">Brand</a> · <a href="../../map/">Map</a> · <a target="_blank" rel="noopener" href="https://github.com/wherefore-build/web">Read every file it is built from<svg class="out" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M9 2h5v5M14 2 7.5 8.5M12 9.5V13a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p></div></div></footer>
+</body>
+</html>
