@@ -148,6 +148,9 @@ jobs:
       - name: Every feature has its clip, and the features page plays it
         if: ${{ !cancelled() && steps.install.outcome == 'success' }}
         run: python3 checks/motion_for_every_feature.py
+      - name: Every clip reads, runs a command the CLI has, prints what the engine prints, and carries every word
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: python3 checks/motion_reads.py
       - name: Every clip fits a portrait frame and a landscape one at every scene, and every scene shows its words
         if: ${{ !cancelled() && steps.browser.outcome == 'success' }}
         run: python3 checks/motion_fits.py

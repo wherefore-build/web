@@ -2,7 +2,7 @@
  "id": "reach",
  "name": "Reach",
  "version": "0.1.0",
- "duration": 29.5,
+ "duration": 30.0,
  "frames": [
   "portrait",
   "landscape"
@@ -11,75 +11,69 @@
   {
    "kind": "open",
    "start": 0.0,
-   "end": 2.0,
+   "end": 3.0,
    "name": "Wherefore",
    "version": "0.1.0"
   },
   {
    "kind": "ask",
-   "start": 2.0,
-   "end": 6.0,
+   "start": 3.0,
+   "end": 7.0,
    "eyebrow": "shipped in 0.1.0",
    "headline": "Reach"
   },
   {
-   "kind": "command",
-   "start": 6.0,
-   "end": 10.0,
-   "eyebrow": "the command",
-   "typed": "wherefore check reach"
-  },
-  {
-   "kind": "answer",
-   "start": 10.0,
-   "end": 14.0,
-   "eyebrow": "the answer",
+   "kind": "run",
+   "start": 7.0,
+   "end": 12.5,
+   "typed": "wherefore check reach",
    "lines": [
     "every fact probed reaches something a customer receives"
-   ]
+   ],
+   "typing": 1.66
   },
   {
    "kind": "mechanism",
-   "start": 14.0,
-   "end": 21.5,
+   "start": 12.5,
+   "end": 20.0,
    "eyebrow": "what it holds",
    "mechanism": "hold",
    "data": {
     "source": "facts/company.json",
-    "facts": 250,
-    "pages": 34,
+    "facts": 268,
+    "pages": 12,
     "shown": [
-     "pendulum/",
      "brand/",
      "changelog/",
      "docs/checks/",
      "docs/commands/",
      "docs/configuration/",
      "docs/",
-     "docs/reporting/"
+     "docs/reporting/",
+     "features/"
     ],
     "probe": {
      "fact": "company.name",
      "files": 1
     }
    },
-   "caption": "250 facts in facts/company.json, and 34 pages built from them; company.name alone reaches 1 page"
+   "caption": "268 facts in facts/company.json, and 12 pages built from them; company.name alone reaches 1 page"
   },
   {
    "kind": "claim",
-   "start": 21.5,
-   "end": 25.5,
+   "start": 20.0,
+   "end": 24.0,
    "text": "Every fact, moved one at a time, reaches what it should."
   },
   {
    "kind": "close",
-   "start": 25.5,
-   "end": 29.5,
+   "start": 24.0,
+   "end": 30.0,
    "home": "wherefore.build",
+   "tagline": "Your company, compiled.",
    "install": "pip install wherefore-build",
    "url": "wherefore.build/features/#reach",
-   "tagline": "Your company, compiled.",
-   "icon": "../../brand/icon.svg"
+   "icon": "icon"
   }
  ]
 }

@@ -2,7 +2,7 @@
  "id": "gate",
  "name": "The gate",
  "version": "0.1.0",
- "duration": 30.0,
+ "duration": 31.5,
  "frames": [
   "portrait",
   "landscape"
@@ -11,63 +11,57 @@
   {
    "kind": "open",
    "start": 0.0,
-   "end": 2.0,
+   "end": 3.0,
    "name": "Wherefore",
    "version": "0.1.0"
   },
   {
    "kind": "ask",
-   "start": 2.0,
-   "end": 6.0,
+   "start": 3.0,
+   "end": 7.0,
    "eyebrow": "shipped in 0.1.0",
    "headline": "The gate"
   },
   {
-   "kind": "command",
-   "start": 6.0,
-   "end": 10.0,
-   "eyebrow": "the command",
-   "typed": "wherefore gate"
-  },
-  {
-   "kind": "answer",
-   "start": 10.0,
-   "end": 14.0,
-   "eyebrow": "the answer",
+   "kind": "run",
+   "start": 7.0,
+   "end": 12.0,
+   "typed": "wherefore gate",
    "lines": [
     "during this run and matches what is committed"
-   ]
+   ],
+   "typing": 1.27
   },
   {
    "kind": "mechanism",
-   "start": 14.0,
-   "end": 22.0,
+   "start": 12.0,
+   "end": 21.5,
    "eyebrow": "what it sorts",
    "mechanism": "sort",
    "data": {
-    "files": 138,
-    "built": 74,
-    "authored": 59,
+    "files": 141,
+    "built": 72,
+    "authored": 64,
     "captured": 5,
     "left": 0
    },
-   "caption": "138 files tracked: 74 built by a script, 59 written with a reason, 5 captured and stamped, 0 unaccounted for"
+   "caption": "141 files tracked: 72 built by a script, 64 written with a reason, 5 captured and stamped, 0 unaccounted for"
   },
   {
    "kind": "claim",
-   "start": 22.0,
-   "end": 26.0,
+   "start": 21.5,
+   "end": 25.5,
    "text": "Every tracked file accounted for; every generated one current."
   },
   {
    "kind": "close",
-   "start": 26.0,
-   "end": 30.0,
+   "start": 25.5,
+   "end": 31.5,
    "home": "wherefore.build",
+   "tagline": "Your company, compiled.",
    "install": "pip install wherefore-build",
    "url": "wherefore.build/features/#gate",
-   "tagline": "Your company, compiled.",
-   "icon": "../../brand/icon.svg"
+   "icon": "icon"
   }
  ]
 }

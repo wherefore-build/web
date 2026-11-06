@@ -11,43 +11,37 @@
   {
    "kind": "open",
    "start": 0.0,
-   "end": 2.0,
+   "end": 3.0,
    "name": "Wherefore",
    "version": "0.12.0"
   },
   {
    "kind": "ask",
-   "start": 2.0,
-   "end": 6.0,
+   "start": 3.0,
+   "end": 7.0,
    "eyebrow": "asked for by zakholdsworth · #15",
    "headline": "Tell us"
   },
   {
-   "kind": "command",
-   "start": 6.0,
-   "end": 12.5,
-   "eyebrow": "the command",
-   "typed": "wherefore report feature the scan across two repositories --show"
-  },
-  {
-   "kind": "answer",
-   "start": 12.5,
-   "end": 18.5,
-   "eyebrow": "the answer",
+   "kind": "run",
+   "start": 7.0,
+   "end": 16.5,
+   "typed": "wherefore report feature the scan across two repositories --show",
    "lines": [
     "--show: nothing was sent. Run it again without --show to open the issue."
-   ]
+   ],
+   "typing": 4.42
   },
   {
    "kind": "mechanism",
-   "start": 18.5,
-   "end": 24.5,
+   "start": 16.5,
+   "end": 22.5,
    "eyebrow": "what it hands over",
    "mechanism": "handover",
    "data": {
     "issues": 9,
     "items": 5,
-    "releases": 27,
+    "releases": 26,
     "steps": [
      "an issue",
      "the plan, on it",
@@ -55,23 +49,23 @@
      "the note that closes it"
     ]
    },
-   "caption": "9 issues answered by 5 roadmap items across 27 releases"
+   "caption": "9 issues answered by 5 roadmap items across 26 releases"
   },
   {
    "kind": "claim",
-   "start": 24.5,
-   "end": 28.5,
+   "start": 22.5,
+   "end": 26.5,
    "text": "A bug, a question or a request, nothing private, sent once."
   },
   {
    "kind": "close",
-   "start": 28.5,
+   "start": 26.5,
    "end": 32.5,
    "home": "wherefore.build",
+   "tagline": "Your company, compiled.",
    "install": "pip install wherefore-build",
    "url": "wherefore.build/features/#report",
-   "tagline": "Your company, compiled.",
-   "icon": "../../brand/icon.svg"
+   "icon": "icon"
   }
  ]
 }

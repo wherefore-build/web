@@ -74,16 +74,9 @@
    "makes": "site/map/, the map of this repository: every source, the scripts that read it, and every file they make, drawn by the pinned engine from a real run in the brand's own colours (site/brand/map.css) - the gate runs it like any command, and `wherefore graph` credits it rather than running it"
   },
   {
-   "run": [
-    "python3",
-    "-m",
-    "wherefore",
-    "motion",
-    "--out",
-    "site/motion"
-   ],
-   "cwd": ".",
-   "makes": "site/motion/, a clip for every feature the pinned release ships - six scenes, every word a fact, as a page in motion in the brand's own stylesheet - which the features page plays on each card; and motion/, each clip's storyboard as data for the checks, kept out of site/ because a storyboard quotes what a command printed"
+   "script": "motion.py",
+   "cwd": "gen",
+   "makes": "site/motion/, a clip for every feature the pinned release ships - the version, who asked, the command run and what it printed, what the feature does in this site's own numbers, the claim, the address - as a page in motion in the brand's own stylesheet, played on each card of the features page and the changelog; and motion/, each clip's storyboard as data for the checks, kept out of site/ because a storyboard quotes what a command printed"
   }
  ],
  "inventory": {
@@ -246,15 +239,5 @@
    }
   ],
   "audience": "a visitor"
- },
- "motion": {
-  "out": "site/motion",
-  "css": "site/brand.css",
-  "storyboards": "motion",
-  "roadmap": "facts/roadmap.json",
-  "icon": "site/brand/icon.svg",
-  "tagline": {
-   "fact": "start.heading"
-  }
  }
 }

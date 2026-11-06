@@ -28,9 +28,9 @@ FRAME = re.compile(r'<iframe src="\.\./motion/([a-z0-9-]+)/index\.html"')
 
 
 def faults():
-    from wherefore import motion
+    from importlib.resources import files
     found = []
-    ids = [f["id"] for f in motion.features()]
+    ids = [f["id"] for f in json.loads((files("wherefore") / "features.json").read_text(encoding="utf-8"))["features"]]
     framed = FRAME.findall(PAGE.read_text(encoding="utf-8")) if PAGE.exists() else []
     for fid in ids:
         page, board = CLIPS / fid / "index.html", BOARDS / fid / "storyboard.json"

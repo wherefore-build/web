@@ -2,7 +2,7 @@
  "id": "build",
  "name": "The build",
  "version": "0.1.0",
- "duration": 31.5,
+ "duration": 32.5,
  "frames": [
   "portrait",
   "landscape"
@@ -11,63 +11,57 @@
   {
    "kind": "open",
    "start": 0.0,
-   "end": 2.0,
+   "end": 3.0,
    "name": "Wherefore",
    "version": "0.1.0"
   },
   {
    "kind": "ask",
-   "start": 2.0,
-   "end": 6.0,
+   "start": 3.0,
+   "end": 7.0,
    "eyebrow": "shipped in 0.1.0",
    "headline": "The build"
   },
   {
-   "kind": "command",
-   "start": 6.0,
-   "end": 10.0,
-   "eyebrow": "the command",
-   "typed": "wherefore list"
-  },
-  {
-   "kind": "answer",
-   "start": 10.0,
-   "end": 15.5,
-   "eyebrow": "the answer",
+   "kind": "run",
+   "start": 7.0,
+   "end": 13.0,
+   "typed": "wherefore list",
    "lines": [
     "4 tracked writes, 0 writes to paths git does not track"
-   ]
+   ],
+   "typing": 1.27
   },
   {
    "kind": "mechanism",
-   "start": 15.5,
-   "end": 23.5,
+   "start": 13.0,
+   "end": 22.5,
    "eyebrow": "what it sorts",
    "mechanism": "sort",
    "data": {
-    "files": 138,
-    "built": 74,
-    "authored": 59,
+    "files": 141,
+    "built": 72,
+    "authored": 64,
     "captured": 5,
     "left": 0
    },
-   "caption": "138 files tracked: 74 built by a script, 59 written with a reason, 5 captured and stamped, 0 unaccounted for"
+   "caption": "141 files tracked: 72 built by a script, 64 written with a reason, 5 captured and stamped, 0 unaccounted for"
   },
   {
    "kind": "claim",
-   "start": 23.5,
-   "end": 27.5,
+   "start": 22.5,
+   "end": 26.5,
    "text": "Every generator run twice, compared with what is committed."
   },
   {
    "kind": "close",
-   "start": 27.5,
-   "end": 31.5,
+   "start": 26.5,
+   "end": 32.5,
    "home": "wherefore.build",
+   "tagline": "Your company, compiled.",
    "install": "pip install wherefore-build",
    "url": "wherefore.build/features/#build",
-   "tagline": "Your company, compiled.",
-   "icon": "../../brand/icon.svg"
+   "icon": "icon"
   }
  ]
 }

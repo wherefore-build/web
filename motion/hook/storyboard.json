@@ -2,7 +2,7 @@
  "id": "hook",
  "name": "The pre-push hook",
  "version": "0.1.0",
- "duration": 26.0,
+ "duration": 30.0,
  "frames": [
   "portrait",
   "landscape"
@@ -11,54 +11,55 @@
   {
    "kind": "open",
    "start": 0.0,
-   "end": 2.0,
+   "end": 3.0,
    "name": "Wherefore",
    "version": "0.1.0"
   },
   {
    "kind": "ask",
-   "start": 2.0,
-   "end": 6.0,
+   "start": 3.0,
+   "end": 7.0,
    "eyebrow": "shipped in 0.1.0",
    "headline": "The pre-push hook"
   },
   {
-   "kind": "command",
-   "start": 6.0,
-   "end": 10.0,
-   "eyebrow": "the command",
-   "typed": "wherefore hook install"
+   "kind": "run",
+   "start": 7.0,
+   "end": 10.5,
+   "typed": "wherefore hook install",
+   "lines": [],
+   "typing": 1.71
   },
   {
    "kind": "mechanism",
-   "start": 10.0,
-   "end": 18.0,
+   "start": 10.5,
+   "end": 20.0,
    "eyebrow": "what it sorts",
    "mechanism": "sort",
    "data": {
-    "files": 138,
-    "built": 74,
-    "authored": 59,
+    "files": 141,
+    "built": 72,
+    "authored": 64,
     "captured": 5,
     "left": 0
    },
-   "caption": "138 files tracked: 74 built by a script, 59 written with a reason, 5 captured and stamped, 0 unaccounted for"
+   "caption": "141 files tracked: 72 built by a script, 64 written with a reason, 5 captured and stamped, 0 unaccounted for"
   },
   {
    "kind": "claim",
-   "start": 18.0,
-   "end": 22.0,
+   "start": 20.0,
+   "end": 24.0,
    "text": "No push leaves the corpus stale."
   },
   {
    "kind": "close",
-   "start": 22.0,
-   "end": 26.0,
+   "start": 24.0,
+   "end": 30.0,
    "home": "wherefore.build",
+   "tagline": "Your company, compiled.",
    "install": "pip install wherefore-build",
    "url": "wherefore.build/features/#hook",
-   "tagline": "Your company, compiled.",
-   "icon": "../../brand/icon.svg"
+   "icon": "icon"
   }
  ]
 }

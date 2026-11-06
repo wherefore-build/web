@@ -1,67 +1,59 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Docs from each release · 0.19.0</title><meta name="robots" content="noindex"><link rel="stylesheet" href="../../brand.css"><style>:root{--t:0}
-:root{--d:20.0s}
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Docs from each release · 0.19.0</title><meta name="robots" content="noindex"><link rel="stylesheet" href="../../brand.css"><style>:root{--t:0;--d:23.0s}
+@property --n{syntax:'<integer>';inherits:true;initial-value:0}
 html,body{margin:0;height:100%;overflow:hidden;background:var(--ground);color:var(--ink)}
 .frame{position:relative;width:100%;height:100%;container-type:size;font-family:var(--font-body)}
-.scene{position:absolute;inset:0;padding:8cqmin 9cqmin;display:flex;flex-direction:column;justify-content:center;gap:3cqmin;opacity:0;animation:20.0s linear infinite;animation-delay:calc(var(--t) * -1s)}
+.scene{position:absolute;inset:0;padding:8cqmin 9cqmin;display:flex;flex-direction:column;justify-content:center;gap:3cqmin;opacity:0;animation:var(--d) linear infinite;animation-delay:calc(var(--t) * -1s)}
 .scene>*{max-width:120cqmin}
-.typed,.answer .ln{animation:20.0s linear infinite;animation-delay:calc(var(--t) * -1s)}
-.typed{font:inherit}
-html.still .scene,html.still .typed,html.still .answer .ln,html.still .mark .l,html.still .ver,html.still .claim .w,html.still .close .w{animation-play-state:paused}
-@media (prefers-reduced-motion:reduce){.scene,.typed,.answer .ln,.mark .l,.ver,.claim .w,.close .w{animation:none}.scene{opacity:0}.scene.claim,.mark .l,.ver,.claim .w,.close .w{opacity:1}}
+.typed,.ln.out,.ln.work,.work i,.mark .l,.ver,.claim .w,.close .w,.viz .row.left,.viz .bar i,.viz .card,.viz .chip,.viz .step,.viz .count{animation:var(--d) linear infinite;animation-delay:calc(var(--t) * -1s)}
+html.still .scene,html.still .typed,html.still .ln.out,html.still .ln.work,html.still .mark .l,html.still .ver,html.still .claim .w,html.still .close .w,html.still .viz .row.left,html.still .viz .bar i,html.still .viz .card,html.still .viz .chip,html.still .viz .step,html.still .viz .count,html.still .work i{animation-play-state:paused}
+@media (prefers-reduced-motion:reduce){.scene,.typed,.ln.out,.ln.work,.work i,.mark .l,.ver,.claim .w,.close .w,.viz .row.left,.viz .bar i,.viz .card,.viz .chip,.viz .step,.viz .count,.work i{animation:none}.scene{opacity:0}.scene.claim,.mark .l,.ver,.claim .w,.close .w,.viz .row.left,.viz .card,.viz .chip,.viz .step{opacity:1}.viz .bar i{width:var(--w)}.viz .count{--n:var(--to)}}
 .mark{font:400 17cqmin/1 var(--font-display);letter-spacing:-0.02em}
-.mark .l,.claim .w,.close .w{opacity:0;animation:20.0s linear infinite;animation-delay:calc(var(--t) * -1s)}
-.close .icon{width:14cqmin;height:14cqmin;display:block;margin-bottom:2cqmin}
-.tag{font:italic 400 5.2cqmin/1.2 var(--font-display);color:var(--muted)}
-.ver{font:500 4cqmin/1 var(--font-mono);color:var(--ground);background:var(--accent);padding:1.6cqmin 2.6cqmin;border-radius:999px;align-self:flex-start;opacity:0;animation:20.0s linear infinite;animation-delay:calc(var(--t) * -1s)}
+.mark .l,.claim .w,.close .w,.ln.out,.ln.work{opacity:0}
+.ver{font:500 4cqmin/1 var(--font-mono);color:var(--on-accent);background:var(--accent);padding:1.6cqmin 2.6cqmin;border-radius:999px;align-self:flex-start;opacity:0}
 .eye{font:500 3.3cqmin/1.3 var(--font-mono);letter-spacing:0.06em;text-transform:uppercase;color:var(--muted)}
 .big{font:400 11.5cqmin/1.05 var(--font-display);text-wrap:balance}
 .term{margin:0;font:400 4.2cqmin/1.6 var(--font-mono);background:var(--surface);border:1px solid var(--line);border-radius:3cqmin;padding:4cqmin;display:grid;gap:1.2cqmin;white-space:normal}
-.term .ln{display:block;font:inherit;white-space:pre-wrap;overflow-wrap:anywhere}
+.term .ln{display:block;font:400 4.2cqmin/1.6 var(--font-mono);white-space:pre-wrap;overflow-wrap:anywhere}
 .term .ln.hi{color:var(--accent)}
-.term .prompt{color:var(--muted)}
+.term .pr{color:var(--muted)}
 .typed{display:inline-block;white-space:nowrap;overflow:hidden;vertical-align:bottom;width:0;border-right:0.5cqmin solid var(--accent)}
-.answer .ln{opacity:0}
+.term .ln.work{height:1.6em;display:flex;align-items:center;gap:1.2cqmin}
+.work i{display:block;width:1.4cqmin;height:1.4cqmin;border-radius:50%;background:var(--muted);opacity:0}
 .claim{font:400 9.5cqmin/1.1 var(--font-display);text-wrap:balance}
-.install{font:400 3.8cqmin/1.6 var(--font-mono)}
-.install b{color:var(--accent);font-weight:500}
+.close .icon{width:14cqmin;height:14cqmin;display:block;margin-bottom:2cqmin}
 .home{font:400 12cqmin/1 var(--font-display);letter-spacing:-0.02em}
-.mech-cap{margin:0}
-
-@property --n{syntax:'<integer>';inherits:false;initial-value:0}
-.viz .count{animation:var(--d) linear infinite;animation-delay:calc(var(--t) * -1s)}
-.viz .count::after{counter-reset:n var(--n);content:counter(n)}
-.viz .count .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
-.viz .row.left .lab{color:var(--ink)}
-.viz .row.left .num{font-size:5.5cqmin;line-height:1}
-.viz .bar.none{background:none;border:0}
+.tag{font:italic 400 5.2cqmin/1.2 var(--font-display);color:var(--muted)}
+.install{font:400 3.8cqmin/1.6 var(--font-mono)}
+.url{font:400 3.6cqmin/1.5 var(--font-mono);color:var(--muted)}
+.mech-cap{margin:0;font:400 3.4cqmin/1.45 var(--font-body);color:var(--muted);max-width:120cqmin}
 .viz{display:grid;gap:2.2cqmin;width:100%;max-width:120cqmin}
 .viz .row{display:grid;grid-template-columns:36cqmin 1fr 10cqmin;gap:2cqmin;align-items:center;font:400 3.2cqmin/1.3 var(--font-mono)}
-.viz .row.left{opacity:0;animation:var(--d) linear infinite;animation-delay:calc(var(--t) * -1s)}
+.viz .row.left{opacity:0}
+.viz .row.left .lab{color:var(--ink)}
+.viz .row.left .num{font-size:5.5cqmin;line-height:1}
 .viz .lab{color:var(--muted)}
 .viz .num{text-align:right;font-variant-numeric:tabular-nums}
+.viz .count::after{counter-reset:n var(--n);content:counter(n)}
+.viz .count .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 .viz .bar{display:block;height:3.2cqmin;background:var(--surface);border:1px solid var(--line);border-radius:999px;overflow:hidden}
-.viz .bar i{display:block;height:100%;width:0;animation:var(--d) linear infinite;animation-delay:calc(var(--t) * -1s)}
+.viz .bar.none{background:none;border:0}
+.viz .bar i{display:block;height:100%;width:0}
 .viz .t-accent{background:var(--accent)}.viz .bar .t-ink{background:var(--ink)}.viz .bar .t-muted{background:var(--muted)}
 .viz span.t-accent,.viz .card.t-accent .num{background:none;color:var(--accent)}
-.viz .card{opacity:0;animation:var(--d) linear infinite;animation-delay:calc(var(--t) * -1s);display:grid;gap:0.8cqmin;padding:3cqmin;border:1px solid var(--line);border-radius:3cqmin;background:var(--surface);font:400 3.2cqmin/1.3 var(--font-mono)}
+.viz .card{opacity:0;display:grid;gap:0.8cqmin;padding:3cqmin;border:1px solid var(--line);border-radius:3cqmin;background:var(--surface);font:400 3.2cqmin/1.3 var(--font-mono)}
 .viz .card .val{font:400 4.2cqmin/1.2 var(--font-display);color:var(--ink)}
 .viz .card .num.big{font:400 10cqmin/1 var(--font-display);text-align:left}
-.viz .card.t-fail .num{color:var(--fail,var(--accent))}
+.viz .card.t-fail .num{color:var(--fail)}
 .viz.hold{grid-template-columns:auto auto 1fr;align-items:center}
 .viz .arrow{font:400 6cqmin/1 var(--font-display);color:var(--muted)}
 .viz .chips{display:flex;flex-wrap:wrap;gap:1.4cqmin}
-.viz .chip{opacity:0;animation:var(--d) linear infinite;animation-delay:calc(var(--t) * -1s);font:400 2.8cqmin/1.2 var(--font-mono);padding:1.2cqmin 2cqmin;border:1px solid var(--line);border-radius:999px;color:var(--ink)}
-.viz .chip.t-muted{color:var(--muted)}.viz .chip.t-fail{color:var(--fail,var(--accent))}
+.viz .chip{opacity:0;font:400 2.8cqmin/1.2 var(--font-mono);padding:1.2cqmin 2cqmin;border:1px solid var(--line);border-radius:999px;color:var(--ink)}
+.viz .chip.t-muted{color:var(--muted)}.viz .chip.t-fail{color:var(--fail)}
 .viz.compare .places{display:flex;gap:2cqmin;flex-wrap:wrap}
 .viz.handover{grid-template-columns:repeat(4,1fr);gap:2cqmin}
-.viz .step{opacity:0;animation:var(--d) linear infinite;animation-delay:calc(var(--t) * -1s);display:grid;gap:1.6cqmin;justify-items:start;font:400 3cqmin/1.3 var(--font-mono)}
+.viz .step{opacity:0;display:grid;gap:1.6cqmin;justify-items:start;font:400 3cqmin/1.3 var(--font-mono)}
 .viz .step .dot{width:4cqmin;height:4cqmin;border-radius:50%;background:var(--accent)}
 .viz .step .lab{color:var(--ink)}
-html.still .viz .row.left,html.still .viz .bar i,html.still .viz .card,html.still .viz .chip,html.still .viz .step,html.still .viz .count{animation-play-state:paused}
-@media (prefers-reduced-motion:reduce){.viz .row.left,.viz .bar i,.viz .card,.viz .chip,.viz .step,.viz .count{animation:none;opacity:1}.viz .bar i{width:var(--w)}.viz .count{--n:var(--to)}}
-.mech-cap{font:400 3.4cqmin/1.45 var(--font-body);color:var(--muted);max-width:120cqmin}
-
-.url{font:400 3.6cqmin/1.5 var(--font-mono);color:var(--muted)}
-@keyframes w0{0%,0.000%{opacity:0}1.500%{opacity:1}8.500%{opacity:1}10.000%,100%{opacity:0}}@keyframes set0_0{0%,1.000%{opacity:0}2.250%,100%{opacity:1}}@keyframes set0_1{0%,1.300%{opacity:0}2.550%,100%{opacity:1}}@keyframes set0_2{0%,1.600%{opacity:0}2.850%,100%{opacity:1}}@keyframes set0_3{0%,1.900%{opacity:0}3.150%,100%{opacity:1}}@keyframes set0_4{0%,2.200%{opacity:0}3.450%,100%{opacity:1}}@keyframes set0_5{0%,2.500%{opacity:0}3.750%,100%{opacity:1}}@keyframes set0_6{0%,2.800%{opacity:0}4.050%,100%{opacity:1}}@keyframes set0_7{0%,3.100%{opacity:0}4.350%,100%{opacity:1}}@keyframes set0_8{0%,3.400%{opacity:0}4.650%,100%{opacity:1}}@keyframes stamp0{0%,5.200%{opacity:0;transform:scale(1.2)}6.450%,100%{opacity:1;transform:none}}@keyframes w1{0%,10.000%{opacity:0}11.500%{opacity:1}28.500%{opacity:1}30.000%,100%{opacity:0}}@keyframes w2{0%,30.000%{opacity:0;transform:translateY(4cqmin)}31.500%{opacity:1;transform:none}58.500%{opacity:1;transform:none}60.000%,100%{opacity:0;transform:none}}@keyframes hs2_0{0%,32.000%{opacity:0}33.750%,100%{opacity:1}}@keyframes hs2_1{0%,35.500%{opacity:0}37.250%,100%{opacity:1}}@keyframes hs2_2{0%,39.000%{opacity:0}40.750%,100%{opacity:1}}@keyframes hs2_3{0%,42.500%{opacity:0}44.250%,100%{opacity:1}}@keyframes w3{0%,60.000%{opacity:0}61.500%{opacity:1}78.500%{opacity:1}80.000%,100%{opacity:0}}@keyframes wd3_0{0%,61.500%{opacity:0}62.750%,100%{opacity:1}}@keyframes wd3_1{0%,61.900%{opacity:0}63.150%,100%{opacity:1}}@keyframes wd3_2{0%,62.300%{opacity:0}63.550%,100%{opacity:1}}@keyframes wd3_3{0%,62.700%{opacity:0}63.950%,100%{opacity:1}}@keyframes wd3_4{0%,63.100%{opacity:0}64.350%,100%{opacity:1}}@keyframes wd3_5{0%,63.500%{opacity:0}64.750%,100%{opacity:1}}@keyframes wd3_6{0%,63.900%{opacity:0}65.150%,100%{opacity:1}}@keyframes wd3_7{0%,64.300%{opacity:0}65.550%,100%{opacity:1}}@keyframes wd3_8{0%,64.700%{opacity:0}65.950%,100%{opacity:1}}@keyframes wd3_9{0%,65.100%{opacity:0}66.350%,100%{opacity:1}}@keyframes w4{0%,80.000%{opacity:0}81.500%{opacity:1}98.500%{opacity:1}100.000%,100%{opacity:0}}@keyframes cl4_0{0%,81.000%{opacity:0}82.250%,100%{opacity:1}}@keyframes cl4_1{0%,82.500%{opacity:0}83.750%,100%{opacity:1}}@keyframes cl4_2{0%,84.000%{opacity:0}85.250%,100%{opacity:1}}@keyframes cl4_3{0%,85.500%{opacity:0}86.750%,100%{opacity:1}}</style></head>
-<body><div class="frame" data-duration="20.0"><div class="scene open" style="animation-name:w0"><div class="mark" aria-label="Wherefore"><span class="l" style="animation-name:set0_0">W</span><span class="l" style="animation-name:set0_1">h</span><span class="l" style="animation-name:set0_2">e</span><span class="l" style="animation-name:set0_3">r</span><span class="l" style="animation-name:set0_4">e</span><span class="l" style="animation-name:set0_5">f</span><span class="l" style="animation-name:set0_6">o</span><span class="l" style="animation-name:set0_7">r</span><span class="l" style="animation-name:set0_8">e</span></div><div class="ver" style="animation-name:stamp0">0.19.0</div></div><div class="scene ask" style="animation-name:w1"><div class="eye">shipped in 0.19.0</div><div class="big">Docs from each release</div></div><div class="scene mechanism" style="animation-name:w2"><div class="eye">what it hands over</div><div class="viz handover"><div class="step" style="animation-name:hs2_0"><span class="dot"></span><span class="lab">an issue</span></div><div class="step" style="animation-name:hs2_1"><span class="dot"></span><span class="lab">the plan, on it</span></div><div class="step" style="animation-name:hs2_2"><span class="dot"></span><span class="lab">the release</span></div><div class="step" style="animation-name:hs2_3"><span class="dot"></span><span class="lab">the note that closes it</span></div></div><p class="mech-cap">9 issues answered by 5 roadmap items across 27 releases</p></div><div class="scene claim" style="animation-name:w3"><div class="claim"><span class="w" style="animation-name:wd3_0">The</span> <span class="w" style="animation-name:wd3_1">docs</span> <span class="w" style="animation-name:wd3_2">of</span> <span class="w" style="animation-name:wd3_3">the</span> <span class="w" style="animation-name:wd3_4">release</span> <span class="w" style="animation-name:wd3_5">you</span> <span class="w" style="animation-name:wd3_6">run,</span> <span class="w" style="animation-name:wd3_7">and</span> <span class="w" style="animation-name:wd3_8">no</span> <span class="w" style="animation-name:wd3_9">other.</span></div></div><div class="scene close" style="animation-name:w4"><div class="w" style="animation-name:cl4_0"><img class="icon" src="../../brand/icon.svg" alt=""></div><div class="w" style="animation-name:cl4_1"><div class="home">wherefore.build</div></div><div class="w" style="animation-name:cl4_2"><div class="tag">Your company, compiled.</div></div><div class="w" style="animation-name:cl4_3"><div class="install">pip install wherefore-build</div><div class="url">wherefore.build/features/#docs</div></div></div></div></body></html>
+@keyframes w0{0%,0.000%{opacity:0}1.304%{opacity:1}11.739%{opacity:1}13.043%,100%{opacity:0}}@keyframes set0_0{0%,1.304%{opacity:0}2.391%,100%{opacity:1}}@keyframes set0_1{0%,1.565%{opacity:0}2.652%,100%{opacity:1}}@keyframes set0_2{0%,1.826%{opacity:0}2.913%,100%{opacity:1}}@keyframes set0_3{0%,2.087%{opacity:0}3.174%,100%{opacity:1}}@keyframes set0_4{0%,2.348%{opacity:0}3.435%,100%{opacity:1}}@keyframes set0_5{0%,2.609%{opacity:0}3.696%,100%{opacity:1}}@keyframes set0_6{0%,2.870%{opacity:0}3.957%,100%{opacity:1}}@keyframes set0_7{0%,3.130%{opacity:0}4.217%,100%{opacity:1}}@keyframes set0_8{0%,3.391%{opacity:0}4.478%,100%{opacity:1}}@keyframes stamp0{0%,5.391%{opacity:0;transform:scale(1.2)}6.478%,100%{opacity:1;transform:none}}@keyframes w1{0%,13.043%{opacity:0}14.348%{opacity:1}29.130%{opacity:1}30.435%,100%{opacity:0}}@keyframes w2{0%,30.435%{opacity:0;transform:translateY(4cqmin)}31.739%{opacity:1;transform:none}55.217%{opacity:1;transform:none}56.522%,100%{opacity:0;transform:none}}@keyframes hs2_0{0%,32.174%{opacity:0}33.696%,100%{opacity:1}}@keyframes hs2_1{0%,35.217%{opacity:0}36.739%,100%{opacity:1}}@keyframes hs2_2{0%,38.261%{opacity:0}39.783%,100%{opacity:1}}@keyframes hs2_3{0%,41.304%{opacity:0}42.826%,100%{opacity:1}}@keyframes w3{0%,56.522%{opacity:0}57.826%{opacity:1}72.609%{opacity:1}73.913%,100%{opacity:0}}@keyframes wd3_0{0%,57.826%{opacity:0}58.913%,100%{opacity:1}}@keyframes wd3_1{0%,58.174%{opacity:0}59.261%,100%{opacity:1}}@keyframes wd3_2{0%,58.522%{opacity:0}59.609%,100%{opacity:1}}@keyframes wd3_3{0%,58.870%{opacity:0}59.957%,100%{opacity:1}}@keyframes wd3_4{0%,59.217%{opacity:0}60.304%,100%{opacity:1}}@keyframes wd3_5{0%,59.565%{opacity:0}60.652%,100%{opacity:1}}@keyframes wd3_6{0%,59.913%{opacity:0}61.000%,100%{opacity:1}}@keyframes wd3_7{0%,60.261%{opacity:0}61.348%,100%{opacity:1}}@keyframes wd3_8{0%,60.609%{opacity:0}61.696%,100%{opacity:1}}@keyframes wd3_9{0%,60.957%{opacity:0}62.043%,100%{opacity:1}}@keyframes w4{0%,73.913%{opacity:0}75.217%{opacity:1}98.696%{opacity:1}100.000%,100%{opacity:0}}@keyframes cl4_0{0%,75.217%{opacity:0}76.304%,100%{opacity:1}}@keyframes cl4_1{0%,76.957%{opacity:0}78.043%,100%{opacity:1}}@keyframes cl4_2{0%,78.696%{opacity:0}79.783%,100%{opacity:1}}@keyframes cl4_3{0%,80.435%{opacity:0}81.522%,100%{opacity:1}}</style></head>
+<body><div class="frame" data-duration="23.0"><div class="scene open" style="animation-name:w0"><div class="mark" aria-label="Wherefore"><span class="l" style="animation-name:set0_0">W</span><span class="l" style="animation-name:set0_1">h</span><span class="l" style="animation-name:set0_2">e</span><span class="l" style="animation-name:set0_3">r</span><span class="l" style="animation-name:set0_4">e</span><span class="l" style="animation-name:set0_5">f</span><span class="l" style="animation-name:set0_6">o</span><span class="l" style="animation-name:set0_7">r</span><span class="l" style="animation-name:set0_8">e</span></div><div class="ver" style="animation-name:stamp0">0.19.0</div></div><div class="scene ask" style="animation-name:w1"><div class="eye">shipped in 0.19.0</div><div class="big">Docs from each release</div></div><div class="scene mechanism" style="animation-name:w2"><div class="eye">what it hands over</div><div class="viz handover"><div class="step" style="animation-name:hs2_0"><span class="dot"></span><span class="lab">an issue</span></div><div class="step" style="animation-name:hs2_1"><span class="dot"></span><span class="lab">the plan, on it</span></div><div class="step" style="animation-name:hs2_2"><span class="dot"></span><span class="lab">the release</span></div><div class="step" style="animation-name:hs2_3"><span class="dot"></span><span class="lab">the note that closes it</span></div></div><p class="mech-cap">9 issues answered by 5 roadmap items across 26 releases</p></div><div class="scene claim" style="animation-name:w3"><div class="claim"><span class="w" style="animation-name:wd3_0">The</span> <span class="w" style="animation-name:wd3_1">docs</span> <span class="w" style="animation-name:wd3_2">of</span> <span class="w" style="animation-name:wd3_3">the</span> <span class="w" style="animation-name:wd3_4">release</span> <span class="w" style="animation-name:wd3_5">you</span> <span class="w" style="animation-name:wd3_6">run,</span> <span class="w" style="animation-name:wd3_7">and</span> <span class="w" style="animation-name:wd3_8">no</span> <span class="w" style="animation-name:wd3_9">other.</span></div></div><div class="scene close" style="animation-name:w4"><div class="w" style="animation-name:cl4_0"><img class="icon" src="../../brand/icon.svg" alt=""></div><div class="w" style="animation-name:cl4_1"><div class="home">wherefore.build</div></div><div class="w" style="animation-name:cl4_2"><div class="tag">Your company, compiled.</div></div><div class="w" style="animation-name:cl4_3"><div class="install">pip install wherefore-build</div><div class="url">wherefore.build/features/#docs</div></div></div></div></body></html>

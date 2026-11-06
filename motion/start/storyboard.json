@@ -2,7 +2,7 @@
  "id": "start",
  "name": "Start a corpus",
  "version": "0.1.0",
- "duration": 24.0,
+ "duration": 26.0,
  "frames": [
   "portrait",
   "landscape"
@@ -11,23 +11,24 @@
   {
    "kind": "open",
    "start": 0.0,
-   "end": 2.0,
+   "end": 3.0,
    "name": "Wherefore",
    "version": "0.1.0"
   },
   {
    "kind": "ask",
-   "start": 2.0,
-   "end": 6.0,
+   "start": 3.0,
+   "end": 7.0,
    "eyebrow": "shipped in 0.1.0",
    "headline": "Start a corpus"
   },
   {
-   "kind": "command",
-   "start": 6.0,
+   "kind": "run",
+   "start": 7.0,
    "end": 10.0,
-   "eyebrow": "the command",
-   "typed": "wherefore init"
+   "typed": "wherefore init",
+   "lines": [],
+   "typing": 1.27
   },
   {
    "kind": "mechanism",
@@ -38,7 +39,7 @@
    "data": {
     "issues": 9,
     "items": 5,
-    "releases": 27,
+    "releases": 26,
     "steps": [
      "an issue",
      "the plan, on it",
@@ -46,7 +47,7 @@
      "the note that closes it"
     ]
    },
-   "caption": "9 issues answered by 5 roadmap items across 27 releases"
+   "caption": "9 issues answered by 5 roadmap items across 26 releases"
   },
   {
    "kind": "claim",
@@ -57,12 +58,12 @@
   {
    "kind": "close",
    "start": 20.0,
-   "end": 24.0,
+   "end": 26.0,
    "home": "wherefore.build",
+   "tagline": "Your company, compiled.",
    "install": "pip install wherefore-build",
    "url": "wherefore.build/features/#start",
-   "tagline": "Your company, compiled.",
-   "icon": "../../brand/icon.svg"
+   "icon": "icon"
   }
  ]
 }

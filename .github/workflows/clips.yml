@@ -1,0 +1,72 @@
+# THE CLIPS, RENDERED ON REQUEST. Every feature's clip is a page the site
+# serves (site/motion/<id>/), built by gen/motion.py and judged by the checks
+# like any page. A video of it is for the places that take a file - a release,
+# a post - and an encoder's bytes are not stable across versions, so the
+# videos are not committed: this renders them from the pages the checks judged
+# (gen/motion_render.py), keeps them as the run's artifacts, and, when this
+# repository holds ENGINE_TOKEN (a fine-grained token with contents write on
+# wherefore-build/wherefore), puts each feature's clips on the engine's
+# release of the version it arrived in. Without the token it says so and the
+# artifacts are the result.
+name: clips
+
+on:
+  workflow_dispatch:
+    inputs:
+      features:
+        description: "which features: ids separated by spaces, or `all`"
+        required: false
+        default: all
+
+permissions:
+  contents: read
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    env:
+      PYTHONPATH: ${{ github.workspace }}/.wherefore-engine:${{ github.workspace }}/.browser
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install the engine this corpus pins
+        run: |
+          rm -rf .wherefore-engine
+          python3 -m pip install --quiet --no-deps --target .wherefore-engine -r requirements-engine.txt
+      - name: Install the browser that steps each clip
+        run: |
+          python3 -m pip install --quiet --target .browser -r requirements-browser.txt
+          python3 -m playwright install --with-deps chromium
+          ffmpeg -version | head -1
+      - name: Render each clip from the page the checks judged
+        env:
+          FEATURES: ${{ inputs.features }}
+        run: |
+          if [ "$FEATURES" = all ] || [ -z "$FEATURES" ]; then
+            python3 gen/motion_render.py --out clips
+          else
+            python3 gen/motion_render.py $FEATURES --out clips
+          fi
+      - uses: actions/upload-artifact@v4
+        with:
+          name: clips
+          path: clips/
+          retention-days: 30
+      - name: Put each feature's clips on the engine's release of the version it arrived in
+        env:
+          GH_TOKEN: ${{ secrets.ENGINE_TOKEN }}
+        run: |
+          if [ -z "$GH_TOKEN" ]; then
+            echo "::notice::No ENGINE_TOKEN, so the clips stay as this run's artifacts. Make a fine-grained token with contents write on wherefore-build/wherefore and save it as ENGINE_TOKEN to put them on the releases."
+            exit 0
+          fi
+          for board in motion/*/storyboard.json; do
+            id=$(python3 -c "import json,sys; print(json.load(open(sys.argv[1]))['id'])" "$board")
+            v=$(python3 -c "import json,sys; print(json.load(open(sys.argv[1]))['version'])" "$board")
+            [ -f "clips/$id-portrait.mp4" ] || continue
+            if gh release view "v$v" --repo wherefore-build/wherefore >/dev/null 2>&1; then
+              gh release upload "v$v" "clips/$id-portrait.mp4" "clips/$id-landscape.mp4" "clips/$id.png" --repo wherefore-build/wherefore --clobber
+              echo "put $id on v$v"
+            else
+              echo "::notice::no release v$v to put $id on"
+            fi
+          done

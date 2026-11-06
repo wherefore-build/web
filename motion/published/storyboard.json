@@ -2,7 +2,7 @@
  "id": "published",
  "name": "A page you publish but cannot build",
  "version": "0.17.0",
- "duration": 32.0,
+ "duration": 31.5,
  "frames": [
   "portrait",
   "landscape"
@@ -11,75 +11,69 @@
   {
    "kind": "open",
    "start": 0.0,
-   "end": 2.0,
+   "end": 3.0,
    "name": "Wherefore",
    "version": "0.17.0"
   },
   {
    "kind": "ask",
-   "start": 2.0,
-   "end": 6.5,
+   "start": 3.0,
+   "end": 7.5,
    "eyebrow": "asked for by zakholdsworth · #22",
    "headline": "A page you publish but cannot build"
   },
   {
-   "kind": "command",
-   "start": 6.5,
-   "end": 10.5,
-   "eyebrow": "the command",
-   "typed": "wherefore check published"
-  },
-  {
-   "kind": "answer",
-   "start": 10.5,
-   "end": 16.5,
-   "eyebrow": "the answer",
+   "kind": "run",
+   "start": 7.5,
+   "end": 14.0,
+   "typed": "wherefore check published",
    "lines": [
     "0 statements on 1 published page still say what the source says…"
-   ]
+   ],
+   "typing": 1.88
   },
   {
    "kind": "mechanism",
-   "start": 16.5,
-   "end": 24.0,
+   "start": 14.0,
+   "end": 21.5,
    "eyebrow": "what it holds",
    "mechanism": "hold",
    "data": {
     "source": "facts/company.json",
-    "facts": 250,
-    "pages": 34,
+    "facts": 268,
+    "pages": 12,
     "shown": [
-     "pendulum/",
      "brand/",
      "changelog/",
      "docs/checks/",
      "docs/commands/",
      "docs/configuration/",
      "docs/",
-     "docs/reporting/"
+     "docs/reporting/",
+     "features/"
     ],
     "probe": {
      "fact": "company.name",
      "files": 1
     }
    },
-   "caption": "250 facts in facts/company.json, and 34 pages built from them; company.name alone reaches 1 page"
+   "caption": "268 facts in facts/company.json, and 12 pages built from them; company.name alone reaches 1 page"
   },
   {
    "kind": "claim",
-   "start": 24.0,
-   "end": 28.0,
+   "start": 21.5,
+   "end": 25.5,
    "text": "A copy held by reading until it can be built."
   },
   {
    "kind": "close",
-   "start": 28.0,
-   "end": 32.0,
+   "start": 25.5,
+   "end": 31.5,
    "home": "wherefore.build",
+   "tagline": "Your company, compiled.",
    "install": "pip install wherefore-build",
    "url": "wherefore.build/features/#published",
-   "tagline": "Your company, compiled.",
-   "icon": "../../brand/icon.svg"
+   "icon": "icon"
   }
  ]
 }
