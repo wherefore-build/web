@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="../page.css">
 </head>
 <body>
+<input class="state inspect-state" type="checkbox" id="inspect">
 <header class="top"><div class="wrap"><a class="name" href="../">Wherefore</a>
 <nav aria-label="On this page"><a href="#colour">Colour</a><a href="#type">Type</a><a href="#shape">Shape</a><a href="#icon">Icon</a><a href="#fonts">Fonts</a></nav></div></header>
 <main id="top">
@@ -21,6 +22,7 @@
 <p class="lede">The brand, said once. Every page, card and slide takes its colours, type and shapes from one file, and this page is built from it too.</p>
 <p class="why">The look follows the name. Wherefore asks why, so the display face is a literary serif. It compiles, so the page is a terminal&#x27;s black and anything a person could type is set in monospace. And one bright accent marks the point of a line, the way a passing build does.</p>
 <p class="files"><a href="tokens.json">tokens.json</a> <a href="../brand.css">brand.css</a></p>
+<div class="src"><p><span class="src-k">from</span> brand/tokens.json · every colour, face and radius, each with its reason</p><p><span class="src-k">held by</span> gate · brand</p></div>
 </div></section>
 <section id="colour"><div class="wrap">
 <h2>Colour</h2>
@@ -126,5 +128,6 @@
 </div></section>
 </main>
 <footer><div class="wrap"><p>Generated from brand/tokens.json. <a href="../">Back to Wherefore</a></p></div></footer>
+<label class="inspect-switch" for="inspect"><span class="switch-track" aria-hidden="true"></span><span class="switch-long">How Wherefore compiled this page</span><span class="switch-short">Compiled by Wherefore</span></label>
 </body>
 </html>

@@ -157,6 +157,7 @@ def gate_usage():
 
 def page(t):
     name = FACTS["company"]["name"]
+    i = FACTS["inspect"]
     value = colours(t)
     png = ICON_PNG.rsplit("/", 1)[1]
     swatches = "\n".join(
@@ -211,6 +212,7 @@ def page(t):
 <link rel="stylesheet" href="../page.css">
 </head>
 <body>
+<input class="state inspect-state" type="checkbox" id="inspect">
 {banner()}<header class="top"><div class="wrap"><a class="name" href="../">{esc(name)}</a>
 <nav aria-label="On this page"><a href="#colour">Colour</a><a href="#type">Type</a><a href="#shape">Shape</a><a href="#icon">Icon</a><a href="#fonts">Fonts</a></nav></div></header>
 <main id="top">
@@ -220,6 +222,7 @@ def page(t):
 <p class="lede">The brand, said once. Every page, card and slide takes its colours, type and shapes from one file, and this page is built from it too.</p>
 <p class="why">{esc(t["idea"])}</p>
 <p class="files"><a href="tokens.json">tokens.json</a> <a href="../brand.css">brand.css</a></p>
+<div class="src"><p><span class="src-k">{esc(i["from"])}</span> brand/tokens.json · every colour, face and radius, each with its reason</p><p><span class="src-k">{esc(i["held"])}</span> gate · brand</p></div>
 </div></section>
 <section id="colour"><div class="wrap">
 <h2>Colour</h2>
@@ -285,6 +288,7 @@ def page(t):
 </div></section>
 </main>
 <footer><div class="wrap"><p>Generated from brand/tokens.json. <a href="../">Back to {esc(name)}</a></p></div></footer>
+<label class="inspect-switch" for="inspect"><span class="switch-track" aria-hidden="true"></span><span class="switch-long">{esc(i["toggle"])}</span><span class="switch-short">{esc(i["toggle_short"])}</span></label>
 </body>
 </html>
 """
