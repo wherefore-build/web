@@ -21,8 +21,8 @@ It fails:
 and, at 390 by 844 with touch, and at 1280 by 900:
 
   - a model's frame that is not to the right of the heading, beside it rather
-    than below it, and on the screen; a plate's frame that is not beside the
-    counts - to their left on a wide screen, above them on a phone;
+    than below it, and on the screen; a plate's frame that is not the last
+    cell of the counts' quadrant - right of the first count, and below it;
   - a model or a plate that draws nothing within a few seconds: inside the
     frame, nothing unlike its commonest colour;
   - one that stands on a ground other than the one its frame names - the
@@ -208,15 +208,13 @@ def look(browser, base, ground, name, viewport, touch, what="model"):
                         f"{h['x'] + h['width']:.0f} px and the model starts at {f['x']:.0f}")
             if f["y"] >= h["y"] + h["height"]:
                 return f"at {name}, the model is below the heading, not beside it"
-        elif touch:
-            if f["y"] + f["height"] > h["y"] + 1:
-                return f"at {name}, the plate is not above the counts: it ends at {f['y'] + f['height']:.0f} px and the first count starts at {h['y']:.0f}"
         else:
-            if f["x"] + f["width"] > h["x"] + 1:
-                return (f"at {name}, the plate is not to the left of the counts: it ends at "
-                        f"{f['x'] + f['width']:.0f} px and the first count starts at {h['x']:.0f}")
-            if f["y"] + f["height"] < h["y"] or f["y"] > h["y"] + h["height"]:
-                return f"at {name}, the plate is not beside the counts"
+            # the quadrant's last cell: right of the first count, and below it
+            if f["x"] < h["x"] + h["width"] - 1:
+                return (f"at {name}, the plate is not to the right of the first count: the count ends at "
+                        f"{h['x'] + h['width']:.0f} px and the plate starts at {f['x']:.0f}")
+            if f["y"] < h["y"] + h["height"] - 1:
+                return f"at {name}, the plate is not below the first count: it starts at {f['y']:.0f} px and the count ends at {h['y'] + h['height']:.0f}"
         if f["x"] + f["width"] > viewport["width"] + 1:
             return f"at {name}, the {what} runs off the right of the screen"
         # The inside of the frame only: its rounded corners show the page's own ground.
