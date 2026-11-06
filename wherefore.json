@@ -46,7 +46,7 @@
   {
    "script": "brand.py",
    "cwd": "gen",
-   "makes": "site/brand.css, the map's theme site/brand/map.css, site/fonts/ and the brand page site/brand/ with the icon, from the brand tokens"
+   "makes": "site/brand.css, the map's theme site/brand/map.css, the app's both-grounds stylesheet site/brand/app.css, site/fonts/ and the brand page site/brand/ with the icon, from the brand tokens"
   },
   {
    "script": "site.py",
