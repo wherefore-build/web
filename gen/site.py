@@ -149,6 +149,7 @@ def engine(name, since="0.1.1"):
 COMMANDS = engine("commands.json")["commands"]
 # What the engine does, as the release says it. Every one must be on the page.
 FEATURES = engine("features.json", since="0.4.0")["features"]
+from wherefore import docs as wherefore_docs   # noqa: E402 - the docs the pinned release ships
 
 
 def version():
@@ -300,13 +301,20 @@ def part(render, f, inspect, also=()):
     return html.replace(SRC, f'<div class="src">{"".join(lines)}</div>')
 
 
+def links(f, home=""):
+    """The site's links, in reading order: how it works, the case, why, then what it
+    has and will have, what shipped, the docs, the map (owner, 6 November 2026:
+    features and roadmap after why and before the changelog)."""
+    n = f["nav"]
+    return (f'<a href="{home}#how">{esc(n["how"])}</a><a href="{home}#case">{esc(f["case"]["eyebrow"])}</a>'
+            f'<a href="{home}#why">{esc(n["why"])}</a><a href="{home}features/">{esc(n["does"])}</a>'
+            f'<a href="{home}changelog/">{esc(f["changelog"]["title"])}</a>'
+            f'<a href="{home}docs/">{esc(n["docs"])}</a><a href="{home}{MAP_PAGE}">{esc(n["map"])}</a>')
+
+
 def nav(f, home=""):
     """The site's links. `home` is the way back to the home page from where the nav sits: "" on it."""
-    n = f["nav"]
-    return (f'<nav aria-label="The site"><a href="{home}#how">{esc(n["how"])}</a>'
-            f'<a href="{home}features/">{esc(n["does"])}</a><a href="{home}#case">{esc(f["case"]["eyebrow"])}</a>'
-            f'<a href="{home}#why">{esc(n["why"])}</a><a href="{home}changelog/">{esc(f["changelog"]["title"])}</a>'
-            f'<a href="{home}{MAP_PAGE}">{esc(n["map"])}</a></nav>')
+    return f'<nav aria-label="The site">{links(f, home)}</nav>'
 
 
 def topbar(f, home=""):
@@ -322,11 +330,7 @@ def topbar(f, home=""):
 
 def foot_nav(f, home=""):
     """Every page's links again, at the foot, where a phone's header has no room for them."""
-    n = f["nav"]
-    return (f'<nav class="foot-nav" aria-label="The site, again"><a href="{home}#how">{esc(n["how"])}</a>'
-            f'<a href="{home}features/">{esc(n["does"])}</a><a href="{home}#case">{esc(f["case"]["eyebrow"])}</a>'
-            f'<a href="{home}#why">{esc(n["why"])}</a><a href="{home}changelog/">{esc(f["changelog"]["title"])}</a>'
-            f'<a href="{home}{MAP_PAGE}">{esc(n["map"])}</a></nav>')
+    return f'<nav class="foot-nav" aria-label="The site, again">{links(f, home)}</nav>'
 
 
 def header(f):
@@ -819,6 +823,65 @@ def sub_page(f, slug, eyebrow, heading, lede, body):
 """
 
 
+def docs_pages(f):
+    """site/docs/: the docs the pinned engine ships, one page each, the first at /docs/.
+
+    THE DOCS ARE THE ENGINE'S. `wherefore.docs.pages()` hands over every page of
+    the release this site pins - start, commands, configuration, checks and
+    proofs, reporting - as Markdown, held to the engine's code by its own
+    tests. This site renders them (gen/markdown.py) in its shell, with the
+    pages listed beside each and the page's own headings under that. The
+    heading and the words around them are this site's; every page is the
+    engine's, so a release that rewrites a page rewrites it here."""
+    from markdown import render
+    d = f["docs"]
+    pages = wherefore_docs.pages()
+    out = {}
+    for pid, title, md in pages:
+        slug = "docs/" if pid == pages[0][0] else f"docs/{pid}/"
+        home = "../" if pid == pages[0][0] else "../../"
+        listing = "".join(f'<li{" class=\"here\"" if p == pid else ""}><a href="{home}docs/{"" if p == pages[0][0] else p + "/"}">{esc(t)}</a></li>'
+                          for p, t, _ in pages)
+        heads = re.findall(r"^## (.+)$", md, re.M)
+        on_page = "".join(f'<li><a href="#{re.sub(r"[^a-z0-9]+", "-", h.lower()).strip("-")}">{esc(h)}</a></li>' for h in heads)
+        aside = (f'<aside class="docs-nav"><p class="docs-nav-title">{esc(d["pages"])}</p><ul>{listing}</ul>'
+                 + (f'<p class="docs-nav-title">{esc(d["on_this_page"])}</p><ul class="docs-on-page">{on_page}</ul>' if on_page else "")
+                 + '</aside>')
+        body = f'<section class="docs"><div class="wrap docs-grid">{aside}<article class="docs-page">{render(md, shift=1)}</article></div></section>'
+        out[slug] = (title, body)
+    return out
+
+
+def docs_page(f, slug, title, body):
+    """One docs page in the sub-page shell, one or two levels down."""
+    d, company = f["docs"], f["company"]
+    depth = slug.count("/")
+    up = "../" * depth
+    name = company["name"]
+    lines = [head(f"{title} · {d['title']} — {name}", d["intro"], f"{up}brand.css"), f'<link rel="stylesheet" href="{up}page.css">']
+    if company["domain"]:
+        lines.append(f'<link rel="canonical" href="https://{esc(company["domain"])}/{slug}">')
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+{chr(10).join(lines)}
+</head>
+<body>
+{banner()}<header class="top">{topbar(f, up)}</header>
+<main id="top">
+<section class="log-head"><div class="wrap">
+<p class="eyebrow">{esc(d["title"])} · {esc(name)} {esc(wherefore.__version__)}</p>
+<h1>{esc(d["heading"])}</h1>
+<p class="lede">{esc(d["intro"])}</p>
+</div></section>
+{body}
+</main>
+{sub_footer(f).replace('href="../', 'href="' + up)}
+</body>
+</html>
+"""
+
+
 def features_page(f):
     """site/features/index.html: every feature the release ships, tagged with the release it arrived in, then what is next."""
     d = f["does"]
@@ -1182,6 +1245,9 @@ def main():
     (SITE / "_headers").write_text(headers(), encoding="utf-8")
     (SITE / "changelog").mkdir(exist_ok=True)
     (SITE / "changelog/index.html").write_text(changelog_page(FACTS), encoding="utf-8")
+    for slug, (title, body) in docs_pages(FACTS).items():
+        (SITE / slug).mkdir(parents=True, exist_ok=True)
+        (SITE / slug / "index.html").write_text(docs_page(FACTS, slug, title, body), encoding="utf-8")
     (SITE / "features").mkdir(exist_ok=True)
     (SITE / "features/index.html").write_text(features_page(FACTS), encoding="utf-8")
     (SITE / MODEL_PAGE).mkdir(exist_ok=True)

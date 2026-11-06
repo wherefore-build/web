@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Configuration · Docs — Wherefore</title>
+<meta name="description" content="The docs ship inside each release of the engine, held to its code by the engine&#x27;s own tests: every command has its section, every section of the configuration is documented, and every example is run again before a release. This site renders the docs of the release it pins.">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="../../brand/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../brand/icon-1024.png">
+<link rel="stylesheet" href="../../brand.css">
+<link rel="stylesheet" href="../../page.css">
+<link rel="canonical" href="https://wherefore.build/docs/configuration/">
+</head>
+<body>
+<header class="top"><div class="wrap"><input class="state menu-state" type="checkbox" id="menu"><a class="name" href="../../">Wherefore</a>
+<label class="menu-switch" for="menu">Menu</label><nav aria-label="The site"><a href="../../#how">How it works</a><a href="../../#case">Case study</a><a href="../../#why">Why Wherefore</a><a href="../../features/">Features &amp; roadmap</a><a href="../../changelog/">Changelog</a><a href="../../docs/">Docs</a><a href="../../map/">Map</a></nav><a class="pill" href="../../#start">Get started</a></div></header>
+<main id="top">
+<section class="log-head"><div class="wrap">
+<p class="eyebrow">Docs · Wherefore 0.19.0</p>
+<h1>Every page, from the release this site pins.</h1>
+<p class="lede">The docs ship inside each release of the engine, held to its code by the engine&#x27;s own tests: every command has its section, every section of the configuration is documented, and every example is run again before a release. This site renders the docs of the release it pins.</p>
+</div></section>
+<section class="docs"><div class="wrap docs-grid"><aside class="docs-nav"><p class="docs-nav-title">The pages</p><ul><li><a href="../../docs/">Start</a></li><li><a href="../../docs/commands/">Commands</a></li><li class="here"><a href="../../docs/configuration/">Configuration</a></li><li><a href="../../docs/checks/">Checks and proofs</a></li><li><a href="../../docs/reporting/">Reporting</a></li></ul><p class="docs-nav-title">On this page</p><ul class="docs-on-page"><li><a href="#wherefore">wherefore</a></li><li><a href="#name">name</a></li><li><a href="#sources">sources</a></li><li><a href="#generators">generators</a></li><li><a href="#not-a-generator">not_a_generator</a></li><li><a href="#inventory">inventory</a></li><li><a href="#compare">compare</a></li><li><a href="#surfaces">surfaces</a></li><li><a href="#retired">retired</a></li><li><a href="#reach">reach</a></li><li><a href="#claims">claims</a></li><li><a href="#palette">palette</a></li><li><a href="#published">published</a></li><li><a href="#proofs">proofs</a></li><li><a href="#hook">hook</a></li><li><a href="#entry">entry</a></li><li><a href="#messages">messages</a></li><li><a href="#observer">observer</a></li><li><a href="#temp-prefix">temp_prefix</a></li><li><a href="#units">units</a></li></ul></aside><article class="docs-page"><h2 id="configuration">Configuration</h2>
+<p><code>wherefore.json</code> sits at the root of a corpus and says what the corpus is: where the facts live, what builds each asset, why every other tracked file is there, and what each check holds. Every exemption carries a <code>why</code>, and the engine refuses one without it. A section may be kept in its own file and named with <code>include</code>; the engine reads it as if it were here. This page has a section for each section the engine reads.</p>
+<h3 id="wherefore">wherefore</h3>
+<p>The schema this engine reads: <code>1</code>. The engine refuses any other.</p>
+<h3 id="name">name</h3>
+<p>The corpus's name, as reports and the map say it: <code>&quot;fernhollow-kettles&quot;</code>.</p>
+<h3 id="sources">sources</h3>
+<p>Where the facts live, each with a reason:</p>
+<pre><code class="lang-json">&quot;sources&quot;: {
+ &quot;facts&quot;: {&quot;path&quot;: &quot;facts.json&quot;, &quot;adapter&quot;: &quot;leaves&quot;,
+           &quot;why&quot;: &quot;THE SOURCE: every fact the corpus states is here once&quot;}
+}</code></pre>
+<p><code>adapter</code> is <code>leaves</code> - a JSON file whose scalars are the facts, named by their dotted path - or <code>params</code>, the pendulum's own parameter schema.</p>
+<h3 id="generators">generators</h3>
+<p>What builds each asset, in order, each saying what it makes:</p>
+<pre><code class="lang-json">&quot;generators&quot;: [
+ {&quot;script&quot;: &quot;landing.py&quot;, &quot;cwd&quot;: &quot;gen&quot;, &quot;makes&quot;: &quot;site/index.html, the landing page&quot;},
+ {&quot;run&quot;: [&quot;node&quot;, &quot;site.mjs&quot;], &quot;cwd&quot;: &quot;gen&quot;, &quot;makes&quot;: &quot;the site, by the repository&#x27;s own tooling&quot;},
+ {&quot;script&quot;: &quot;notes.py&quot;, &quot;cwd&quot;: &quot;gen&quot;, &quot;makes&quot;: &quot;the speaker notes&quot;, &quot;stdout_to&quot;: &quot;deck/speaker-notes.txt&quot;}
+]</code></pre>
+<p><code>script</code> is a Python file run by the engine's Python; <code>run</code> is any command, its words as a list, with no shell. <code>cwd</code> is where it runs. <code>stdout_to</code> captures what it prints as the file it makes. <code>probe</code> and <code>resettle</code> tune how the reach probe and the gate's second run treat it, with a <code>why</code>. The gate sees what a generator wrote by comparing the tree before and after.</p>
+<h3 id="not-a-generator">not_a_generator</h3>
+<p>Scripts in the tree that look like generators and are not - a helper, a one-off - each with why, so the gate does not ask about them.</p>
+<h3 id="inventory">inventory</h3>
+<p>Why every tracked file that is not generated is there:</p>
+<pre><code class="lang-json">&quot;inventory&quot;: {
+ &quot;authored&quot;: {&quot;rules&quot;: [[&quot;*.py&quot;, &quot;code: the generators&quot;], [&quot;facts.json&quot;, &quot;THE SOURCE&quot;]]},
+ &quot;captured&quot;: {&quot;groups&quot;: {
+  &quot;photos&quot;: {&quot;files&quot;: [&quot;photos/kettle.jpg&quot;], &quot;why&quot;: &quot;shot by hand, from the product as it is&quot;,
+             &quot;upstream&quot;: {&quot;url&quot;: &quot;https://example.com/spec.json&quot;, &quot;read&quot;: {&quot;json&quot;: &quot;/version&quot;},
+                          &quot;matches&quot;: {&quot;file&quot;: &quot;facts.json&quot;, &quot;at&quot;: &quot;spec.version&quot;}}}}}
+}</code></pre>
+<p><code>authored.rules</code> are <code>[pattern, why]</code> pairs, narrow on purpose: <code>*.py</code> is a reason; <code>**</code> is never one. <code>captured.groups</code> are files made by hand from something, stamped with what they were made from; <code>wherefore gate --restamp</code> records a re-made group. A group taken from outside the repository names its <code>upstream</code>: the address, what to <code>read</code> there (a JSON pointer, a meta tag, or a pattern), what it must still <code>match</code> (the file's bytes, or a value the corpus records), and <code>unreachable</code>, the reason the source being down should not stop the corpus. <code>no_stamp</code> with why excuses a copy the gate cannot read.</p>
+<h3 id="compare">compare</h3>
+<p>How a generated file is compared with what is committed when bytes will not do, by glob, first match wins, each with why:</p>
+<pre><code class="lang-json">&quot;compare&quot;: [
+ {&quot;glob&quot;: &quot;deck/*.xlsx&quot;, &quot;as&quot;: &quot;xlsx-cells&quot;, &quot;why&quot;: &quot;a workbook&#x27;s bytes carry its save time&quot;},
+ {&quot;glob&quot;: &quot;renders/*.png&quot;, &quot;as&quot;: &quot;picture&quot;, &quot;edge_tol&quot;: 0.02, &quot;tone_tol&quot;: 0.01,
+  &quot;why&quot;: &quot;a raster differs by rasteriser; held as a picture, measured here&quot;}
+]</code></pre>
+<p><code>bytes</code> is the default. <code>xlsx-cells</code> compares a workbook by its cells; <code>numbers</code> with <code>tol</code> every number within a tolerance; <code>picture</code> and <code>html-inlined-pictures</code> a raster, or a page's inlined pictures, as pictures. The thresholds are measured on the corpus, not defaults.</p>
+<h3 id="surfaces">surfaces</h3>
+<p>Where a person reads, named once and used by the retired and claims checks:</p>
+<pre><code class="lang-json">&quot;surfaces&quot;: {
+ &quot;read&quot;: {&quot;include&quot;: [[&quot;site&quot;, &quot;*.html&quot;], [&quot;deck&quot;, &quot;*.svg&quot;], [&quot;.&quot;, &quot;*.md&quot;]],
+          &quot;skip&quot;: [], &quot;archive&quot;: [&quot;CHANGELOG&quot;],
+          &quot;why&quot;: &quot;everything a customer reads; code is not here&quot;}
+}</code></pre>
+<p><code>include</code> is <code>[directory, pattern]</code> pairs; <code>skip</code> leaves paths out; <code>archive</code> names files that are history and may say what was.</p>
+<h3 id="retired">retired</h3>
+<p>What a value or a phrase used to be, and that nothing a person reads may say it again:</p>
+<pre><code class="lang-json">&quot;retired&quot;: {
+ &quot;register&quot;: {&quot;source&quot;: &quot;facts&quot;, &quot;at&quot;: &quot;retired&quot;},
+ &quot;surface&quot;: &quot;read&quot;,
+ &quot;assertion_patterns&quot;: [&quot;\\$\\s*{v}(?!\\d|[.,]\\d)&quot;, &quot;^\\s*{v}\\s*$&quot;],
+ &quot;exemptions&quot;: [],
+ &quot;why&quot;: &quot;a fact goes stale as a number and a description as a sentence&quot;
+}</code></pre>
+<p>The register lives in the source, at <code>at</code>: its <code>values</code> say what a number was, what replaced it and why; its <code>phrases</code> the same for wording. <code>assertion_patterns</code> say how this corpus states a number, with <code>{v}</code> for the value. Each exemption names the file, the value, the text on the line and why.</p>
+<h3 id="reach">reach</h3>
+<p>Every fact moved one at a time, and what must move with it:</p>
+<pre><code class="lang-json">&quot;reach&quot;: {
+ &quot;facts&quot;: {&quot;source&quot;: &quot;facts&quot;, &quot;include&quot;: [&quot;product.*&quot;], &quot;exclude&quot;: [], &quot;why&quot;: &quot;every fact the page states&quot;},
+ &quot;watched&quot;: [&quot;site&quot;, &quot;deck&quot;],
+ &quot;exclude&quot;: [],
+ &quot;exempt&quot;: {&quot;site.draft_banner&quot;: &quot;said on every page while the site is a draft, and nowhere once launched&quot;},
+ &quot;unconsumed&quot;: {},
+ &quot;probes&quot;: [{&quot;name&quot;: &quot;the price&quot;, &quot;fact&quot;: &quot;product.price_usd&quot;,
+             &quot;reaches&quot;: &quot;the page and the deck&quot;, &quot;files&quot;: [&quot;site/index.html&quot;, &quot;deck/one-pager.svg&quot;]}],
+ &quot;audience&quot;: &quot;a customer&quot;
+}</code></pre>
+<p><code>watched</code> is every directory a fact may reach; <code>probes</code> name the files a fact must move; <code>exempt</code> excuses a fact with why; <code>unconsumed</code> records a fact proven to reach nothing, as a defect still open, with why. <code>audience</code> is who receives what the probe watches, in the check's own words.</p>
+<h3 id="claims">claims</h3>
+<p>What may be claimed, of what, and why:</p>
+<pre><code class="lang-json">&quot;claims&quot;: [
+ {&quot;name&quot;: &quot;the origin&quot;, &quot;trigger&quot;: &quot;in Portugal&quot;, &quot;surface&quot;: &quot;read&quot;,
+  &quot;may_say&quot;: {&quot;assembled&quot;: &quot;every kettle is assembled at the bench in Porto&quot;},
+  &quot;never&quot;: {&quot;made&quot;: &quot;the heating element is bought in&quot;},
+  &quot;why&quot;: &quot;an origin claim has a regulated meaning&quot;}
+]</code></pre>
+<p>A sentence that triggers the claim and names anything but what <code>may_say</code> allows fails, naming the word; <code>never</code> says why the rest must not be said.</p>
+<h3 id="palette">palette</h3>
+<p>Where the brand lives, so every colour said anywhere else fails:</p>
+<pre><code class="lang-json">&quot;palette&quot;: {&quot;source&quot;: &quot;brand/tokens.json&quot;, &quot;read&quot;: [&quot;gen/**&quot;, &quot;site/**&quot;],
+            &quot;not_ours&quot;: {&quot;site/pendulum/index.html&quot;: &quot;the pendulum&#x27;s own page, in its brand&quot;},
+            &quot;why&quot;: &quot;a brand is a fact like a price&quot;}</code></pre>
+<p>Or, for a corpus with no brand, <code>{&quot;none&quot;: &quot;why there is no brand here&quot;}</code>. <code>read</code> limits what is read; <code>not_ours</code> excuses files whose colours are somebody else's, each with why.</p>
+<h3 id="published">published</h3>
+<p>Pages the company publishes but cannot build, and the facts each states:</p>
+<pre><code class="lang-json">&quot;published&quot;: {
+ &quot;pricing&quot;: {&quot;url&quot;: &quot;https://www.example.com/pricing&quot;,
+             &quot;why&quot;: &quot;the public site, on a hosted CMS marketing edits&quot;,
+             &quot;states&quot;: [{&quot;fact&quot;: &quot;plans.pro.trial_days&quot;, &quot;as&quot;: [&quot;{} day free trial&quot;, &quot;{}-day free trial&quot;]},
+                        {&quot;fact&quot;: &quot;plans.pro.features&quot;, &quot;each&quot;: true}],
+             &quot;unreachable&quot;: &quot;the CMS being down is not the page moving&quot;}
+}</code></pre>
+<p><code>as</code> is a template with the value in braces, or several; <code>each</code> holds every item of a list. <code>source</code> names the facts when reach does not and the corpus has more than one.</p>
+<h3 id="proofs">proofs</h3>
+<p>Where the corpus's proofs are: <code>{&quot;glob&quot;: &quot;proofs/*_proof.py&quot;}</code>. <code>wherefore prove</code> runs each, one at a time, in place.</p>
+<h3 id="hook">hook</h3>
+<p>What the pre-push hook may skip: <code>{&quot;skip&quot;: [&quot;^docs/&quot;]}</code>, patterns for paths that cannot move a generated file. Nothing is skipped unless the corpus says so.</p>
+<h3 id="entry">entry</h3>
+<p>For a corpus that configures the engine in Python: the script each command runs, as <code>{&quot;gate&quot;: &quot;checks/gate.py&quot;}</code>. That script is where the generator list, the comparators and the exemptions live, with their reasons; the engine refuses them here as well.</p>
+<h3 id="messages">messages</h3>
+<p>The corpus's own words where the engine's are not its: <code>{&quot;reach_ok&quot;: &quot;every fact probed reaches something a buyer receives&quot;}</code>.</p>
+<h3 id="observer">observer</h3>
+<p>Where the engine watches what a generator reads: <code>{&quot;dir&quot;: &quot;.wherefore&quot;, &quot;env_prefix&quot;: &quot;WHEREFORE_&quot;}</code>. Few corpora need to say this.</p>
+<h3 id="temp-prefix">temp_prefix</h3>
+<p>The prefix of the temporary directories the engine makes: <code>&quot;wherefore-&quot;</code> by default.</p>
+<h3 id="units">units</h3>
+<p><code>&quot;in&quot;</code> for a corpus whose parameters are inches; the reach probe nudges in those units.</p></article></div></section>
+</main>
+<footer><div class="wrap"><nav class="foot-nav" aria-label="The site, again"><a href="../../#how">How it works</a><a href="../../#case">Case study</a><a href="../../#why">Why Wherefore</a><a href="../../features/">Features &amp; roadmap</a><a href="../../changelog/">Changelog</a><a href="../../docs/">Docs</a><a href="../../map/">Map</a></nav><div class="footer-row"><p><span class="footer-name">Wherefore</span> · This site is built with Wherefore, from one source file and the release it pins.</p>
+<p class="footer-meta"><a href="../../">Wherefore</a> · <a href="../../brand/">Brand</a> · <a href="../../map/">Map</a> · <a target="_blank" rel="noopener" href="https://github.com/wherefore-build/web">Read every file it is built from<svg class="out" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M9 2h5v5M14 2 7.5 8.5M12 9.5V13a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p></div></div></footer>
+</body>
+</html>
