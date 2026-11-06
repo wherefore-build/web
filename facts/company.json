@@ -308,6 +308,7 @@
     "command": "wherefore scan",
     "args": "https://your-site.example",
     "also": "https://your-site.example https://your-app.example",
+    "also_says": "Or your site and your app together, and see where the two disagree.",
     "says": "See what has drifted. Nothing to set up."
    },
    {

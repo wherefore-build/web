@@ -449,9 +449,17 @@ footer .src { margin: 0 0 1.25rem; }
 .start-steps { list-style: none; counter-reset: start; margin: 1.75rem 0 0; padding: 0; display: grid; gap: 0.5rem; max-width: 46rem; }
 .start-steps li { counter-increment: start; display: grid; grid-template-columns: 2rem 1fr; gap: 0.15rem 0.75rem; padding: 0.85rem 1rem; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
 .start-steps li::before { content: counter(start, decimal-leading-zero); grid-row: span 2; font: 400 0.8125rem/1.6 var(--font-mono); color: var(--accent); }
+/* Everything in a step stands in the second column, under its number, however
+   many lines it has: a step with a second form (the scan of a site and an app
+   together) has four, and its second command stands a little apart. */
+.start-steps li > * { grid-column: 2; }
+.start-steps .does + code { margin-top: 0.6rem; }
 .start-steps code { font-size: 0.9375rem; overflow-wrap: anywhere; }
 .start-steps code::before { content: "$ "; color: var(--muted); }
-.start-steps .does { font-size: 0.875rem; line-height: 1.45; color: var(--muted); }
+/* The note under a step is one line of prose (display: block): the class is
+   shared with the features grid, which would otherwise split "Or with pip:"
+   and its command into two columns on a wide screen. */
+.start-steps .does { display: block; font-size: 0.875rem; line-height: 1.45; color: var(--muted); }
 .start-closed { margin: 1.25rem 0 0; color: var(--ink); font-weight: 500; }
 .road { list-style: none; margin: 2rem 0 0; padding: 1.5rem 0 0; border-top: 1px solid var(--line); display: grid; gap: 0.75rem; font-size: 0.9375rem; color: var(--muted); }
 .road li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.25rem 0.75rem; }

@@ -1014,13 +1014,18 @@ def rule(f):
 
 
 def start(f):
-    """Getting started: install, scan, init - in this company's words; the licence and package are the release's."""
+    """Getting started: install, scan (one place, or a site and an app together), init - in this company's words; the licence and package are the release's."""
     st, h = f["start"], f["hero"]
     name, licence = release_meta()
     lines = [f'<li><code>{esc(st["install"])}</code><span class="does">{esc(h["pip"])} <code>pip install {esc(name)}</code></span></li>']
     for s in st["steps"]:
         run = f'{command(s["command"])} {s.get("args", "")}'.strip()
-        lines.append(f'<li><code>{esc(run)}</code><span class="does">{esc(s["says"])}</span></li>')
+        # A step with a second form - the scan pointed at a site and an app
+        # together (owner, 6 November 2026) - shows it under the first, with
+        # its own words, so Get started says both ways the hero does.
+        also = (f'<code>{esc(command(s["command"]))} {esc(s["also"])}</code><span class="does">{esc(s["also_says"])}</span>'
+                if s.get("also") else "")
+        lines.append(f'<li><code>{esc(run)}</code><span class="does">{esc(s["says"])}</span>{also}</li>')
     return f"""<section id="start"><div class="wrap">
 {SRC}
 <div class="start-box">
