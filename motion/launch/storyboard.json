@@ -1,0 +1,53 @@
+{
+ "id": "launch",
+ "name": "Launches that wait",
+ "version": "0.21.0",
+ "duration": 26.5,
+ "frames": [
+  "portrait",
+  "landscape"
+ ],
+ "scenes": [
+  {
+   "kind": "open",
+   "start": 0.0,
+   "end": 3.0,
+   "name": "Wherefore",
+   "version": "0.21.0"
+  },
+  {
+   "kind": "ask",
+   "start": 3.0,
+   "end": 7.0,
+   "eyebrow": "shipped in 0.21.0",
+   "headline": "Launches that wait"
+  },
+  {
+   "kind": "run",
+   "start": 7.0,
+   "end": 16.5,
+   "typed": "wherefore check launch",
+   "lines": [
+    "  ok   spout     building  1 held; beta waits on a help doc…",
+    "1 of 3 things lacks what its stage needs (1 missing)…"
+   ],
+   "typing": 1.71
+  },
+  {
+   "kind": "claim",
+   "start": 16.5,
+   "end": 20.5,
+   "text": "A launch waits until everything it needs is there."
+  },
+  {
+   "kind": "close",
+   "start": 20.5,
+   "end": 26.5,
+   "home": "wherefore.build",
+   "tagline": "Your company, compiled.",
+   "install": "pip install wherefore-build",
+   "url": "wherefore.build/features/#launch",
+   "icon": "icon"
+  }
+ ]
+}
