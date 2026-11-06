@@ -720,7 +720,8 @@ def changelog_page(f):
         arrived = ""
         if brought:
             names = "".join(f'<li><span class="arrived-name">{esc(x["name"])}</span> '
-                            f'{esc(d["words"][x["id"]]) if x["id"] in d["words"] else ""}</li>'
+                            f'{esc(d["words"][x["id"]]) if x["id"] in d["words"] else ""}'
+                            f'{clip_frame(x, d) if x["id"] in d["words"] else ""}</li>'
                             for x in brought)
             arrived = f'<h3>{esc(c["arrived"])}</h3><ul class="arrived">{names}</ul>'
         # WHAT THE RELEASE ANSWERED, from the engine's ledger (owner, 6 November
@@ -895,6 +896,14 @@ def short(usage):
                     if not (w[:1] in "[-." or w.endswith("]") or w.isupper() or "|" in w))
 
 
+def clip_frame(x, d, up="../"):
+    """The feature's clip, the page the pinned engine wrote into site/motion/,
+    played in a landscape frame; the same facts, in time. No caption (owner,
+    6 November 2026): the clip says what it is."""
+    return (f'<figure class="does-motion"><iframe src="{up}motion/{esc(x["id"])}/index.html" loading="lazy" '
+            f'title="{esc(x["name"])}, {esc(d["watch"].lower())}"></iframe></figure>')
+
+
 def does(f):
     """Every feature the pinned release ships, in this company's words.
 
@@ -950,10 +959,16 @@ def does(f):
         # <details> needs no script, and the page runs none.
         toggle = (f'<span class="does-toggle"><span class="is-closed">{esc(d["more"])}</span>'
                   f'<span class="is-open">{esc(d["less"])}</span></span>')
+        # THE FEATURE IN MOTION: its clip, the page the pinned engine wrote into
+        # site/motion/, played in a frame on the card - the same facts, in time.
+        clip = clip_frame(x, d)
+        # The command stays on the closed card (owner, 6 November 2026), the
+        # clip opens with the details, in a landscape frame that takes the
+        # card's width.
         items.append(f'<li id="{esc(x["id"])}"><details class="does-more"><summary><p class="does-name">{esc(x["name"])}{since}{new}{toggle}</p>'
-                     f'<p>{esc(words[x["id"]])}</p></summary>'
+                     f'<p>{esc(words[x["id"]])}</p>{cmds}</summary>'
                      f'<p class="does-details"><span class="road-asked">{esc(d["open"])}</span> {esc(x["details"])}</p>'
-                     f'{"".join(asks)}{cmds}</details></li>')
+                     f'{"".join(asks)}{clip}</details></li>')
     return f"""<section id="does"><div class="wrap">
 <p class="does-intro">{esc(d["intro"])} <a href="../changelog/">{esc(f["changelog"]["link"])}</a></p>
 <ul class="does">
@@ -1230,6 +1245,13 @@ def headers():
     lines += ["", f"/{MODEL_PAGE}*", "  ! Content-Security-Policy",
               "  Content-Security-Policy: default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; "
               "img-src data:; font-src data:; base-uri 'none'; form-action 'none'; frame-ancestors 'self'"]
+    # The clips: each a page in motion the engine wrote, its style inline and
+    # the brand's stylesheet and fonts from this site, no script; framed only
+    # here, on the feature's card (owner, 6 November 2026: on a phone the
+    # frame showed nothing - the page refused the card under the policy above).
+    lines += ["", "/motion/*", "  ! Content-Security-Policy",
+              "  Content-Security-Policy: default-src 'none'; style-src 'self' 'unsafe-inline'; font-src 'self'; "
+              "img-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'self'"]
     # The map: the engine's own page, one file with its style and its script
     # inside it, loading nothing; its path may run that script and nothing else.
     lines += ["", f"/{MAP_PAGE}*", "  ! Content-Security-Policy",

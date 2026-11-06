@@ -1,0 +1,67 @@
+{
+ "id": "gate",
+ "name": "The gate",
+ "version": "0.1.0",
+ "duration": 31.5,
+ "frames": [
+  "portrait",
+  "landscape"
+ ],
+ "scenes": [
+  {
+   "kind": "open",
+   "start": 0.0,
+   "end": 3.0,
+   "name": "Wherefore",
+   "version": "0.1.0"
+  },
+  {
+   "kind": "ask",
+   "start": 3.0,
+   "end": 7.0,
+   "eyebrow": "shipped in 0.1.0",
+   "headline": "The gate"
+  },
+  {
+   "kind": "run",
+   "start": 7.0,
+   "end": 12.0,
+   "typed": "wherefore gate",
+   "lines": [
+    "during this run and matches what is committed"
+   ],
+   "typing": 1.27
+  },
+  {
+   "kind": "mechanism",
+   "start": 12.0,
+   "end": 21.5,
+   "eyebrow": "what it sorts",
+   "mechanism": "sort",
+   "data": {
+    "files": 141,
+    "built": 72,
+    "authored": 64,
+    "captured": 5,
+    "left": 0
+   },
+   "caption": "141 files tracked: 72 built by a script, 64 written with a reason, 5 captured and stamped, 0 unaccounted for"
+  },
+  {
+   "kind": "claim",
+   "start": 21.5,
+   "end": 25.5,
+   "text": "Every tracked file accounted for; every generated one current."
+  },
+  {
+   "kind": "close",
+   "start": 25.5,
+   "end": 31.5,
+   "home": "wherefore.build",
+   "tagline": "Your company, compiled.",
+   "install": "pip install wherefore-build",
+   "url": "wherefore.build/features/#gate",
+   "icon": "icon"
+  }
+ ]
+}

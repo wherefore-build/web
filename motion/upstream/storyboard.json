@@ -1,0 +1,79 @@
+{
+ "id": "upstream",
+ "name": "Derived from elsewhere",
+ "version": "0.5.0",
+ "duration": 30.5,
+ "frames": [
+  "portrait",
+  "landscape"
+ ],
+ "scenes": [
+  {
+   "kind": "open",
+   "start": 0.0,
+   "end": 3.0,
+   "name": "Wherefore",
+   "version": "0.5.0"
+  },
+  {
+   "kind": "ask",
+   "start": 3.0,
+   "end": 7.0,
+   "eyebrow": "shipped in 0.5.0",
+   "headline": "Derived from elsewhere"
+  },
+  {
+   "kind": "run",
+   "start": 7.0,
+   "end": 13.0,
+   "typed": "wherefore check upstream",
+   "lines": [
+    "nothing captured here names an upstream (1 captured groups)…"
+   ],
+   "typing": 1.82
+  },
+  {
+   "kind": "mechanism",
+   "start": 13.0,
+   "end": 20.5,
+   "eyebrow": "what it holds",
+   "mechanism": "hold",
+   "data": {
+    "source": "facts/company.json",
+    "facts": 268,
+    "pages": 12,
+    "shown": [
+     "brand/",
+     "changelog/",
+     "docs/checks/",
+     "docs/commands/",
+     "docs/configuration/",
+     "docs/",
+     "docs/reporting/",
+     "features/"
+    ],
+    "probe": {
+     "fact": "company.name",
+     "files": 1
+    }
+   },
+   "caption": "268 facts in facts/company.json, and 12 pages built from them; company.name alone reaches 1 page"
+  },
+  {
+   "kind": "claim",
+   "start": 20.5,
+   "end": 24.5,
+   "text": "Every copy still matches where it was taken from, read now."
+  },
+  {
+   "kind": "close",
+   "start": 24.5,
+   "end": 30.5,
+   "home": "wherefore.build",
+   "tagline": "Your company, compiled.",
+   "install": "pip install wherefore-build",
+   "url": "wherefore.build/features/#upstream",
+   "icon": "icon"
+  }
+ ]
+}

@@ -31,6 +31,9 @@ private repository, not here, so that none of them goes public with the site.
 | `site/index.html` | the home page | generated |
 | `site/features/`, `site/changelog/` | everything it does and what's next, and every release | generated |
 | `site/map/` | the site's own map, written by `wherefore graph` run as a generator: every source, the scripts that read it, and every file they make, from a real run, in the brand's own colours (`--theme site/brand/map.css`) | generated |
+| `gen/motion.py` | a clip for every feature the pinned release ships, compiled from the engine's features, releases and docs, the roadmap's ledger and this company's own words: the version, who asked, the command run and what it printed, what the feature does in this site's own numbers, the claim, the address - as a page in motion in the brand's own stylesheet | authored |
+| `site/motion/`, `motion/` | the clips, one page per feature, played on each card of the features page and the changelog; the storyboards, as data for the checks, sit in `motion/`, out of `site/`, because a storyboard quotes what a command printed | generated |
+| `gen/motion_render.py` | the camera: each clip stepped frame by frame into portrait and landscape video, on request (`.github/workflows/clips.yml`), never committed | authored |
 | `site/_headers` | what Cloudflare Pages serves with every file | generated |
 | `site/install.sh` | the one-line installer `wherefore.sh` serves, from the pinned release (`gen/install.py`) | generated |
 | `site/brand.css`, `site/fonts/` | the brand as custom properties, and the fonts it serves itself | generated |
@@ -46,12 +49,15 @@ private repository, not here, so that none of them goes public with the site.
 | `checks/questions_turn.py` | the questions on "Why Wherefore" turn by themselves, stop on the chip a thumb taps, and hold still for a visitor who asks for less motion | authored |
 | `checks/fits_phone.py` | every page fits a phone's width, moving or still and with "how this page is built" open, and no icon is bigger than the words it follows | authored |
 | `checks/model_turns.py` | the pendulum's model stands beside the case study's heading and its plate beside the counts; each draws, and turns under a thumb; only their frames may run a script | authored |
+| `checks/motion_for_every_feature.py` | every feature the pinned release ships has its clip, and the features page plays it | authored |
+| `checks/motion_reads.py` | every clip runs 16 to 40 s, no scene outruns a reader, every command run is one the CLI has, every printed line is one the engine prints, and every word is on the page | authored |
+| `checks/motion_fits.py` | every clip fits a portrait frame and a landscape one at the middle of every scene, and every scene shows its words | authored |
 | `checks/*_proof.py` | each check, and the gate, shown to fail | authored |
 | `wherefore.json` | what this repository is to the engine | authored |
 | `requirements-engine.txt` | the engine release this is built and judged by | authored |
 | `requirements-browser.txt` | the browser library the press check drives | authored |
 | `wrangler.jsonc` | the hosting: Cloudflare serves `site/` as committed | authored |
-| `.github/workflows/pin.yml` | a release reaches the site by a pull request the release opens: the engine sends `engine-released`, this moves the pin, rebuilds, and opens a draft whose checks say what the site still has to describe | authored |
+| `.github/workflows/wherefore-pin.yml` | a release reaches the site by a pull request this repository opens itself: every few hours it asks PyPI for the newest engine, moves the pin, rebuilds, and opens a draft whose checks say what the site still has to describe. Written by `wherefore init`, ours since | authored |
 
 Never edit `site/` by hand. The gate fails a page that is not what its sources
 make.

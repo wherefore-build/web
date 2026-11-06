@@ -1,0 +1,79 @@
+{
+ "id": "reach",
+ "name": "Reach",
+ "version": "0.1.0",
+ "duration": 30.0,
+ "frames": [
+  "portrait",
+  "landscape"
+ ],
+ "scenes": [
+  {
+   "kind": "open",
+   "start": 0.0,
+   "end": 3.0,
+   "name": "Wherefore",
+   "version": "0.1.0"
+  },
+  {
+   "kind": "ask",
+   "start": 3.0,
+   "end": 7.0,
+   "eyebrow": "shipped in 0.1.0",
+   "headline": "Reach"
+  },
+  {
+   "kind": "run",
+   "start": 7.0,
+   "end": 12.5,
+   "typed": "wherefore check reach",
+   "lines": [
+    "every fact probed reaches something a customer receives"
+   ],
+   "typing": 1.66
+  },
+  {
+   "kind": "mechanism",
+   "start": 12.5,
+   "end": 20.0,
+   "eyebrow": "what it holds",
+   "mechanism": "hold",
+   "data": {
+    "source": "facts/company.json",
+    "facts": 268,
+    "pages": 12,
+    "shown": [
+     "brand/",
+     "changelog/",
+     "docs/checks/",
+     "docs/commands/",
+     "docs/configuration/",
+     "docs/",
+     "docs/reporting/",
+     "features/"
+    ],
+    "probe": {
+     "fact": "company.name",
+     "files": 1
+    }
+   },
+   "caption": "268 facts in facts/company.json, and 12 pages built from them; company.name alone reaches 1 page"
+  },
+  {
+   "kind": "claim",
+   "start": 20.0,
+   "end": 24.0,
+   "text": "Every fact, moved one at a time, reaches what it should."
+  },
+  {
+   "kind": "close",
+   "start": 24.0,
+   "end": 30.0,
+   "home": "wherefore.build",
+   "tagline": "Your company, compiled.",
+   "install": "pip install wherefore-build",
+   "url": "wherefore.build/features/#reach",
+   "icon": "icon"
+  }
+ ]
+}

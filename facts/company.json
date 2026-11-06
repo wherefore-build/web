@@ -218,7 +218,7 @@
    "graph": "A page for every repository: each file, how it is made, and what changes when a source does. One command draws it, and changes nothing.",
    "palette": "Your brand lives in one file. Type a colour anywhere else and the build names the file and the line, unless the file says, with a reason, that the colour is somebody else's.",
    "report": "Stuck, or missing something? Tell your agent to tell us: one command writes the report, with the release, the shape of your repository and your words, nothing private, and opens it with the people who make Wherefore.",
-   "pins": "When a release ships, every repository that pins Wherefore gets a pull request moving its pin, opened by the release itself, and your checks say what you still have to describe before it builds.",
+   "pins": "When a release ships, this site's own workflow sees it on PyPI, moves the pin, rebuilds, and opens a draft pull request whose checks say what the site still has to describe. No token from the engine, no list of clients: every repository that pins the engine watches for it itself.",
    "scan2": "Point the scan at your site, your app, your backend and your docs together: it says what they state in common and where any two disagree, before anything is installed.",
    "scan-read": "Beside the result, what each place contributed and what it left unread; an app's own words, read out of its source; a table set apart from the stale copies; and the colours your site states, with the greys that were meant to be one grey, before any brand is declared."
   },
@@ -241,7 +241,29 @@
   "less": "Less",
   "answers": "Answers",
   "asked": "asked for by",
-  "plan": "What was planned"
+  "plan": "What was planned",
+  "watch": "In motion",
+  "claim": {
+   "scan": "Where every value is stated, and where the copies disagree.",
+   "start": "A wherefore.json that declares nothing yet, and a skill beside it.",
+   "gate": "Every tracked file accounted for; every generated one current.",
+   "build": "Every generator run twice, compared with what is committed.",
+   "graph": "What builds what, drawn from a real run.",
+   "proofs": "Every check shown to fail when it should.",
+   "retired": "Nothing a person reads still claims a retired value.",
+   "reach": "Every fact, moved one at a time, reaches what it should.",
+   "claims": "Every claim says only what its rule allows.",
+   "upstream": "Every copy still matches where it was taken from, read now.",
+   "published": "A copy held by reading until it can be built.",
+   "palette": "Every colour anywhere is one the brand's source holds.",
+   "hook": "No push leaves the corpus stale.",
+   "skill": "One skill, where each agent reads it, held to the release.",
+   "docs": "The docs of the release you run, and no other.",
+   "report": "A bug, a question or a request, nothing private, sent once.",
+   "pins": "A release reaches a client only by its own pull request.",
+   "scan2": "Your site, your app, your docs, scanned together.",
+   "scan-read": "Beside the result, what the scan read, so quiet means quiet."
+  }
  },
  "case": {
   "eyebrow": "Case study",

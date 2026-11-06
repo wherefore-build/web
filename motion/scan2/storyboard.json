@@ -1,0 +1,69 @@
+{
+ "id": "scan2",
+ "name": "Scan any number of repositories at once",
+ "version": "0.13.0",
+ "duration": 29.5,
+ "frames": [
+  "portrait",
+  "landscape"
+ ],
+ "scenes": [
+  {
+   "kind": "open",
+   "start": 0.0,
+   "end": 3.0,
+   "name": "Wherefore",
+   "version": "0.13.0"
+  },
+  {
+   "kind": "ask",
+   "start": 3.0,
+   "end": 7.0,
+   "eyebrow": "shipped in 0.13.0",
+   "headline": "Scan any number of repositories at once"
+  },
+  {
+   "kind": "run",
+   "start": 7.0,
+   "end": 14.0,
+   "typed": "wherefore scan site app",
+   "lines": [
+    "  agree   \"plans from {} dollars a\"  site: 9 (1x) · app: 9 (1x)"
+   ],
+   "typing": 1.76
+  },
+  {
+   "kind": "mechanism",
+   "start": 14.0,
+   "end": 19.5,
+   "eyebrow": "what it compares",
+   "mechanism": "compare",
+   "data": {
+    "places": [
+     "site"
+    ],
+    "stated": 137,
+    "files": 35,
+    "disagree": 0,
+    "says": []
+   },
+   "caption": "137 values stated across 35 pages in site; 0 disagree"
+  },
+  {
+   "kind": "claim",
+   "start": 19.5,
+   "end": 23.5,
+   "text": "Your site, your app, your docs, scanned together."
+  },
+  {
+   "kind": "close",
+   "start": 23.5,
+   "end": 29.5,
+   "home": "wherefore.build",
+   "tagline": "Your company, compiled.",
+   "install": "pip install wherefore-build",
+   "url": "wherefore.build/features/#scan2",
+   "icon": "icon"
+  }
+ ]
+}

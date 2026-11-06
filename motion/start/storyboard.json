@@ -1,0 +1,69 @@
+{
+ "id": "start",
+ "name": "Start a corpus",
+ "version": "0.1.0",
+ "duration": 26.0,
+ "frames": [
+  "portrait",
+  "landscape"
+ ],
+ "scenes": [
+  {
+   "kind": "open",
+   "start": 0.0,
+   "end": 3.0,
+   "name": "Wherefore",
+   "version": "0.1.0"
+  },
+  {
+   "kind": "ask",
+   "start": 3.0,
+   "end": 7.0,
+   "eyebrow": "shipped in 0.1.0",
+   "headline": "Start a corpus"
+  },
+  {
+   "kind": "run",
+   "start": 7.0,
+   "end": 10.0,
+   "typed": "wherefore init",
+   "lines": [],
+   "typing": 1.27
+  },
+  {
+   "kind": "mechanism",
+   "start": 10.0,
+   "end": 16.0,
+   "eyebrow": "what it hands over",
+   "mechanism": "handover",
+   "data": {
+    "issues": 9,
+    "items": 5,
+    "releases": 26,
+    "steps": [
+     "an issue",
+     "the plan, on it",
+     "the release",
+     "the note that closes it"
+    ]
+   },
+   "caption": "9 issues answered by 5 roadmap items across 26 releases"
+  },
+  {
+   "kind": "claim",
+   "start": 16.0,
+   "end": 20.0,
+   "text": "A wherefore.json that declares nothing yet, and a skill beside it."
+  },
+  {
+   "kind": "close",
+   "start": 20.0,
+   "end": 26.0,
+   "home": "wherefore.build",
+   "tagline": "Your company, compiled.",
+   "install": "pip install wherefore-build",
+   "url": "wherefore.build/features/#start",
+   "icon": "icon"
+  }
+ ]
+}
