@@ -1182,34 +1182,56 @@ def rule(f):
 </div></section>"""
 
 
-TURN = 2.2     # seconds each line before the heading stands (start.heading_turns)
-DWELL = 9.0    # and the heading itself, before the turn comes round again
+SLOT = 6.0      # seconds each word has, typed, held and erased: the same for every word (owner, 6 November 2026)
+TYPE = 0.09     # seconds a letter takes to type
+ERASE = 0.05    # and to erase
 
 
 def turning_heading(st):
-    """Get started's heading, turning (owner, 6 November 2026): your project,
-    your organization, then the heading itself - your company - which stands
-    far longer. Only here: everywhere else the heading is one line. The words
-    turn by CSS alone, as the questions do; a reader hears the heading once,
-    and a visitor who asks for less motion sees only it."""
-    turns = list(st.get("heading_turns") or [])
-    if not turns:
+    """Get started's heading, typed (owner, 6 November 2026): the word that
+    changes - company, project, organization - is typed out a letter at a
+    time, held, erased, and the next one typed, each on the same clock. Only
+    here: everywhere else the heading is one line.
+
+    The words are what the heading and start.heading_turns do not share: the
+    part before them ("Your ") and after them (", compiled.") is said once,
+    from the heading itself. Each letter is shown by its font size - nothing,
+    then the letter - so a word takes only the room it has typed, and the
+    heading moves the way a line being typed does. CSS alone does it, as it
+    turns the questions; a reader hears the heading once, and a visitor who
+    asks for less motion sees the heading, still."""
+    import os.path
+    lines = [st["heading"]] + list(st.get("heading_turns") or [])
+    if len(lines) < 2:
         return f'<h2>{esc(st["heading"])}</h2>'
-    cycle = len(turns) * TURN + DWELL
-    w = TURN / cycle * 100
-    last_on = len(turns) * TURN / cycle * 100
-    spans = "".join(f'<span class="turn" style="animation-delay: {i * TURN:g}s">{esc(t)}</span>' for i, t in enumerate(turns))
-    style = (f"<style>\n"
-             f".turns .turn {{ animation: turn {cycle:g}s linear infinite; }}\n"
-             f".turns .turn-last {{ animation: turn-last {cycle:g}s linear infinite; }}\n"
-             f"@keyframes turn {{ 0% {{ opacity: 0; }} 2% {{ opacity: 1; }} {w - 2:.2f}% {{ opacity: 1; }} {w:.2f}%, 100% {{ opacity: 0; }} }}\n"
-             f"@keyframes turn-last {{ 0%, {last_on:.2f}% {{ opacity: 0; }} {last_on + 2:.2f}%, 98% {{ opacity: 1; }} 100% {{ opacity: 0; }} }}\n"
+    before = os.path.commonprefix(lines)
+    after = os.path.commonprefix([l[len(before):][::-1] for l in lines])[::-1]
+    words = [l[len(before):len(l) - len(after)] for l in lines]
+    cycle = SLOT * len(words)
+
+    def pct(t):
+        return f"{t / cycle * 100:.3f}%"
+    rules, spans = [], []
+    for k, word in enumerate(words):
+        t0, n = k * SLOT, len(word)
+        for j, ch in enumerate(word):
+            on = t0 + j * TYPE
+            off = t0 + SLOT - (j + 1) * ERASE        # erased from the end, as a person backspaces
+            name = f"type{k}_{j}"
+            rules.append(f"@keyframes {name} {{ 0%, {pct(on)} {{ font-size: 0; }} {pct(on)}, {pct(off)} {{ font-size: 1em; }} "
+                         f"{pct(off)}, 100% {{ font-size: 0; }} }}")
+            spans.append(f'<span class="ch w{k}" style="animation-name: {name}">{esc(ch)}</span>')
+    style = ("<style>\n"
+             f".typed .ch {{ font-size: 0; animation-duration: {cycle:g}s; animation-iteration-count: infinite; "
+             f"animation-timing-function: step-end; }}\n"
+             + "\n".join(rules) + "\n"
              # After the animations, so it wins: less motion is the heading alone, still.
-             f"@media (prefers-reduced-motion: reduce) {{ .turns .turn {{ display: none; }} "
-             f".turns .turn-last {{ opacity: 1; animation: none; }} }}\n"
-             f"</style>")
+             "@media (prefers-reduced-motion: reduce) { .typed .ch { animation: none; font-size: 0; } "
+             ".typed .ch.w0 { font-size: 1em; } .typed .caret { display: none; } }\n"
+             "</style>")
     return (f'<h2 class="turning"><span class="sr">{esc(st["heading"])}</span>'
-            f'<span class="turns" aria-hidden="true">{spans}<span class="turn-last">{esc(st["heading"])}</span></span></h2>\n{style}')
+            f'<span aria-hidden="true">{esc(before)}<span class="typed">{"".join(spans)}<span class="caret"></span></span>'
+            f'{esc(after)}</span></h2>\n{style}')
 
 
 def start(f):
