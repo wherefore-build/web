@@ -23,7 +23,7 @@
  },
  "nav": {
   "how": "How it works",
-  "does": "Features",
+  "does": "Features & roadmap",
   "why": "Why Wherefore",
   "start": "Get started",
   "github": "View on GitHub",
@@ -232,7 +232,13 @@
    "upstream": "Copied a partner's spec? The deploy fails the day their source changes."
   },
   "all": "All {n} features, and what's next",
-  "since": "since {version}"
+  "since": "since {version}",
+  "open": "What it does, in full",
+  "more": "More",
+  "less": "Less",
+  "answers": "Answers",
+  "asked": "asked for by",
+  "plan": "What was planned"
  },
  "case": {
   "eyebrow": "Case study",
@@ -346,7 +352,12 @@
   "labels": {
    "next": "Next",
    "later": "Later",
-   "asked": "asked for by"
-  }
+   "asked": "asked for by",
+   "shipped": "Shipped in {version}",
+   "plan": "The plan",
+   "feature": "now"
+  },
+  "shipped_heading": "What shipped, and what it answered",
+  "shipped_source": "Every request that became a feature, with its plan and the release that shipped it."
  }
 }
