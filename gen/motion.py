@@ -75,7 +75,10 @@ MECHANISM = {"scan": "compare", "scan2": "compare", "scan-read": "compare", "dri
              "reach": "hold", "retired": "hold", "claims": "hold", "published": "hold", "upstream": "hold", "palette": "hold",
              "gate": "sort", "build": "sort", "graph": "sort", "proofs": "sort", "hook": "sort",
              "report": "handover", "pins": "handover", "skill": "handover", "docs": "handover", "start": "handover",
-             "motion": "handover"}
+             "motion": "handover",
+             # No picture of its own yet: what the check prints - one thing live, one waiting on its
+             # help doc, one named nowhere public - is the picture.
+             "launch": None}
 
 
 def engine(name):
@@ -286,11 +289,11 @@ def storyboard(feature, item, examples, mechanics, claim):
     else:
         eyebrow = f"shipped in {version}"
     add("ask", 4.0, 5.5, eyebrow=eyebrow, headline=feature["name"])
-    kind = MECHANISM.get(feature["id"])
-    if kind is None:
+    if feature["id"] not in MECHANISM:
         raise SystemExit(f"the pinned engine ships `{feature['id']}` and gen/motion.py names no mechanism for it: "
                          f"say which picture its clip draws, one of {', '.join(KINDS)}")
-    mech = mechanics.get(kind)
+    kind = MECHANISM[feature["id"]]
+    mech = mechanics.get(kind) if kind else None
     typed, printed = picture(feature, release, examples)
     lines = answer(printed, short=mech is not None)
     if typed:
