@@ -17,12 +17,38 @@
 <label class="menu-switch" for="menu">Menu</label><nav aria-label="The site"><a href="../#how">How it works</a><a href="../features/">Features</a><a href="../#case">Case study</a><a href="../#why">Why Wherefore</a><a href="../changelog/">Changelog</a><a href="../map/">Map</a></nav><a class="pill" href="../#start">Get started</a></div></header>
 <main id="top">
 <section class="log-head"><div class="wrap">
-<p class="eyebrow">Changelog · Wherefore 0.17.0</p>
+<p class="eyebrow">Changelog · Wherefore 0.18.1</p>
 <h1>Every release, newest first.</h1>
 <p class="lede">Built from the release this site pins, so a release is here the moment the site moves to it - and the build stops if a feature it ships has no words on this site.</p>
 </div></section>
 <section class="log"><div class="wrap">
 <ol class="releases">
+<li class="release" id="v0.18.1">
+<div class="release-meta"><p class="release-v"><a href="#v0.18.1">0.18.1</a></p>
+<p class="release-date"><time datetime="2026-11-06">6 November 2026</time></p></div>
+<div class="release-body">
+<h2>Scan any number of repositories at once</h2>
+<p class="release-says">The scan always took any number of places; the words said two. Now they say what it does: the site, the app, the backend and the docs together, and where any two disagree.</p>
+<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore scan site app backend docs
+4 places read together - site, app, backend, docs - state 2 things in common; they disagree on 2
+  DIFFER  &quot;start your {} day free&quot;  site: 14 (1x) · app: 30 (1x) · backend: 14 (1x)
+  DIFFER  &quot;up to {} mb per&quot;  site: 250 (1x) · backend: 500 (1x) · docs: 250 (1x)</code></pre>
+<figcaption>What it printed</figcaption></figure>
+
+</div>
+</li>
+<li class="release" id="v0.18.0">
+<div class="release-meta"><p class="release-v"><a href="#v0.18.0">0.18.0</a></p>
+<p class="release-date"><time datetime="2026-11-06">6 November 2026</time></p></div>
+<div class="release-body">
+<h2>The inbox, held</h2>
+<p class="release-says">The roadmap is the inbox&#x27;s ledger: a request&#x27;s plan, who asked, and what shipped are written there, held by the engine&#x27;s own tests, and written back onto each issue by the release, which then closes it. Every feature carries the details a person reads when they open it.</p>
+<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore --version
+wherefore 0.18.0</code></pre>
+<figcaption>What it printed</figcaption></figure>
+
+</div>
+</li>
 <li class="release" id="v0.17.0">
 <div class="release-meta"><p class="release-v"><a href="#v0.17.0">0.17.0</a></p>
 <p class="release-date"><time datetime="2026-11-06">6 November 2026</time></p></div>
@@ -105,7 +131,7 @@ the scan found our trial length stated two ways
   DIFFER  &quot;start your {} day free&quot;  site: 14 (2x) · app: 30 (1x)
   agree   &quot;plans from {} dollars a&quot;  site: 9 (1x) · app: 9 (1x)</code></pre>
 <figcaption>What it printed</figcaption></figure>
-<h3>What arrived</h3><ul class="arrived"><li><span class="arrived-name">Scan two repositories at once</span> Point the scan at your site and your app together: it says what both state and where the two disagree, before anything is installed.</li></ul>
+<h3>What arrived</h3><ul class="arrived"><li><span class="arrived-name">Scan any number of repositories at once</span> Point the scan at your site and your app together: it says what both state and where the two disagree, before anything is installed.</li></ul>
 </div>
 </li>
 <li class="release" id="v0.12.1">
