@@ -2,7 +2,7 @@
  "id": "report",
  "name": "Tell us",
  "version": "0.12.0",
- "duration": 27.0,
+ "duration": 30.0,
  "frames": [
   "portrait",
   "landscape"
@@ -25,14 +25,14 @@
   {
    "kind": "command",
    "start": 6.0,
-   "end": 10.0,
+   "end": 13.0,
    "eyebrow": "the command",
    "typed": "wherefore report feature the scan across two repositories --show"
   },
   {
    "kind": "answer",
-   "start": 10.0,
-   "end": 19.5,
+   "start": 13.0,
+   "end": 22.5,
    "eyebrow": "the answer",
    "lines": [
     "**The corpus:** fernhollow-kettles: 4 generators, 1 sources, 5 authored rules, 1 captured groups",
@@ -41,14 +41,14 @@
   },
   {
    "kind": "claim",
-   "start": 19.5,
-   "end": 23.5,
+   "start": 22.5,
+   "end": 26.5,
    "text": "A bug, a question or a request, nothing private, sent once."
   },
   {
    "kind": "close",
-   "start": 23.5,
-   "end": 27.0,
+   "start": 26.5,
+   "end": 30.0,
    "eyebrow": "try it",
    "install": "pip install wherefore-build==0.12.0",
    "url": "wherefore.build/features/#report"

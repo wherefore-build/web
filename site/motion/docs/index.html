@@ -5,14 +5,15 @@ html,body{margin:0;height:100%;overflow:hidden;background:var(--ground);color:va
 .scene{position:absolute;inset:0;padding:8cqmin 9cqmin;display:flex;flex-direction:column;justify-content:center;gap:3cqmin;opacity:0;animation:17.5s linear infinite;animation-delay:calc(var(--t) * -1s)}
 .scene>*{max-width:120cqmin}
 .typed,.answer .ln{animation:17.5s linear infinite;animation-delay:calc(var(--t) * -1s)}
+.typed{font:inherit}
 html.still .scene,html.still .typed,html.still .answer .ln{animation-play-state:paused}
 @media (prefers-reduced-motion:reduce){.scene,.typed,.answer .ln{animation-play-state:paused}}
 .mark{font:400 17cqmin/1 var(--font-display);letter-spacing:-0.02em}
 .ver{font:500 4cqmin/1 var(--font-mono);color:var(--ground);background:var(--accent);padding:1.6cqmin 2.6cqmin;border-radius:999px;align-self:flex-start}
 .eye{font:500 3.3cqmin/1.3 var(--font-mono);letter-spacing:0.06em;text-transform:uppercase;color:var(--muted)}
 .big{font:400 11.5cqmin/1.05 var(--font-display);text-wrap:balance}
-.term{font:400 4.2cqmin/1.6 var(--font-mono);background:var(--surface);border:1px solid var(--line);border-radius:3cqmin;padding:4cqmin;display:grid;gap:1.2cqmin}
-.term .ln{display:block;white-space:pre-wrap;overflow-wrap:anywhere}
+.term{margin:0;font:400 4.2cqmin/1.6 var(--font-mono);background:var(--surface);border:1px solid var(--line);border-radius:3cqmin;padding:4cqmin;display:grid;gap:1.2cqmin;white-space:normal}
+.term .ln{display:block;font:inherit;white-space:pre-wrap;overflow-wrap:anywhere}
 .term .ln.hi{color:var(--accent)}
 .term .prompt{color:var(--muted)}
 .typed{display:inline-block;white-space:nowrap;overflow:hidden;vertical-align:bottom;width:0;border-right:0.5cqmin solid var(--accent)}
