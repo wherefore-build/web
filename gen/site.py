@@ -950,10 +950,15 @@ def does(f):
         # <details> needs no script, and the page runs none.
         toggle = (f'<span class="does-toggle"><span class="is-closed">{esc(d["more"])}</span>'
                   f'<span class="is-open">{esc(d["less"])}</span></span>')
+        # THE FEATURE IN MOTION: its clip, the page the pinned engine wrote into
+        # site/motion/, played in a frame on the card - the same facts, in time.
+        clip = (f'<figure class="does-motion"><iframe src="../motion/{esc(x["id"])}/index.html" loading="lazy" '
+                f'title="{esc(x["name"])}, {esc(d["watch"].lower())}"></iframe>'
+                f'<figcaption>{esc(d["watch"])}</figcaption></figure>')
         items.append(f'<li id="{esc(x["id"])}"><details class="does-more"><summary><p class="does-name">{esc(x["name"])}{since}{new}{toggle}</p>'
                      f'<p>{esc(words[x["id"]])}</p></summary>'
                      f'<p class="does-details"><span class="road-asked">{esc(d["open"])}</span> {esc(x["details"])}</p>'
-                     f'{"".join(asks)}{cmds}</details></li>')
+                     f'{"".join(asks)}{clip}{cmds}</details></li>')
     return f"""<section id="does"><div class="wrap">
 <p class="does-intro">{esc(d["intro"])} <a href="../changelog/">{esc(f["changelog"]["link"])}</a></p>
 <ul class="does">

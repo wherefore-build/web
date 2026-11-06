@@ -1,0 +1,57 @@
+{
+ "id": "motion",
+ "name": "Every feature, in motion",
+ "version": "0.20.0",
+ "duration": 23.0,
+ "frames": [
+  "portrait",
+  "landscape"
+ ],
+ "scenes": [
+  {
+   "kind": "open",
+   "start": 0.0,
+   "end": 2.0,
+   "name": "Wherefore",
+   "version": "0.20.0"
+  },
+  {
+   "kind": "ask",
+   "start": 2.0,
+   "end": 6.0,
+   "eyebrow": "shipped in 0.20.0",
+   "headline": "Every feature, in motion"
+  },
+  {
+   "kind": "command",
+   "start": 6.0,
+   "end": 10.0,
+   "eyebrow": "the command",
+   "typed": "wherefore motion published"
+  },
+  {
+   "kind": "answer",
+   "start": 10.0,
+   "end": 15.5,
+   "eyebrow": "the answer",
+   "lines": [
+    "  published    6 scenes  23.0 s  A page you publish but cannot build",
+    "wrote motion/…"
+   ]
+  },
+  {
+   "kind": "claim",
+   "start": 15.5,
+   "end": 19.5,
+   "text": "Every feature, in motion, every word a fact."
+  },
+  {
+   "kind": "close",
+   "start": 19.5,
+   "end": 23.0,
+   "eyebrow": "try it",
+   "install": "pip install wherefore-build==0.20.0",
+   "url": "wherefore.build/features/#motion"
+  }
+ ]
+}

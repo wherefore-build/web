@@ -1,0 +1,47 @@
+{
+ "id": "docs",
+ "name": "Docs from each release",
+ "version": "0.19.0",
+ "duration": 17.5,
+ "frames": [
+  "portrait",
+  "landscape"
+ ],
+ "scenes": [
+  {
+   "kind": "open",
+   "start": 0.0,
+   "end": 2.0,
+   "name": "Wherefore",
+   "version": "0.19.0"
+  },
+  {
+   "kind": "ask",
+   "start": 2.0,
+   "end": 6.0,
+   "eyebrow": "shipped in 0.19.0",
+   "headline": "Docs from each release"
+  },
+  {
+   "kind": "more",
+   "start": 6.0,
+   "end": 10.0,
+   "eyebrow": "what it does",
+   "text": "Five pages ship inside each release…"
+  },
+  {
+   "kind": "claim",
+   "start": 10.0,
+   "end": 14.0,
+   "text": "The docs of the release you run, and no other."
+  },
+  {
+   "kind": "close",
+   "start": 14.0,
+   "end": 17.5,
+   "eyebrow": "try it",
+   "install": "pip install wherefore-build==0.19.0",
+   "url": "wherefore.build/features/#docs"
+  }
+ ]
+}

@@ -31,6 +31,7 @@ private repository, not here, so that none of them goes public with the site.
 | `site/index.html` | the home page | generated |
 | `site/features/`, `site/changelog/` | everything it does and what's next, and every release | generated |
 | `site/map/` | the site's own map, written by `wherefore graph` run as a generator: every source, the scripts that read it, and every file they make, from a real run, in the brand's own colours (`--theme site/brand/map.css`) | generated |
+| `site/motion/` | a clip for every feature the pinned release ships, written by `wherefore motion` run as a generator: six scenes, every word a fact, as a page in motion in the brand's own stylesheet; the features page plays each on its card | generated |
 | `site/_headers` | what Cloudflare Pages serves with every file | generated |
 | `site/install.sh` | the one-line installer `wherefore.sh` serves, from the pinned release (`gen/install.py`) | generated |
 | `site/brand.css`, `site/fonts/` | the brand as custom properties, and the fonts it serves itself | generated |
@@ -46,6 +47,8 @@ private repository, not here, so that none of them goes public with the site.
 | `checks/questions_turn.py` | the questions on "Why Wherefore" turn by themselves, stop on the chip a thumb taps, and hold still for a visitor who asks for less motion | authored |
 | `checks/fits_phone.py` | every page fits a phone's width, moving or still and with "how this page is built" open, and no icon is bigger than the words it follows | authored |
 | `checks/model_turns.py` | the pendulum's model stands beside the case study's heading and its plate beside the counts; each draws, and turns under a thumb; only their frames may run a script | authored |
+| `checks/motion_for_every_feature.py` | every feature the pinned release ships has its clip, and the features page plays it | authored |
+| `checks/motion_fits.py` | every clip fits a portrait frame and a landscape one at the middle of every scene, and every scene shows its words | authored |
 | `checks/*_proof.py` | each check, and the gate, shown to fail | authored |
 | `wherefore.json` | what this repository is to the engine | authored |
 | `requirements-engine.txt` | the engine release this is built and judged by | authored |

@@ -1,0 +1,57 @@
+{
+ "id": "scan2",
+ "name": "Scan any number of repositories at once",
+ "version": "0.13.0",
+ "duration": 27.0,
+ "frames": [
+  "portrait",
+  "landscape"
+ ],
+ "scenes": [
+  {
+   "kind": "open",
+   "start": 0.0,
+   "end": 2.0,
+   "name": "Wherefore",
+   "version": "0.13.0"
+  },
+  {
+   "kind": "ask",
+   "start": 2.0,
+   "end": 6.0,
+   "eyebrow": "shipped in 0.13.0",
+   "headline": "Scan any number of repositories at once"
+  },
+  {
+   "kind": "command",
+   "start": 6.0,
+   "end": 10.0,
+   "eyebrow": "the command",
+   "typed": "wherefore scan site app"
+  },
+  {
+   "kind": "answer",
+   "start": 10.0,
+   "end": 19.5,
+   "eyebrow": "the answer",
+   "lines": [
+    "  DIFFER  \"start your {} day free\"  site: 14 (2x) · app: 30 (1x)",
+    "  agree   \"plans from {} dollars a\"  site: 9 (1x) · app: 9 (1x)"
+   ]
+  },
+  {
+   "kind": "claim",
+   "start": 19.5,
+   "end": 23.5,
+   "text": "Your site, your app, your docs, scanned together."
+  },
+  {
+   "kind": "close",
+   "start": 23.5,
+   "end": 27.0,
+   "eyebrow": "try it",
+   "install": "pip install wherefore-build==0.13.0",
+   "url": "wherefore.build/features/#scan2"
+  }
+ ]
+}

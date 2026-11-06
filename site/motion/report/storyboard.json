@@ -1,0 +1,57 @@
+{
+ "id": "report",
+ "name": "Tell us",
+ "version": "0.12.0",
+ "duration": 27.0,
+ "frames": [
+  "portrait",
+  "landscape"
+ ],
+ "scenes": [
+  {
+   "kind": "open",
+   "start": 0.0,
+   "end": 2.0,
+   "name": "Wherefore",
+   "version": "0.12.0"
+  },
+  {
+   "kind": "ask",
+   "start": 2.0,
+   "end": 6.0,
+   "eyebrow": "shipped in 0.12.0",
+   "headline": "Tell us"
+  },
+  {
+   "kind": "command",
+   "start": 6.0,
+   "end": 10.0,
+   "eyebrow": "the command",
+   "typed": "wherefore report feature the scan across two repositories --show"
+  },
+  {
+   "kind": "answer",
+   "start": 10.0,
+   "end": 19.5,
+   "eyebrow": "the answer",
+   "lines": [
+    "**The corpus:** fernhollow-kettles: 4 generators, 1 sources, 5 authored rules, 1 captured groups",
+    "--show: nothing was sent. Run it again without --show to open the issue."
+   ]
+  },
+  {
+   "kind": "claim",
+   "start": 19.5,
+   "end": 23.5,
+   "text": "A bug, a question or a request, nothing private, sent once."
+  },
+  {
+   "kind": "close",
+   "start": 23.5,
+   "end": 27.0,
+   "eyebrow": "try it",
+   "install": "pip install wherefore-build==0.12.0",
+   "url": "wherefore.build/features/#report"
+  }
+ ]
+}

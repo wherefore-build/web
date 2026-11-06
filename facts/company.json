@@ -220,7 +220,8 @@
    "report": "Stuck, or missing something? Tell your agent to tell us: one command writes the report, with the release, the shape of your repository and your words, nothing private, and opens it with the people who make Wherefore.",
    "pins": "When a release ships, every repository that pins Wherefore gets a pull request moving its pin, opened by the release itself, and your checks say what you still have to describe before it builds.",
    "scan2": "Point the scan at your site, your app, your backend and your docs together: it says what they state in common and where any two disagree, before anything is installed.",
-   "scan-read": "Beside the result, what each place contributed and what it left unread; an app's own words, read out of its source; a table set apart from the stale copies; and the colours your site states, with the greys that were meant to be one grey, before any brand is declared."
+   "scan-read": "Beside the result, what each place contributed and what it left unread; an app's own words, read out of its source; a table set apart from the stale copies; and the colours your site states, with the greys that were meant to be one grey, before any brand is declared.",
+   "motion": "Every feature gets a short clip, compiled from the same facts as this page: the version, who asked, the command, what it printed, the claim. Watch one on any card below."
   },
   "unshown": {},
   "home": [
@@ -241,7 +242,8 @@
   "less": "Less",
   "answers": "Answers",
   "asked": "asked for by",
-  "plan": "What was planned"
+  "plan": "What was planned",
+  "watch": "In motion"
  },
  "case": {
   "eyebrow": "Case study",

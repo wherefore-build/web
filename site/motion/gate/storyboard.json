@@ -1,0 +1,58 @@
+{
+ "id": "gate",
+ "name": "The gate",
+ "version": "0.1.0",
+ "duration": 26.5,
+ "frames": [
+  "portrait",
+  "landscape"
+ ],
+ "scenes": [
+  {
+   "kind": "open",
+   "start": 0.0,
+   "end": 2.0,
+   "name": "Wherefore",
+   "version": "0.1.0"
+  },
+  {
+   "kind": "ask",
+   "start": 2.0,
+   "end": 6.0,
+   "eyebrow": "shipped in 0.1.0",
+   "headline": "The gate"
+  },
+  {
+   "kind": "command",
+   "start": 6.0,
+   "end": 10.0,
+   "eyebrow": "the command",
+   "typed": "wherefore gate"
+  },
+  {
+   "kind": "answer",
+   "start": 10.0,
+   "end": 19.0,
+   "eyebrow": "the answer",
+   "lines": [
+    "  captured       1   declared hand-made, and stamped",
+    "every tracked file is classified, and every generated one was written",
+    "during this run and matches what is committed"
+   ]
+  },
+  {
+   "kind": "claim",
+   "start": 19.0,
+   "end": 23.0,
+   "text": "Every tracked file accounted for; every generated one current."
+  },
+  {
+   "kind": "close",
+   "start": 23.0,
+   "end": 26.5,
+   "eyebrow": "try it",
+   "install": "pip install wherefore-build==0.1.0",
+   "url": "wherefore.build/features/#gate"
+  }
+ ]
+}

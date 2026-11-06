@@ -1,0 +1,57 @@
+{
+ "id": "scan-read",
+ "name": "The scan says what it read",
+ "version": "0.16.0",
+ "duration": 24.0,
+ "frames": [
+  "portrait",
+  "landscape"
+ ],
+ "scenes": [
+  {
+   "kind": "open",
+   "start": 0.0,
+   "end": 2.0,
+   "name": "Wherefore",
+   "version": "0.16.0"
+  },
+  {
+   "kind": "ask",
+   "start": 2.0,
+   "end": 6.0,
+   "eyebrow": "shipped in 0.16.0",
+   "headline": "The scan says what it read"
+  },
+  {
+   "kind": "command",
+   "start": 6.0,
+   "end": 10.0,
+   "eyebrow": "the command",
+   "typed": "wherefore scan site app"
+  },
+  {
+   "kind": "answer",
+   "start": 10.0,
+   "end": 16.5,
+   "eyebrow": "the answer",
+   "lines": [
+    "  #5f6269 · #606370   site/style.css",
+    "  DIFFER  \"start your {} day free\"  site: 14 (1x) · app: 30 (1x)"
+   ]
+  },
+  {
+   "kind": "claim",
+   "start": 16.5,
+   "end": 20.5,
+   "text": "Beside the result, what the scan read, so quiet means quiet."
+  },
+  {
+   "kind": "close",
+   "start": 20.5,
+   "end": 24.0,
+   "eyebrow": "try it",
+   "install": "pip install wherefore-build==0.16.0",
+   "url": "wherefore.build/features/#scan-read"
+  }
+ ]
+}

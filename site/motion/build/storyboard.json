@@ -1,0 +1,57 @@
+{
+ "id": "build",
+ "name": "The build",
+ "version": "0.1.0",
+ "duration": 23.5,
+ "frames": [
+  "portrait",
+  "landscape"
+ ],
+ "scenes": [
+  {
+   "kind": "open",
+   "start": 0.0,
+   "end": 2.0,
+   "name": "Wherefore",
+   "version": "0.1.0"
+  },
+  {
+   "kind": "ask",
+   "start": 2.0,
+   "end": 6.0,
+   "eyebrow": "shipped in 0.1.0",
+   "headline": "The build"
+  },
+  {
+   "kind": "command",
+   "start": 6.0,
+   "end": 10.0,
+   "eyebrow": "the command",
+   "typed": "wherefore list"
+  },
+  {
+   "kind": "answer",
+   "start": 10.0,
+   "end": 16.0,
+   "eyebrow": "the answer",
+   "lines": [
+    "4 generators, in order",
+    "4 tracked writes, 0 writes to paths git does not track"
+   ]
+  },
+  {
+   "kind": "claim",
+   "start": 16.0,
+   "end": 20.0,
+   "text": "Every generator run twice, compared with what is committed."
+  },
+  {
+   "kind": "close",
+   "start": 20.0,
+   "end": 23.5,
+   "eyebrow": "try it",
+   "install": "pip install wherefore-build==0.1.0",
+   "url": "wherefore.build/features/#build"
+  }
+ ]
+}

@@ -1,0 +1,56 @@
+{
+ "id": "retired",
+ "name": "Retired facts",
+ "version": "0.1.0",
+ "duration": 22.0,
+ "frames": [
+  "portrait",
+  "landscape"
+ ],
+ "scenes": [
+  {
+   "kind": "open",
+   "start": 0.0,
+   "end": 2.0,
+   "name": "Wherefore",
+   "version": "0.1.0"
+  },
+  {
+   "kind": "ask",
+   "start": 2.0,
+   "end": 6.0,
+   "eyebrow": "shipped in 0.1.0",
+   "headline": "Retired facts"
+  },
+  {
+   "kind": "command",
+   "start": 6.0,
+   "end": 10.0,
+   "eyebrow": "the command",
+   "typed": "wherefore check retired"
+  },
+  {
+   "kind": "answer",
+   "start": 10.0,
+   "end": 14.5,
+   "eyebrow": "the answer",
+   "lines": [
+    "nothing anywhere still claims a retired value or a retired phrase"
+   ]
+  },
+  {
+   "kind": "claim",
+   "start": 14.5,
+   "end": 18.5,
+   "text": "Nothing a person reads still claims a retired value."
+  },
+  {
+   "kind": "close",
+   "start": 18.5,
+   "end": 22.0,
+   "eyebrow": "try it",
+   "install": "pip install wherefore-build==0.1.0",
+   "url": "wherefore.build/features/#retired"
+  }
+ ]
+}

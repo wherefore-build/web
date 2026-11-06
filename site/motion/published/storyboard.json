@@ -1,0 +1,56 @@
+{
+ "id": "published",
+ "name": "A page you publish but cannot build",
+ "version": "0.17.0",
+ "duration": 22.5,
+ "frames": [
+  "portrait",
+  "landscape"
+ ],
+ "scenes": [
+  {
+   "kind": "open",
+   "start": 0.0,
+   "end": 2.0,
+   "name": "Wherefore",
+   "version": "0.17.0"
+  },
+  {
+   "kind": "ask",
+   "start": 2.0,
+   "end": 6.0,
+   "eyebrow": "shipped in 0.17.0",
+   "headline": "A page you publish but cannot build"
+  },
+  {
+   "kind": "command",
+   "start": 6.0,
+   "end": 10.0,
+   "eyebrow": "the command",
+   "typed": "wherefore check published"
+  },
+  {
+   "kind": "answer",
+   "start": 10.0,
+   "end": 15.0,
+   "eyebrow": "the answer",
+   "lines": [
+    "0 statements on 1 published page still say what the source says…"
+   ]
+  },
+  {
+   "kind": "claim",
+   "start": 15.0,
+   "end": 19.0,
+   "text": "A copy held by reading until it can be built."
+  },
+  {
+   "kind": "close",
+   "start": 19.0,
+   "end": 22.5,
+   "eyebrow": "try it",
+   "install": "pip install wherefore-build==0.17.0",
+   "url": "wherefore.build/features/#published"
+  }
+ ]
+}

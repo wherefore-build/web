@@ -1,0 +1,56 @@
+{
+ "id": "claims",
+ "name": "Claims",
+ "version": "0.1.0",
+ "duration": 21.5,
+ "frames": [
+  "portrait",
+  "landscape"
+ ],
+ "scenes": [
+  {
+   "kind": "open",
+   "start": 0.0,
+   "end": 2.0,
+   "name": "Wherefore",
+   "version": "0.1.0"
+  },
+  {
+   "kind": "ask",
+   "start": 2.0,
+   "end": 6.0,
+   "eyebrow": "shipped in 0.1.0",
+   "headline": "Claims"
+  },
+  {
+   "kind": "command",
+   "start": 6.0,
+   "end": 10.0,
+   "eyebrow": "the command",
+   "typed": "wherefore check claims"
+  },
+  {
+   "kind": "answer",
+   "start": 10.0,
+   "end": 14.0,
+   "eyebrow": "the answer",
+   "lines": [
+    "every claim says only what its rule allows"
+   ]
+  },
+  {
+   "kind": "claim",
+   "start": 14.0,
+   "end": 18.0,
+   "text": "Every claim says only what its rule allows."
+  },
+  {
+   "kind": "close",
+   "start": 18.0,
+   "end": 21.5,
+   "eyebrow": "try it",
+   "install": "pip install wherefore-build==0.1.0",
+   "url": "wherefore.build/features/#claims"
+  }
+ ]
+}

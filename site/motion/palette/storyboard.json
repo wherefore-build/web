@@ -1,0 +1,57 @@
+{
+ "id": "palette",
+ "name": "One palette",
+ "version": "0.10.0",
+ "duration": 26.5,
+ "frames": [
+  "portrait",
+  "landscape"
+ ],
+ "scenes": [
+  {
+   "kind": "open",
+   "start": 0.0,
+   "end": 2.0,
+   "name": "Wherefore",
+   "version": "0.10.0"
+  },
+  {
+   "kind": "ask",
+   "start": 2.0,
+   "end": 6.0,
+   "eyebrow": "shipped in 0.10.0",
+   "headline": "One palette"
+  },
+  {
+   "kind": "command",
+   "start": 6.0,
+   "end": 10.0,
+   "eyebrow": "the command",
+   "typed": "wherefore check palette"
+  },
+  {
+   "kind": "answer",
+   "start": 10.0,
+   "end": 19.0,
+   "eyebrow": "the answer",
+   "lines": [
+    "::error::a colour is said that brand.json does not hold - the brand, said twice:",
+    "   site/page.css:3: #FF3355 - a colour that is not one of brand.json's"
+   ]
+  },
+  {
+   "kind": "claim",
+   "start": 19.0,
+   "end": 23.0,
+   "text": "Every colour anywhere is one the brand's source holds."
+  },
+  {
+   "kind": "close",
+   "start": 23.0,
+   "end": 26.5,
+   "eyebrow": "try it",
+   "install": "pip install wherefore-build==0.10.0",
+   "url": "wherefore.build/features/#palette"
+  }
+ ]
+}

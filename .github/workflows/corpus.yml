@@ -139,6 +139,12 @@ jobs:
       - name: Every page fits a phone's width, moving or still, and no icon outgrows its words
         if: ${{ !cancelled() && steps.browser.outcome == 'success' }}
         run: python3 checks/fits_phone.py
+      - name: Every feature has its clip, and the features page plays it
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: python3 checks/motion_for_every_feature.py
+      - name: Every clip fits a portrait frame and a landscape one at every scene, and every scene shows its words
+        if: ${{ !cancelled() && steps.browser.outcome == 'success' }}
+        run: python3 checks/motion_fits.py
 
   # EACH CHECK SHOWN TO FAIL, beside the checks rather than after them. Needs
   # the same engine and browser, in its own checkout: the proofs plant faults

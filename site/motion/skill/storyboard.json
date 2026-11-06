@@ -1,0 +1,57 @@
+{
+ "id": "skill",
+ "name": "The skill, for Claude Code and Codex",
+ "version": "0.2.0",
+ "duration": 26.5,
+ "frames": [
+  "portrait",
+  "landscape"
+ ],
+ "scenes": [
+  {
+   "kind": "open",
+   "start": 0.0,
+   "end": 2.0,
+   "name": "Wherefore",
+   "version": "0.2.0"
+  },
+  {
+   "kind": "ask",
+   "start": 2.0,
+   "end": 6.0,
+   "eyebrow": "shipped in 0.2.0",
+   "headline": "The skill, for Claude Code and Codex"
+  },
+  {
+   "kind": "command",
+   "start": 6.0,
+   "end": 10.0,
+   "eyebrow": "the command",
+   "typed": "wherefore init"
+  },
+  {
+   "kind": "answer",
+   "start": 10.0,
+   "end": 19.0,
+   "eyebrow": "the answer",
+   "lines": [
+    "Commit both. Then ask your agent to set up Wherefore…",
+    "From the first build on, the skill is regenerated from the release this repository…"
+   ]
+  },
+  {
+   "kind": "claim",
+   "start": 19.0,
+   "end": 23.0,
+   "text": "One skill, where each agent reads it, held to the release."
+  },
+  {
+   "kind": "close",
+   "start": 23.0,
+   "end": 26.5,
+   "eyebrow": "try it",
+   "install": "pip install wherefore-build==0.2.0",
+   "url": "wherefore.build/features/#skill"
+  }
+ ]
+}

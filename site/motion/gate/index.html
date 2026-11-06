@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>The gate · 0.1.0</title><meta name="robots" content="noindex"><link rel="stylesheet" href="../../brand.css"><style>:root{--t:0}
+html,body{margin:0;height:100%;overflow:hidden;background:var(--ground);color:var(--ink)}
+.frame{position:relative;width:100%;height:100%;container-type:size;font-family:var(--font-body)}
+.scene{position:absolute;inset:0;padding:8cqmin 9cqmin;display:flex;flex-direction:column;justify-content:center;gap:3cqmin;opacity:0;animation:26.5s linear infinite;animation-delay:calc(var(--t) * -1s)}
+.scene>*{max-width:120cqmin}
+.typed,.answer .ln{animation:26.5s linear infinite;animation-delay:calc(var(--t) * -1s)}
+html.still .scene,html.still .typed,html.still .answer .ln{animation-play-state:paused}
+@media (prefers-reduced-motion:reduce){.scene,.typed,.answer .ln{animation-play-state:paused}}
+.mark{font:400 17cqmin/1 var(--font-display);letter-spacing:-0.02em}
+.ver{font:500 4cqmin/1 var(--font-mono);color:var(--ground);background:var(--accent);padding:1.6cqmin 2.6cqmin;border-radius:999px;align-self:flex-start}
+.eye{font:500 3.3cqmin/1.3 var(--font-mono);letter-spacing:0.06em;text-transform:uppercase;color:var(--muted)}
+.big{font:400 11.5cqmin/1.05 var(--font-display);text-wrap:balance}
+.term{font:400 4.2cqmin/1.6 var(--font-mono);background:var(--surface);border:1px solid var(--line);border-radius:3cqmin;padding:4cqmin;display:grid;gap:1.2cqmin}
+.term .ln{display:block;white-space:pre-wrap;overflow-wrap:anywhere}
+.term .ln.hi{color:var(--accent)}
+.term .prompt{color:var(--muted)}
+.typed{display:inline-block;white-space:nowrap;overflow:hidden;vertical-align:bottom;width:0;border-right:0.5cqmin solid var(--accent)}
+.answer .ln{opacity:0}
+.claim{font:400 9.5cqmin/1.1 var(--font-display);text-wrap:balance}
+.install{font:400 4.2cqmin/1.6 var(--font-mono)}
+.install b{color:var(--accent);font-weight:500}
+.url{font:400 3.6cqmin/1.5 var(--font-mono);color:var(--muted)}
+@keyframes w0{0%,0.000%{opacity:0}1.132%{opacity:1}6.415%{opacity:1}7.547%,100%{opacity:0}}@keyframes w1{0%,7.547%{opacity:0}8.679%{opacity:1}21.509%{opacity:1}22.642%,100%{opacity:0}}@keyframes w2{0%,22.642%{opacity:0}23.774%{opacity:1}36.604%{opacity:1}37.736%,100%{opacity:0}}@keyframes type2{0%,24.906%{width:0}28.604%,100%{width:14ch}}@keyframes w3{0%,37.736%{opacity:0}38.868%{opacity:1}70.566%{opacity:1}71.698%,100%{opacity:0}}@keyframes line3_0{0%,39.245%{opacity:0}40.000%,100%{opacity:1}}@keyframes line3_1{0%,41.132%{opacity:0}41.887%,100%{opacity:1}}@keyframes line3_2{0%,43.019%{opacity:0}43.774%,100%{opacity:1}}@keyframes w4{0%,71.698%{opacity:0}72.830%{opacity:1}85.660%{opacity:1}86.792%,100%{opacity:0}}@keyframes w5{0%,86.792%{opacity:0}87.925%{opacity:1}98.868%{opacity:1}100.000%,100%{opacity:0}}</style></head>
+<body><div class="frame" data-duration="26.5"><div class="scene open" style="animation-name:w0"><div class="mark">Wherefore</div><div class="ver">0.1.0</div></div><div class="scene ask" style="animation-name:w1"><div class="eye">shipped in 0.1.0</div><div class="big">The gate</div></div><div class="scene command" style="animation-name:w2"><div class="eye">the command</div><div class="term"><span class="ln"><span class="prompt">$ </span><span class="typed" style="animation-name:type2;animation-timing-function:steps(14)">wherefore gate</span></span></div></div><div class="scene answer" style="animation-name:w3"><div class="eye">the answer</div><div class="term"><span class="ln" style="animation-name:line3_0">  captured       1   declared hand-made, and stamped</span><span class="ln" style="animation-name:line3_1">every tracked file is classified, and every generated one was written</span><span class="ln hi" style="animation-name:line3_2">during this run and matches what is committed</span></div></div><div class="scene claim" style="animation-name:w4"><div class="claim">Every tracked file accounted for; every generated one current.</div></div><div class="scene close" style="animation-name:w5"><div class="eye">try it</div><div class="install">pip install wherefore-build==0.1.0</div><div class="url">wherefore.build/features/#gate</div></div></div></body></html>
