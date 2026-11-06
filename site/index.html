@@ -25,8 +25,8 @@
 <div class="hero-grid">
 <div class="hero-copy">
 <p class="lede">Everything your company says is a copy of a copy, and every copy drifts. Wherefore gives the rest of your company the pipeline your code already has.</p>
-<p class="try-label">See what has already drifted on your site, or on your site and your app together. No setup, no account.</p>
-<div class="try"><code class="cmd"><span class="term-prompt">$</span> curl -fsSL https://wherefore.sh | sh</code><code class="cmd"><span class="term-prompt">$</span> wherefore scan https://your-site.example</code><code class="cmd"><span class="term-prompt">$</span> wherefore scan https://your-site.example https://your-app.example</code></div>
+<p class="try-label">See what has already drifted on your site, or across your site, your app and your docs together. No setup, no account.</p>
+<div class="try"><code class="cmd"><span class="term-prompt">$</span> curl -fsSL https://wherefore.sh | sh</code><code class="cmd"><span class="term-prompt">$</span> wherefore scan https://your-site.example</code><code class="cmd"><span class="term-prompt">$</span> wherefore scan https://your-site.example app docs</code></div>
 <p class="try-pip">Or with pip: <code>pip install wherefore-build</code></p>
 <p class="actions"><a class="button button-quiet" href="https://github.com/wherefore-build/wherefore">View on GitHub<svg class="out" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M9 2h5v5M14 2 7.5 8.5M12 9.5V13a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
 </div>
@@ -190,7 +190,7 @@
 <p class="start-text">Start with one scan. If it finds nothing, good: the rest of Wherefore keeps it that way.</p>
 <ol class="start-steps">
 <li><code>curl -fsSL https://wherefore.sh | sh</code><span class="does">Or with pip: <code>pip install wherefore-build</code></span></li>
-<li><code>wherefore scan https://your-site.example</code><span class="does">See what has drifted. Nothing to set up.</span><code>wherefore scan https://your-site.example https://your-app.example</code><span class="does">Or your site and your app together, and see where the two disagree.</span></li>
+<li><code>wherefore scan https://your-site.example</code><span class="does">See what has drifted. Nothing to set up.</span><code>wherefore scan https://your-site.example app docs</code><span class="does">Or your site, your app and your docs together, and see where any two disagree.</span></li>
 <li><code>wherefore init</code><span class="does">When you&#x27;re ready: set up the repository, then ask your coding agent to set up Wherefore.</span></li>
 </ol>
 <p class="start-free">Open source under Apache-2.0.</p>
