@@ -1183,8 +1183,8 @@ def rule(f):
 
 
 SLOT = 6.0      # seconds each word has, typed, held and erased: the same for every word (owner, 6 November 2026)
-TYPE = 0.09     # seconds a letter takes to type
-ERASE = 0.05    # and to erase
+TYPE = 0.06     # seconds a letter takes to type: quick, as a person who knows the word
+ERASE = 0.035   # and to erase, quicker still
 
 
 def turning_heading(st):
