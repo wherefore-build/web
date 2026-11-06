@@ -508,7 +508,7 @@ OUT = ('<svg class="out" viewBox="0 0 16 16" aria-hidden="true" focusable="false
        'fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>')
 
 def hero(f):
-    """What it is, why it matters, and the two commands that try it on your own site - with real output beside them.
+    """What it is, why it matters, and the commands that try it on your own site - and on your site and your app together - with real output beside them.
 
     The headline runs the whole width; under it the lede and the two commands
     take one column and the scan's output the other, once there is room for
@@ -522,6 +522,11 @@ def hero(f):
     name, licence = release_meta()
     first = st["steps"][0]
     run = f'{command(first["command"])} {first.get("args", "")}'.strip()
+    # The same scan, pointed at two places at once (owner, 5 November 2026):
+    # the output beside it reads a site and an app together, so the command
+    # that does that stands under the one-site command, ready to copy.
+    also = (f'<code class="cmd"><span class="term-prompt">$</span> {esc(command(first["command"]))} {esc(first["also"])}</code>'
+            if first.get("also") else "")
     repo = f["company"]["github"]
     github = (f'<p class="actions"><a class="button button-quiet" href="{esc(repo)}">{esc(f["nav"]["github"])}{OUT}</a></p>'
               if repo else "")
@@ -533,7 +538,7 @@ def hero(f):
 <div class="hero-copy">
 <p class="lede">{esc(h["lede"])}</p>
 <p class="try-label">{esc(h["try"])}</p>
-<div class="try"><code class="cmd"><span class="term-prompt">$</span> {esc(st["install"])}</code><code class="cmd"><span class="term-prompt">$</span> {esc(run)}</code></div>
+<div class="try"><code class="cmd"><span class="term-prompt">$</span> {esc(st["install"])}</code><code class="cmd"><span class="term-prompt">$</span> {esc(run)}</code>{also}</div>
 <p class="try-pip">{esc(h["pip"])} <code>pip install {esc(name)}</code></p>
 {github}
 </div>
@@ -873,8 +878,13 @@ def planned(f):
                              f"which {ENGINE} ships: take the copy again from the engine, where it has left")
         if it["state"] not in p["labels"]:
             raise SystemExit(f"roadmap item `{it['id']}` is {it['state']!r}, which planned.labels does not name")
+        # Who asked, when the engine's roadmap says: the person's GitHub login, which the
+        # issue they asked in already shows, so the site says nothing the issue does not.
         issue = (f' <a class="road-issue" href="{esc(it["issue"])}">#{esc(it["issue"].rsplit("/", 1)[-1])}</a>'
                  if it.get("issue") else "")
+        if it.get("asked_by"):
+            issue = (f' <span class="road-asked">{esc(p["labels"]["asked"])} '
+                     f'<a href="https://github.com/{esc(it["asked_by"])}">@{esc(it["asked_by"])}</a></span>' + issue)
         items.append(f'<li id="{esc(it["id"])}"><p class="does-name">{esc(it["name"])} <span class="chip chip-{esc(it["state"])}">'
                      f'{esc(p["labels"][it["state"]])}</span>{issue}</p><p>{esc(it["words"])}</p></li>')
     return f"""<section id="next"><div class="wrap">
@@ -1004,13 +1014,18 @@ def rule(f):
 
 
 def start(f):
-    """Getting started: install, scan, init - in this company's words; the licence and package are the release's."""
+    """Getting started: install, scan (one place, or a site and an app together), init - in this company's words; the licence and package are the release's."""
     st, h = f["start"], f["hero"]
     name, licence = release_meta()
     lines = [f'<li><code>{esc(st["install"])}</code><span class="does">{esc(h["pip"])} <code>pip install {esc(name)}</code></span></li>']
     for s in st["steps"]:
         run = f'{command(s["command"])} {s.get("args", "")}'.strip()
-        lines.append(f'<li><code>{esc(run)}</code><span class="does">{esc(s["says"])}</span></li>')
+        # A step with a second form - the scan pointed at a site and an app
+        # together (owner, 6 November 2026) - shows it under the first, with
+        # its own words, so Get started says both ways the hero does.
+        also = (f'<code>{esc(command(s["command"]))} {esc(s["also"])}</code><span class="does">{esc(s["also_says"])}</span>'
+                if s.get("also") else "")
+        lines.append(f'<li><code>{esc(run)}</code><span class="does">{esc(s["says"])}</span>{also}</li>')
     return f"""<section id="start"><div class="wrap">
 {SRC}
 <div class="start-box">
