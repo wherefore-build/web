@@ -221,7 +221,7 @@ def page(t):
 <h1 class="wordmark">{esc(name)}</h1>
 <p class="lede">The brand, said once. Every page, card and slide takes its colours, type and shapes from one file, and this page is built from it too.</p>
 <p class="why">{esc(t["idea"])}</p>
-<p class="files"><a href="tokens.json">tokens.json</a> <a href="../brand.css">brand.css</a></p>
+<p class="files"><a href="tokens.json">tokens.json</a> <a href="../brand.css">brand.css</a> <a href="app.css">app.css</a></p>
 <div class="src"><p><span class="src-k">{esc(i["from"])}</span> brand/tokens.json · every colour, face and radius, each with its reason</p><p><span class="src-k">{esc(i["held"])}</span> gate · brand</p></div>
 </div></section>
 <section id="colour"><div class="wrap">
@@ -294,11 +294,57 @@ def page(t):
 """
 
 
+def app_theme(t):
+    """site/brand/app.css: the brand on both grounds, the way the app will take it.
+
+    ONE FILE, BOTH SCHEMES (owner, 6 November 2026: light and dark, following
+    the system). The app links this one stylesheet and writes every rule with
+    the brand's roles - var(--ground), var(--ink), var(--accent) - and the
+    roles take the light scheme or the dark one: the system's choice, under
+    `prefers-color-scheme`, unless the page says `data-theme="light"` or
+    `"dark"` on its root, which is how a person's own choice in the app will
+    win. With no signal it is light, because the app is white (owner, 5
+    November 2026). The roles are the same names site/brand.css uses, so a rule
+    written once reads right on either ground.
+
+    `--mark` is what marks the point of a line as text. On the terminal the
+    accent is type; on paper it never is (the tokens' `light.note`), so on
+    paper the mark is the ink and the accent is only a fill. Nothing here is a
+    value but the tokens'; checks/one_palette.py reads this file."""
+    faces = []
+    for role, face in t["type"].items():
+        for f in face["faces"]:
+            faces.append(
+                "@font-face {\n"
+                f'  font-family: "{face["family"]}";\n'
+                f'  font-style: {f["style"]};\n'
+                f'  font-weight: {f["weight"]};\n'
+                "  font-display: swap;\n"
+                f'  src: url("../fonts/{f["file"]}") format("woff2");\n'
+                "}\n")
+
+    def scheme(colours, mark):
+        out = [f"  --{name}: var(--{c['same_as']});" if "same_as" in c else f"  --{name}: {c['value']};"
+               for name, c in colours.items()]
+        return out + [f"  --mark: var(--{mark});"]
+    light = scheme(t["light"]["color"], "ink") + ["  color-scheme: light;"]
+    dark = scheme(t["color"], "accent") + ["  color-scheme: dark;"]
+    shared = ([f'  --font-{role}: "{face["family"]}", {face["fallback"]};' for role, face in t["type"].items()]
+              + [f"  --radius-{name}: {r['value']};" for name, r in t["radius"].items()])
+    header = CSS_HEADER.replace("site/brand.css", "site/brand/app.css") if "site/brand.css" in CSS_HEADER else CSS_HEADER
+    return (header + "".join(faces)
+            + ":root {\n" + "\n".join(shared + light) + "\n}\n"
+            + "@media (prefers-color-scheme: dark) {\n  :root:not([data-theme=\"light\"]) {\n"
+            + "\n".join("  " + line for line in dark) + "\n  }\n}\n"
+            + ":root[data-theme=\"dark\"] {\n" + "\n".join(dark) + "\n}\n")
+
+
 def main():
     t = TOKENS
     SITE.mkdir(exist_ok=True)
     (SITE / "brand.css").write_text(stylesheet(t), encoding="utf-8")
     (SITE / "brand/map.css").write_text(map_theme(t), encoding="utf-8")
+    (SITE / "brand/app.css").write_text(app_theme(t), encoding="utf-8")
     fonts(t)
     (SITE / "brand").mkdir(exist_ok=True)
     shutil.copyfile(ROOT / "brand/tokens.json", SITE / "brand/tokens.json")

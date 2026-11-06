@@ -46,7 +46,7 @@
   {
    "script": "brand.py",
    "cwd": "gen",
-   "makes": "site/brand.css, the map's theme site/brand/map.css, site/fonts/ and the brand page site/brand/ with the icon, from the brand tokens"
+   "makes": "site/brand.css, the map's theme site/brand/map.css, the app's both-grounds stylesheet site/brand/app.css, site/fonts/ and the brand page site/brand/ with the icon, from the brand tokens"
   },
   {
    "script": "site.py",
@@ -197,7 +197,7 @@
      "no_stamp": "copied byte for byte from the engine's repository, which this gate cannot see and deliberately does not read: the engine's own tests hold the file honest, and its upstream below holds this copy to it",
      "why": "the engine's roadmap, the same file that sits beside its code, which What's next on the features page is built from",
      "upstream": {
-      "url": "https://raw.githubusercontent.com/wherefore-build/wherefore/03602f7eea2e7a24fabcebb6f327ad1d1e477eaa/roadmap.json",
+      "url": "https://raw.githubusercontent.com/wherefore-build/wherefore/main/roadmap.json",
       "matches": "bytes",
       "unreachable": "GitHub not answering is not the roadmap moving: a deploy goes ahead and says so, and the next build reads it again"
      }

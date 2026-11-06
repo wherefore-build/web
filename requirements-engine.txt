@@ -7,7 +7,7 @@
 # that pull request (.github/workflows/wherefore-pin.yml); a person may too. The
 # distribution is wherefore-build because `wherefore` on PyPI is another
 # project's; what is imported and typed is `wherefore`.
-# PREVIEW ONLY: pinned to wherefore-build/wherefore#35 at its head commit, so the
-# owner can read 0.21.0 on a phone before it is released. Never merged: the
+# PREVIEW ONLY: pinned to wherefore-build/wherefore#37 at its head commit, so the
+# owner can read 0.22.0 on a phone before it is released. Never merged: the
 # release itself reaches main by this repository's own watch, from PyPI.
-wherefore-build @ git+https://github.com/wherefore-build/wherefore@03602f7eea2e7a24fabcebb6f327ad1d1e477eaa
+wherefore-build @ git+https://github.com/wherefore-build/wherefore@fb4ac3ae35af1624b382325aa257963a65cc520a
