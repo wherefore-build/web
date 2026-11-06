@@ -908,20 +908,31 @@ def planned(f):
         if it.get("asked_by"):
             issues = (f' <span class="road-asked">{esc(p["labels"]["asked"])} '
                       f'<a href="https://github.com/{esc(it["asked_by"])}">@{esc(it["asked_by"])}</a></span>' + issues)
+        # An item with a plan opens to it, like a feature to its details (owner,
+        # 6 November 2026: compact until clicked); one without is the line alone.
         plan = (f'<p class="does-plan"><span class="road-asked">{esc(p["labels"]["plan"])}</span> {esc(it["plan"])}</p>'
                 if it.get("plan") else "")
+        toggle = (f'<span class="does-toggle"><span class="is-closed">{esc(f["does"]["more"])}</span>'
+                  f'<span class="is-open">{esc(f["does"]["less"])}</span></span>') if plan else ""
         if it["state"] == "shipped":
             feat = shipped.get(it["feature"])
             if feat is None:
                 raise SystemExit(f"roadmap item `{it['id']}` shipped as `{it['feature']}`, which {ENGINE} does not ship")
             chip = f'<span class="chip chip-shipped">{esc(fill(p["labels"]["shipped"], version=it["since"]))}</span>'
             now = f' <span class="road-asked">{esc(p["labels"]["feature"])} <a href="#{esc(feat["id"])}">{esc(feat["name"])}</a></span>'
-            done.append(f'<li id="{esc(it["id"])}"><p class="does-name">{esc(it["name"])} {chip}{issues}{now}</p>'
-                        f'<p>{esc(it["words"])}</p>{plan}</li>')
+            # The links - the issues, who asked, the feature - sit under the
+            # summary, not in it: a thumb on the summary opens the card, and
+            # never lands on a link instead.
+            head = f'<p class="does-name">{esc(it["name"])} {chip}{toggle}</p><p>{esc(it["words"])}</p>'
+            links = f'<p class="does-answers">{issues}{now}</p>' if (issues or now) else ""
+            done.append(f'<li id="{esc(it["id"])}">' + (f'<details class="does-more"><summary>{head}</summary>{links}{plan}</details>'
+                                                          if plan else head + links) + '</li>')
         else:
             chip = f'<span class="chip chip-{esc(it["state"])}">{esc(p["labels"][it["state"]])}</span>'
-            nxt.append(f'<li id="{esc(it["id"])}"><p class="does-name">{esc(it["name"])} {chip}{issues}</p>'
-                       f'<p>{esc(it["words"])}</p>{plan}</li>')
+            head = f'<p class="does-name">{esc(it["name"])} {chip}{toggle}</p><p>{esc(it["words"])}</p>'
+            links = f'<p class="does-answers">{issues}</p>' if issues else ""
+            nxt.append(f'<li id="{esc(it["id"])}">' + (f'<details class="does-more"><summary>{head}</summary>{links}{plan}</details>'
+                                                         if plan else head + links) + '</li>')
     return f"""<section id="next"><div class="wrap">
 <h2>{esc(p["heading"])}</h2>
 <p class="does-intro">{esc(p["source"])}</p>
