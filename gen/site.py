@@ -301,13 +301,20 @@ def part(render, f, inspect, also=()):
     return html.replace(SRC, f'<div class="src">{"".join(lines)}</div>')
 
 
+def links(f, home=""):
+    """The site's links, in reading order: how it works, the case, why, then what it
+    has and will have, what shipped, the docs, the map (owner, 6 November 2026:
+    features and roadmap after why and before the changelog)."""
+    n = f["nav"]
+    return (f'<a href="{home}#how">{esc(n["how"])}</a><a href="{home}#case">{esc(f["case"]["eyebrow"])}</a>'
+            f'<a href="{home}#why">{esc(n["why"])}</a><a href="{home}features/">{esc(n["does"])}</a>'
+            f'<a href="{home}changelog/">{esc(f["changelog"]["title"])}</a>'
+            f'<a href="{home}docs/">{esc(n["docs"])}</a><a href="{home}{MAP_PAGE}">{esc(n["map"])}</a>')
+
+
 def nav(f, home=""):
     """The site's links. `home` is the way back to the home page from where the nav sits: "" on it."""
-    n = f["nav"]
-    return (f'<nav aria-label="The site"><a href="{home}#how">{esc(n["how"])}</a>'
-            f'<a href="{home}features/">{esc(n["does"])}</a><a href="{home}#case">{esc(f["case"]["eyebrow"])}</a>'
-            f'<a href="{home}#why">{esc(n["why"])}</a><a href="{home}changelog/">{esc(f["changelog"]["title"])}</a>'
-            f'<a href="{home}docs/">{esc(n["docs"])}</a><a href="{home}{MAP_PAGE}">{esc(n["map"])}</a></nav>')
+    return f'<nav aria-label="The site">{links(f, home)}</nav>'
 
 
 def topbar(f, home=""):
@@ -323,11 +330,7 @@ def topbar(f, home=""):
 
 def foot_nav(f, home=""):
     """Every page's links again, at the foot, where a phone's header has no room for them."""
-    n = f["nav"]
-    return (f'<nav class="foot-nav" aria-label="The site, again"><a href="{home}#how">{esc(n["how"])}</a>'
-            f'<a href="{home}features/">{esc(n["does"])}</a><a href="{home}#case">{esc(f["case"]["eyebrow"])}</a>'
-            f'<a href="{home}#why">{esc(n["why"])}</a><a href="{home}changelog/">{esc(f["changelog"]["title"])}</a>'
-            f'<a href="{home}docs/">{esc(n["docs"])}</a><a href="{home}{MAP_PAGE}">{esc(n["map"])}</a></nav>')
+    return f'<nav class="foot-nav" aria-label="The site, again">{links(f, home)}</nav>'
 
 
 def header(f):
