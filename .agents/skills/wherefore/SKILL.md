@@ -40,6 +40,7 @@ wherefore list              # what each generator writes, right now
 wherefore gate              # is every tracked file classified and current?
 wherefore graph             # what builds what: which script makes each file, from what
 wherefore check palette     # every colour anywhere is one the brand's source holds, or excused with why
+wherefore scan site app     # what two places state in common, and where they disagree; needs no corpus
 ```
 
 `wherefore graph` is for seeing the chain before you change it: which sources a
@@ -75,6 +76,32 @@ Python: each command runs the script named there, and **that script** is where
 the generator list, the comparators and the exemptions live, with their
 reasons. Edit them there. Do not copy them into `wherefore.json`, which refuses
 them anyway, because that would be one fact in two places.
+
+## Scanning, one place or two
+
+`wherefore scan` reads what a person reads - pages, Markdown, plain text - in
+a folder or at a live address, and reports every value stated in words more
+than one way. Given two places, it also says what they state in common and
+which of those they disagree on:
+
+```
+2 places read together - site, app - state 2 things in common; they disagree on 1
+  DIFFER  "start your {} day free"  site: 14 (2x) · app: 30 (1x)
+  agree   "plans from {} dollars a"  site: 9 (1x) · app: 9 (1x)
+```
+
+A `DIFFER` line is drift between two teams, which no one repository's checks
+can see; it exits 1, so a deploy can run it. Three things before you act on
+what it says:
+
+- **It cannot see** names, lists, a value alone on its line, an app's words
+  in its source code, or a page nothing links to. `start.md` says where to
+  look instead.
+- **Read each finding where it was found.** Two values tied on every page are
+  a table, not a stale copy.
+- **"0 things in common" is not agreement** until you know what each place
+  contributed: a checkout whose readable files are vendored READMEs and icons
+  contributed nothing of the company's.
 
 ## Changing a fact
 
@@ -190,17 +217,24 @@ something it should take, or when the person wants something it does not do,
 there is a way to tell the people who make it:
 
 ```
-wherefore report bug "what happened, in the person's words" --from gate.log --show
-wherefore report ask "the question" --show
-wherefore report feature "what it should do" --show
+wherefore report --title "one line" "what happened, what was wanted, or the question" --from gate.log --show
 ```
 
-It writes the report - the release, the shape of the corpus in counts, the
-output in the file given, the words - and never a file's contents. `--show`
-prints it and sends nothing: run that first, show the person, and send only
-when they say, by running it again without `--show`. With `gh` signed in it
-opens the issue on wherefore-build/wherefore; without, it prints a link that
-opens the issue filled in. The words are the person's: ask, do not invent.
+One command for all of it: there is no kind to choose, because whether a thing
+is a bug or a missing feature is the maintainers' judgment, made in triage.
+**One report per topic.** Feedback with three points about three things is
+three reports, each with its own title; never one report per kind, and never
+every point under one title.
+
+It writes the report - the title, the words, the release, the shape of the
+corpus in counts, the output in the file given - and never a file's contents
+or a path on this machine. You may draft the title and the words from what
+the person said; they are theirs to approve. Run it with `--show` first and
+show the person. Then either send it when they say, by running it again
+without `--show` (it opens the issue on wherefore-build/wherefore with `gh`,
+signed in, or prints a link), or run it with `--link`, which never sends and
+prints a link that opens the issue filled in: the person reads it there and
+sends it themselves, which is the approval.
 
 ## Releases are a person's
 
