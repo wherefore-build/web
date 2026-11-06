@@ -921,6 +921,8 @@ def planned(f):
             feat = shipped.get(it["feature"])
             if feat is None:
                 raise SystemExit(f"roadmap item `{it['id']}` shipped as `{it['feature']}`, which {ENGINE} does not ship")
+            if not it.get("issues"):
+                continue          # shipped, and nobody asked: the changelog already says so, and this section is the inbox's record
             chip = f'<span class="chip chip-shipped">{esc(fill(p["labels"]["shipped"], version=it["since"]))}</span>'
             now = f' <span class="road-asked">{esc(p["labels"]["feature"])} <a href="#{esc(feat["id"])}">{esc(feat["name"])}</a></span>'
             # The links - the issues, who asked, the feature - sit under the
