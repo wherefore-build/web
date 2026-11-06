@@ -17,12 +17,83 @@
 <label class="menu-switch" for="menu">Menu</label><nav aria-label="The site"><a href="../#how">How it works</a><a href="../features/">Features</a><a href="../#case">Case study</a><a href="../#why">Why Wherefore</a><a href="../changelog/">Changelog</a><a href="../map/">Map</a></nav><a class="pill" href="../#start">Get started</a></div></header>
 <main id="top">
 <section class="log-head"><div class="wrap">
-<p class="eyebrow">Changelog · Wherefore 0.13.0</p>
+<p class="eyebrow">Changelog · Wherefore 0.17.0</p>
 <h1>Every release, newest first.</h1>
 <p class="lede">Built from the release this site pins, so a release is here the moment the site moves to it - and the build stops if a feature it ships has no words on this site.</p>
 </div></section>
 <section class="log"><div class="wrap">
 <ol class="releases">
+<li class="release" id="v0.17.0">
+<div class="release-meta"><p class="release-v"><a href="#v0.17.0">0.17.0</a></p>
+<p class="release-date"><time datetime="2026-11-06">6 November 2026</time></p></div>
+<div class="release-body">
+<h2>A page you publish but cannot build</h2>
+<p class="release-says">A published section names a page nobody here builds and the facts it states; wherefore check published reads it live and fails when the page says otherwise, quoting it. Reach counts the declaration. A copy held by reading until it can be built.</p>
+<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore check published
+<span class="term-cut" title="lines left out">…</span>
+0 statements on 1 published page still say what the source says; 1 page did not answer, and passed for the reason each gives. A published page is a copy until it is built from the source: holding it by reading is the step before that.</code></pre>
+<figcaption>What it printed</figcaption></figure>
+<h3>What arrived</h3><ul class="arrived"><li><span class="arrived-name">A page you publish but cannot build</span> A page nobody builds - your site on a hosted CMS - declared with the facts it states. Wherefore reads it live and fails when it says otherwise, quoting the page: a copy held by reading until it can be built.</li></ul>
+</div>
+</li>
+<li class="release" id="v0.16.1">
+<div class="release-meta"><p class="release-v"><a href="#v0.16.1">0.16.1</a></p>
+<p class="release-date"><time datetime="2026-11-06">6 November 2026</time></p></div>
+<div class="release-body">
+<h2>A colour quoted in code is not paint</h2>
+<p class="release-says">wherefore check palette reads what a page paints, not what it quotes: a colour inside &lt;pre&gt; or &lt;code&gt;, or in Markdown&#x27;s fences and backticks, is text a visitor reads - the scan&#x27;s own output, shown on a page - and no longer fails the brand.</p>
+<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore --version
+wherefore 0.16.1</code></pre>
+<figcaption>What it printed</figcaption></figure>
+
+</div>
+</li>
+<li class="release" id="v0.16.0">
+<div class="release-meta"><p class="release-v"><a href="#v0.16.0">0.16.0</a></p>
+<p class="release-date"><time datetime="2026-11-06">6 November 2026</time></p></div>
+<div class="release-body">
+<h2>The scan says what it read</h2>
+<p class="release-says">Beside the result, what each place contributed and what it left unread; an app&#x27;s own words, read out of its source; a table set apart from the stale copies; and the colours a site states, with the greys that were meant to be one grey.</p>
+<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore scan site app
+  read  site: 1 .html, 1 .css
+  read  app: 1 .elm · not read: 1 .json
+<span class="term-cut" title="lines left out">…</span>
+3 colours stated in 1 file; 1 group within a shade of one another
+  #5f6269 · #606370   site/style.css
+<span class="term-cut" title="lines left out">…</span>
+  DIFFER  &quot;start your {} day free&quot;  site: 14 (1x) · app: 30 (1x)</code></pre>
+<figcaption>What it printed</figcaption></figure>
+<h3>What arrived</h3><ul class="arrived"><li><span class="arrived-name">The scan says what it read</span> Beside the result, what each place contributed and what it left unread; an app&#x27;s own words, read out of its source; a table set apart from the stale copies; and the colours your site states, with the greys that were meant to be one grey, before any brand is declared.</li></ul>
+</div>
+</li>
+<li class="release" id="v0.15.0">
+<div class="release-meta"><p class="release-v"><a href="#v0.15.0">0.15.0</a></p>
+<p class="release-date"><time datetime="2026-11-06">6 November 2026</time></p></div>
+<div class="release-body">
+<h2>The skill learns from the field</h2>
+<p class="release-says">The first session on a stranger&#x27;s company rewrote the start guide: scan before you ask, find where each fact is decided before choosing a repository, know what the scan cannot see and read each finding where it was found, two places at once, facts that live in app code, and a page you publish but cannot build.</p>
+<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore --version
+wherefore 0.15.0</code></pre>
+<figcaption>What it printed</figcaption></figure>
+
+</div>
+</li>
+<li class="release" id="v0.14.0">
+<div class="release-meta"><p class="release-v"><a href="#v0.14.0">0.14.0</a></p>
+<p class="release-date"><time datetime="2026-11-06">6 November 2026</time></p></div>
+<div class="release-body">
+<h2>One report, with a title</h2>
+<p class="release-says">wherefore report is one command for a bug, a question or a request: a title, the words as the body, one topic each, the kind left to triage - and --link prints the issue for the person to read and send themselves.</p>
+<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore report --title Thanks the scan found our trial length stated two ways --link
+# Thanks
+the scan found our trial length stated two ways
+**The corpus:** fernhollow-kettles: 4 generators, 1 sources, 5 authored rules, 1 captured groups
+--link: nothing was sent. This link opens the issue, filled in, for the person to read and send:
+<span class="term-cut" title="lines left out">…</span></code></pre>
+<figcaption>What it printed</figcaption></figure>
+
+</div>
+</li>
 <li class="release" id="v0.13.0">
 <div class="release-meta"><p class="release-v"><a href="#v0.13.0">0.13.0</a></p>
 <p class="release-date"><time datetime="2026-11-05">5 November 2026</time></p></div>
