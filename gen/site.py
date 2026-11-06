@@ -1182,6 +1182,36 @@ def rule(f):
 </div></section>"""
 
 
+TURN = 2.2     # seconds each line before the heading stands (start.heading_turns)
+DWELL = 9.0    # and the heading itself, before the turn comes round again
+
+
+def turning_heading(st):
+    """Get started's heading, turning (owner, 6 November 2026): your project,
+    your organization, then the heading itself - your company - which stands
+    far longer. Only here: everywhere else the heading is one line. The words
+    turn by CSS alone, as the questions do; a reader hears the heading once,
+    and a visitor who asks for less motion sees only it."""
+    turns = list(st.get("heading_turns") or [])
+    if not turns:
+        return f'<h2>{esc(st["heading"])}</h2>'
+    cycle = len(turns) * TURN + DWELL
+    w = TURN / cycle * 100
+    last_on = len(turns) * TURN / cycle * 100
+    spans = "".join(f'<span class="turn" style="animation-delay: {i * TURN:g}s">{esc(t)}</span>' for i, t in enumerate(turns))
+    style = (f"<style>\n"
+             f".turns .turn {{ animation: turn {cycle:g}s linear infinite; }}\n"
+             f".turns .turn-last {{ animation: turn-last {cycle:g}s linear infinite; }}\n"
+             f"@keyframes turn {{ 0% {{ opacity: 0; }} 2% {{ opacity: 1; }} {w - 2:.2f}% {{ opacity: 1; }} {w:.2f}%, 100% {{ opacity: 0; }} }}\n"
+             f"@keyframes turn-last {{ 0%, {last_on:.2f}% {{ opacity: 0; }} {last_on + 2:.2f}%, 98% {{ opacity: 1; }} 100% {{ opacity: 0; }} }}\n"
+             # After the animations, so it wins: less motion is the heading alone, still.
+             f"@media (prefers-reduced-motion: reduce) {{ .turns .turn {{ display: none; }} "
+             f".turns .turn-last {{ opacity: 1; animation: none; }} }}\n"
+             f"</style>")
+    return (f'<h2 class="turning"><span class="sr">{esc(st["heading"])}</span>'
+            f'<span class="turns" aria-hidden="true">{spans}<span class="turn-last">{esc(st["heading"])}</span></span></h2>\n{style}')
+
+
 def start(f):
     """Getting started: install, scan (one place, or a site and an app together), init - in this company's words; the licence and package are the release's."""
     st, h = f["start"], f["hero"]
@@ -1198,7 +1228,7 @@ def start(f):
     return f"""<section id="start"><div class="wrap">
 {SRC}
 <div class="start-box">
-<h2>{esc(st["heading"])}</h2>
+{turning_heading(st)}
 <p class="start-text">{esc(st["text"])}</p>
 <ol class="start-steps">
 {chr(10).join(lines)}

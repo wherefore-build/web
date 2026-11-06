@@ -475,6 +475,10 @@ footer .src { margin: 0 0 1.25rem; }
 #start { border-top: 0; }
 .start-box { padding: clamp(2.25rem, 7vw, 5rem) clamp(1.25rem, 6vw, 4rem); border: 1px solid var(--line); border-radius: var(--radius-card); background: var(--surface); }
 .start-ask { margin: 0 0 0.875rem; font: italic 400 1.5rem/1.2 var(--font-display); color: var(--muted); }
+/* The heading turns: each line in the same cell, one at a time (gen/site.py, turning_heading). */
+.turning .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.turns { display: grid; }
+.turns > span { grid-area: 1 / 1; opacity: 0; }
 .start-box h2 { max-width: 16ch; margin: 0; font-size: clamp(2.5rem, 5.6vw, 4.75rem); line-height: 1; letter-spacing: -0.025em; }
 .start-text { margin: 1.25rem 0 0; font-size: 1.125rem; color: var(--muted); max-width: 50ch; }
 .start-steps { list-style: none; counter-reset: start; margin: 1.75rem 0 0; padding: 0; display: grid; gap: 0.5rem; max-width: 46rem; }

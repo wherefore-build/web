@@ -184,9 +184,16 @@
 </div>
 </div></section>
 <section id="start"><div class="wrap">
-<div class="src"><p><span class="src-k">from</span> facts/company.json · 12 facts: start.{install, steps[].{command, args, also, also_says, says}, heading, text, free} · hero.pip</p><p><span class="src-k">from</span> wherefore 0.20.0 · licence · commands.json: wherefore scan, wherefore init</p><p><span class="src-k">held by</span> gate · reach · brand · engine</p></div>
+<div class="src"><p><span class="src-k">from</span> facts/company.json · 14 facts: start.{install, steps[].{command, args, also, also_says, says}, heading_turns[], heading, text, free} · hero.pip</p><p><span class="src-k">from</span> wherefore 0.20.0 · licence · commands.json: wherefore scan, wherefore init</p><p><span class="src-k">held by</span> gate · reach · brand · engine</p></div>
 <div class="start-box">
-<h2>Your company, compiled.</h2>
+<h2 class="turning"><span class="sr">Your company, compiled.</span><span class="turns" aria-hidden="true"><span class="turn" style="animation-delay: 0s">Your project, compiled.</span><span class="turn" style="animation-delay: 2.2s">Your organization, compiled.</span><span class="turn-last">Your company, compiled.</span></span></h2>
+<style>
+.turns .turn { animation: turn 13.4s linear infinite; }
+.turns .turn-last { animation: turn-last 13.4s linear infinite; }
+@keyframes turn { 0% { opacity: 0; } 2% { opacity: 1; } 14.42% { opacity: 1; } 16.42%, 100% { opacity: 0; } }
+@keyframes turn-last { 0%, 32.84% { opacity: 0; } 34.84%, 98% { opacity: 1; } 100% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .turns .turn { display: none; } .turns .turn-last { opacity: 1; animation: none; } }
+</style>
 <p class="start-text">Start with one scan. If it finds nothing, good: the rest of Wherefore keeps it that way.</p>
 <ol class="start-steps">
 <li><code>curl -fsSL https://wherefore.sh | sh</code><span class="does">Or with pip: <code>pip install wherefore-build</code></span></li>
