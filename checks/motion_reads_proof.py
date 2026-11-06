@@ -10,6 +10,7 @@ the words of the case, or, for the case that must not fire, to pass.
           a line the engine never printed
           a claim of too many words
           a page missing a word its scene says
+          a poster missing a word its scene says
   passes  the site as it is
 
 Usage:  python3 checks/motion_reads_proof.py
@@ -27,6 +28,7 @@ from wherefore.prove import Edit, check, report                   # noqa: E402
 CHECK = "checks/motion_reads.py"
 BOARD = "motion/gate/storyboard.json"
 PAGE = "site/motion/gate/index.html"
+POSTER = "site/motion/gate/poster.svg"
 PASS = "every one of the"
 
 
@@ -60,6 +62,12 @@ def main():
             raise SystemExit("the gate's claim no longer sets the word `accounted` - re-anchor this case")
         p.write_text(text.replace(">accounted<", ">counted<", 1), encoding="utf-8")
         check(r, "a page missing a word its scene says", CHECK, True, ["DROPPED        gate/claim: the page lacks `accounted`"])
+    with Edit(POSTER) as p:
+        text = p.read_text(encoding="utf-8")
+        if ">accounted<" not in text:
+            raise SystemExit("the gate's poster no longer sets the word `accounted` - re-anchor this case")
+        p.write_text(text.replace(">accounted<", ">counted<", 1), encoding="utf-8")
+        check(r, "a poster missing a word its scene says", CHECK, True, ["DROPPED        gate/claim: the poster lacks `accounted`"])
     check(r, "the site as it is", CHECK, False, [PASS])
     return report(r)
 

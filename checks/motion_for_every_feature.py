@@ -3,11 +3,12 @@
 
 THE CLIP IS THE PROMISE IN MOTION. The features page must say something about
 every feature or the build stops; since 0.20.0 the engine also writes a clip
-for each - a page in motion, site/motion/<id>/ - and the card plays it. A
+for each - a page in motion, site/motion/<id>/, and beside it poster.svg, the
+same clip as one SVG for the issue it answered - and the card plays it. A
 feature whose clip is missing, or whose card does not frame it, is a feature
 people read about and never see. This fails:
 
-  NO CLIP      site/motion/<id>/index.html or motion/<id>/storyboard.json is not there
+  NO CLIP      site/motion/<id>/index.html, its poster.svg, or motion/<id>/storyboard.json is not there
   NOT PLAYED   the features page frames no clip for a feature it describes
   NOT A CLIP   a storyboard names another feature, or has no scenes
   STRAY        a clip in site/motion/ for a feature the release does not ship
@@ -34,8 +35,8 @@ def faults():
     framed = FRAME.findall(PAGE.read_text(encoding="utf-8")) if PAGE.exists() else []
     for fid in ids:
         page, board = CLIPS / fid / "index.html", BOARDS / fid / "storyboard.json"
-        if not page.is_file() or not board.is_file():
-            found.append(f"NO CLIP      {fid}: site/motion/{fid}/ has no index.html, or motion/{fid}/ no storyboard.json; the build writes them")
+        if not page.is_file() or not page.with_name("poster.svg").is_file() or not board.is_file():
+            found.append(f"NO CLIP      {fid}: site/motion/{fid}/ has no index.html or poster.svg, or motion/{fid}/ no storyboard.json; the build writes them")
             continue
         try:
             b = json.loads(board.read_text(encoding="utf-8"))

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Drift, on the map · 0.20.0</title><meta name="robots" content="noindex"><link rel="stylesheet" href="../../brand.css"><style>:root{--t:0;--d:27.5s}
+@property --n{syntax:'<integer>';inherits:true;initial-value:0}
+html,body{margin:0;height:100%;overflow:hidden;background:var(--ground);color:var(--ink)}
+.frame{position:relative;width:100%;height:100%;container-type:size;font-family:var(--font-body)}
+.scene{position:absolute;inset:0;padding:8cqmin 9cqmin;display:flex;flex-direction:column;justify-content:center;gap:3cqmin;opacity:0;animation:var(--d) linear infinite;animation-delay:calc(var(--t) * -1s)}
+.scene>*{max-width:120cqmin}
+.typed,.ln.out,.ln.work,.work i,.mark .l,.ver,.claim .w,.close .w,.viz .row.left,.viz .bar i,.viz .card,.viz .chip,.viz .step,.viz .count{animation:var(--d) linear infinite;animation-delay:calc(var(--t) * -1s)}
+html.still .scene,html.still .typed,html.still .ln.out,html.still .ln.work,html.still .mark .l,html.still .ver,html.still .claim .w,html.still .close .w,html.still .viz .row.left,html.still .viz .bar i,html.still .viz .card,html.still .viz .chip,html.still .viz .step,html.still .viz .count,html.still .work i{animation-play-state:paused}
+@media (prefers-reduced-motion:reduce){.scene,.typed,.ln.out,.ln.work,.work i,.mark .l,.ver,.claim .w,.close .w,.viz .row.left,.viz .bar i,.viz .card,.viz .chip,.viz .step,.viz .count,.work i{animation:none}.scene{opacity:0}.scene.claim,.mark .l,.ver,.claim .w,.close .w,.viz .row.left,.viz .card,.viz .chip,.viz .step{opacity:1}.viz .bar i{width:var(--w)}.viz .count{--n:var(--to)}}
+.mark{font:400 17cqmin/1 var(--font-display);letter-spacing:-0.02em}
+.mark .l,.claim .w,.close .w,.ln.out,.ln.work{opacity:0}
+.ver{font:500 4cqmin/1 var(--font-mono);color:var(--on-accent);background:var(--accent);padding:1.6cqmin 2.6cqmin;border-radius:999px;align-self:flex-start;opacity:0}
+.eye{font:500 3.3cqmin/1.3 var(--font-mono);letter-spacing:0.06em;text-transform:uppercase;color:var(--muted)}
+.big{font:400 11.5cqmin/1.05 var(--font-display);text-wrap:balance}
+.term{margin:0;font:400 4.2cqmin/1.6 var(--font-mono);background:var(--surface);border:1px solid var(--line);border-radius:3cqmin;padding:4cqmin;display:grid;gap:1.2cqmin;white-space:normal}
+.term .ln{display:block;font:400 4.2cqmin/1.6 var(--font-mono);white-space:pre-wrap;overflow-wrap:anywhere}
+.term .ln.hi{color:var(--accent)}
+.term .pr{color:var(--muted)}
+.typed{display:inline-block;white-space:nowrap;overflow:hidden;vertical-align:bottom;width:0;border-right:0.5cqmin solid var(--accent)}
+.term .ln.work{height:1.6em;display:flex;align-items:center;gap:1.2cqmin}
+.work i{display:block;width:1.4cqmin;height:1.4cqmin;border-radius:50%;background:var(--muted);opacity:0}
+.claim{font:400 9.5cqmin/1.1 var(--font-display);text-wrap:balance}
+.close .icon{width:14cqmin;height:14cqmin;display:block;margin-bottom:2cqmin}
+.home{font:400 12cqmin/1 var(--font-display);letter-spacing:-0.02em}
+.tag{font:italic 400 5.2cqmin/1.2 var(--font-display);color:var(--muted)}
+.install{font:400 3.8cqmin/1.6 var(--font-mono)}
+.url{font:400 3.6cqmin/1.5 var(--font-mono);color:var(--muted)}
+.mech-cap{margin:0;font:400 3.4cqmin/1.45 var(--font-body);color:var(--muted);max-width:120cqmin}
+.viz{display:grid;gap:2.2cqmin;width:100%;max-width:120cqmin}
+.viz .row{display:grid;grid-template-columns:36cqmin 1fr 10cqmin;gap:2cqmin;align-items:center;font:400 3.2cqmin/1.3 var(--font-mono)}
+.viz .row.left{opacity:0}
+.viz .row.left .lab{color:var(--ink)}
+.viz .row.left .num{font-size:5.5cqmin;line-height:1}
+.viz .lab{color:var(--muted)}
+.viz .num{text-align:right;font-variant-numeric:tabular-nums}
+.viz .count::after{counter-reset:n var(--n);content:counter(n)}
+.viz .count .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.viz .bar{display:block;height:3.2cqmin;background:var(--surface);border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.viz .bar.none{background:none;border:0}
+.viz .bar i{display:block;height:100%;width:0}
+.viz .t-accent{background:var(--accent)}.viz .bar .t-ink{background:var(--ink)}.viz .bar .t-muted{background:var(--muted)}
+.viz span.t-accent,.viz .card.t-accent .num{background:none;color:var(--accent)}
+.viz .card{opacity:0;display:grid;gap:0.8cqmin;padding:3cqmin;border:1px solid var(--line);border-radius:3cqmin;background:var(--surface);font:400 3.2cqmin/1.3 var(--font-mono)}
+.viz .card .val{font:400 4.2cqmin/1.2 var(--font-display);color:var(--ink)}
+.viz .card .num.big{font:400 10cqmin/1 var(--font-display);text-align:left}
+.viz .card.t-fail .num{color:var(--fail)}
+.viz.hold{grid-template-columns:auto auto 1fr;align-items:center}
+.viz .arrow{font:400 6cqmin/1 var(--font-display);color:var(--muted)}
+.viz .chips{display:flex;flex-wrap:wrap;gap:1.4cqmin}
+.viz .chip{opacity:0;font:400 2.8cqmin/1.2 var(--font-mono);padding:1.2cqmin 2cqmin;border:1px solid var(--line);border-radius:999px;color:var(--ink)}
+.viz .chip.t-muted{color:var(--muted)}.viz .chip.t-fail{color:var(--fail)}
+.viz.compare .places{display:flex;gap:2cqmin;flex-wrap:wrap}
+.viz.handover{grid-template-columns:repeat(4,1fr);gap:2cqmin}
+.viz .step{opacity:0;display:grid;gap:1.6cqmin;justify-items:start;font:400 3cqmin/1.3 var(--font-mono)}
+.viz .step .dot{width:4cqmin;height:4cqmin;border-radius:50%;background:var(--accent)}
+.viz .step .lab{color:var(--ink)}
+@keyframes w0{0%,0.000%{opacity:0}1.091%{opacity:1}9.818%{opacity:1}10.909%,100%{opacity:0}}@keyframes set0_0{0%,1.091%{opacity:0}2.000%,100%{opacity:1}}@keyframes set0_1{0%,1.309%{opacity:0}2.218%,100%{opacity:1}}@keyframes set0_2{0%,1.527%{opacity:0}2.436%,100%{opacity:1}}@keyframes set0_3{0%,1.745%{opacity:0}2.655%,100%{opacity:1}}@keyframes set0_4{0%,1.964%{opacity:0}2.873%,100%{opacity:1}}@keyframes set0_5{0%,2.182%{opacity:0}3.091%,100%{opacity:1}}@keyframes set0_6{0%,2.400%{opacity:0}3.309%,100%{opacity:1}}@keyframes set0_7{0%,2.618%{opacity:0}3.527%,100%{opacity:1}}@keyframes set0_8{0%,2.836%{opacity:0}3.745%,100%{opacity:1}}@keyframes stamp0{0%,4.509%{opacity:0;transform:scale(1.2)}5.418%,100%{opacity:1;transform:none}}@keyframes w1{0%,10.909%{opacity:0}12.000%{opacity:1}24.364%{opacity:1}25.455%,100%{opacity:0}}@keyframes w2{0%,25.455%{opacity:0}26.545%{opacity:1}42.545%{opacity:1}43.636%,100%{opacity:0}}@keyframes type2_0{0%,27.273%{width:0}31.473%,100%{width:21ch}}@keyframes work2{0%,32.200%{opacity:0}32.382%{opacity:1}35.473%{opacity:1}35.655%,100%{opacity:0}}@keyframes dot2_0{0%,32.382%{opacity:0}33.291%,100%{opacity:1}}@keyframes dot2_1{0%,33.291%{opacity:0}34.200%,100%{opacity:1}}@keyframes dot2_2{0%,34.200%{opacity:0}35.109%,100%{opacity:1}}@keyframes line2_0{0%,35.473%{opacity:0}36.018%,100%{opacity:1}}@keyframes w3{0%,43.636%{opacity:0;transform:translateY(4cqmin)}44.727%{opacity:1;transform:none}62.545%{opacity:1;transform:none}63.636%,100%{opacity:0;transform:none}}@keyframes pl3_0{0%,44.727%{opacity:0}46.000%,100%{opacity:1}}@keyframes st3{0%,48.727%{opacity:0}50.000%,100%{opacity:1}}@keyframes dis3{0%,53.091%{opacity:0}54.364%,100%{opacity:1}}@keyframes cnt3_1{0%,48.727%{--n:0}52.364%,100%{--n:76}}@keyframes cnt3_2{0%,53.091%{--n:0}56.727%,100%{--n:0}}@keyframes w4{0%,63.636%{opacity:0}64.727%{opacity:1}77.091%{opacity:1}78.182%,100%{opacity:0}}@keyframes wd4_0{0%,64.727%{opacity:0}65.636%,100%{opacity:1}}@keyframes wd4_1{0%,65.018%{opacity:0}65.927%,100%{opacity:1}}@keyframes wd4_2{0%,65.309%{opacity:0}66.218%,100%{opacity:1}}@keyframes wd4_3{0%,65.600%{opacity:0}66.509%,100%{opacity:1}}@keyframes wd4_4{0%,65.891%{opacity:0}66.800%,100%{opacity:1}}@keyframes wd4_5{0%,66.182%{opacity:0}67.091%,100%{opacity:1}}@keyframes wd4_6{0%,66.473%{opacity:0}67.382%,100%{opacity:1}}@keyframes wd4_7{0%,66.764%{opacity:0}67.673%,100%{opacity:1}}@keyframes wd4_8{0%,67.055%{opacity:0}67.964%,100%{opacity:1}}@keyframes w5{0%,78.182%{opacity:0}79.273%{opacity:1}98.909%{opacity:1}100.000%,100%{opacity:0}}@keyframes cl5_0{0%,79.273%{opacity:0}80.182%,100%{opacity:1}}@keyframes cl5_1{0%,80.727%{opacity:0}81.636%,100%{opacity:1}}@keyframes cl5_2{0%,82.182%{opacity:0}83.091%,100%{opacity:1}}@keyframes cl5_3{0%,83.636%{opacity:0}84.545%,100%{opacity:1}}</style></head>
+<body><div class="frame" data-duration="27.5"><div class="scene open" style="animation-name:w0"><div class="mark" aria-label="Wherefore"><span class="l" style="animation-name:set0_0">W</span><span class="l" style="animation-name:set0_1">h</span><span class="l" style="animation-name:set0_2">e</span><span class="l" style="animation-name:set0_3">r</span><span class="l" style="animation-name:set0_4">e</span><span class="l" style="animation-name:set0_5">f</span><span class="l" style="animation-name:set0_6">o</span><span class="l" style="animation-name:set0_7">r</span><span class="l" style="animation-name:set0_8">e</span></div><div class="ver" style="animation-name:stamp0">0.20.0</div></div><div class="scene ask" style="animation-name:w1"><div class="eye">shipped in 0.20.0</div><div class="big">Drift, on the map</div></div><div class="scene run" style="animation-name:w2"><pre class="term"><code class="ln"><span class="pr"><span class="prompt">$ </span></span><span class="typed" style="animation-name:type2_0;animation-timing-function:steps(21)">wherefore check drift</span></code><code class="ln work" style="animation-name:work2"><i class="d" style="animation-name:dot2_0"></i><i class="d" style="animation-name:dot2_1"></i><i class="d" style="animation-name:dot2_2"></i></code><code class="ln out hi" style="animation-name:line2_0">1 value drifts…</code></pre></div><div class="scene mechanism" style="animation-name:w3"><div class="eye">what it compares</div><div class="viz compare"><div class="places"><div class="card" style="animation-name:pl3_0"><span class="lab">a place</span><span class="val">site/</span></div></div><div class="card tally" style="animation-name:st3"><span class="num big count" style="--to:76;animation-name:cnt3_1" data-n="76"><span class="sr">76</span></span><span class="lab">values stated, 16 pages</span></div><div class="card tally t-accent" style="animation-name:dis3"><span class="num big count" style="--to:0;animation-name:cnt3_2" data-n="0"><span class="sr">0</span></span><span class="lab">disagree</span></div></div><p class="mech-cap">76 values stated across 16 pages in site; 0 disagree</p></div><div class="scene claim" style="animation-name:w4"><div class="claim"><span class="w" style="animation-name:wd4_0">Every</span> <span class="w" style="animation-name:wd4_1">hand-written</span> <span class="w" style="animation-name:wd4_2">copy</span> <span class="w" style="animation-name:wd4_3">no</span> <span class="w" style="animation-name:wd4_4">source</span> <span class="w" style="animation-name:wd4_5">holds,</span> <span class="w" style="animation-name:wd4_6">named</span> <span class="w" style="animation-name:wd4_7">and</span> <span class="w" style="animation-name:wd4_8">counted.</span></div></div><div class="scene close" style="animation-name:w5"><div class="w" style="animation-name:cl5_0"><img class="icon" src="../../brand/icon.svg" alt=""></div><div class="w" style="animation-name:cl5_1"><div class="home">wherefore.build</div></div><div class="w" style="animation-name:cl5_2"><div class="tag">Your company, compiled.</div></div><div class="w" style="animation-name:cl5_3"><div class="install">pip install wherefore-build</div><div class="url">wherefore.build/features/#drift</div></div></div></div></body></html>

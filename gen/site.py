@@ -294,6 +294,7 @@ def part(render, f, inspect, also=()):
     if ASKED:
         asked = ((["version"] if "version" in ASKED else []) + (["licence"] if "licence" in ASKED else [])
                  + (["releases.json"] if "releases" in ASKED else [])
+                 + (["docs/*.md, every page of them"] if "docs" in ASKED else [])
                  + ([f"commands.json: {', '.join(commands)}"] if commands else []))
         lines.append(f'<p><span class="src-k">{esc(inspect["from"])}</span> {esc(ENGINE)} · '
                      f'{esc(" · ".join(asked))}</p>')
@@ -337,8 +338,8 @@ def header(f):
     return f'{banner(f)}<header class="top">{topbar(f)}<div class="wrap">{SRC}</div></header>'
 
 
-def key(f):
-    """What the checks named under each part do, shown with them."""
+def key(f, home=""):
+    """What the checks named under each part do, shown with them; `home` is the way up to the root."""
     i = f["inspect"]
     rows = "".join(f'<div><dt>{esc(k)}</dt><dd>{esc(i["checks"][k])}</dd></div>' for k in i["checks"])
     source = f["company"]["source"]
@@ -346,7 +347,7 @@ def key(f):
     link = f' <a target="_blank" rel="noopener" href="{esc(source)}">{esc(i["source"])}{OUT}</a>' if source else ""
     # The map: the whole chain, drawn by the pinned engine from a real run of
     # every generator (MAP_PAGE, a generator in wherefore.json).
-    link += f' <a href="{MAP_PAGE}">{esc(i["map"])}</a>'
+    link += f' <a href="{home}{MAP_PAGE}">{esc(i["map"])}</a>'
     return (f'<div class="src-key"><div class="wrap"><p>{esc(i["intro"])}{link}</p>'
             f'<dl>{rows}</dl></div></div>')
 
@@ -766,12 +767,15 @@ def changelog_page(f):
 {chr(10).join(lines)}
 </head>
 <body>
+{INSPECT_STATE}
 {banner()}<header class="top">{topbar(f, "../")}</header>
 <main id="top">
+{key(f, "../")}
 <section class="log-head"><div class="wrap">
 <p class="eyebrow">{esc(c["title"])} · {esc(name)} {esc(wherefore.__version__)}</p>
 <h1>{esc(c["heading"])}</h1>
 <p class="lede">{esc(c["intro"])}</p>
+{SRC}
 </div></section>
 <section class="log"><div class="wrap">
 <ol class="releases">
@@ -780,6 +784,7 @@ def changelog_page(f):
 </div></section>
 </main>
 {sub_footer(f)}
+{switch(f)}
 </body>
 </html>
 """
@@ -795,8 +800,26 @@ def sub_footer(f):
             f' · {esc(f["colophon"])}</p>\n<p class="footer-meta"><a href="../">{esc(name)}</a> · <a href="../brand/">Brand</a> · <a href="../{MAP_PAGE}">{esc(f["inspect"]["map_short"])}</a>{source}</p></div></div></footer>')
 
 
+INSPECT_STATE = '<input class="state inspect-state" type="checkbox" id="inspect">'
+
+
+def switch(f):
+    """The switch that shows how the page was compiled: first in the page as a
+    checkbox, last as the label a reader presses (page.css holds it in place)."""
+    i = f["inspect"]
+    return (f'<label class="inspect-switch" for="inspect"><span class="switch-track" aria-hidden="true"></span>'
+            f'<span class="switch-long">{esc(i["toggle"])}</span><span class="switch-short">{esc(i["toggle_short"])}</span></label>')
+
+
 def sub_page(f, slug, eyebrow, heading, lede, body):
-    """A page one level down, in the changelog's shell: the draft banner, the nav, its head, its body."""
+    """A page one level down, in the changelog's shell: the draft banner, the nav, its head, its body.
+
+    EVERY PAGE SAYS HOW IT WAS COMPILED (owner, 6 November 2026): the switch the
+    home page has is on every page, and a page one level down gives one
+    account of itself, under its heading - the facts it read, what it asked the
+    engine for, the checks that hold it - the way each part of the home page
+    does. main() renders the page through `part`, which writes that account
+    where SRC is."""
     company = f["company"]
     name = company["name"]
     lines = [head(f"{heading} — {name}", lede or heading, "../brand.css"), '<link rel="stylesheet" href="../page.css">']
@@ -809,16 +832,20 @@ def sub_page(f, slug, eyebrow, heading, lede, body):
 {chr(10).join(lines)}
 </head>
 <body>
+{INSPECT_STATE}
 {banner()}<header class="top">{topbar(f, "../")}</header>
 <main id="top">
+{key(f, "../")}
 <section class="log-head"><div class="wrap">
 <p class="eyebrow">{esc(eyebrow)}</p>
 <h1>{esc(heading)}</h1>
 {lede_html}
+{SRC}
 </div></section>
-{body.replace(SRC, "")}
+{body}
 </main>
 {sub_footer(f)}
+{switch(f)}
 </body>
 </html>
 """
@@ -836,6 +863,7 @@ def docs_pages(f):
     engine's, so a release that rewrites a page rewrites it here."""
     from markdown import render
     d = f["docs"]
+    ASKED.append("docs")
     pages = wherefore_docs.pages()
     out = {}
     for pid, title, md in pages:
@@ -868,16 +896,20 @@ def docs_page(f, slug, title, body):
 {chr(10).join(lines)}
 </head>
 <body>
+{INSPECT_STATE}
 {banner()}<header class="top">{topbar(f, up)}</header>
 <main id="top">
+{key(f, up)}
 <section class="log-head"><div class="wrap">
 <p class="eyebrow">{esc(d["title"])} · {esc(name)} {esc(wherefore.__version__)}</p>
 <h1>{esc(d["heading"])}</h1>
 <p class="lede">{esc(d["intro"])}</p>
+{SRC}
 </div></section>
 {body}
 </main>
 {sub_footer(f).replace('href="../', 'href="' + up)}
+{switch(f)}
 </body>
 </html>
 """
@@ -1205,7 +1237,7 @@ def page(f):
 {chr(10).join(lines)}
 </head>
 <body>
-<input class="state inspect-state" type="checkbox" id="inspect">
+{INSPECT_STATE}
 {parts["header"]}
 <main id="top">
 {key(f)}
@@ -1219,7 +1251,7 @@ def page(f):
 {parts["start"]}
 </main>
 {parts["footer"]}
-<label class="inspect-switch" for="inspect"><span class="switch-track" aria-hidden="true"></span><span class="switch-long">{esc(inspect["toggle"])}</span><span class="switch-short">{esc(inspect["toggle_short"])}</span></label>
+{switch(f)}
 </body>
 </html>
 """
@@ -1266,12 +1298,14 @@ def main():
     (SITE / "index.html").write_text(page(FACTS), encoding="utf-8")
     (SITE / "_headers").write_text(headers(), encoding="utf-8")
     (SITE / "changelog").mkdir(exist_ok=True)
-    (SITE / "changelog/index.html").write_text(changelog_page(FACTS), encoding="utf-8")
-    for slug, (title, body) in docs_pages(FACTS).items():
+    inspect = FACTS["inspect"]
+    (SITE / "changelog/index.html").write_text(part(changelog_page, FACTS, inspect), encoding="utf-8")
+    for slug, (title, _) in docs_pages(FACTS).items():
         (SITE / slug).mkdir(parents=True, exist_ok=True)
-        (SITE / slug / "index.html").write_text(docs_page(FACTS, slug, title, body), encoding="utf-8")
+        (SITE / slug / "index.html").write_text(
+            part(lambda r, s=slug, t=title: docs_page(r, s, t, docs_pages(r)[s][1]), FACTS, inspect), encoding="utf-8")
     (SITE / "features").mkdir(exist_ok=True)
-    (SITE / "features/index.html").write_text(features_page(FACTS), encoding="utf-8")
+    (SITE / "features/index.html").write_text(part(features_page, FACTS, inspect), encoding="utf-8")
     (SITE / MODEL_PAGE).mkdir(exist_ok=True)
     (SITE / MODEL_PAGE / "index.html").write_text(model_page(FACTS), encoding="utf-8")
     (SITE / PART_PAGE).mkdir(exist_ok=True)

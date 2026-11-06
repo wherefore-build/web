@@ -6,6 +6,7 @@ check to fail in the words of the case, or, for the case that must not fire,
 to pass.
 
   fails   a feature's clip deleted
+          a feature's poster deleted
           a storyboard that is another feature's
           the features page framing no clip for a feature
           a clip for a feature the release does not ship
@@ -40,6 +41,9 @@ def main():
     with Edit("site/motion/gate/index.html") as p:
         p.unlink()
         check(r, "a feature's clip deleted", CHECK, True, ["NO CLIP      gate"])
+    with Edit("site/motion/gate/poster.svg") as p:
+        p.unlink()
+        check(r, "a feature's poster deleted", CHECK, True, ["NO CLIP      gate"])
     with Edit("motion/gate/storyboard.json") as p:
         plant(p, '"id": "gate"', '"id": "build"')
         check(r, "a storyboard that is another feature's", CHECK, True, ["NOT A CLIP   motion/gate/storyboard.json"])

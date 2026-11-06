@@ -40,7 +40,7 @@
    "mechanism": "hold",
    "data": {
     "source": "facts/company.json",
-    "facts": 268,
+    "facts": 270,
     "pages": 12,
     "shown": [
      "brand/",
@@ -57,7 +57,7 @@
      "files": 1
     }
    },
-   "caption": "268 facts in facts/company.json, and 12 pages built from them; company.name alone reaches 1 page"
+   "caption": "270 facts in facts/company.json, and 12 pages built from them; company.name alone reaches 1 page"
   },
   {
    "kind": "claim",

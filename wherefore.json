@@ -3,13 +3,20 @@
  "name": "wherefore.build",
  "palette": {
   "source": "brand/tokens.json",
-  "read": ["gen/**", "site/**", "facts/**", "brand/**", "cases/**"],
+  "read": [
+   "gen/**",
+   "site/**",
+   "facts/**",
+   "brand/**",
+   "cases/**"
+  ],
   "not_ours": {
    "cases/pendulum/model.html": "the pendulum's page, taken from its repository as it serves it; its own suite holds its brand",
    "site/pendulum/index.html": "the same page, copied to where the site serves it",
    "cases/pendulum/plate.html": "the pendulum's plate, the same page opened on one part; its own suite holds its brand",
    "site/pendulum/plate/index.html": "the same page, copied to where the site serves it",
-   "site/changelog/index.html": "quotes each release's picture as the engine printed it, and the 0.10.0 picture is the palette check catching a stray colour - so the page says that colour as text, never as a style; its styles are page.css and brand.css, read above"
+   "site/changelog/index.html": "quotes each release's picture as the engine printed it, and the 0.10.0 picture is the palette check catching a stray colour - so the page says that colour as text, never as a style; its styles are page.css and brand.css, read above",
+   "site/motion/palette/poster.svg": "the palette feature's clip, as one SVG: it prints the 0.10.0 picture's line, which names the stray colour the check caught, as text in <text> - never as a style. The same clip as a page says it inside <code>, which the check reads as quoted; an SVG has no code element, so this one is excused by name, with the same reason as the changelog"
   }
  },
  "note": "The company: its site and its brand now, and every asset after them. Each asset is generated from facts/company.json, from brand/tokens.json and from the engine it pins - what the product is (its principles, its commands, its version) is read from that release, never retyped here.",
@@ -239,5 +246,12 @@
    }
   ],
   "audience": "a visitor"
+ },
+ "drift": {
+  "allow": 0,
+  "why": "nothing: every value the site states by hand is held by facts/ or brand/, and the one file set that repeats a value is not this site's",
+  "ignore": {
+   "brand/fonts/**": "the three faces' licences, each the OFL's own text with its own version in it; third-party, unchanged"
+  }
  }
 }
