@@ -48,7 +48,7 @@
    "kind": "close",
    "start": 19.0,
    "end": 22.5,
-   "eyebrow": "try it",
+   "home": "wherefore.build",
    "install": "pip install wherefore-build==0.17.0",
    "url": "wherefore.build/features/#published"
   }

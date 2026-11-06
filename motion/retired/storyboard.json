@@ -48,7 +48,7 @@
    "kind": "close",
    "start": 18.5,
    "end": 22.0,
-   "eyebrow": "try it",
+   "home": "wherefore.build",
    "install": "pip install wherefore-build==0.1.0",
    "url": "wherefore.build/features/#retired"
   }

@@ -49,7 +49,7 @@
    "kind": "close",
    "start": 23.0,
    "end": 26.5,
-   "eyebrow": "try it",
+   "home": "wherefore.build",
    "install": "pip install wherefore-build==0.2.0",
    "url": "wherefore.build/features/#skill"
   }
