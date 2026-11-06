@@ -2,7 +2,7 @@
  "id": "start",
  "name": "Start a corpus",
  "version": "0.1.0",
- "duration": 25.0,
+ "duration": 22.5,
  "frames": [
   "portrait",
   "landscape"
@@ -30,22 +30,34 @@
    "typed": "wherefore init"
   },
   {
-   "kind": "more",
+   "kind": "mechanism",
    "start": 10.0,
-   "end": 17.5,
-   "eyebrow": "what it does",
-   "text": "One command writes a wherefore.json that declares nothing yet, and the skill where Claude Code and Codex read it"
+   "end": 15.0,
+   "eyebrow": "what it hands over",
+   "mechanism": "handover",
+   "data": {
+    "issues": 9,
+    "items": 5,
+    "releases": 27,
+    "steps": [
+     "an issue",
+     "the plan, on it",
+     "the release",
+     "the note that closes it"
+    ]
+   },
+   "caption": "9 issues answered by 5 roadmap items across 27 releases"
   },
   {
    "kind": "claim",
-   "start": 17.5,
-   "end": 21.5,
+   "start": 15.0,
+   "end": 19.0,
    "text": "A wherefore.json that declares nothing yet, and a skill beside it."
   },
   {
    "kind": "close",
-   "start": 21.5,
-   "end": 25.0,
+   "start": 19.0,
+   "end": 22.5,
    "home": "wherefore.build",
    "install": "pip install wherefore-build==0.1.0",
    "url": "wherefore.build/features/#start"

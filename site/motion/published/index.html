@@ -1,10 +1,11 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>A page you publish but cannot build · 0.17.0</title><meta name="robots" content="noindex"><link rel="stylesheet" href="../../brand.css"><style>:root{--t:0}
+:root{--d:29.0s}
 html,body{margin:0;height:100%;overflow:hidden;background:var(--ground);color:var(--ink)}
 .frame{position:relative;width:100%;height:100%;container-type:size;font-family:var(--font-body)}
-.scene{position:absolute;inset:0;padding:8cqmin 9cqmin;display:flex;flex-direction:column;justify-content:center;gap:3cqmin;opacity:0;animation:22.5s linear infinite;animation-delay:calc(var(--t) * -1s)}
+.scene{position:absolute;inset:0;padding:8cqmin 9cqmin;display:flex;flex-direction:column;justify-content:center;gap:3cqmin;opacity:0;animation:29.0s linear infinite;animation-delay:calc(var(--t) * -1s)}
 .scene>*{max-width:120cqmin}
-.typed,.answer .ln{animation:22.5s linear infinite;animation-delay:calc(var(--t) * -1s)}
+.typed,.answer .ln{animation:29.0s linear infinite;animation-delay:calc(var(--t) * -1s)}
 .typed{font:inherit}
 html.still .scene,html.still .typed,html.still .answer .ln{animation-play-state:paused}
 @media (prefers-reduced-motion:reduce){.scene,.typed,.answer .ln{animation:none}.scene{opacity:0}.scene.claim{opacity:1}}
@@ -22,6 +23,35 @@ html.still .scene,html.still .typed,html.still .answer .ln{animation-play-state:
 .install{font:400 3.8cqmin/1.6 var(--font-mono)}
 .install b{color:var(--accent);font-weight:500}
 .home{font:400 12cqmin/1 var(--font-display);letter-spacing:-0.02em}
+.mech-cap{margin:0}
+
+.viz{display:grid;gap:2.2cqmin;width:100%;max-width:120cqmin}
+.viz .row{display:grid;grid-template-columns:36cqmin 1fr 10cqmin;gap:2cqmin;align-items:center;font:400 3.2cqmin/1.3 var(--font-mono)}
+.viz .row.left{opacity:0;animation:var(--d) linear infinite;animation-delay:calc(var(--t) * -1s)}
+.viz .lab{color:var(--muted)}
+.viz .num{text-align:right;font-variant-numeric:tabular-nums}
+.viz .bar{display:block;height:3.2cqmin;background:var(--surface);border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.viz .bar i{display:block;height:100%;width:0;animation:var(--d) linear infinite;animation-delay:calc(var(--t) * -1s)}
+.viz .t-accent{background:var(--accent)}.viz .bar .t-ink{background:var(--ink)}.viz .bar .t-muted{background:var(--muted)}
+.viz span.t-accent,.viz .card.t-accent .num{background:none;color:var(--accent)}
+.viz .card{opacity:0;animation:var(--d) linear infinite;animation-delay:calc(var(--t) * -1s);display:grid;gap:0.8cqmin;padding:3cqmin;border:1px solid var(--line);border-radius:3cqmin;background:var(--surface);font:400 3.2cqmin/1.3 var(--font-mono)}
+.viz .card .val{font:400 4.2cqmin/1.2 var(--font-display);color:var(--ink)}
+.viz .card .num.big{font:400 10cqmin/1 var(--font-display);text-align:left}
+.viz .card.t-fail .num{color:var(--fail,var(--accent))}
+.viz.hold{grid-template-columns:auto auto 1fr;align-items:center}
+.viz .arrow{font:400 6cqmin/1 var(--font-display);color:var(--muted)}
+.viz .chips{display:flex;flex-wrap:wrap;gap:1.4cqmin}
+.viz .chip{opacity:0;animation:var(--d) linear infinite;animation-delay:calc(var(--t) * -1s);font:400 2.8cqmin/1.2 var(--font-mono);padding:1.2cqmin 2cqmin;border:1px solid var(--line);border-radius:999px;color:var(--ink)}
+.viz .chip.t-muted{color:var(--muted)}.viz .chip.t-fail{color:var(--fail,var(--accent))}
+.viz.compare .places{display:flex;gap:2cqmin;flex-wrap:wrap}
+.viz.handover{grid-template-columns:repeat(4,1fr);gap:2cqmin}
+.viz .step{opacity:0;animation:var(--d) linear infinite;animation-delay:calc(var(--t) * -1s);display:grid;gap:1.6cqmin;justify-items:start;font:400 3cqmin/1.3 var(--font-mono)}
+.viz .step .dot{width:4cqmin;height:4cqmin;border-radius:50%;background:var(--accent)}
+.viz .step .lab{color:var(--ink)}
+html.still .viz .row.left,html.still .viz .bar i,html.still .viz .card,html.still .viz .chip,html.still .viz .step{animation-play-state:paused}
+@media (prefers-reduced-motion:reduce){.viz .row.left,.viz .bar i,.viz .card,.viz .chip,.viz .step{animation:none;opacity:1}.viz .bar i{width:var(--w)}}
+.mech-cap{font:400 3.4cqmin/1.45 var(--font-body);color:var(--muted);max-width:120cqmin}
+
 .url{font:400 3.6cqmin/1.5 var(--font-mono);color:var(--muted)}
-@keyframes w0{0%,0.000%{opacity:0}1.333%{opacity:1}7.556%{opacity:1}8.889%,100%{opacity:0}}@keyframes w1{0%,8.889%{opacity:0}10.222%{opacity:1}25.333%{opacity:1}26.667%,100%{opacity:0}}@keyframes w2{0%,26.667%{opacity:0}28.000%{opacity:1}43.111%{opacity:1}44.444%,100%{opacity:0}}@keyframes type2_0{0%,29.333%{width:0}37.111%,100%{width:25ch}}@keyframes w3{0%,44.444%{opacity:0}45.778%{opacity:1}65.333%{opacity:1}66.667%,100%{opacity:0}}@keyframes line3_0{0%,46.222%{opacity:0}47.111%,100%{opacity:1}}@keyframes w4{0%,66.667%{opacity:0}68.000%{opacity:1}83.111%{opacity:1}84.444%,100%{opacity:0}}@keyframes w5{0%,84.444%{opacity:0}85.778%{opacity:1}98.667%{opacity:1}100.000%,100%{opacity:0}}</style></head>
-<body><div class="frame" data-duration="22.5"><div class="scene open" style="animation-name:w0"><div class="mark">Wherefore</div><div class="ver">0.17.0</div></div><div class="scene ask" style="animation-name:w1"><div class="eye">shipped in 0.17.0</div><div class="big">A page you publish but cannot build</div></div><div class="scene command" style="animation-name:w2"><div class="eye">the command</div><pre class="term"><code class="ln"><span class="prompt">$ </span><span class="typed" style="animation-name:type2_0;animation-timing-function:steps(25)">wherefore check published</span></code></pre></div><div class="scene answer" style="animation-name:w3"><div class="eye">the answer</div><pre class="term"><code class="ln hi" style="animation-name:line3_0">0 statements on 1 published page still say what the source says…</code></pre></div><div class="scene claim" style="animation-name:w4"><div class="claim">A copy held by reading until it can be built.</div></div><div class="scene close" style="animation-name:w5"><div class="home">wherefore.build</div><div class="install">pip install wherefore-build==0.17.0</div><div class="url">wherefore.build/features/#published</div></div></div></body></html>
+@keyframes w0{0%,0.000%{opacity:0}1.034%{opacity:1}5.862%{opacity:1}6.897%,100%{opacity:0}}@keyframes w1{0%,6.897%{opacity:0}7.931%{opacity:1}21.379%{opacity:1}22.414%,100%{opacity:0}}@keyframes w2{0%,22.414%{opacity:0}23.448%{opacity:1}35.172%{opacity:1}36.207%,100%{opacity:0}}@keyframes type2_0{0%,24.483%{width:0}30.517%,100%{width:25ch}}@keyframes w3{0%,36.207%{opacity:0}37.241%{opacity:1}52.414%{opacity:1}53.448%,100%{opacity:0}}@keyframes line3_0{0%,37.586%{opacity:0}38.276%,100%{opacity:1}}@keyframes w4{0%,53.448%{opacity:0}54.483%{opacity:1}73.103%{opacity:1}74.138%,100%{opacity:0}}@keyframes src4{0%,54.483%{opacity:0}55.690%,100%{opacity:1}}@keyframes pg4_0{0%,56.897%{opacity:0}58.103%,100%{opacity:1}}@keyframes pg4_1{0%,57.759%{opacity:0}58.966%,100%{opacity:1}}@keyframes pg4_2{0%,58.621%{opacity:0}59.828%,100%{opacity:1}}@keyframes pg4_3{0%,59.483%{opacity:0}60.690%,100%{opacity:1}}@keyframes pg4_4{0%,60.345%{opacity:0}61.552%,100%{opacity:1}}@keyframes pg4_5{0%,61.207%{opacity:0}62.414%,100%{opacity:1}}@keyframes pg4_6{0%,62.069%{opacity:0}63.276%,100%{opacity:1}}@keyframes pg4_7{0%,62.931%{opacity:0}64.138%,100%{opacity:1}}@keyframes pgm4{0%,63.793%{opacity:0}65.000%,100%{opacity:1}}@keyframes w5{0%,74.138%{opacity:0}75.172%{opacity:1}86.897%{opacity:1}87.931%,100%{opacity:0}}@keyframes w6{0%,87.931%{opacity:0}88.966%{opacity:1}98.966%{opacity:1}100.000%,100%{opacity:0}}</style></head>
+<body><div class="frame" data-duration="29.0"><div class="scene open" style="animation-name:w0"><div class="mark">Wherefore</div><div class="ver">0.17.0</div></div><div class="scene ask" style="animation-name:w1"><div class="eye">asked for by zakholdsworth · #22</div><div class="big">A page you publish but cannot build</div></div><div class="scene command" style="animation-name:w2"><div class="eye">the command</div><pre class="term"><code class="ln"><span class="prompt">$ </span><span class="typed" style="animation-name:type2_0;animation-timing-function:steps(25)">wherefore check published</span></code></pre></div><div class="scene answer" style="animation-name:w3"><div class="eye">the answer</div><pre class="term"><code class="ln hi" style="animation-name:line3_0">0 statements on 1 published page still say what the source says…</code></pre></div><div class="scene mechanism" style="animation-name:w4"><div class="eye">what it holds</div><div class="viz hold"><div class="card src" style="animation-name:src4"><span class="lab">the source</span><span class="val">facts/company.json</span><span class="num">250 facts</span></div><div class="arrow">→</div><div class="chips"><span class="chip" style="animation-name:pg4_0">pendulum/</span><span class="chip" style="animation-name:pg4_1">brand/</span><span class="chip" style="animation-name:pg4_2">changelog/</span><span class="chip" style="animation-name:pg4_3">docs/checks/</span><span class="chip" style="animation-name:pg4_4">docs/commands/</span><span class="chip" style="animation-name:pg4_5">docs/configuration/</span><span class="chip" style="animation-name:pg4_6">docs/</span><span class="chip" style="animation-name:pg4_7">docs/reporting/</span><span class="chip t-muted" style="animation-name:pgm4">+26 more</span></div></div><p class="mech-cap">250 facts in facts/company.json, and 34 pages built from them; company.name alone reaches 1 page</p></div><div class="scene claim" style="animation-name:w5"><div class="claim">A copy held by reading until it can be built.</div></div><div class="scene close" style="animation-name:w6"><div class="home">wherefore.build</div><div class="install">pip install wherefore-build==0.17.0</div><div class="url">wherefore.build/features/#published</div></div></div></body></html>

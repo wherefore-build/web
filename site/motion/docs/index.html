@@ -1,10 +1,11 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Docs from each release · 0.19.0</title><meta name="robots" content="noindex"><link rel="stylesheet" href="../../brand.css"><style>:root{--t:0}
+:root{--d:18.5s}
 html,body{margin:0;height:100%;overflow:hidden;background:var(--ground);color:var(--ink)}
 .frame{position:relative;width:100%;height:100%;container-type:size;font-family:var(--font-body)}
-.scene{position:absolute;inset:0;padding:8cqmin 9cqmin;display:flex;flex-direction:column;justify-content:center;gap:3cqmin;opacity:0;animation:17.5s linear infinite;animation-delay:calc(var(--t) * -1s)}
+.scene{position:absolute;inset:0;padding:8cqmin 9cqmin;display:flex;flex-direction:column;justify-content:center;gap:3cqmin;opacity:0;animation:18.5s linear infinite;animation-delay:calc(var(--t) * -1s)}
 .scene>*{max-width:120cqmin}
-.typed,.answer .ln{animation:17.5s linear infinite;animation-delay:calc(var(--t) * -1s)}
+.typed,.answer .ln{animation:18.5s linear infinite;animation-delay:calc(var(--t) * -1s)}
 .typed{font:inherit}
 html.still .scene,html.still .typed,html.still .answer .ln{animation-play-state:paused}
 @media (prefers-reduced-motion:reduce){.scene,.typed,.answer .ln{animation:none}.scene{opacity:0}.scene.claim{opacity:1}}
@@ -22,6 +23,35 @@ html.still .scene,html.still .typed,html.still .answer .ln{animation-play-state:
 .install{font:400 3.8cqmin/1.6 var(--font-mono)}
 .install b{color:var(--accent);font-weight:500}
 .home{font:400 12cqmin/1 var(--font-display);letter-spacing:-0.02em}
+.mech-cap{margin:0}
+
+.viz{display:grid;gap:2.2cqmin;width:100%;max-width:120cqmin}
+.viz .row{display:grid;grid-template-columns:36cqmin 1fr 10cqmin;gap:2cqmin;align-items:center;font:400 3.2cqmin/1.3 var(--font-mono)}
+.viz .row.left{opacity:0;animation:var(--d) linear infinite;animation-delay:calc(var(--t) * -1s)}
+.viz .lab{color:var(--muted)}
+.viz .num{text-align:right;font-variant-numeric:tabular-nums}
+.viz .bar{display:block;height:3.2cqmin;background:var(--surface);border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.viz .bar i{display:block;height:100%;width:0;animation:var(--d) linear infinite;animation-delay:calc(var(--t) * -1s)}
+.viz .t-accent{background:var(--accent)}.viz .bar .t-ink{background:var(--ink)}.viz .bar .t-muted{background:var(--muted)}
+.viz span.t-accent,.viz .card.t-accent .num{background:none;color:var(--accent)}
+.viz .card{opacity:0;animation:var(--d) linear infinite;animation-delay:calc(var(--t) * -1s);display:grid;gap:0.8cqmin;padding:3cqmin;border:1px solid var(--line);border-radius:3cqmin;background:var(--surface);font:400 3.2cqmin/1.3 var(--font-mono)}
+.viz .card .val{font:400 4.2cqmin/1.2 var(--font-display);color:var(--ink)}
+.viz .card .num.big{font:400 10cqmin/1 var(--font-display);text-align:left}
+.viz .card.t-fail .num{color:var(--fail,var(--accent))}
+.viz.hold{grid-template-columns:auto auto 1fr;align-items:center}
+.viz .arrow{font:400 6cqmin/1 var(--font-display);color:var(--muted)}
+.viz .chips{display:flex;flex-wrap:wrap;gap:1.4cqmin}
+.viz .chip{opacity:0;animation:var(--d) linear infinite;animation-delay:calc(var(--t) * -1s);font:400 2.8cqmin/1.2 var(--font-mono);padding:1.2cqmin 2cqmin;border:1px solid var(--line);border-radius:999px;color:var(--ink)}
+.viz .chip.t-muted{color:var(--muted)}.viz .chip.t-fail{color:var(--fail,var(--accent))}
+.viz.compare .places{display:flex;gap:2cqmin;flex-wrap:wrap}
+.viz.handover{grid-template-columns:repeat(4,1fr);gap:2cqmin}
+.viz .step{opacity:0;animation:var(--d) linear infinite;animation-delay:calc(var(--t) * -1s);display:grid;gap:1.6cqmin;justify-items:start;font:400 3cqmin/1.3 var(--font-mono)}
+.viz .step .dot{width:4cqmin;height:4cqmin;border-radius:50%;background:var(--accent)}
+.viz .step .lab{color:var(--ink)}
+html.still .viz .row.left,html.still .viz .bar i,html.still .viz .card,html.still .viz .chip,html.still .viz .step{animation-play-state:paused}
+@media (prefers-reduced-motion:reduce){.viz .row.left,.viz .bar i,.viz .card,.viz .chip,.viz .step{animation:none;opacity:1}.viz .bar i{width:var(--w)}}
+.mech-cap{font:400 3.4cqmin/1.45 var(--font-body);color:var(--muted);max-width:120cqmin}
+
 .url{font:400 3.6cqmin/1.5 var(--font-mono);color:var(--muted)}
-@keyframes w0{0%,0.000%{opacity:0}1.714%{opacity:1}9.714%{opacity:1}11.429%,100%{opacity:0}}@keyframes w1{0%,11.429%{opacity:0}13.143%{opacity:1}32.571%{opacity:1}34.286%,100%{opacity:0}}@keyframes w2{0%,34.286%{opacity:0}36.000%{opacity:1}55.429%{opacity:1}57.143%,100%{opacity:0}}@keyframes w3{0%,57.143%{opacity:0}58.857%{opacity:1}78.286%{opacity:1}80.000%,100%{opacity:0}}@keyframes w4{0%,80.000%{opacity:0}81.714%{opacity:1}98.286%{opacity:1}100.000%,100%{opacity:0}}</style></head>
-<body><div class="frame" data-duration="17.5"><div class="scene open" style="animation-name:w0"><div class="mark">Wherefore</div><div class="ver">0.19.0</div></div><div class="scene ask" style="animation-name:w1"><div class="eye">shipped in 0.19.0</div><div class="big">Docs from each release</div></div><div class="scene more" style="animation-name:w2"><div class="eye">what it does</div><div class="claim">Five pages ship inside each release…</div></div><div class="scene claim" style="animation-name:w3"><div class="claim">The docs of the release you run, and no other.</div></div><div class="scene close" style="animation-name:w4"><div class="home">wherefore.build</div><div class="install">pip install wherefore-build==0.19.0</div><div class="url">wherefore.build/features/#docs</div></div></div></body></html>
+@keyframes w0{0%,0.000%{opacity:0}1.622%{opacity:1}9.189%{opacity:1}10.811%,100%{opacity:0}}@keyframes w1{0%,10.811%{opacity:0}12.432%{opacity:1}30.811%{opacity:1}32.432%,100%{opacity:0}}@keyframes w2{0%,32.432%{opacity:0}34.054%{opacity:1}57.838%{opacity:1}59.459%,100%{opacity:0}}@keyframes hs2_0{0%,34.595%{opacity:0}36.486%,100%{opacity:1}}@keyframes hs2_1{0%,38.378%{opacity:0}40.270%,100%{opacity:1}}@keyframes hs2_2{0%,42.162%{opacity:0}44.054%,100%{opacity:1}}@keyframes hs2_3{0%,45.946%{opacity:0}47.838%,100%{opacity:1}}@keyframes w3{0%,59.459%{opacity:0}61.081%{opacity:1}79.459%{opacity:1}81.081%,100%{opacity:0}}@keyframes w4{0%,81.081%{opacity:0}82.703%{opacity:1}98.378%{opacity:1}100.000%,100%{opacity:0}}</style></head>
+<body><div class="frame" data-duration="18.5"><div class="scene open" style="animation-name:w0"><div class="mark">Wherefore</div><div class="ver">0.19.0</div></div><div class="scene ask" style="animation-name:w1"><div class="eye">shipped in 0.19.0</div><div class="big">Docs from each release</div></div><div class="scene mechanism" style="animation-name:w2"><div class="eye">what it hands over</div><div class="viz handover"><div class="step" style="animation-name:hs2_0"><span class="dot"></span><span class="lab">an issue</span></div><div class="step" style="animation-name:hs2_1"><span class="dot"></span><span class="lab">the plan, on it</span></div><div class="step" style="animation-name:hs2_2"><span class="dot"></span><span class="lab">the release</span></div><div class="step" style="animation-name:hs2_3"><span class="dot"></span><span class="lab">the note that closes it</span></div></div><p class="mech-cap">9 issues answered by 5 roadmap items across 27 releases</p></div><div class="scene claim" style="animation-name:w3"><div class="claim">The docs of the release you run, and no other.</div></div><div class="scene close" style="animation-name:w4"><div class="home">wherefore.build</div><div class="install">pip install wherefore-build==0.19.0</div><div class="url">wherefore.build/features/#docs</div></div></div></body></html>

@@ -2,7 +2,7 @@
  "id": "scan2",
  "name": "Scan any number of repositories at once",
  "version": "0.13.0",
- "duration": 27.0,
+ "duration": 27.5,
  "frames": [
   "portrait",
   "landscape"
@@ -32,23 +32,39 @@
   {
    "kind": "answer",
    "start": 10.0,
-   "end": 19.5,
+   "end": 15.0,
    "eyebrow": "the answer",
    "lines": [
-    "  DIFFER  \"start your {} day free\"  site: 14 (2x) · app: 30 (1x)",
     "  agree   \"plans from {} dollars a\"  site: 9 (1x) · app: 9 (1x)"
    ]
   },
   {
+   "kind": "mechanism",
+   "start": 15.0,
+   "end": 20.0,
+   "eyebrow": "what it compares",
+   "mechanism": "compare",
+   "data": {
+    "places": [
+     "site"
+    ],
+    "stated": 139,
+    "files": 36,
+    "disagree": 0,
+    "says": []
+   },
+   "caption": "139 values stated across 36 pages in site; 0 disagree"
+  },
+  {
    "kind": "claim",
-   "start": 19.5,
-   "end": 23.5,
+   "start": 20.0,
+   "end": 24.0,
    "text": "Your site, your app, your docs, scanned together."
   },
   {
    "kind": "close",
-   "start": 23.5,
-   "end": 27.0,
+   "start": 24.0,
+   "end": 27.5,
    "home": "wherefore.build",
    "install": "pip install wherefore-build==0.13.0",
    "url": "wherefore.build/features/#scan2"

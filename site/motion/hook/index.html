@@ -1,10 +1,11 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>The pre-push hook · 0.1.0</title><meta name="robots" content="noindex"><link rel="stylesheet" href="../../brand.css"><style>:root{--t:0}
+:root{--d:25.5s}
 html,body{margin:0;height:100%;overflow:hidden;background:var(--ground);color:var(--ink)}
 .frame{position:relative;width:100%;height:100%;container-type:size;font-family:var(--font-body)}
-.scene{position:absolute;inset:0;padding:8cqmin 9cqmin;display:flex;flex-direction:column;justify-content:center;gap:3cqmin;opacity:0;animation:26.5s linear infinite;animation-delay:calc(var(--t) * -1s)}
+.scene{position:absolute;inset:0;padding:8cqmin 9cqmin;display:flex;flex-direction:column;justify-content:center;gap:3cqmin;opacity:0;animation:25.5s linear infinite;animation-delay:calc(var(--t) * -1s)}
 .scene>*{max-width:120cqmin}
-.typed,.answer .ln{animation:26.5s linear infinite;animation-delay:calc(var(--t) * -1s)}
+.typed,.answer .ln{animation:25.5s linear infinite;animation-delay:calc(var(--t) * -1s)}
 .typed{font:inherit}
 html.still .scene,html.still .typed,html.still .answer .ln{animation-play-state:paused}
 @media (prefers-reduced-motion:reduce){.scene,.typed,.answer .ln{animation:none}.scene{opacity:0}.scene.claim{opacity:1}}
@@ -22,6 +23,35 @@ html.still .scene,html.still .typed,html.still .answer .ln{animation-play-state:
 .install{font:400 3.8cqmin/1.6 var(--font-mono)}
 .install b{color:var(--accent);font-weight:500}
 .home{font:400 12cqmin/1 var(--font-display);letter-spacing:-0.02em}
+.mech-cap{margin:0}
+
+.viz{display:grid;gap:2.2cqmin;width:100%;max-width:120cqmin}
+.viz .row{display:grid;grid-template-columns:36cqmin 1fr 10cqmin;gap:2cqmin;align-items:center;font:400 3.2cqmin/1.3 var(--font-mono)}
+.viz .row.left{opacity:0;animation:var(--d) linear infinite;animation-delay:calc(var(--t) * -1s)}
+.viz .lab{color:var(--muted)}
+.viz .num{text-align:right;font-variant-numeric:tabular-nums}
+.viz .bar{display:block;height:3.2cqmin;background:var(--surface);border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.viz .bar i{display:block;height:100%;width:0;animation:var(--d) linear infinite;animation-delay:calc(var(--t) * -1s)}
+.viz .t-accent{background:var(--accent)}.viz .bar .t-ink{background:var(--ink)}.viz .bar .t-muted{background:var(--muted)}
+.viz span.t-accent,.viz .card.t-accent .num{background:none;color:var(--accent)}
+.viz .card{opacity:0;animation:var(--d) linear infinite;animation-delay:calc(var(--t) * -1s);display:grid;gap:0.8cqmin;padding:3cqmin;border:1px solid var(--line);border-radius:3cqmin;background:var(--surface);font:400 3.2cqmin/1.3 var(--font-mono)}
+.viz .card .val{font:400 4.2cqmin/1.2 var(--font-display);color:var(--ink)}
+.viz .card .num.big{font:400 10cqmin/1 var(--font-display);text-align:left}
+.viz .card.t-fail .num{color:var(--fail,var(--accent))}
+.viz.hold{grid-template-columns:auto auto 1fr;align-items:center}
+.viz .arrow{font:400 6cqmin/1 var(--font-display);color:var(--muted)}
+.viz .chips{display:flex;flex-wrap:wrap;gap:1.4cqmin}
+.viz .chip{opacity:0;animation:var(--d) linear infinite;animation-delay:calc(var(--t) * -1s);font:400 2.8cqmin/1.2 var(--font-mono);padding:1.2cqmin 2cqmin;border:1px solid var(--line);border-radius:999px;color:var(--ink)}
+.viz .chip.t-muted{color:var(--muted)}.viz .chip.t-fail{color:var(--fail,var(--accent))}
+.viz.compare .places{display:flex;gap:2cqmin;flex-wrap:wrap}
+.viz.handover{grid-template-columns:repeat(4,1fr);gap:2cqmin}
+.viz .step{opacity:0;animation:var(--d) linear infinite;animation-delay:calc(var(--t) * -1s);display:grid;gap:1.6cqmin;justify-items:start;font:400 3cqmin/1.3 var(--font-mono)}
+.viz .step .dot{width:4cqmin;height:4cqmin;border-radius:50%;background:var(--accent)}
+.viz .step .lab{color:var(--ink)}
+html.still .viz .row.left,html.still .viz .bar i,html.still .viz .card,html.still .viz .chip,html.still .viz .step{animation-play-state:paused}
+@media (prefers-reduced-motion:reduce){.viz .row.left,.viz .bar i,.viz .card,.viz .chip,.viz .step{animation:none;opacity:1}.viz .bar i{width:var(--w)}}
+.mech-cap{font:400 3.4cqmin/1.45 var(--font-body);color:var(--muted);max-width:120cqmin}
+
 .url{font:400 3.6cqmin/1.5 var(--font-mono);color:var(--muted)}
-@keyframes w0{0%,0.000%{opacity:0}1.132%{opacity:1}6.415%{opacity:1}7.547%,100%{opacity:0}}@keyframes w1{0%,7.547%{opacity:0}8.679%{opacity:1}21.509%{opacity:1}22.642%,100%{opacity:0}}@keyframes w2{0%,22.642%{opacity:0}23.774%{opacity:1}36.604%{opacity:1}37.736%,100%{opacity:0}}@keyframes type2_0{0%,24.906%{width:0}30.717%,100%{width:22ch}}@keyframes w3{0%,37.736%{opacity:0}38.868%{opacity:1}70.566%{opacity:1}71.698%,100%{opacity:0}}@keyframes w4{0%,71.698%{opacity:0}72.830%{opacity:1}85.660%{opacity:1}86.792%,100%{opacity:0}}@keyframes w5{0%,86.792%{opacity:0}87.925%{opacity:1}98.868%{opacity:1}100.000%,100%{opacity:0}}</style></head>
-<body><div class="frame" data-duration="26.5"><div class="scene open" style="animation-name:w0"><div class="mark">Wherefore</div><div class="ver">0.1.0</div></div><div class="scene ask" style="animation-name:w1"><div class="eye">shipped in 0.1.0</div><div class="big">The pre-push hook</div></div><div class="scene command" style="animation-name:w2"><div class="eye">the command</div><pre class="term"><code class="ln"><span class="prompt">$ </span><span class="typed" style="animation-name:type2_0;animation-timing-function:steps(22)">wherefore hook install</span></code></pre></div><div class="scene more" style="animation-name:w3"><div class="eye">what it does</div><div class="claim">A pre-push hook runs the gate before a push leaves the machine, so no push ships a stale document, and the push that would…</div></div><div class="scene claim" style="animation-name:w4"><div class="claim">No push leaves the corpus stale.</div></div><div class="scene close" style="animation-name:w5"><div class="home">wherefore.build</div><div class="install">pip install wherefore-build==0.1.0</div><div class="url">wherefore.build/features/#hook</div></div></div></body></html>
+@keyframes w0{0%,0.000%{opacity:0}1.176%{opacity:1}6.667%{opacity:1}7.843%,100%{opacity:0}}@keyframes w1{0%,7.843%{opacity:0}9.020%{opacity:1}22.353%{opacity:1}23.529%,100%{opacity:0}}@keyframes w2{0%,23.529%{opacity:0}24.706%{opacity:1}38.039%{opacity:1}39.216%,100%{opacity:0}}@keyframes type2_0{0%,25.882%{width:0}31.922%,100%{width:22ch}}@keyframes w3{0%,39.216%{opacity:0}40.392%{opacity:1}69.412%{opacity:1}70.588%,100%{opacity:0}}@keyframes bar3_0{0%,40.784%{width:0}42.157%,100%{width:var(--w)}}@keyframes bar3_1{0%,42.745%{width:0}44.118%,100%{width:var(--w)}}@keyframes bar3_2{0%,44.706%{width:0}46.078%,100%{width:var(--w)}}@keyframes left3{0%,48.627%{opacity:0}50.000%,100%{opacity:1}}@keyframes w4{0%,70.588%{opacity:0}71.765%{opacity:1}85.098%{opacity:1}86.275%,100%{opacity:0}}@keyframes w5{0%,86.275%{opacity:0}87.451%{opacity:1}98.824%{opacity:1}100.000%,100%{opacity:0}}</style></head>
+<body><div class="frame" data-duration="25.5"><div class="scene open" style="animation-name:w0"><div class="mark">Wherefore</div><div class="ver">0.1.0</div></div><div class="scene ask" style="animation-name:w1"><div class="eye">shipped in 0.1.0</div><div class="big">The pre-push hook</div></div><div class="scene command" style="animation-name:w2"><div class="eye">the command</div><pre class="term"><code class="ln"><span class="prompt">$ </span><span class="typed" style="animation-name:type2_0;animation-timing-function:steps(22)">wherefore hook install</span></code></pre></div><div class="scene mechanism" style="animation-name:w3"><div class="eye">what it sorts</div><div class="viz sort"><div class="row"><span class="lab">built by a script</span><span class="bar"><i class="t-accent" style="--w:100.0%;animation-name:bar3_0"></i></span><span class="num">74</span></div><div class="row"><span class="lab">written, with a reason</span><span class="bar"><i class="t-ink" style="--w:79.7%;animation-name:bar3_1"></i></span><span class="num">59</span></div><div class="row"><span class="lab">captured, stamped</span><span class="bar"><i class="t-muted" style="--w:6.8%;animation-name:bar3_2"></i></span><span class="num">5</span></div><div class="row left" style="animation-name:left3"><span class="lab">unaccounted for</span><span class="num t-accent">0</span></div></div><p class="mech-cap">138 files tracked: 74 built by a script, 59 written with a reason, 5 captured and stamped, 0 unaccounted for</p></div><div class="scene claim" style="animation-name:w4"><div class="claim">No push leaves the corpus stale.</div></div><div class="scene close" style="animation-name:w5"><div class="home">wherefore.build</div><div class="install">pip install wherefore-build==0.1.0</div><div class="url">wherefore.build/features/#hook</div></div></div></body></html>

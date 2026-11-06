@@ -2,7 +2,7 @@
  "id": "skill",
  "name": "The skill, for Claude Code and Codex",
  "version": "0.2.0",
- "duration": 26.5,
+ "duration": 29.5,
  "frames": [
   "portrait",
   "landscape"
@@ -18,37 +18,55 @@
   {
    "kind": "ask",
    "start": 2.0,
-   "end": 6.0,
-   "eyebrow": "shipped in 0.2.0",
+   "end": 7.5,
+   "eyebrow": "asked for by zakholdsworth · #17, #18, #19, #21",
    "headline": "The skill, for Claude Code and Codex"
   },
   {
    "kind": "command",
-   "start": 6.0,
-   "end": 10.0,
+   "start": 7.5,
+   "end": 11.5,
    "eyebrow": "the command",
    "typed": "wherefore init"
   },
   {
    "kind": "answer",
-   "start": 10.0,
-   "end": 19.0,
+   "start": 11.5,
+   "end": 17.0,
    "eyebrow": "the answer",
    "lines": [
-    "Commit both. Then ask your agent to set up Wherefore…",
     "From the first build on, the skill is regenerated from the release this repository…"
    ]
   },
   {
+   "kind": "mechanism",
+   "start": 17.0,
+   "end": 22.0,
+   "eyebrow": "what it hands over",
+   "mechanism": "handover",
+   "data": {
+    "issues": 9,
+    "items": 5,
+    "releases": 27,
+    "steps": [
+     "an issue",
+     "the plan, on it",
+     "the release",
+     "the note that closes it"
+    ]
+   },
+   "caption": "9 issues answered by 5 roadmap items across 27 releases"
+  },
+  {
    "kind": "claim",
-   "start": 19.0,
-   "end": 23.0,
+   "start": 22.0,
+   "end": 26.0,
    "text": "One skill, where each agent reads it, held to the release."
   },
   {
    "kind": "close",
-   "start": 23.0,
-   "end": 26.5,
+   "start": 26.0,
+   "end": 29.5,
    "home": "wherefore.build",
    "install": "pip install wherefore-build==0.2.0",
    "url": "wherefore.build/features/#skill"

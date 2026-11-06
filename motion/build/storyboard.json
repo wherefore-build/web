@@ -2,7 +2,7 @@
  "id": "build",
  "name": "The build",
  "version": "0.1.0",
- "duration": 23.5,
+ "duration": 30.0,
  "frames": [
   "portrait",
   "landscape"
@@ -32,23 +32,37 @@
   {
    "kind": "answer",
    "start": 10.0,
-   "end": 16.0,
+   "end": 14.5,
    "eyebrow": "the answer",
    "lines": [
-    "4 generators, in order",
     "4 tracked writes, 0 writes to paths git does not track"
    ]
   },
   {
+   "kind": "mechanism",
+   "start": 14.5,
+   "end": 22.5,
+   "eyebrow": "what it sorts",
+   "mechanism": "sort",
+   "data": {
+    "files": 138,
+    "built": 74,
+    "authored": 59,
+    "captured": 5,
+    "left": 0
+   },
+   "caption": "138 files tracked: 74 built by a script, 59 written with a reason, 5 captured and stamped, 0 unaccounted for"
+  },
+  {
    "kind": "claim",
-   "start": 16.0,
-   "end": 20.0,
+   "start": 22.5,
+   "end": 26.5,
    "text": "Every generator run twice, compared with what is committed."
   },
   {
    "kind": "close",
-   "start": 20.0,
-   "end": 23.5,
+   "start": 26.5,
+   "end": 30.0,
    "home": "wherefore.build",
    "install": "pip install wherefore-build==0.1.0",
    "url": "wherefore.build/features/#build"

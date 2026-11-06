@@ -2,7 +2,7 @@
  "id": "retired",
  "name": "Retired facts",
  "version": "0.1.0",
- "duration": 22.0,
+ "duration": 28.0,
  "frames": [
   "portrait",
   "landscape"
@@ -39,15 +39,42 @@
    ]
   },
   {
-   "kind": "claim",
+   "kind": "mechanism",
    "start": 14.5,
-   "end": 18.5,
+   "end": 20.5,
+   "eyebrow": "what it holds",
+   "mechanism": "hold",
+   "data": {
+    "source": "facts/company.json",
+    "facts": 250,
+    "pages": 34,
+    "shown": [
+     "pendulum/",
+     "brand/",
+     "changelog/",
+     "docs/checks/",
+     "docs/commands/",
+     "docs/configuration/",
+     "docs/",
+     "docs/reporting/"
+    ],
+    "probe": {
+     "fact": "company.name",
+     "files": 1
+    }
+   },
+   "caption": "250 facts in facts/company.json, and 34 pages built from them; company.name alone reaches 1 page"
+  },
+  {
+   "kind": "claim",
+   "start": 20.5,
+   "end": 24.5,
    "text": "Nothing a person reads still claims a retired value."
   },
   {
    "kind": "close",
-   "start": 18.5,
-   "end": 22.0,
+   "start": 24.5,
+   "end": 28.0,
    "home": "wherefore.build",
    "install": "pip install wherefore-build==0.1.0",
    "url": "wherefore.build/features/#retired"

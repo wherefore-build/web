@@ -250,6 +250,7 @@
  "motion": {
   "out": "site/motion",
   "css": "site/brand.css",
-  "storyboards": "motion"
+  "storyboards": "motion",
+  "roadmap": "facts/roadmap.json"
  }
 }

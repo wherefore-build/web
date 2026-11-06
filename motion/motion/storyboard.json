@@ -2,7 +2,7 @@
  "id": "motion",
  "name": "Every feature, in motion",
  "version": "0.20.0",
- "duration": 23.0,
+ "duration": 26.5,
  "frames": [
   "portrait",
   "landscape"
@@ -32,23 +32,41 @@
   {
    "kind": "answer",
    "start": 10.0,
-   "end": 15.5,
+   "end": 14.0,
    "eyebrow": "the answer",
    "lines": [
-    "  published    6 scenes  23.0 s  A page you publish but cannot build",
     "wrote motion/…"
    ]
   },
   {
+   "kind": "mechanism",
+   "start": 14.0,
+   "end": 19.0,
+   "eyebrow": "what it hands over",
+   "mechanism": "handover",
+   "data": {
+    "issues": 9,
+    "items": 5,
+    "releases": 27,
+    "steps": [
+     "an issue",
+     "the plan, on it",
+     "the release",
+     "the note that closes it"
+    ]
+   },
+   "caption": "9 issues answered by 5 roadmap items across 27 releases"
+  },
+  {
    "kind": "claim",
-   "start": 15.5,
-   "end": 19.5,
+   "start": 19.0,
+   "end": 23.0,
    "text": "Every feature, in motion, every word a fact."
   },
   {
    "kind": "close",
-   "start": 19.5,
-   "end": 23.0,
+   "start": 23.0,
+   "end": 26.5,
    "home": "wherefore.build",
    "install": "pip install wherefore-build==0.20.0",
    "url": "wherefore.build/features/#motion"

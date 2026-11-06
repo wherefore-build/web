@@ -2,7 +2,7 @@
  "id": "pins",
  "name": "Releases that reach every client",
  "version": "0.8.0",
- "duration": 22.5,
+ "duration": 27.5,
  "frames": [
   "portrait",
   "landscape"
@@ -39,15 +39,34 @@
    ]
   },
   {
-   "kind": "claim",
+   "kind": "mechanism",
    "start": 15.0,
-   "end": 19.0,
+   "end": 20.0,
+   "eyebrow": "what it hands over",
+   "mechanism": "handover",
+   "data": {
+    "issues": 9,
+    "items": 5,
+    "releases": 27,
+    "steps": [
+     "an issue",
+     "the plan, on it",
+     "the release",
+     "the note that closes it"
+    ]
+   },
+   "caption": "9 issues answered by 5 roadmap items across 27 releases"
+  },
+  {
+   "kind": "claim",
+   "start": 20.0,
+   "end": 24.0,
    "text": "A release reaches a client only by its own pull request."
   },
   {
    "kind": "close",
-   "start": 19.0,
-   "end": 22.5,
+   "start": 24.0,
+   "end": 27.5,
    "home": "wherefore.build",
    "install": "pip install wherefore-build==0.8.0",
    "url": "wherefore.build/features/#pins"

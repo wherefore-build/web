@@ -1,10 +1,11 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>The gate · 0.1.0</title><meta name="robots" content="noindex"><link rel="stylesheet" href="../../brand.css"><style>:root{--t:0}
+:root{--d:29.5s}
 html,body{margin:0;height:100%;overflow:hidden;background:var(--ground);color:var(--ink)}
 .frame{position:relative;width:100%;height:100%;container-type:size;font-family:var(--font-body)}
-.scene{position:absolute;inset:0;padding:8cqmin 9cqmin;display:flex;flex-direction:column;justify-content:center;gap:3cqmin;opacity:0;animation:26.5s linear infinite;animation-delay:calc(var(--t) * -1s)}
+.scene{position:absolute;inset:0;padding:8cqmin 9cqmin;display:flex;flex-direction:column;justify-content:center;gap:3cqmin;opacity:0;animation:29.5s linear infinite;animation-delay:calc(var(--t) * -1s)}
 .scene>*{max-width:120cqmin}
-.typed,.answer .ln{animation:26.5s linear infinite;animation-delay:calc(var(--t) * -1s)}
+.typed,.answer .ln{animation:29.5s linear infinite;animation-delay:calc(var(--t) * -1s)}
 .typed{font:inherit}
 html.still .scene,html.still .typed,html.still .answer .ln{animation-play-state:paused}
 @media (prefers-reduced-motion:reduce){.scene,.typed,.answer .ln{animation:none}.scene{opacity:0}.scene.claim{opacity:1}}
@@ -22,6 +23,35 @@ html.still .scene,html.still .typed,html.still .answer .ln{animation-play-state:
 .install{font:400 3.8cqmin/1.6 var(--font-mono)}
 .install b{color:var(--accent);font-weight:500}
 .home{font:400 12cqmin/1 var(--font-display);letter-spacing:-0.02em}
+.mech-cap{margin:0}
+
+.viz{display:grid;gap:2.2cqmin;width:100%;max-width:120cqmin}
+.viz .row{display:grid;grid-template-columns:36cqmin 1fr 10cqmin;gap:2cqmin;align-items:center;font:400 3.2cqmin/1.3 var(--font-mono)}
+.viz .row.left{opacity:0;animation:var(--d) linear infinite;animation-delay:calc(var(--t) * -1s)}
+.viz .lab{color:var(--muted)}
+.viz .num{text-align:right;font-variant-numeric:tabular-nums}
+.viz .bar{display:block;height:3.2cqmin;background:var(--surface);border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.viz .bar i{display:block;height:100%;width:0;animation:var(--d) linear infinite;animation-delay:calc(var(--t) * -1s)}
+.viz .t-accent{background:var(--accent)}.viz .bar .t-ink{background:var(--ink)}.viz .bar .t-muted{background:var(--muted)}
+.viz span.t-accent,.viz .card.t-accent .num{background:none;color:var(--accent)}
+.viz .card{opacity:0;animation:var(--d) linear infinite;animation-delay:calc(var(--t) * -1s);display:grid;gap:0.8cqmin;padding:3cqmin;border:1px solid var(--line);border-radius:3cqmin;background:var(--surface);font:400 3.2cqmin/1.3 var(--font-mono)}
+.viz .card .val{font:400 4.2cqmin/1.2 var(--font-display);color:var(--ink)}
+.viz .card .num.big{font:400 10cqmin/1 var(--font-display);text-align:left}
+.viz .card.t-fail .num{color:var(--fail,var(--accent))}
+.viz.hold{grid-template-columns:auto auto 1fr;align-items:center}
+.viz .arrow{font:400 6cqmin/1 var(--font-display);color:var(--muted)}
+.viz .chips{display:flex;flex-wrap:wrap;gap:1.4cqmin}
+.viz .chip{opacity:0;animation:var(--d) linear infinite;animation-delay:calc(var(--t) * -1s);font:400 2.8cqmin/1.2 var(--font-mono);padding:1.2cqmin 2cqmin;border:1px solid var(--line);border-radius:999px;color:var(--ink)}
+.viz .chip.t-muted{color:var(--muted)}.viz .chip.t-fail{color:var(--fail,var(--accent))}
+.viz.compare .places{display:flex;gap:2cqmin;flex-wrap:wrap}
+.viz.handover{grid-template-columns:repeat(4,1fr);gap:2cqmin}
+.viz .step{opacity:0;animation:var(--d) linear infinite;animation-delay:calc(var(--t) * -1s);display:grid;gap:1.6cqmin;justify-items:start;font:400 3cqmin/1.3 var(--font-mono)}
+.viz .step .dot{width:4cqmin;height:4cqmin;border-radius:50%;background:var(--accent)}
+.viz .step .lab{color:var(--ink)}
+html.still .viz .row.left,html.still .viz .bar i,html.still .viz .card,html.still .viz .chip,html.still .viz .step{animation-play-state:paused}
+@media (prefers-reduced-motion:reduce){.viz .row.left,.viz .bar i,.viz .card,.viz .chip,.viz .step{animation:none;opacity:1}.viz .bar i{width:var(--w)}}
+.mech-cap{font:400 3.4cqmin/1.45 var(--font-body);color:var(--muted);max-width:120cqmin}
+
 .url{font:400 3.6cqmin/1.5 var(--font-mono);color:var(--muted)}
-@keyframes w0{0%,0.000%{opacity:0}1.132%{opacity:1}6.415%{opacity:1}7.547%,100%{opacity:0}}@keyframes w1{0%,7.547%{opacity:0}8.679%{opacity:1}21.509%{opacity:1}22.642%,100%{opacity:0}}@keyframes w2{0%,22.642%{opacity:0}23.774%{opacity:1}36.604%{opacity:1}37.736%,100%{opacity:0}}@keyframes type2_0{0%,24.906%{width:0}28.604%,100%{width:14ch}}@keyframes w3{0%,37.736%{opacity:0}38.868%{opacity:1}70.566%{opacity:1}71.698%,100%{opacity:0}}@keyframes line3_0{0%,39.245%{opacity:0}40.000%,100%{opacity:1}}@keyframes line3_1{0%,41.132%{opacity:0}41.887%,100%{opacity:1}}@keyframes line3_2{0%,43.019%{opacity:0}43.774%,100%{opacity:1}}@keyframes w4{0%,71.698%{opacity:0}72.830%{opacity:1}85.660%{opacity:1}86.792%,100%{opacity:0}}@keyframes w5{0%,86.792%{opacity:0}87.925%{opacity:1}98.868%{opacity:1}100.000%,100%{opacity:0}}</style></head>
-<body><div class="frame" data-duration="26.5"><div class="scene open" style="animation-name:w0"><div class="mark">Wherefore</div><div class="ver">0.1.0</div></div><div class="scene ask" style="animation-name:w1"><div class="eye">shipped in 0.1.0</div><div class="big">The gate</div></div><div class="scene command" style="animation-name:w2"><div class="eye">the command</div><pre class="term"><code class="ln"><span class="prompt">$ </span><span class="typed" style="animation-name:type2_0;animation-timing-function:steps(14)">wherefore gate</span></code></pre></div><div class="scene answer" style="animation-name:w3"><div class="eye">the answer</div><pre class="term"><code class="ln" style="animation-name:line3_0">  captured       1   declared hand-made, and stamped</code><code class="ln" style="animation-name:line3_1">every tracked file is classified, and every generated one was written</code><code class="ln hi" style="animation-name:line3_2">during this run and matches what is committed</code></pre></div><div class="scene claim" style="animation-name:w4"><div class="claim">Every tracked file accounted for; every generated one current.</div></div><div class="scene close" style="animation-name:w5"><div class="home">wherefore.build</div><div class="install">pip install wherefore-build==0.1.0</div><div class="url">wherefore.build/features/#gate</div></div></div></body></html>
+@keyframes w0{0%,0.000%{opacity:0}1.017%{opacity:1}5.763%{opacity:1}6.780%,100%{opacity:0}}@keyframes w1{0%,6.780%{opacity:0}7.797%{opacity:1}19.322%{opacity:1}20.339%,100%{opacity:0}}@keyframes w2{0%,20.339%{opacity:0}21.356%{opacity:1}32.881%{opacity:1}33.898%,100%{opacity:0}}@keyframes type2_0{0%,22.373%{width:0}25.695%,100%{width:14ch}}@keyframes w3{0%,33.898%{opacity:0}34.915%{opacity:1}46.441%{opacity:1}47.458%,100%{opacity:0}}@keyframes line3_0{0%,35.254%{opacity:0}35.932%,100%{opacity:1}}@keyframes w4{0%,47.458%{opacity:0}48.475%{opacity:1}73.559%{opacity:1}74.576%,100%{opacity:0}}@keyframes bar4_0{0%,48.814%{width:0}50.000%,100%{width:var(--w)}}@keyframes bar4_1{0%,50.508%{width:0}51.695%,100%{width:var(--w)}}@keyframes bar4_2{0%,52.203%{width:0}53.390%,100%{width:var(--w)}}@keyframes left4{0%,55.593%{opacity:0}56.780%,100%{opacity:1}}@keyframes w5{0%,74.576%{opacity:0}75.593%{opacity:1}87.119%{opacity:1}88.136%,100%{opacity:0}}@keyframes w6{0%,88.136%{opacity:0}89.153%{opacity:1}98.983%{opacity:1}100.000%,100%{opacity:0}}</style></head>
+<body><div class="frame" data-duration="29.5"><div class="scene open" style="animation-name:w0"><div class="mark">Wherefore</div><div class="ver">0.1.0</div></div><div class="scene ask" style="animation-name:w1"><div class="eye">shipped in 0.1.0</div><div class="big">The gate</div></div><div class="scene command" style="animation-name:w2"><div class="eye">the command</div><pre class="term"><code class="ln"><span class="prompt">$ </span><span class="typed" style="animation-name:type2_0;animation-timing-function:steps(14)">wherefore gate</span></code></pre></div><div class="scene answer" style="animation-name:w3"><div class="eye">the answer</div><pre class="term"><code class="ln hi" style="animation-name:line3_0">during this run and matches what is committed</code></pre></div><div class="scene mechanism" style="animation-name:w4"><div class="eye">what it sorts</div><div class="viz sort"><div class="row"><span class="lab">built by a script</span><span class="bar"><i class="t-accent" style="--w:100.0%;animation-name:bar4_0"></i></span><span class="num">74</span></div><div class="row"><span class="lab">written, with a reason</span><span class="bar"><i class="t-ink" style="--w:79.7%;animation-name:bar4_1"></i></span><span class="num">59</span></div><div class="row"><span class="lab">captured, stamped</span><span class="bar"><i class="t-muted" style="--w:6.8%;animation-name:bar4_2"></i></span><span class="num">5</span></div><div class="row left" style="animation-name:left4"><span class="lab">unaccounted for</span><span class="num t-accent">0</span></div></div><p class="mech-cap">138 files tracked: 74 built by a script, 59 written with a reason, 5 captured and stamped, 0 unaccounted for</p></div><div class="scene claim" style="animation-name:w5"><div class="claim">Every tracked file accounted for; every generated one current.</div></div><div class="scene close" style="animation-name:w6"><div class="home">wherefore.build</div><div class="install">pip install wherefore-build==0.1.0</div><div class="url">wherefore.build/features/#gate</div></div></div></body></html>

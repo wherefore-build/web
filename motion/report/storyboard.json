@@ -2,7 +2,7 @@
  "id": "report",
  "name": "Tell us",
  "version": "0.12.0",
- "duration": 30.0,
+ "duration": 30.5,
  "frames": [
   "portrait",
   "landscape"
@@ -19,7 +19,7 @@
    "kind": "ask",
    "start": 2.0,
    "end": 6.0,
-   "eyebrow": "shipped in 0.12.0",
+   "eyebrow": "asked for by zakholdsworth · #15",
    "headline": "Tell us"
   },
   {
@@ -32,23 +32,41 @@
   {
    "kind": "answer",
    "start": 13.0,
-   "end": 22.5,
+   "end": 18.0,
    "eyebrow": "the answer",
    "lines": [
-    "**The corpus:** fernhollow-kettles: 4 generators, 1 sources, 5 authored rules, 1 captured groups",
     "--show: nothing was sent. Run it again without --show to open the issue."
    ]
   },
   {
+   "kind": "mechanism",
+   "start": 18.0,
+   "end": 23.0,
+   "eyebrow": "what it hands over",
+   "mechanism": "handover",
+   "data": {
+    "issues": 9,
+    "items": 5,
+    "releases": 27,
+    "steps": [
+     "an issue",
+     "the plan, on it",
+     "the release",
+     "the note that closes it"
+    ]
+   },
+   "caption": "9 issues answered by 5 roadmap items across 27 releases"
+  },
+  {
    "kind": "claim",
-   "start": 22.5,
-   "end": 26.5,
+   "start": 23.0,
+   "end": 27.0,
    "text": "A bug, a question or a request, nothing private, sent once."
   },
   {
    "kind": "close",
-   "start": 26.5,
-   "end": 30.0,
+   "start": 27.0,
+   "end": 30.5,
    "home": "wherefore.build",
    "install": "pip install wherefore-build==0.12.0",
    "url": "wherefore.build/features/#report"

@@ -1,10 +1,11 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Scan · 0.3.0</title><meta name="robots" content="noindex"><link rel="stylesheet" href="../../brand.css"><style>:root{--t:0}
+:root{--d:26.5s}
 html,body{margin:0;height:100%;overflow:hidden;background:var(--ground);color:var(--ink)}
 .frame{position:relative;width:100%;height:100%;container-type:size;font-family:var(--font-body)}
-.scene{position:absolute;inset:0;padding:8cqmin 9cqmin;display:flex;flex-direction:column;justify-content:center;gap:3cqmin;opacity:0;animation:24.5s linear infinite;animation-delay:calc(var(--t) * -1s)}
+.scene{position:absolute;inset:0;padding:8cqmin 9cqmin;display:flex;flex-direction:column;justify-content:center;gap:3cqmin;opacity:0;animation:26.5s linear infinite;animation-delay:calc(var(--t) * -1s)}
 .scene>*{max-width:120cqmin}
-.typed,.answer .ln{animation:24.5s linear infinite;animation-delay:calc(var(--t) * -1s)}
+.typed,.answer .ln{animation:26.5s linear infinite;animation-delay:calc(var(--t) * -1s)}
 .typed{font:inherit}
 html.still .scene,html.still .typed,html.still .answer .ln{animation-play-state:paused}
 @media (prefers-reduced-motion:reduce){.scene,.typed,.answer .ln{animation:none}.scene{opacity:0}.scene.claim{opacity:1}}
@@ -22,6 +23,35 @@ html.still .scene,html.still .typed,html.still .answer .ln{animation-play-state:
 .install{font:400 3.8cqmin/1.6 var(--font-mono)}
 .install b{color:var(--accent);font-weight:500}
 .home{font:400 12cqmin/1 var(--font-display);letter-spacing:-0.02em}
+.mech-cap{margin:0}
+
+.viz{display:grid;gap:2.2cqmin;width:100%;max-width:120cqmin}
+.viz .row{display:grid;grid-template-columns:36cqmin 1fr 10cqmin;gap:2cqmin;align-items:center;font:400 3.2cqmin/1.3 var(--font-mono)}
+.viz .row.left{opacity:0;animation:var(--d) linear infinite;animation-delay:calc(var(--t) * -1s)}
+.viz .lab{color:var(--muted)}
+.viz .num{text-align:right;font-variant-numeric:tabular-nums}
+.viz .bar{display:block;height:3.2cqmin;background:var(--surface);border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.viz .bar i{display:block;height:100%;width:0;animation:var(--d) linear infinite;animation-delay:calc(var(--t) * -1s)}
+.viz .t-accent{background:var(--accent)}.viz .bar .t-ink{background:var(--ink)}.viz .bar .t-muted{background:var(--muted)}
+.viz span.t-accent,.viz .card.t-accent .num{background:none;color:var(--accent)}
+.viz .card{opacity:0;animation:var(--d) linear infinite;animation-delay:calc(var(--t) * -1s);display:grid;gap:0.8cqmin;padding:3cqmin;border:1px solid var(--line);border-radius:3cqmin;background:var(--surface);font:400 3.2cqmin/1.3 var(--font-mono)}
+.viz .card .val{font:400 4.2cqmin/1.2 var(--font-display);color:var(--ink)}
+.viz .card .num.big{font:400 10cqmin/1 var(--font-display);text-align:left}
+.viz .card.t-fail .num{color:var(--fail,var(--accent))}
+.viz.hold{grid-template-columns:auto auto 1fr;align-items:center}
+.viz .arrow{font:400 6cqmin/1 var(--font-display);color:var(--muted)}
+.viz .chips{display:flex;flex-wrap:wrap;gap:1.4cqmin}
+.viz .chip{opacity:0;animation:var(--d) linear infinite;animation-delay:calc(var(--t) * -1s);font:400 2.8cqmin/1.2 var(--font-mono);padding:1.2cqmin 2cqmin;border:1px solid var(--line);border-radius:999px;color:var(--ink)}
+.viz .chip.t-muted{color:var(--muted)}.viz .chip.t-fail{color:var(--fail,var(--accent))}
+.viz.compare .places{display:flex;gap:2cqmin;flex-wrap:wrap}
+.viz.handover{grid-template-columns:repeat(4,1fr);gap:2cqmin}
+.viz .step{opacity:0;animation:var(--d) linear infinite;animation-delay:calc(var(--t) * -1s);display:grid;gap:1.6cqmin;justify-items:start;font:400 3cqmin/1.3 var(--font-mono)}
+.viz .step .dot{width:4cqmin;height:4cqmin;border-radius:50%;background:var(--accent)}
+.viz .step .lab{color:var(--ink)}
+html.still .viz .row.left,html.still .viz .bar i,html.still .viz .card,html.still .viz .chip,html.still .viz .step{animation-play-state:paused}
+@media (prefers-reduced-motion:reduce){.viz .row.left,.viz .bar i,.viz .card,.viz .chip,.viz .step{animation:none;opacity:1}.viz .bar i{width:var(--w)}}
+.mech-cap{font:400 3.4cqmin/1.45 var(--font-body);color:var(--muted);max-width:120cqmin}
+
 .url{font:400 3.6cqmin/1.5 var(--font-mono);color:var(--muted)}
-@keyframes w0{0%,0.000%{opacity:0}1.224%{opacity:1}6.939%{opacity:1}8.163%,100%{opacity:0}}@keyframes w1{0%,8.163%{opacity:0}9.388%{opacity:1}23.265%{opacity:1}24.490%,100%{opacity:0}}@keyframes w2{0%,24.490%{opacity:0}25.714%{opacity:1}39.592%{opacity:1}40.816%,100%{opacity:0}}@keyframes type2_0{0%,26.939%{width:0}31.510%,100%{width:16ch}}@keyframes w3{0%,40.816%{opacity:0}42.041%{opacity:1}68.163%{opacity:1}69.388%,100%{opacity:0}}@keyframes line3_0{0%,42.449%{opacity:0}43.265%,100%{opacity:1}}@keyframes line3_1{0%,44.490%{opacity:0}45.306%,100%{opacity:1}}@keyframes line3_2{0%,46.531%{opacity:0}47.347%,100%{opacity:1}}@keyframes w4{0%,69.388%{opacity:0}70.612%{opacity:1}84.490%{opacity:1}85.714%,100%{opacity:0}}@keyframes w5{0%,85.714%{opacity:0}86.939%{opacity:1}98.776%{opacity:1}100.000%,100%{opacity:0}}</style></head>
-<body><div class="frame" data-duration="24.5"><div class="scene open" style="animation-name:w0"><div class="mark">Wherefore</div><div class="ver">0.3.0</div></div><div class="scene ask" style="animation-name:w1"><div class="eye">shipped in 0.3.0</div><div class="big">Scan</div></div><div class="scene command" style="animation-name:w2"><div class="eye">the command</div><pre class="term"><code class="ln"><span class="prompt">$ </span><span class="typed" style="animation-name:type2_0;animation-timing-function:steps(16)">wherefore scan .</span></code></pre></div><div class="scene answer" style="animation-name:w3"><div class="eye">the answer</div><pre class="term"><code class="ln" style="animation-name:line3_0">  &quot;start your {} day free&quot;  - said 4 times, 2 ways</code><code class="ln" style="animation-name:line3_1">     14           3x   docs/start.md:1, site/index.html:1, site/pricing.html:1</code><code class="ln hi" style="animation-name:line3_2">     30           1x   help/billing.md:1</code></pre></div><div class="scene claim" style="animation-name:w4"><div class="claim">Where every value is stated, and where the copies disagree.</div></div><div class="scene close" style="animation-name:w5"><div class="home">wherefore.build</div><div class="install">pip install wherefore-build==0.3.0</div><div class="url">wherefore.build/features/#scan</div></div></div></body></html>
+@keyframes w0{0%,0.000%{opacity:0}1.132%{opacity:1}6.415%{opacity:1}7.547%,100%{opacity:0}}@keyframes w1{0%,7.547%{opacity:0}8.679%{opacity:1}21.509%{opacity:1}22.642%,100%{opacity:0}}@keyframes w2{0%,22.642%{opacity:0}23.774%{opacity:1}36.604%{opacity:1}37.736%,100%{opacity:0}}@keyframes type2_0{0%,24.906%{width:0}29.132%,100%{width:16ch}}@keyframes w3{0%,37.736%{opacity:0}38.868%{opacity:1}51.698%{opacity:1}52.830%,100%{opacity:0}}@keyframes line3_0{0%,39.245%{opacity:0}40.000%,100%{opacity:1}}@keyframes w4{0%,52.830%{opacity:0}53.962%{opacity:1}70.566%{opacity:1}71.698%,100%{opacity:0}}@keyframes pl4_0{0%,53.962%{opacity:0}55.283%,100%{opacity:1}}@keyframes st4{0%,58.113%{opacity:0}59.434%,100%{opacity:1}}@keyframes dis4{0%,62.642%{opacity:0}63.962%,100%{opacity:1}}@keyframes w5{0%,71.698%{opacity:0}72.830%{opacity:1}85.660%{opacity:1}86.792%,100%{opacity:0}}@keyframes w6{0%,86.792%{opacity:0}87.925%{opacity:1}98.868%{opacity:1}100.000%,100%{opacity:0}}</style></head>
+<body><div class="frame" data-duration="26.5"><div class="scene open" style="animation-name:w0"><div class="mark">Wherefore</div><div class="ver">0.3.0</div></div><div class="scene ask" style="animation-name:w1"><div class="eye">shipped in 0.3.0</div><div class="big">Scan</div></div><div class="scene command" style="animation-name:w2"><div class="eye">the command</div><pre class="term"><code class="ln"><span class="prompt">$ </span><span class="typed" style="animation-name:type2_0;animation-timing-function:steps(16)">wherefore scan .</span></code></pre></div><div class="scene answer" style="animation-name:w3"><div class="eye">the answer</div><pre class="term"><code class="ln hi" style="animation-name:line3_0">     30           1x   help/billing.md:1</code></pre></div><div class="scene mechanism" style="animation-name:w4"><div class="eye">what it compares</div><div class="viz compare"><div class="places"><div class="card" style="animation-name:pl4_0"><span class="lab">a place</span><span class="val">site/</span></div></div><div class="card tally" style="animation-name:st4"><span class="num big">139</span><span class="lab">values stated, 36 pages</span></div><div class="card tally t-accent" style="animation-name:dis4"><span class="num big">0</span><span class="lab">disagree</span></div></div><p class="mech-cap">139 values stated across 36 pages in site; 0 disagree</p></div><div class="scene claim" style="animation-name:w5"><div class="claim">Where every value is stated, and where the copies disagree.</div></div><div class="scene close" style="animation-name:w6"><div class="home">wherefore.build</div><div class="install">pip install wherefore-build==0.3.0</div><div class="url">wherefore.build/features/#scan</div></div></div></body></html>

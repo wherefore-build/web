@@ -2,7 +2,7 @@
  "id": "hook",
  "name": "The pre-push hook",
  "version": "0.1.0",
- "duration": 26.5,
+ "duration": 25.5,
  "frames": [
   "portrait",
   "landscape"
@@ -30,22 +30,30 @@
    "typed": "wherefore hook install"
   },
   {
-   "kind": "more",
+   "kind": "mechanism",
    "start": 10.0,
-   "end": 19.0,
-   "eyebrow": "what it does",
-   "text": "A pre-push hook runs the gate before a push leaves the machine, so no push ships a stale document, and the push that would…"
+   "end": 18.0,
+   "eyebrow": "what it sorts",
+   "mechanism": "sort",
+   "data": {
+    "files": 138,
+    "built": 74,
+    "authored": 59,
+    "captured": 5,
+    "left": 0
+   },
+   "caption": "138 files tracked: 74 built by a script, 59 written with a reason, 5 captured and stamped, 0 unaccounted for"
   },
   {
    "kind": "claim",
-   "start": 19.0,
-   "end": 23.0,
+   "start": 18.0,
+   "end": 22.0,
    "text": "No push leaves the corpus stale."
   },
   {
    "kind": "close",
-   "start": 23.0,
-   "end": 26.5,
+   "start": 22.0,
+   "end": 25.5,
    "home": "wherefore.build",
    "install": "pip install wherefore-build==0.1.0",
    "url": "wherefore.build/features/#hook"

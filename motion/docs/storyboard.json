@@ -2,7 +2,7 @@
  "id": "docs",
  "name": "Docs from each release",
  "version": "0.19.0",
- "duration": 17.5,
+ "duration": 18.5,
  "frames": [
   "portrait",
   "landscape"
@@ -23,22 +23,34 @@
    "headline": "Docs from each release"
   },
   {
-   "kind": "more",
+   "kind": "mechanism",
    "start": 6.0,
-   "end": 10.0,
-   "eyebrow": "what it does",
-   "text": "Five pages ship inside each release…"
+   "end": 11.0,
+   "eyebrow": "what it hands over",
+   "mechanism": "handover",
+   "data": {
+    "issues": 9,
+    "items": 5,
+    "releases": 27,
+    "steps": [
+     "an issue",
+     "the plan, on it",
+     "the release",
+     "the note that closes it"
+    ]
+   },
+   "caption": "9 issues answered by 5 roadmap items across 27 releases"
   },
   {
    "kind": "claim",
-   "start": 10.0,
-   "end": 14.0,
+   "start": 11.0,
+   "end": 15.0,
    "text": "The docs of the release you run, and no other."
   },
   {
    "kind": "close",
-   "start": 14.0,
-   "end": 17.5,
+   "start": 15.0,
+   "end": 18.5,
    "home": "wherefore.build",
    "install": "pip install wherefore-build==0.19.0",
    "url": "wherefore.build/features/#docs"
