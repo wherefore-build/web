@@ -955,10 +955,13 @@ def does(f):
         clip = (f'<figure class="does-motion"><iframe src="../motion/{esc(x["id"])}/index.html" loading="lazy" '
                 f'title="{esc(x["name"])}, {esc(d["watch"].lower())}"></iframe>'
                 f'<figcaption>{esc(d["watch"])}</figcaption></figure>')
+        # The command stays on the closed card (owner, 6 November 2026), the
+        # clip opens with the details, in a landscape frame that takes the
+        # card's width.
         items.append(f'<li id="{esc(x["id"])}"><details class="does-more"><summary><p class="does-name">{esc(x["name"])}{since}{new}{toggle}</p>'
-                     f'<p>{esc(words[x["id"]])}</p></summary>'
+                     f'<p>{esc(words[x["id"]])}</p>{cmds}</summary>'
                      f'<p class="does-details"><span class="road-asked">{esc(d["open"])}</span> {esc(x["details"])}</p>'
-                     f'{"".join(asks)}{clip}{cmds}</details></li>')
+                     f'{"".join(asks)}{clip}</details></li>')
     return f"""<section id="does"><div class="wrap">
 <p class="does-intro">{esc(d["intro"])} <a href="../changelog/">{esc(f["changelog"]["link"])}</a></p>
 <ul class="does">
@@ -1235,6 +1238,13 @@ def headers():
     lines += ["", f"/{MODEL_PAGE}*", "  ! Content-Security-Policy",
               "  Content-Security-Policy: default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; "
               "img-src data:; font-src data:; base-uri 'none'; form-action 'none'; frame-ancestors 'self'"]
+    # The clips: each a page in motion the engine wrote, its style inline and
+    # the brand's stylesheet and fonts from this site, no script; framed only
+    # here, on the feature's card (owner, 6 November 2026: on a phone the
+    # frame showed nothing - the page refused the card under the policy above).
+    lines += ["", "/motion/*", "  ! Content-Security-Policy",
+              "  Content-Security-Policy: default-src 'none'; style-src 'self' 'unsafe-inline'; font-src 'self'; "
+              "base-uri 'none'; form-action 'none'; frame-ancestors 'self'"]
     # The map: the engine's own page, one file with its style and its script
     # inside it, loading nothing; its path may run that script and nothing else.
     lines += ["", f"/{MAP_PAGE}*", "  ! Content-Security-Policy",

@@ -304,9 +304,9 @@ em { font-style: italic; }
 .does-name { font-weight: 600; display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.75rem; }
 .does li p:nth-child(2) { color: var(--muted); }
 .does-motion { margin: 0.25rem 0 0; }
-.does-motion iframe { display: block; width: min(100%, 14rem); aspect-ratio: 9 / 16; border: 1px solid var(--line); border-radius: var(--radius-card); background: var(--ground); }
+.does-motion iframe { display: block; width: 100%; aspect-ratio: 16 / 9; border: 1px solid var(--line); border-radius: var(--radius-card); background: var(--ground); }
 .does-motion figcaption { margin-top: 0.4rem; font: 500 0.7rem/1.2 var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
-.does-cmd { margin-top: auto !important; font: 400 0.875rem/1.4 var(--font-mono); color: var(--accent); }
+.does-cmd { margin-top: 0.25rem !important; font: 400 0.875rem/1.4 var(--font-mono); color: var(--accent); }
 .does-cmd code { font-size: 1em; }
 .does-intro a { color: var(--accent); white-space: nowrap; }
 

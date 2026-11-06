@@ -7,7 +7,7 @@ html,body{margin:0;height:100%;overflow:hidden;background:var(--ground);color:va
 .typed,.answer .ln{animation:26.5s linear infinite;animation-delay:calc(var(--t) * -1s)}
 .typed{font:inherit}
 html.still .scene,html.still .typed,html.still .answer .ln{animation-play-state:paused}
-@media (prefers-reduced-motion:reduce){.scene,.typed,.answer .ln{animation-play-state:paused}}
+@media (prefers-reduced-motion:reduce){.scene,.typed,.answer .ln{animation:none}.scene{opacity:0}.scene.claim{opacity:1}}
 .mark{font:400 17cqmin/1 var(--font-display);letter-spacing:-0.02em}
 .ver{font:500 4cqmin/1 var(--font-mono);color:var(--ground);background:var(--accent);padding:1.6cqmin 2.6cqmin;border-radius:999px;align-self:flex-start}
 .eye{font:500 3.3cqmin/1.3 var(--font-mono);letter-spacing:0.06em;text-transform:uppercase;color:var(--muted)}
