@@ -941,12 +941,11 @@ def planned(f):
                 if it.get("plan") else "")
         toggle = (f'<span class="does-toggle"><span class="is-closed">{esc(f["does"]["more"])}</span>'
                   f'<span class="is-open">{esc(f["does"]["less"])}</span></span>') if plan else ""
-        else:
-            chip = f'<span class="chip chip-{esc(it["state"])}">{esc(p["labels"][it["state"]])}</span>'
-            head = f'<p class="does-name">{esc(it["name"])} {chip}{toggle}</p><p>{esc(it["words"])}</p>'
-            links = f'<p class="does-answers">{issues}</p>' if issues else ""
-            nxt.append(f'<li id="road-{esc(it["id"])}">' + (f'<details class="does-more"><summary>{head}</summary>{links}{plan}</details>'
-                                                         if plan else head + links) + '</li>')
+        chip = f'<span class="chip chip-{esc(it["state"])}">{esc(p["labels"][it["state"]])}</span>'
+        head = f'<p class="does-name">{esc(it["name"])} {chip}{toggle}</p><p>{esc(it["words"])}</p>'
+        links = f'<p class="does-answers">{issues}</p>' if issues else ""
+        nxt.append(f'<li id="road-{esc(it["id"])}">' + (f'<details class="does-more"><summary>{head}</summary>{links}{plan}</details>'
+                                                     if plan else head + links) + '</li>')
     return f"""<section id="next"><div class="wrap">
 <h2>{esc(p["heading"])}</h2>
 <p class="does-intro">{esc(p["source"])}</p>
