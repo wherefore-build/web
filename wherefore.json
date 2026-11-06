@@ -246,5 +246,12 @@
    }
   ],
   "audience": "a visitor"
+ },
+ "drift": {
+  "allow": 0,
+  "why": "nothing: every value the site states by hand is held by facts/ or brand/, and the one file set that repeats a value is not this site's",
+  "ignore": {
+   "brand/fonts/**": "the three faces' licences, each the OFL's own text with its own version in it; third-party, unchanged"
+  }
  }
 }

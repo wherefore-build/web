@@ -39,7 +39,7 @@
    "data": {
     "issues": 9,
     "items": 5,
-    "releases": 26,
+    "releases": 27,
     "steps": [
      "an issue",
      "the plan, on it",
@@ -47,7 +47,7 @@
      "the note that closes it"
     ]
    },
-   "caption": "9 issues answered by 5 roadmap items across 26 releases"
+   "caption": "9 issues answered by 5 roadmap items across 27 releases"
   },
   {
    "kind": "claim",

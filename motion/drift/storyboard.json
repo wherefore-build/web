@@ -1,0 +1,69 @@
+{
+ "id": "drift",
+ "name": "Drift, on the map",
+ "version": "0.20.0",
+ "duration": 27.5,
+ "frames": [
+  "portrait",
+  "landscape"
+ ],
+ "scenes": [
+  {
+   "kind": "open",
+   "start": 0.0,
+   "end": 3.0,
+   "name": "Wherefore",
+   "version": "0.20.0"
+  },
+  {
+   "kind": "ask",
+   "start": 3.0,
+   "end": 7.0,
+   "eyebrow": "shipped in 0.20.0",
+   "headline": "Drift, on the map"
+  },
+  {
+   "kind": "run",
+   "start": 7.0,
+   "end": 12.0,
+   "typed": "wherefore check drift",
+   "lines": [
+    "1 value drifts…"
+   ],
+   "typing": 1.66
+  },
+  {
+   "kind": "mechanism",
+   "start": 12.0,
+   "end": 17.5,
+   "eyebrow": "what it compares",
+   "mechanism": "compare",
+   "data": {
+    "places": [
+     "site"
+    ],
+    "stated": 69,
+    "files": 16,
+    "disagree": 0,
+    "says": []
+   },
+   "caption": "69 values stated across 16 pages in site; 0 disagree"
+  },
+  {
+   "kind": "claim",
+   "start": 17.5,
+   "end": 21.5,
+   "text": "Every hand-written copy no source holds, named and counted."
+  },
+  {
+   "kind": "close",
+   "start": 21.5,
+   "end": 27.5,
+   "home": "wherefore.build",
+   "tagline": "Your company, compiled.",
+   "install": "pip install wherefore-build",
+   "url": "wherefore.build/features/#drift",
+   "icon": "icon"
+  }
+ ]
+}
