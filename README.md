@@ -257,10 +257,15 @@ the commit and on the day it names.
 
 ## CI
 
-`.github/workflows/corpus.yml` runs on every push, on a hosted runner, in about
-two minutes, most of it installing the browser the press check drives. It
-installs the engine release `requirements-engine.txt` pins from PyPI, so it
-needs no secret to read it; the one secret it holds is the deploy's,
+`.github/workflows/corpus.yml` runs on every push, on a hosted runner, as two
+jobs side by side: `corpus` runs every check, and `proofs` plants each check's
+fault and requires the check to fail. The proofs are the long half, and they
+run only when something that decides what a check does has moved - a check, a
+generator, the brand's source, the workflow, `wherefore.json`; a push that only
+moves the pin, the facts or the pages they make skips them, and the job says
+so. The browser the press check drives is cached by the file that pins it. The
+workflow installs the engine release `requirements-engine.txt` pins from PyPI,
+so it needs no secret to read it; the one secret it holds is the deploy's,
 `CLOUDFLARE_API_TOKEN` (below).
 
 ## Hosting
@@ -269,8 +274,9 @@ Cloudflare Workers serves `site/` exactly as committed, as static assets
 (`wrangler.jsonc`), with the headers in `site/_headers`.
 
 **CI deploys it, and only after every check has passed.** The `deploy` job in
-`.github/workflows/corpus.yml` needs `corpus`, so a tree the gate or a proof
-failed never reaches Cloudflare, and nothing builds on Cloudflare's side.
+`.github/workflows/corpus.yml` needs `corpus`, and `proofs` when they ran, so
+a tree the gate or a proof failed never reaches Cloudflare, and nothing builds
+on Cloudflare's side.
 - `main` deploys to the site's address, `wherefore.build`, a Custom Domain
   declared in `wrangler.jsonc` (and still at its `workers.dev` address).
 - Every other branch deploys to a preview of its own. The job posts the

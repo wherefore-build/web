@@ -2,8 +2,18 @@
 # every file accounted for and every generated one current, every fact reaching
 # what a visitor receives, the site reaching nothing outside itself, the brand
 # said once and readable, every control on it doing something when a thumb
-# presses it - and each of those shown to fail. Hosted, and short: two minutes
-# or so a run, most of it installing the browser.
+# presses it - and each of those shown to fail.
+#
+# TWO JOBS SIDE BY SIDE, SO A RUN IS AS LONG AS ITS LONGEST HALF, NOT THE SUM
+# (owner, 6 November 2026). `corpus` runs every check; `proofs` plants each
+# check's fault and requires the check to fail, which takes longest and used
+# to run after everything else. The proofs run only when something that
+# decides what a check does has moved - a check, a generator, the brand's
+# source, this workflow, wherefore.json. A push that only moves the pin, the
+# facts, the skill's copies or the pages they make changes no check's
+# behaviour, and the engine's own proofs cover the engine; `proofs` says it
+# was skipped and why. The browser is cached between runs by the file that
+# pins it.
 #
 # The engine is the release requirements-engine.txt pins, from PyPI, so the
 # install needs no secret. It is installed into the checkout, never into the
@@ -16,7 +26,7 @@
 # site is compiled, and only then, never on a timer: the owner's call.
 #
 # THEN IT DEPLOYS what those checks passed, and nothing else: `deploy` needs
-# `corpus`. main goes to the site's address; every other branch to a preview
+# `corpus`, and `proofs` when they ran. main goes to the site's address; every other branch to a preview
 # of its own, whose address is posted on its pull request. Cloudflare builds
 # nothing, so what it serves is the tree that was judged.
 name: corpus
@@ -33,6 +43,36 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # WHAT MOVED decides whether the proofs run. The push's parent is compared
+  # with its head; a new branch, a dispatch or a force has no parent here and
+  # runs everything.
+  moved:
+    runs-on: ubuntu-latest
+    outputs:
+      prove: ${{ steps.what.outputs.prove }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - name: Did anything that decides what a check does move?
+        id: what
+        env:
+          BEFORE: ${{ github.event.before }}
+        run: |
+          if [ "${{ github.event_name }}" != push ] || [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ] \
+             || ! git cat-file -e "$BEFORE^{commit}" 2>/dev/null; then
+            echo "prove=yes" >> "$GITHUB_OUTPUT"; echo "no parent to compare with: every proof runs"; exit 0
+          fi
+          CHANGED=$(git diff --name-only "$BEFORE" "$GITHUB_SHA")
+          echo "$CHANGED"
+          # Everything but the pin, the facts, the skill's copies and the pages they make.
+          if printf '%s\n' "$CHANGED" | grep -Ev '^(requirements-engine\.txt|facts/|site/|\.claude/|\.agents/)' | grep -q .; then
+            echo "prove=yes" >> "$GITHUB_OUTPUT"; echo "a check, a generator, the brand, the workflow or wherefore.json moved: every proof runs"
+          else
+            echo "prove=no" >> "$GITHUB_OUTPUT"; echo "only the pin, the facts, the skill's copies or the pages moved: no check's behaviour did, so the proofs are not run"
+          fi
+
+  # `corpus` keeps its name: it is the status check main requires before a merge.
   corpus:
     runs-on: ubuntu-latest
     env:
@@ -74,6 +114,12 @@ jobs:
       # The press check drives a real browser, pinned in
       # requirements-browser.txt and installed into the checkout like the
       # engine; `playwright install` fetches the Chromium build that pin asks for.
+      - name: The browser, from the cache when its pin has not moved
+        uses: actions/cache@v4
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('requirements-browser.txt') }}
       - name: Install the browser the press check drives
         id: browser
         if: ${{ !cancelled() && steps.install.outcome == 'success' }}
@@ -93,8 +139,34 @@ jobs:
       - name: Every page fits a phone's width, moving or still, and no icon outgrows its words
         if: ${{ !cancelled() && steps.browser.outcome == 'success' }}
         run: python3 checks/fits_phone.py
+
+  # EACH CHECK SHOWN TO FAIL, beside the checks rather than after them. Needs
+  # the same engine and browser, in its own checkout: the proofs plant faults
+  # in the tree and put them back, and two in one checkout would corrupt each
+  # other.
+  proofs:
+    needs: moved
+    if: needs.moved.outputs.prove == 'yes'
+    runs-on: ubuntu-latest
+    env:
+      PYTHONPATH: ${{ github.workspace }}/.wherefore-engine:${{ github.workspace }}/.browser
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install the engine this corpus pins
+        run: |
+          rm -rf .wherefore-engine
+          python3 -m pip install --quiet --no-deps --target .wherefore-engine -r requirements-engine.txt
+      - name: The browser, from the cache when its pin has not moved
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('requirements-browser.txt') }}
+      - name: Install the browser the proofs drive
+        run: |
+          rm -rf .browser
+          python3 -m pip install --quiet --target .browser -r requirements-browser.txt
+          python3 -m playwright install --with-deps chromium
       - name: And each of those fails when it should
-        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
         run: python3 -m wherefore prove
 
   # Cloudflare's own Git builds are disconnected: this is the one deploy, and it
@@ -103,7 +175,10 @@ jobs:
   # repository (README.md, "Hosting"). wrangler is pinned, like the engine, so
   # the deploy is the same program every time.
   deploy:
-    needs: corpus
+    needs: [corpus, proofs]
+    # The proofs may have been skipped for a push that moved no check; a deploy
+    # waits for the checks either way, and for the proofs when they ran.
+    if: ${{ !cancelled() && needs.corpus.result == 'success' && (needs.proofs.result == 'success' || needs.proofs.result == 'skipped') }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
