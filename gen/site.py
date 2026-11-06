@@ -883,6 +883,9 @@ def does(f):
 def planned(f):
     """What is next, and what shipped: the engine's own roadmap, from the copy of it this site holds (facts/roadmap.json).
 
+    An item's anchor is road-<id>, so a shipped item and the feature it became
+    never share one; the feature's is its own id.
+
     THE SITE OWNS NO ROADMAP. The engine's sits beside its code, public, where
     the people and agents working on it plan from it; this site keeps a copy,
     byte for byte, and `wherefore check upstream` fails the deploy when the
@@ -925,13 +928,13 @@ def planned(f):
             # never lands on a link instead.
             head = f'<p class="does-name">{esc(it["name"])} {chip}{toggle}</p><p>{esc(it["words"])}</p>'
             links = f'<p class="does-answers">{issues}{now}</p>' if (issues or now) else ""
-            done.append(f'<li id="{esc(it["id"])}">' + (f'<details class="does-more"><summary>{head}</summary>{links}{plan}</details>'
+            done.append(f'<li id="road-{esc(it["id"])}">' + (f'<details class="does-more"><summary>{head}</summary>{links}{plan}</details>'
                                                           if plan else head + links) + '</li>')
         else:
             chip = f'<span class="chip chip-{esc(it["state"])}">{esc(p["labels"][it["state"]])}</span>'
             head = f'<p class="does-name">{esc(it["name"])} {chip}{toggle}</p><p>{esc(it["words"])}</p>'
             links = f'<p class="does-answers">{issues}</p>' if issues else ""
-            nxt.append(f'<li id="{esc(it["id"])}">' + (f'<details class="does-more"><summary>{head}</summary>{links}{plan}</details>'
+            nxt.append(f'<li id="road-{esc(it["id"])}">' + (f'<details class="does-more"><summary>{head}</summary>{links}{plan}</details>'
                                                          if plan else head + links) + '</li>')
     return f"""<section id="next"><div class="wrap">
 <h2>{esc(p["heading"])}</h2>
