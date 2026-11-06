@@ -54,6 +54,17 @@ NAMED = re.compile(r"\b(?:color|background(?:-color)?|border(?:-[a-z]+)*|outline
 FONT = re.compile(r"\bfont(?:-family)?\s*:([^;]*)", re.I)
 
 
+# Where a colour is quoted, not painted: a page's <pre> and <code>. The hero
+# shows the scan's own output, which names the greys it found on an example
+# site; that is text a visitor reads, not a colour they receive. Each quoted
+# stretch is blanked line for line, so a line number still means the same line.
+QUOTED = re.compile(r"<(pre|code)\b[^>]*>.*?</\1\s*>|`[^`\n]*`", re.S | re.I)
+
+
+def unquoted(text):
+    return QUOTED.sub(lambda m: re.sub(r"[^\n]", " ", m.group(0)), text)
+
+
 def brand_values():
     """Every colour value the tokens hold, upper-cased: the only literals a served page may carry."""
     import json
@@ -69,7 +80,7 @@ def served_faults():
             rel = path.relative_to(ROOT).as_posix()
             if rel in NOT_OURS:
                 continue
-            for n, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
+            for n, line in enumerate(unquoted(path.read_text(encoding="utf-8")).splitlines(), 1):
                 for m in HEX.finditer(line):
                     if m.group(0).upper() not in allowed:
                         found.append(f"{rel}:{n}: {m.group(0)} - a colour a visitor receives that is not one of the brand's")
@@ -85,7 +96,7 @@ def faults():
     for pattern in READ:
         for path in sorted(ROOT.glob(pattern)):
             rel = path.relative_to(ROOT).as_posix()
-            for n, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
+            for n, line in enumerate(unquoted(path.read_text(encoding="utf-8")).splitlines(), 1):
                 for m in HEX.finditer(line):
                     found.append(f"{rel}:{n}: {m.group(0)} - a colour said outside brand/tokens.json")
                 for m in FUNC.finditer(line):
