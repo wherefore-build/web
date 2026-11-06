@@ -27,6 +27,7 @@ import threading
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 SITE = ROOT / "site"
 CLIPS = SITE / "motion"
+BOARDS = ROOT / "motion"            # the storyboards, as data, kept out of site/
 FRAMES = {"portrait": (540, 960), "landscape": (960, 540)}
 SHOWN = """() => {
   const W = innerWidth, H = innerHeight, out = {spill: [], shown: 0};
@@ -54,7 +55,7 @@ class Quiet(http.server.SimpleHTTPRequestHandler):
 
 def faults(browser, url):
     found = []
-    for board_path in sorted(CLIPS.glob("*/storyboard.json")):
+    for board_path in sorted(BOARDS.glob("*/storyboard.json")):
         board = json.loads(board_path.read_text(encoding="utf-8"))
         fid = board["id"]
         for frame, (w, h) in FRAMES.items():
@@ -80,8 +81,8 @@ def main():
     except ImportError:
         print("::error::playwright is not installed: pip install -r requirements-browser.txt && python3 -m playwright install chromium")
         return 1
-    if not CLIPS.is_dir():
-        print("::error::site/motion/ is not there: the build writes the clips")
+    if not CLIPS.is_dir() or not BOARDS.is_dir():
+        print("::error::site/motion/ or motion/ is not there: the build writes the clips and their storyboards")
         return 1
     server = http.server.ThreadingHTTPServer(("127.0.0.1", 0), functools.partial(Quiet, directory=str(SITE)))
     threading.Thread(target=server.serve_forever, daemon=True).start()
@@ -93,7 +94,7 @@ def main():
     finally:
         server.shutdown()
         server.server_close()
-    n = len(list(CLIPS.glob("*/storyboard.json")))
+    n = len(list(BOARDS.glob("*/storyboard.json")))
     if found:
         print("::error::a clip does not fit its frame, or a scene shows nothing:\n")
         for f in found:

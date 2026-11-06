@@ -3,13 +3,7 @@
  "name": "wherefore.build",
  "palette": {
   "source": "brand/tokens.json",
-  "read": [
-   "gen/**",
-   "site/**",
-   "facts/**",
-   "brand/**",
-   "cases/**"
-  ],
+  "read": ["gen/**", "site/**", "facts/**", "brand/**", "cases/**"],
   "not_ours": {
    "cases/pendulum/model.html": "the pendulum's page, taken from its repository as it serves it; its own suite holds its brand",
    "site/pendulum/index.html": "the same page, copied to where the site serves it",
@@ -89,7 +83,7 @@
     "site/motion"
    ],
    "cwd": ".",
-   "makes": "site/motion/, a clip for every feature the pinned release ships - six scenes, every word a fact, as a page in motion in the brand's own stylesheet - which the features page plays on each card"
+   "makes": "site/motion/, a clip for every feature the pinned release ships - six scenes, every word a fact, as a page in motion in the brand's own stylesheet - which the features page plays on each card; and motion/, each clip's storyboard as data for the checks, kept out of site/ because a storyboard quotes what a command printed"
   }
  ],
  "inventory": {
@@ -255,6 +249,7 @@
  },
  "motion": {
   "out": "site/motion",
-  "css": "site/brand.css"
+  "css": "site/brand.css",
+  "storyboards": "motion"
  }
 }

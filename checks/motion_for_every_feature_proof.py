@@ -40,9 +40,9 @@ def main():
     with Edit("site/motion/gate/index.html") as p:
         p.unlink()
         check(r, "a feature's clip deleted", CHECK, True, ["NO CLIP      gate"])
-    with Edit("site/motion/gate/storyboard.json") as p:
+    with Edit("motion/gate/storyboard.json") as p:
         plant(p, '"id": "gate"', '"id": "build"')
-        check(r, "a storyboard that is another feature's", CHECK, True, ["NOT A CLIP   site/motion/gate/storyboard.json"])
+        check(r, "a storyboard that is another feature's", CHECK, True, ["NOT A CLIP   motion/gate/storyboard.json"])
     with Edit(PAGE) as p:
         plant(p, '<iframe src="../motion/reach/index.html"', '<iframe src="../motion/reach/index.htm"')
         check(r, "the features page framing no clip for a feature", CHECK, True, ["NOT PLAYED   the features page frames no clip for reach"])

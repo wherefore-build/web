@@ -31,7 +31,7 @@ private repository, not here, so that none of them goes public with the site.
 | `site/index.html` | the home page | generated |
 | `site/features/`, `site/changelog/` | everything it does and what's next, and every release | generated |
 | `site/map/` | the site's own map, written by `wherefore graph` run as a generator: every source, the scripts that read it, and every file they make, from a real run, in the brand's own colours (`--theme site/brand/map.css`) | generated |
-| `site/motion/` | a clip for every feature the pinned release ships, written by `wherefore motion` run as a generator: six scenes, every word a fact, as a page in motion in the brand's own stylesheet; the features page plays each on its card | generated |
+| `site/motion/`, `motion/` | a clip for every feature the pinned release ships, written by `wherefore motion` run as a generator: six scenes, every word a fact, as a page in motion in the brand's own stylesheet; the features page plays each on its card. The storyboards, as data for the checks, sit in `motion/`, out of `site/`, because a storyboard quotes what a command printed | generated |
 | `site/_headers` | what Cloudflare Pages serves with every file | generated |
 | `site/install.sh` | the one-line installer `wherefore.sh` serves, from the pinned release (`gen/install.py`) | generated |
 | `site/brand.css`, `site/fonts/` | the brand as custom properties, and the fonts it serves itself | generated |

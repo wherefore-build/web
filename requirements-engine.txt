@@ -10,4 +10,4 @@
 # UNTIL 0.20.0 IS RELEASED: the engine branch that declares it, by commit, so this
 # branch builds and previews before the release the owner has not yet cut. The
 # pin pull request the release opens moves this back to the PyPI line.
-wherefore-build @ git+https://github.com/wherefore-build/wherefore@8db8dce8aa0aee9e27ae908da7f54916012768b9
+wherefore-build @ git+https://github.com/wherefore-build/wherefore@f4d4fe7ff208efd9cd58fcb8ed09a044bd7df28a
