@@ -14,15 +14,41 @@
 </head>
 <body>
 <header class="top"><div class="wrap"><input class="state menu-state" type="checkbox" id="menu"><a class="name" href="../">Wherefore</a>
-<label class="menu-switch" for="menu">Menu</label><nav aria-label="The site"><a href="../#how">How it works</a><a href="../features/">Features</a><a href="../#case">Case study</a><a href="../#why">Why Wherefore</a><a href="../changelog/">Changelog</a><a href="../map/">Map</a></nav><a class="pill" href="../#start">Get started</a></div></header>
+<label class="menu-switch" for="menu">Menu</label><nav aria-label="The site"><a href="../#how">How it works</a><a href="../features/">Features &amp; roadmap</a><a href="../#case">Case study</a><a href="../#why">Why Wherefore</a><a href="../changelog/">Changelog</a><a href="../map/">Map</a></nav><a class="pill" href="../#start">Get started</a></div></header>
 <main id="top">
 <section class="log-head"><div class="wrap">
-<p class="eyebrow">Changelog · Wherefore 0.17.0</p>
+<p class="eyebrow">Changelog · Wherefore 0.18.1</p>
 <h1>Every release, newest first.</h1>
 <p class="lede">Built from the release this site pins, so a release is here the moment the site moves to it - and the build stops if a feature it ships has no words on this site.</p>
 </div></section>
 <section class="log"><div class="wrap">
 <ol class="releases">
+<li class="release" id="v0.18.1">
+<div class="release-meta"><p class="release-v"><a href="#v0.18.1">0.18.1</a></p>
+<p class="release-date"><time datetime="2026-11-06">6 November 2026</time></p></div>
+<div class="release-body">
+<h2>Scan any number of repositories at once</h2>
+<p class="release-says">The scan always took any number of places; the words said two. Now they say what it does: the site, the app, the backend and the docs together, and where any two disagree.</p>
+<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore scan site app backend docs
+4 places read together - site, app, backend, docs - state 2 things in common; they disagree on 2
+  DIFFER  &quot;start your {} day free&quot;  site: 14 (1x) · app: 30 (1x) · backend: 14 (1x)
+  DIFFER  &quot;up to {} mb per&quot;  site: 250 (1x) · backend: 500 (1x) · docs: 250 (1x)</code></pre>
+<figcaption>What it printed</figcaption></figure>
+
+</div>
+</li>
+<li class="release" id="v0.18.0">
+<div class="release-meta"><p class="release-v"><a href="#v0.18.0">0.18.0</a></p>
+<p class="release-date"><time datetime="2026-11-06">6 November 2026</time></p></div>
+<div class="release-body">
+<h2>The inbox, held</h2>
+<p class="release-says">The roadmap is the inbox&#x27;s ledger: a request&#x27;s plan, who asked, and what shipped are written there, held by the engine&#x27;s own tests, and written back onto each issue by the release, which then closes it. Every feature carries the details a person reads when they open it.</p>
+<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore --version
+wherefore 0.18.0</code></pre>
+<figcaption>What it printed</figcaption></figure>
+
+</div>
+</li>
 <li class="release" id="v0.17.0">
 <div class="release-meta"><p class="release-v"><a href="#v0.17.0">0.17.0</a></p>
 <p class="release-date"><time datetime="2026-11-06">6 November 2026</time></p></div>
@@ -33,7 +59,7 @@
 <span class="term-cut" title="lines left out">…</span>
 0 statements on 1 published page still say what the source says; 1 page did not answer, and passed for the reason each gives. A published page is a copy until it is built from the source: holding it by reading is the step before that.</code></pre>
 <figcaption>What it printed</figcaption></figure>
-<h3>What arrived</h3><ul class="arrived"><li><span class="arrived-name">A page you publish but cannot build</span> A page nobody builds - your site on a hosted CMS - declared with the facts it states. Wherefore reads it live and fails when it says otherwise, quoting the page: a copy held by reading until it can be built.</li></ul>
+<h3>What arrived</h3><ul class="arrived"><li><span class="arrived-name">A page you publish but cannot build</span> A page nobody builds - your site on a hosted CMS - declared with the facts it states. Wherefore reads it live and fails when it says otherwise, quoting the page: a copy held by reading until it can be built.</li></ul><h3>What it answered</h3><ul class="arrived answered"><li id="road-published"><details class="does-more"><summary><p class="does-name"><span class="arrived-name">A page you publish but cannot build</span> <a class="road-issue" href="https://github.com/wherefore-build/wherefore/issues/22">#22</a> <span class="road-asked">asked for by <a href="https://github.com/zakholdsworth">@zakholdsworth</a></span><span class="does-toggle"><span class="is-closed">More</span><span class="is-open">Less</span></span></p><p>A page nobody builds, declared with the facts it states; read live, failing when it says otherwise.</p></summary><p class="does-plan"><span class="road-asked">What was planned</span> A published section names each page nobody here builds - its address, why, and the facts it states as templates with the value in braces. wherefore check published reads the page live and fails when it says otherwise, quoting the page; a schedule is the client&#x27;s choice; declaring the page counts as reach. An intermediate step: a copy until it is built from the source.</p></details></li></ul>
 </div>
 </li>
 <li class="release" id="v0.16.1">
@@ -63,7 +89,7 @@ wherefore 0.16.1</code></pre>
 <span class="term-cut" title="lines left out">…</span>
   DIFFER  &quot;start your {} day free&quot;  site: 14 (1x) · app: 30 (1x)</code></pre>
 <figcaption>What it printed</figcaption></figure>
-<h3>What arrived</h3><ul class="arrived"><li><span class="arrived-name">The scan says what it read</span> Beside the result, what each place contributed and what it left unread; an app&#x27;s own words, read out of its source; a table set apart from the stale copies; and the colours your site states, with the greys that were meant to be one grey, before any brand is declared.</li></ul>
+<h3>What arrived</h3><ul class="arrived"><li><span class="arrived-name">The scan says what it read</span> Beside the result, what each place contributed and what it left unread; an app&#x27;s own words, read out of its source; a table set apart from the stale copies; and the colours your site states, with the greys that were meant to be one grey, before any brand is declared.</li></ul><h3>What it answered</h3><ul class="arrived answered"><li id="road-scan-read"><details class="does-more"><summary><p class="does-name"><span class="arrived-name">The scan says what it read</span> <a class="road-issue" href="https://github.com/wherefore-build/wherefore/issues/19">#19</a>, <a class="road-issue" href="https://github.com/wherefore-build/wherefore/issues/20">#20</a> <span class="road-asked">asked for by <a href="https://github.com/zakholdsworth">@zakholdsworth</a></span><span class="does-toggle"><span class="is-closed">More</span><span class="is-open">Less</span></span></p><p>Beside the result, what each place contributed and what it left unread; an app&#x27;s own words; a table set apart; the colours a site states.</p></summary><p class="does-plan"><span class="road-asked">What was planned</span> Under the first line, for each place, how many files of each kind were read and the kinds seen and not read, so &quot;0 things in common&quot; is never mistaken for agreement. Read string literals out of source code, so an app&#x27;s own words count. Report two values said in the same files alike as a table, not a disagreement. Count the colours a site states and group the ones within a shade of each other, before any brand is declared.</p></details></li></ul>
 </div>
 </li>
 <li class="release" id="v0.15.0">
@@ -75,7 +101,7 @@ wherefore 0.16.1</code></pre>
 <figure class="term"><pre><code><span class="term-prompt">$</span> wherefore --version
 wherefore 0.15.0</code></pre>
 <figcaption>What it printed</figcaption></figure>
-
+<h3>What it answered</h3><ul class="arrived answered"><li id="road-skill-field"><details class="does-more"><summary><p class="does-name"><span class="arrived-name">The skill learns from the field</span> <a class="road-issue" href="https://github.com/wherefore-build/wherefore/issues/17">#17</a>, <a class="road-issue" href="https://github.com/wherefore-build/wherefore/issues/18">#18</a>, <a class="road-issue" href="https://github.com/wherefore-build/wherefore/issues/19">#19</a>, <a class="road-issue" href="https://github.com/wherefore-build/wherefore/issues/21">#21</a> <span class="road-asked">asked for by <a href="https://github.com/zakholdsworth">@zakholdsworth</a></span><span class="does-toggle"><span class="is-closed">More</span><span class="is-open">Less</span></span></p><p>The start guide rewritten from the first session on a stranger&#x27;s company.</p></summary><p class="does-plan"><span class="road-asked">What was planned</span> Scan before you ask, and begin the interview from what the scan found. Find where each fact is decided before choosing the repository: the one the agent was opened in may only be a reader. Say what the scan cannot see and read each finding where it was found. Say what to do when a fact lives in an app&#x27;s source code: read the owner at run time, else keep it once in the language&#x27;s own terms, generate source last.</p></details></li></ul>
 </div>
 </li>
 <li class="release" id="v0.14.0">
@@ -91,7 +117,7 @@ the scan found our trial length stated two ways
 --link: nothing was sent. This link opens the issue, filled in, for the person to read and send:
 <span class="term-cut" title="lines left out">…</span></code></pre>
 <figcaption>What it printed</figcaption></figure>
-
+<h3>What it answered</h3><ul class="arrived answered"><li id="road-report-title"><details class="does-more"><summary><p class="does-name"><span class="arrived-name">One report, with a title</span> <a class="road-issue" href="https://github.com/wherefore-build/wherefore/issues/15">#15</a> <span class="road-asked">asked for by <a href="https://github.com/zakholdsworth">@zakholdsworth</a></span><span class="does-toggle"><span class="is-closed">More</span><span class="is-open">Less</span></span></p><p>One command for all feedback, with a title and a body, instead of choosing bug, ask or feature.</p></summary><p class="does-plan"><span class="road-asked">What was planned</span> Drop the kinds: whether a thing is a bug or a missing feature is the maintainers&#x27; judgment, made in triage. Take --title and put the words in the body, so several points stay several points. Add --link, which prints the issue for the person to send and never sends. Never quote the engine&#x27;s error, which names a path. One report per topic; the agent may draft the words and the person approves them.</p></details></li></ul>
 </div>
 </li>
 <li class="release" id="v0.13.0">
@@ -105,7 +131,7 @@ the scan found our trial length stated two ways
   DIFFER  &quot;start your {} day free&quot;  site: 14 (2x) · app: 30 (1x)
   agree   &quot;plans from {} dollars a&quot;  site: 9 (1x) · app: 9 (1x)</code></pre>
 <figcaption>What it printed</figcaption></figure>
-<h3>What arrived</h3><ul class="arrived"><li><span class="arrived-name">Scan two repositories at once</span> Point the scan at your site and your app together: it says what both state and where the two disagree, before anything is installed.</li></ul>
+<h3>What arrived</h3><ul class="arrived"><li><span class="arrived-name">Scan any number of repositories at once</span> Point the scan at your site, your app, your backend and your docs together: it says what they state in common and where any two disagree, before anything is installed.</li></ul>
 </div>
 </li>
 <li class="release" id="v0.12.1">
@@ -355,7 +381,7 @@ during this run and matches what is committed</code></pre>
 </ol>
 </div></section>
 </main>
-<footer><div class="wrap"><nav class="foot-nav" aria-label="The site, again"><a href="../#how">How it works</a><a href="../features/">Features</a><a href="../#case">Case study</a><a href="../#why">Why Wherefore</a><a href="../changelog/">Changelog</a><a href="../map/">Map</a></nav><div class="footer-row"><p><span class="footer-name">Wherefore</span> · This site is built with Wherefore, from one source file and the release it pins.</p>
+<footer><div class="wrap"><nav class="foot-nav" aria-label="The site, again"><a href="../#how">How it works</a><a href="../features/">Features &amp; roadmap</a><a href="../#case">Case study</a><a href="../#why">Why Wherefore</a><a href="../changelog/">Changelog</a><a href="../map/">Map</a></nav><div class="footer-row"><p><span class="footer-name">Wherefore</span> · This site is built with Wherefore, from one source file and the release it pins.</p>
 <p class="footer-meta"><a href="../">Wherefore</a> · <a href="../brand/">Brand</a> · <a href="../map/">Map</a> · <a target="_blank" rel="noopener" href="https://github.com/wherefore-build/web">Read every file it is built from<svg class="out" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M9 2h5v5M14 2 7.5 8.5M12 9.5V13a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p></div></div></footer>
 </body>
 </html>

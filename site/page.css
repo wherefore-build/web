@@ -540,6 +540,23 @@ footer p { margin: 0; }
 .chip-later { min-width: 0; }
 .road-asked { font: 400 0.8125rem/1.4 var(--font-mono); color: var(--muted); margin-left: 0.5rem; }
 .road-asked a { color: var(--muted); }
+.chip-shipped { color: var(--on-accent); background: var(--accent); border-color: var(--accent); min-width: 0; }
+/* A feature opens to its details (owner, 6 November 2026): the line stays in
+   the list; the paragraph, every command and what it answered unfold under
+   it. <details> needs no script. The marker is the list's own hint. */
+.does-more { display: flex; flex-direction: column; gap: 0.6rem; }
+.does-more summary { list-style: none; cursor: pointer; display: flex; flex-direction: column; gap: 0.6rem; }
+.does-more summary::-webkit-details-marker { display: none; }
+/* The toggle is a word, not a glyph, so that opening changes what is read
+   where the thumb pressed - More becomes Less - and not only below the
+   screen's edge on a phone. */
+.does-toggle { margin-left: auto; font: 400 0.8125rem/1.4 var(--font-mono); color: var(--accent); }
+.does-more .is-open, .does-more[open] .is-closed { display: none; }
+.does-more[open] .is-open { display: inline; }
+.does-more summary p:nth-child(2) { color: var(--muted); }
+.does-details, .does-plan, .does-answers { color: var(--ink); font-size: 0.9375rem; line-height: 1.5; }
+.does-details .road-asked, .does-plan .road-asked, .does-answers .road-asked { margin-left: 0; display: block; margin-bottom: 0.15rem; }
+.does-plan { color: var(--muted); }
 #next { padding-top: 0; border-top: 0; }
 
 /* The case study's two lists, folded behind one tap: the story and the counts stay in view. */

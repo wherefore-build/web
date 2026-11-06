@@ -719,6 +719,25 @@ def changelog_page(f):
                             f'{esc(d["words"][x["id"]]) if x["id"] in d["words"] else ""}</li>'
                             for x in brought)
             arrived = f'<h3>{esc(c["arrived"])}</h3><ul class="arrived">{names}</ul>'
+        # WHAT THE RELEASE ANSWERED, from the engine's ledger (owner, 6 November
+        # 2026): a request becomes a feature in a release, so this is where the
+        # chain is told - who asked, the issues, and the plan, folded until
+        # clicked - and the features page tells it once more from the feature.
+        answered = [it for it in ROADMAP["items"]
+                    if it["state"] == "shipped" and it.get("since") == v and it.get("issues")]
+        if answered:
+            rows = []
+            for it in answered:
+                links = ", ".join(f'<a class="road-issue" href="{esc(u)}">#{esc(u.rsplit("/", 1)[-1])}</a>' for u in it["issues"])
+                asked = (f'<span class="road-asked">{esc(d["asked"])} <a href="https://github.com/{esc(it["asked_by"])}">'
+                         f'@{esc(it["asked_by"])}</a></span>')
+                toggle = (f'<span class="does-toggle"><span class="is-closed">{esc(d["more"])}</span>'
+                          f'<span class="is-open">{esc(d["less"])}</span></span>')
+                rows.append(f'<li id="road-{esc(it["id"])}"><details class="does-more"><summary><p class="does-name">'
+                            f'<span class="arrived-name">{esc(it["name"])}</span> {links} {asked}{toggle}</p>'
+                            f'<p>{esc(it["words"])}</p></summary>'
+                            f'<p class="does-plan"><span class="road-asked">{esc(d["plan"])}</span> {esc(it["plan"])}</p></details></li>')
+            arrived += f'<h3>{esc(c["answered"])}</h3><ul class="arrived answered">{"".join(rows)}</ul>'
         items.append(f"""<li class="release" id="v{esc(v)}">
 <div class="release-meta"><p class="release-v"><a href="#v{esc(v)}">{esc(v)}</a></p>
 <p class="release-date"><time datetime="{esc(r["date"])}">{esc(long_date(r["date"]))}</time></p></div>
@@ -839,6 +858,14 @@ def does(f):
     # The newest features: those of the latest release that brought any. A
     # release that only mends what is there leaves the last new ones marked.
     newest = max((x["since"] for x in FEATURES), key=lambda v: tuple(int(n) for n in v.split(".")))
+    # WHAT EACH FEATURE ANSWERED: the roadmap's shipped items that name it, with
+    # their issues, who asked, and the plan - the engine's ledger, shown whole
+    # (owner, 6 November 2026: the chain from a request to what shipped is not
+    # to be missed again).
+    answered = {}
+    for it in ROADMAP["items"]:
+        if it["state"] == "shipped" and it.get("issues"):
+            answered.setdefault(it["feature"], []).append(it)
     items = []
     for x in FEATURES:
         if x["id"] in unshown:
@@ -846,11 +873,24 @@ def does(f):
             continue
         new = (f' <span class="chip chip-new">{esc(fill(d["new"], version=newest))}</span>'
                if x["since"] == newest else "")
-        cmd = (f'<p class="does-cmd"><code>{esc(command(short(x["commands"][0])))}</code></p>'
-               if x.get("commands") else "")
+        cmds = "".join(f'<p class="does-cmd"><code>{esc(command(short(c)))}</code></p>' for c in x.get("commands", []))
         since = f' <span class="chip chip-since">{esc(fill(d["since"], version=x["since"]))}</span>'
-        items.append(f'<li><p class="does-name">{esc(x["name"])}{since}{new}</p>'
-                     f'<p>{esc(words[x["id"]])}</p>{cmd}</li>')
+        asks = []
+        for it in answered.get(x["id"], []):
+            links = ", ".join(f'<a class="road-issue" href="{esc(u)}">#{esc(u.rsplit("/", 1)[-1])}</a>' for u in it["issues"])
+            asks.append(f'<p class="does-answers"><span class="road-asked">{esc(d["answers"])}</span> {links} '
+                        f'<span class="road-asked">{esc(d["asked"])} <a href="https://github.com/{esc(it["asked_by"])}">'
+                        f'@{esc(it["asked_by"])}</a> · {esc(fill(d["since"], version=it["since"]))}</span></p>'
+                        f'<p class="does-plan"><span class="road-asked">{esc(d["plan"])}</span> {esc(it["plan"])}</p>')
+        # The feature opens to its details: the paragraph a person reads when
+        # they want more than the line, every command, and what it answered.
+        # <details> needs no script, and the page runs none.
+        toggle = (f'<span class="does-toggle"><span class="is-closed">{esc(d["more"])}</span>'
+                  f'<span class="is-open">{esc(d["less"])}</span></span>')
+        items.append(f'<li id="{esc(x["id"])}"><details class="does-more"><summary><p class="does-name">{esc(x["name"])}{since}{new}{toggle}</p>'
+                     f'<p>{esc(words[x["id"]])}</p></summary>'
+                     f'<p class="does-details"><span class="road-asked">{esc(d["open"])}</span> {esc(x["details"])}</p>'
+                     f'{"".join(asks)}{cmds}</details></li>')
     return f"""<section id="does"><div class="wrap">
 <p class="does-intro">{esc(d["intro"])} <a href="../changelog/">{esc(f["changelog"]["link"])}</a></p>
 <ul class="does">
@@ -862,36 +902,55 @@ def does(f):
 def planned(f):
     """What is next: the engine's own roadmap, from the copy of it this site holds (facts/roadmap.json).
 
+    An item's anchor is road-<id>, so a shipped item and the feature it became
+    never share one; the feature's is its own id.
+
     THE SITE OWNS NO ROADMAP. The engine's sits beside its code, public, where
     the people and agents working on it plan from it; this site keeps a copy,
     byte for byte, and `wherefore check upstream` fails the deploy when the
     engine's file has moved, until the copy is taken again. The heading and
-    the labels are this site's words; every item is the engine's. An item the
-    pinned release already ships stops the build: the roadmap may not promise
-    what is already here, and the engine's own test refuses the same."""
+    the labels are this site's words; every item is the engine's. THE ROADMAP
+    IS THE INBOX'S LEDGER: an item that answers a request names the issue and
+    who asked and carries its plan, and when it ships it stays, marked shipped
+    with the release and the feature - told on the changelog, under that
+    release, and on the feature it became; here only what is still to come.
+    An item the pinned release ships that is not marked shipped stops the
+    build, and the engine's own test refuses the same."""
     p = f["planned"]
     shipped = {x["id"]: x for x in FEATURES}
-    items = []
+    nxt = []
     for it in ROADMAP["items"]:
-        if it["id"] in shipped:
-            raise SystemExit(f"the roadmap copied in facts/roadmap.json still lists `{it['id']}` ({it['name']}), "
-                             f"which {ENGINE} ships: take the copy again from the engine, where it has left")
+        if it["id"] in shipped and it["state"] != "shipped":
+            raise SystemExit(f"the roadmap copied in facts/roadmap.json lists `{it['id']}` ({it['name']}) as {it['state']}, "
+                             f"and {ENGINE} ships it: take the copy again from the engine, where it is marked shipped")
+        if it["state"] == "shipped":
+            if it["feature"] not in shipped:
+                raise SystemExit(f"roadmap item `{it['id']}` shipped as `{it['feature']}`, which {ENGINE} does not ship")
+            continue              # the changelog tells what each release answered; here is what is still to come
         if it["state"] not in p["labels"]:
             raise SystemExit(f"roadmap item `{it['id']}` is {it['state']!r}, which planned.labels does not name")
         # Who asked, when the engine's roadmap says: the person's GitHub login, which the
         # issue they asked in already shows, so the site says nothing the issue does not.
-        issue = (f' <a class="road-issue" href="{esc(it["issue"])}">#{esc(it["issue"].rsplit("/", 1)[-1])}</a>'
-                 if it.get("issue") else "")
+        issues = "".join(f' <a class="road-issue" href="{esc(u)}">#{esc(u.rsplit("/", 1)[-1])}</a>' for u in it.get("issues", []))
         if it.get("asked_by"):
-            issue = (f' <span class="road-asked">{esc(p["labels"]["asked"])} '
-                     f'<a href="https://github.com/{esc(it["asked_by"])}">@{esc(it["asked_by"])}</a></span>' + issue)
-        items.append(f'<li id="{esc(it["id"])}"><p class="does-name">{esc(it["name"])} <span class="chip chip-{esc(it["state"])}">'
-                     f'{esc(p["labels"][it["state"]])}</span>{issue}</p><p>{esc(it["words"])}</p></li>')
+            issues = (f' <span class="road-asked">{esc(p["labels"]["asked"])} '
+                      f'<a href="https://github.com/{esc(it["asked_by"])}">@{esc(it["asked_by"])}</a></span>' + issues)
+        # An item with a plan opens to it, like a feature to its details (owner,
+        # 6 November 2026: compact until clicked); one without is the line alone.
+        plan = (f'<p class="does-plan"><span class="road-asked">{esc(p["labels"]["plan"])}</span> {esc(it["plan"])}</p>'
+                if it.get("plan") else "")
+        toggle = (f'<span class="does-toggle"><span class="is-closed">{esc(f["does"]["more"])}</span>'
+                  f'<span class="is-open">{esc(f["does"]["less"])}</span></span>') if plan else ""
+        chip = f'<span class="chip chip-{esc(it["state"])}">{esc(p["labels"][it["state"]])}</span>'
+        head = f'<p class="does-name">{esc(it["name"])} {chip}{toggle}</p><p>{esc(it["words"])}</p>'
+        links = f'<p class="does-answers">{issues}</p>' if issues else ""
+        nxt.append(f'<li id="road-{esc(it["id"])}">' + (f'<details class="does-more"><summary>{head}</summary>{links}{plan}</details>'
+                                                     if plan else head + links) + '</li>')
     return f"""<section id="next"><div class="wrap">
 <h2>{esc(p["heading"])}</h2>
 <p class="does-intro">{esc(p["source"])}</p>
 <ul class="does">
-{chr(10).join(items)}
+{chr(10).join(nxt)}
 </ul>
 </div></section>"""
 
