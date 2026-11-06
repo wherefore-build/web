@@ -19,7 +19,8 @@
   "intro": "Built from the release this site pins, so a release is here the moment the site moves to it - and the build stops if a feature it ships has no words on this site.",
   "arrived": "What arrived",
   "printed": "What it printed",
-  "cut": "lines left out"
+  "cut": "lines left out",
+  "answered": "What it answered"
  },
  "nav": {
   "how": "How it works",
@@ -353,11 +354,7 @@
    "next": "Next",
    "later": "Later",
    "asked": "asked for by",
-   "shipped": "Shipped in {version}",
-   "plan": "The plan",
-   "feature": "now"
-  },
-  "shipped_heading": "What shipped, and what it answered",
-  "shipped_source": "Every request that became a feature, with its plan and the release that shipped it."
+   "plan": "The plan"
+  }
  }
 }
