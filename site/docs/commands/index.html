@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Commands · Docs — Wherefore</title>
+<meta name="description" content="The docs ship inside each release of the engine, held to its code by the engine&#x27;s own tests: every command has its section, every section of the configuration is documented, and every example is run again before a release. This site renders the docs of the release it pins.">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="../../brand/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../brand/icon-1024.png">
+<link rel="stylesheet" href="../../brand.css">
+<link rel="stylesheet" href="../../page.css">
+<link rel="canonical" href="https://wherefore.build/docs/commands/">
+</head>
+<body>
+<header class="top"><div class="wrap"><input class="state menu-state" type="checkbox" id="menu"><a class="name" href="../../">Wherefore</a>
+<label class="menu-switch" for="menu">Menu</label><nav aria-label="The site"><a href="../../#how">How it works</a><a href="../../features/">Features &amp; roadmap</a><a href="../../#case">Case study</a><a href="../../#why">Why Wherefore</a><a href="../../changelog/">Changelog</a><a href="../../docs/">Docs</a><a href="../../map/">Map</a></nav><a class="pill" href="../../#start">Get started</a></div></header>
+<main id="top">
+<section class="log-head"><div class="wrap">
+<p class="eyebrow">Docs · Wherefore 0.19.0</p>
+<h1>Every page, from the release this site pins.</h1>
+<p class="lede">The docs ship inside each release of the engine, held to its code by the engine&#x27;s own tests: every command has its section, every section of the configuration is documented, and every example is run again before a release. This site renders the docs of the release it pins.</p>
+</div></section>
+<section class="docs"><div class="wrap docs-grid"><aside class="docs-nav"><p class="docs-nav-title">The pages</p><ul><li><a href="../../docs/">Start</a></li><li class="here"><a href="../../docs/commands/">Commands</a></li><li><a href="../../docs/configuration/">Configuration</a></li><li><a href="../../docs/checks/">Checks and proofs</a></li><li><a href="../../docs/reporting/">Reporting</a></li></ul><p class="docs-nav-title">On this page</p><ul class="docs-on-page"><li><a href="#wherefore-scan">wherefore scan</a></li><li><a href="#wherefore-init">wherefore init</a></li><li><a href="#wherefore-gate">wherefore gate</a></li><li><a href="#wherefore-build">wherefore build</a></li><li><a href="#wherefore-list">wherefore list</a></li><li><a href="#wherefore-graph">wherefore graph</a></li><li><a href="#wherefore-prove">wherefore prove</a></li><li><a href="#wherefore-check-retired">wherefore check retired</a></li><li><a href="#wherefore-check-reach">wherefore check reach</a></li><li><a href="#wherefore-check-claims">wherefore check claims</a></li><li><a href="#wherefore-check-upstream">wherefore check upstream</a></li><li><a href="#wherefore-check-palette">wherefore check palette</a></li><li><a href="#wherefore-check-published">wherefore check published</a></li><li><a href="#wherefore-hook">wherefore hook</a></li><li><a href="#wherefore-report">wherefore report</a></li></ul></aside><article class="docs-page"><h2 id="commands">Commands</h2>
+<p>Every command finds its corpus by looking for <code>wherefore.json</code> in the working directory and above it, or in <code>WHEREFORE_ROOT</code>. Each exits 0 when what it judges holds, 1 when it does not, and 2 for a line it cannot act on. The examples below are run on the example company, fernhollow-kettles, on every change to the engine, and must print what they say.</p>
+<h3 id="wherefore-scan">wherefore scan</h3>
+<pre><code>wherefore scan PATH|URL ... [--json] [--all] [--max-pages N]</code></pre>
+<p>The first win, with nothing set up. Point it at what a company publishes - a built site, a docs folder, exported notes, or a live address - and it reads what a person reads there, finds every value stated in words, and reports each statement whose copies disagree, the commonest value first and every place it was said. Given several places, it tags each statement with where it came from and says what the places state in common and where any two disagree. Under the first line it says what each place contributed, and the kinds of file it saw and did not read. Source code is read for its string literals; stylesheets, style attributes and drawings for their colours, which it counts and groups by shade. A table - two values said in the same files alike - is set apart from the stale copies. <code>--all</code> reads files that are history by name, such as a changelog; <code>--max-pages</code> bounds a crawl, fifty by default. Exits 1 when any statement disagrees.</p>
+<pre><code>$ wherefore scan .
+8 stated values in 11 files or pages; 0 statements whose copies disagree
+  read  .: 6 .py, 2 .svg, 1 .md, 1 .txt, 1 .html · not read: 3 .json, 1 .gitignore
+…
+Every statement found says one thing everywhere it is said.</code></pre>
+<h3 id="wherefore-init">wherefore init</h3>
+<pre><code>wherefore init [DIR]</code></pre>
+<p>Writes a <code>wherefore.json</code> that declares nothing yet, and the skill where Claude Code and Codex read it, in the directory given or the current one. It refuses a directory that already has a <code>wherefore.json</code>. The skill's <code>start.md</code> is how the first fact is compiled; from the first build on, the skill is regenerated from the release the repository pins.</p>
+<h3 id="wherefore-gate">wherefore gate</h3>
+<pre><code>wherefore gate [--keep]
+wherefore gate --restamp GROUP</code></pre>
+<p>The coverage gate: every tracked file must be generated during this run, authored under a rule in the inventory with a reason, or captured and stamped with what it was made from. It runs every generator twice and requires the second run to change nothing, compares every generated file with what is committed, and names each file nobody wrote and nobody claimed. The tree is put back unless <code>--keep</code>. <code>--restamp GROUP</code> records a re-made capture against its sources, for a group a person has just re-made by hand.</p>
+<pre><code>$ wherefore gate
+15 tracked files; 4 generators
+…
+  ok   4 generated files, 0 differ from what is committed
+  ok   the corpus settles: a second regeneration moves 0 files
+…
+every tracked file is classified, and every generated one was written
+during this run and matches what is committed</code></pre>
+<h3 id="wherefore-build">wherefore build</h3>
+<pre><code>wherefore build</code></pre>
+<p>The roll: every generator, in order, twice, compared with what is committed, and the results left in place so the diff shows exactly what a change to a fact moves. The same judgement as the gate, with the tree left as the generators wrote it.</p>
+<h3 id="wherefore-list">wherefore list</h3>
+<pre><code>wherefore list</code></pre>
+<p>Runs every generator once and says what each wrote: which tracked files, and whether any write went to a path git does not track.</p>
+<pre><code>$ wherefore list
+4 generators, in order
+…
+4 tracked writes, 0 writes to paths git does not track</code></pre>
+<h3 id="wherefore-graph">wherefore graph</h3>
+<pre><code>wherefore graph [--html PATH] [--json PATH|-] [--theme CSS ...] [--home URL [WORDS]]</code></pre>
+<p>What builds what. Runs every generator once, traces what each reads and writes, and draws one self-contained page - every source, script and file, with the lines between them - changing nothing. <code>--json</code> writes the same as data, or prints it with <code>-</code>. <code>--theme</code> draws it in a stylesheet's custom properties, so a corpus publishes its map in its own brand; <code>--home</code> puts a way back to the site on it. A corpus whose generator is itself <code>wherefore graph</code> is credited with that file rather than run, so a map never maps itself without end.</p>
+<h3 id="wherefore-prove">wherefore prove</h3>
+<pre><code>wherefore prove [SCRIPT ...]</code></pre>
+<p>Runs the corpus's proofs, in place, one at a time: each plants the fault its check exists to catch, runs the check, requires it to fail naming the fault, and puts the tree back. A check nobody has seen fail is not trusted.</p>
+<pre><code>$ wherefore prove
+…
+1/1 proofs held</code></pre>
+<h3 id="wherefore-check-retired">wherefore check retired</h3>
+<pre><code>wherefore check retired</code></pre>
+<p>Nothing a person reads may still say a retired value or phrase. The register lives in the source; the <code>retired</code> section says where, and which files a person reads.</p>
+<pre><code>$ wherefore check retired
+…
+nothing anywhere still claims a retired value or a retired phrase</code></pre>
+<h3 id="wherefore-check-reach">wherefore check reach</h3>
+<pre><code>wherefore check reach</code></pre>
+<p>Every fact, moved one at a time, must reach what it should: the probe nudges each fact, regenerates, and requires something a visitor receives to change. A fact that moves nothing is dead, or copied by hand into a generator; a fact a published page states reaches it by declaration. Every exemption carries a reason.</p>
+<pre><code>$ wherefore check reach
+…
+every fact probed reaches something a customer receives</code></pre>
+<h3 id="wherefore-check-claims">wherefore check claims</h3>
+<pre><code>wherefore check claims</code></pre>
+<p>Every claim says only what its rule allows: a rule names what may be claimed, of what, and why, and the check fails any page that says more.</p>
+<pre><code>$ wherefore check claims
+…
+every claim says only what its rule allows</code></pre>
+<h3 id="wherefore-check-upstream">wherefore check upstream</h3>
+<pre><code>wherefore check upstream</code></pre>
+<p>Every copy taken from elsewhere still matches where it was taken from, read there now. A captured group with an <code>upstream</code> names the address and what must still match; the check fails MOVED when the source says something else, NO LONGER SAYS when the source changed shape, and UNREACHABLE when it does not answer, unless the group says why that should not stop the corpus. It goes to the network: before a deploy, never in the gate.</p>
+<pre><code>$ wherefore check upstream
+nothing captured here names an upstream (1 captured groups): nothing is derived from elsewhere, or nothing says so</code></pre>
+<h3 id="wherefore-check-palette">wherefore check palette</h3>
+<pre><code>wherefore check palette</code></pre>
+<p>Every colour said anywhere is one the brand's source holds, or the file says, with a reason, whose colours they are. A colour quoted in code is text, not paint, and passes. A corpus with no brand declines the check with why.</p>
+<h3 id="wherefore-check-published">wherefore check published</h3>
+<pre><code>wherefore check published</code></pre>
+<p>Every page the company publishes but cannot build - a site on a hosted CMS - still states the source's facts, read live. A <code>published</code> section names each page and the facts it states as templates; the check fails SAYS OTHERWISE when the page states another value, quoting it, NOT SAID when the page states nothing like it, and UNREACHABLE when it does not answer, unless the entry says why that should not stop the corpus. Before a deploy, and on a schedule if the client wants one; never in the gate. A published page is a copy until it is built from the source.</p>
+<pre><code>$ wherefore check published
+nothing here is published without being built: every page a visitor receives is the corpus&#x27;s own</code></pre>
+<h3 id="wherefore-hook">wherefore hook</h3>
+<pre><code>wherefore hook install
+wherefore hook pre-push</code></pre>
+<p><code>install</code> writes a pre-push hook that rolls the corpus before a push that could move a generated document, and refuses the push if one moved. <code>pre-push</code> is what the installed hook runs; it is not for typing.</p>
+<h3 id="wherefore-report">wherefore report</h3>
+<pre><code>wherefore report --title TITLE WORDS ... [--from FILE] [--show | --link]</code></pre>
+<p>Feedback for the engine's makers - a bug, a question or a request, one topic each. It writes a title, the words as the body, the release, the corpus's shape in counts, and the output of a command given with <code>--from</code>; never a file's contents or a path. <code>--show</code> prints it and sends nothing; <code>--link</code> prints it with a link that opens the issue filled in, for the person to send; with neither, it opens the issue with <code>gh</code>, signed in, or prints the link.</p>
+<pre><code>$ wherefore report --title Hello the words --show
+# Hello
+…
+--show: nothing was sent. Show the person; send it only when they say.</code></pre></article></div></section>
+</main>
+<footer><div class="wrap"><nav class="foot-nav" aria-label="The site, again"><a href="../../#how">How it works</a><a href="../../features/">Features &amp; roadmap</a><a href="../../#case">Case study</a><a href="../../#why">Why Wherefore</a><a href="../../changelog/">Changelog</a><a href="../../docs/">Docs</a><a href="../../map/">Map</a></nav><div class="footer-row"><p><span class="footer-name">Wherefore</span> · This site is built with Wherefore, from one source file and the release it pins.</p>
+<p class="footer-meta"><a href="../../">Wherefore</a> · <a href="../../brand/">Brand</a> · <a href="../../map/">Map</a> · <a target="_blank" rel="noopener" href="https://github.com/wherefore-build/web">Read every file it is built from<svg class="out" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M9 2h5v5M14 2 7.5 8.5M12 9.5V13a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p></div></div></footer>
+</body>
+</html>

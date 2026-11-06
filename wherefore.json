@@ -44,7 +44,7 @@
   {
    "script": "site.py",
    "cwd": "gen",
-   "makes": "site/index.html, site/page.css, site/_headers and the pendulum's framed model and its framed plate site/pendulum/, from the facts, the pendulum's counts, model and plate, the brand and the pinned engine"
+   "makes": "site/index.html, site/page.css, site/_headers, the docs site/docs/ the pinned engine ships, and the pendulum's framed model and its framed plate site/pendulum/, from the facts, the pendulum's counts, model and plate, the brand and the pinned engine"
   },
   {
    "script": "install.py",
@@ -219,7 +219,8 @@
   ],
   "exclude": [],
   "exempt": {
-   "site.draft_banner": "said on every page while site.status is draft, and nowhere once the site is launched - which is the launch. The gate's proof moves the status either way and requires the banner to go and come back"
+   "site.draft_banner": "said on every page while site.status is draft, and nowhere once the site is launched - which is the launch. The gate's proof moves the status either way and requires the banner to go and come back",
+   "planned.labels.next": "the chip on a roadmap item that is next; it is said only while some item is next, and nothing is next while every planned item is later or shipped, so the word reaches no page until the engine names one. The roadmap is the engine's ledger, so this site cannot put an item there to make the word reach"
   },
   "unconsumed": {},
   "probes": [
