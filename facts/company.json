@@ -35,7 +35,7 @@
   "headline": "Your product changes.",
   "headline_end": "Your site, docs and deck don't.",
   "lede": "Everything your company says is a copy of a copy, and every copy drifts. Wherefore gives the rest of your company the pipeline your code already has.",
-  "try": "See what has already drifted on your site, or on your site and your app together. No setup, no account.",
+  "try": "See what has already drifted on your site, or across your site, your app and your docs together. No setup, no account.",
   "pip": "Or with pip:",
   "shows": "Real output, on an example company. One trial, two lengths: you decide which is true, and Wherefore keeps it that way."
  },
@@ -216,7 +216,7 @@
    "palette": "Your brand lives in one file. Type a colour anywhere else and the build names the file and the line, unless the file says, with a reason, that the colour is somebody else's.",
    "report": "Stuck, or missing something? Tell your agent to tell us: one command writes the report, with the release, the shape of your repository and your words, nothing private, and opens it with the people who make Wherefore.",
    "pins": "When a release ships, every repository that pins Wherefore gets a pull request moving its pin, opened by the release itself, and your checks say what you still have to describe before it builds.",
-   "scan2": "Point the scan at your site and your app together: it says what both state and where the two disagree, before anything is installed.",
+   "scan2": "Point the scan at your site, your app, your backend and your docs together: it says what they state in common and where any two disagree, before anything is installed.",
    "scan-read": "Beside the result, what each place contributed and what it left unread; an app's own words, read out of its source; a table set apart from the stale copies; and the colours your site states, with the greys that were meant to be one grey, before any brand is declared."
   },
   "unshown": {},
@@ -315,8 +315,8 @@
    {
     "command": "wherefore scan",
     "args": "https://your-site.example",
-    "also": "https://your-site.example https://your-app.example",
-    "also_says": "Or your site and your app together, and see where the two disagree.",
+    "also": "https://your-site.example app docs",
+    "also_says": "Or your site, your app and your docs together, and see where any two disagree.",
     "says": "See what has drifted. Nothing to set up."
    },
    {
