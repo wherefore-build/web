@@ -75,7 +75,7 @@ MECHANISM = {"scan": "compare", "scan2": "compare", "scan-read": "compare", "dri
              "reach": "hold", "retired": "hold", "claims": "hold", "published": "hold", "upstream": "hold", "palette": "hold",
              "gate": "sort", "build": "sort", "graph": "sort", "proofs": "sort", "hook": "sort",
              "report": "handover", "pins": "handover", "skill": "handover", "docs": "handover", "start": "handover",
-             "motion": "handover",
+             "motion": "handover", "status": "handover",
              # No picture of its own yet: what the check prints - one thing live, one waiting on its
              # help doc, one named nowhere public - is the picture.
              "launch": None}
