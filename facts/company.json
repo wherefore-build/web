@@ -381,7 +381,7 @@
   ],
   "text": "Start with one scan. If it finds nothing, good: the rest of Wherefore keeps it that way.",
   "install": "curl -fsSL https://wherefore.sh | sh",
-  "pip": "Or with pip:",
+  "pip": "Or",
   "steps": [
    {
     "command": "wherefore scan",
