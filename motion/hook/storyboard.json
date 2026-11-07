@@ -37,13 +37,13 @@
    "eyebrow": "what it sorts",
    "mechanism": "sort",
    "data": {
-    "files": 171,
-    "built": 101,
+    "files": 172,
+    "built": 102,
     "authored": 65,
     "captured": 5,
     "left": 0
    },
-   "caption": "171 files tracked: 101 built by a script, 65 written with a reason, 5 captured and stamped, 0 unaccounted for"
+   "caption": "172 files tracked: 102 built by a script, 65 written with a reason, 5 captured and stamped, 0 unaccounted for"
   },
   {
    "kind": "claim",

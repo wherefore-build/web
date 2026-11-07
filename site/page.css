@@ -114,7 +114,6 @@ em { font-style: italic; }
 .fork-compiled .fork-title { color: var(--accent); }
 .fork-art { display: block; width: 100%; height: auto; margin: 0.75rem 0 1rem; overflow: visible; }
 .fork-caption { margin: 0; font-size: 0.9375rem; line-height: 1.5; color: var(--muted); }
-.fork-sting { margin: 0.6rem 0 0; font-size: 0.9375rem; line-height: 1.45; color: var(--fail); }
 .fork-art path { fill: none; stroke-linecap: round; stroke-linejoin: round; }
 .art-main { stroke: var(--muted); stroke-width: 2.5; }
 .art-branch { stroke: var(--muted); stroke-width: 1.75; }
@@ -296,8 +295,14 @@ em { font-style: italic; }
 .steps h3 { margin: 1rem 0 0.5rem; }
 .steps p:last-child { color: var(--muted); margin: 0; }
 .how-note { margin: 1.5rem 0 0; color: var(--muted); font-size: 0.9375rem; }
+/* The three commands, under the picture, in the same section (owner, 7 November 2026). */
+.how-heading { margin: clamp(2.5rem, 6vw, 4rem) 0 1.25rem; font-size: clamp(1.5rem, 3vw, 2rem); line-height: 1.15; }
 
 .does-intro { color: var(--muted); max-width: 46ch; margin: 0 0 2rem; }
+/* Five groups of features, each a heading with its line beside it, so a reader scans five things, not twenty-two (owner, 7 November 2026). */
+.does-group { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.25rem 1rem; margin: 2.75rem 0 1rem; font-size: 1.5rem; }
+.does-group:first-of-type { margin-top: 0; }
+.does-group-lede { font: 400 1rem/1.5 var(--font-body); color: var(--muted); }
 .does { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(17rem, 100%), 1fr)); gap: 1rem; }
 .does li { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-card); padding: 1.4rem 1.5rem; display: flex; flex-direction: column; gap: 0.6rem; }
 .does li p { margin: 0; }
@@ -343,11 +348,6 @@ em { font-style: italic; }
   .release-date { margin-top: 0 !important; }
 }
 .chip-new { color: var(--on-accent); background: var(--accent); border-color: var(--accent); min-width: 0; }
-
-.rule { background: var(--accent); color: var(--on-accent); border-top: 0; }
-.rule-grid { display: flex; flex-wrap: wrap; gap: 1.5rem 4rem; align-items: flex-end; justify-content: space-between; }
-.rule-line { margin: 0; max-width: none; font: 400 clamp(2.25rem, 5.6vw, 4.75rem)/1 var(--font-display); letter-spacing: -0.025em; }
-.rule-text { margin: 0; max-width: 34ch; font-size: 1.0625rem; line-height: 1.5; }
 
 /* The case study */
 .case h2 { max-width: 20ch; }
@@ -567,9 +567,7 @@ footer p { margin: 0; }
 .try-pip code { color: var(--ink); user-select: all; -webkit-user-select: all; }
 .hero .actions { margin-top: 1.5rem; }
 
-/* What else it catches, under how it works: three features in a line each, then the way to all of them. */
-.catches { margin: 3rem 0 1rem; }
-.does-three { grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr)); }
+/* Under the steps: the one line to every feature. */
 .more-all { margin: 1.5rem 0 0; }
 .more-all a { color: var(--accent); }
 .chip-since { min-width: 0; }

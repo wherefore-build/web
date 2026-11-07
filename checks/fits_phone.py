@@ -36,7 +36,7 @@ import threading
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 SITE = ROOT / "site"
 PHONE = {"width": 390, "height": 844}
-PAGES = ["", "features/", "changelog/", "map/", "docs/", "docs/commands/", "docs/configuration/", "docs/checks/", "docs/reporting/"]
+PAGES = ["", "why/", "features/", "changelog/", "map/", "docs/", "docs/commands/", "docs/configuration/", "docs/checks/", "docs/reporting/"]
 WATCH = 15.0        # seconds: two turns of the questions (gen/site.py FLIP, 7 s) and one more
 EVERY = 0.25
 ICON = 1.5          # how many times its words' size an icon may be
