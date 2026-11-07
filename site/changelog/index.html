@@ -32,7 +32,7 @@
 <div class="release-body">
 <h2>Where it stands, in one read</h2>
 <p class="release-says">One command says where a repository stands - what each file is, what drifts, where every launch stands, which engine it pins - as a few lines or as the JSON the app will read.</p>
-<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore status
+<figure class="term"><pre><code><span class="term-prompt">$</span> <span class="term-cmd">wherefore status</span>
 fernhollow-kettles
   engine   wherefore 0.23.0
   files    15 tracked: 10 written, 1 captured, 4 for the gate to judge
@@ -48,7 +48,7 @@ fernhollow-kettles
 <div class="release-body">
 <h2>Many ladders, one by default</h2>
 <p class="release-says">Things that move differently each get a ladder of their own - features through building, beta and live, the site through draft and launched - and one ladder stays the default.</p>
-<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore check launch
+<figure class="term"><pre><code><span class="term-prompt">$</span> <span class="term-cmd">wherefore check launch</span>
 features  building · beta · live  (facts.json)
   ok   lid       live      2 held
   ok   timer     beta      1 held; live waits on the landing page names it
@@ -65,7 +65,7 @@ site  draft · launched  (facts.json)
 <div class="release-body">
 <h2>A stopped build says why, this time truly</h2>
 <p class="release-says">When a release stops a client&#x27;s build, the pull request its watch opens quotes the stopped generator&#x27;s own words, not the pages every release moves.</p>
-<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore --version
+<figure class="term"><pre><code><span class="term-prompt">$</span> <span class="term-cmd">wherefore --version</span>
 wherefore 0.21.1</code></pre>
 <figcaption>What it printed</figcaption></figure>
 
@@ -77,7 +77,7 @@ wherefore 0.21.1</code></pre>
 <div class="release-body">
 <h2>Launches that wait</h2>
 <p class="release-says">Every thing with a stage holds to what its stage needs: stages named once, each requiring a field, a file, or words said or not yet said, and a stage that moves only when those are there.</p>
-<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore check launch
+<figure class="term"><pre><code><span class="term-prompt">$</span> <span class="term-cmd">wherefore check launch</span>
   ok   lid       live      3 held
 ::error::timer is beta, and from beta it needs a help doc: no tracked file is docs/timer.md
   ok   spout     building  1 held; beta waits on a help doc; the changelog marks it beta
@@ -92,7 +92,7 @@ wherefore 0.21.1</code></pre>
 <div class="release-body">
 <h2>A stopped build says why</h2>
 <p class="release-says">When a release stops a client&#x27;s build, the pull request its watch opens quotes the build&#x27;s own words - what the corpus has to describe - instead of the gate&#x27;s list of files left unwritten.</p>
-<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore --version
+<figure class="term"><pre><code><span class="term-prompt">$</span> <span class="term-cmd">wherefore --version</span>
 wherefore 0.20.1</code></pre>
 <figcaption>What it printed</figcaption></figure>
 
@@ -104,7 +104,7 @@ wherefore 0.20.1</code></pre>
 <div class="release-body">
 <h2>Drift on the map, and pins the client&#x27;s own</h2>
 <p class="release-says">A value said by hand in two or more files that no source holds is drift: wherefore check drift names each with its files and counts them, the map draws them beside the files, and a declared allowance can only fall. And a release reaches a client by the client&#x27;s own watch now: wherefore init writes a workflow that asks PyPI, moves the pin and opens the pull request, so no token and no list of clients exist anywhere.</p>
-<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore check drift
+<figure class="term"><pre><code><span class="term-prompt">$</span> <span class="term-cmd">wherefore check drift</span>
   5            &quot;ships in {} working days&quot;  in 2 files, 2x: README.md, photos/hero.svg
 1 value drifts: said by hand in two or more of 2 files, held by no source; 0 held. Declare how many this corpus allows in wherefore.json - &quot;drift&quot;: {&quot;allow&quot;: 1, &quot;why&quot;: ...} - and lower it as each is tracked</code></pre>
 <figcaption>What it printed</figcaption></figure>
@@ -117,7 +117,7 @@ wherefore 0.20.1</code></pre>
 <div class="release-body">
 <h2>Docs from each release</h2>
 <p class="release-says">Five pages ship inside the release as data - start, commands, configuration, checks and proofs, reporting - held to the code by the engine&#x27;s tests, with every example run again; the company&#x27;s site renders the docs of the release it pins.</p>
-<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore --version
+<figure class="term"><pre><code><span class="term-prompt">$</span> <span class="term-cmd">wherefore --version</span>
 wherefore 0.19.0</code></pre>
 <figcaption>What it printed</figcaption></figure>
 <h3>What arrived</h3><ul class="arrived"><li><span class="arrived-name">Docs from each release</span> Every release ships its own docs, held to its code by tests; this site shows its release&#x27;s.<figure class="does-motion"><iframe src="../motion/docs/index.html" loading="lazy" title="Docs from each release, in motion"></iframe></figure></li></ul>
@@ -129,7 +129,7 @@ wherefore 0.19.0</code></pre>
 <div class="release-body">
 <h2>Scan any number of repositories at once</h2>
 <p class="release-says">The scan always took any number of places; the words said two. Now they say what it does: the site, the app, the backend and the docs together, and where any two disagree.</p>
-<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore scan site app backend docs
+<figure class="term"><pre><code><span class="term-prompt">$</span> <span class="term-cmd">wherefore scan site app backend docs</span>
 4 places read together - site, app, backend, docs - state 2 things in common; they disagree on 2
   DIFFER  &quot;start your {} day free&quot;  site: 14 (1x) · app: 30 (1x) · backend: 14 (1x)
   DIFFER  &quot;up to {} mb per&quot;  site: 250 (1x) · backend: 500 (1x) · docs: 250 (1x)</code></pre>
@@ -143,7 +143,7 @@ wherefore 0.19.0</code></pre>
 <div class="release-body">
 <h2>The inbox, held</h2>
 <p class="release-says">The roadmap is the inbox&#x27;s ledger: a request&#x27;s plan, who asked, and what shipped are written there, held by the engine&#x27;s own tests, and written back onto each issue by the release, which then closes it. Every feature carries the details a person reads when they open it.</p>
-<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore --version
+<figure class="term"><pre><code><span class="term-prompt">$</span> <span class="term-cmd">wherefore --version</span>
 wherefore 0.18.0</code></pre>
 <figcaption>What it printed</figcaption></figure>
 
@@ -155,7 +155,7 @@ wherefore 0.18.0</code></pre>
 <div class="release-body">
 <h2>A page you publish but cannot build</h2>
 <p class="release-says">A published section names a page nobody here builds and the facts it states; wherefore check published reads it live and fails when the page says otherwise, quoting it. Reach counts the declaration. A copy held by reading until it can be built.</p>
-<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore check published
+<figure class="term"><pre><code><span class="term-prompt">$</span> <span class="term-cmd">wherefore check published</span>
 <span class="term-cut" title="lines left out">…</span>
 0 statements on 1 published page still say what the source says; 1 page did not answer, and passed for the reason each gives. A published page is a copy until it is built from the source: holding it by reading is the step before that.</code></pre>
 <figcaption>What it printed</figcaption></figure>
@@ -168,7 +168,7 @@ wherefore 0.18.0</code></pre>
 <div class="release-body">
 <h2>A colour quoted in code is not paint</h2>
 <p class="release-says">wherefore check palette reads what a page paints, not what it quotes: a colour inside &lt;pre&gt; or &lt;code&gt;, or in Markdown&#x27;s fences and backticks, is text a visitor reads - the scan&#x27;s own output, shown on a page - and no longer fails the brand.</p>
-<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore --version
+<figure class="term"><pre><code><span class="term-prompt">$</span> <span class="term-cmd">wherefore --version</span>
 wherefore 0.16.1</code></pre>
 <figcaption>What it printed</figcaption></figure>
 
@@ -180,7 +180,7 @@ wherefore 0.16.1</code></pre>
 <div class="release-body">
 <h2>The scan says what it read</h2>
 <p class="release-says">Beside the result, what each place contributed and what it left unread; an app&#x27;s own words, read out of its source; a table set apart from the stale copies; and the colours a site states, with the greys that were meant to be one grey.</p>
-<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore scan site app
+<figure class="term"><pre><code><span class="term-prompt">$</span> <span class="term-cmd">wherefore scan site app</span>
   read  site: 1 .html, 1 .css
   read  app: 1 .elm · not read: 1 .json
 <span class="term-cut" title="lines left out">…</span>
@@ -198,7 +198,7 @@ wherefore 0.16.1</code></pre>
 <div class="release-body">
 <h2>The skill learns from the field</h2>
 <p class="release-says">The first session on a stranger&#x27;s company rewrote the start guide: scan before you ask, find where each fact is decided before choosing a repository, know what the scan cannot see and read each finding where it was found, two places at once, facts that live in app code, and a page you publish but cannot build.</p>
-<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore --version
+<figure class="term"><pre><code><span class="term-prompt">$</span> <span class="term-cmd">wherefore --version</span>
 wherefore 0.15.0</code></pre>
 <figcaption>What it printed</figcaption></figure>
 <h3>What it answered</h3><ul class="arrived answered"><li id="road-skill-field"><details class="does-more"><summary><p class="does-name"><span class="arrived-name">The skill learns from the field</span> <a class="road-issue" href="https://github.com/wherefore-build/wherefore/issues/17">#17</a>, <a class="road-issue" href="https://github.com/wherefore-build/wherefore/issues/18">#18</a>, <a class="road-issue" href="https://github.com/wherefore-build/wherefore/issues/19">#19</a>, <a class="road-issue" href="https://github.com/wherefore-build/wherefore/issues/21">#21</a> <span class="road-asked">asked for by <a href="https://github.com/zakholdsworth">@zakholdsworth</a></span><span class="does-toggle"><span class="is-closed">More</span><span class="is-open">Less</span></span></p><p>The start guide rewritten from the first session on a stranger&#x27;s company.</p></summary><p class="does-plan"><span class="road-asked">What was planned</span> Scan before you ask, and begin the interview from what the scan found. Find where each fact is decided before choosing the repository: the one the agent was opened in may only be a reader. Say what the scan cannot see and read each finding where it was found. Say what to do when a fact lives in an app&#x27;s source code: read the owner at run time, else keep it once in the language&#x27;s own terms, generate source last.</p></details></li></ul>
@@ -210,7 +210,7 @@ wherefore 0.15.0</code></pre>
 <div class="release-body">
 <h2>One report, with a title</h2>
 <p class="release-says">wherefore report is one command for a bug, a question or a request: a title, the words as the body, one topic each, the kind left to triage - and --link prints the issue for the person to read and send themselves.</p>
-<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore report --title Thanks the scan found our trial length stated two ways --link
+<figure class="term"><pre><code><span class="term-prompt">$</span> <span class="term-cmd">wherefore report --title Thanks the scan found our trial length stated two ways --link</span>
 # Thanks
 the scan found our trial length stated two ways
 **The corpus:** fernhollow-kettles: 4 generators, 1 sources, 5 authored rules, 1 captured groups
@@ -226,7 +226,7 @@ the scan found our trial length stated two ways
 <div class="release-body">
 <h2>Scan two repositories at once</h2>
 <p class="release-says">wherefore scan given the site and the app tags every place with where it came from, and says what both state and where the two disagree - the drift between teams, with nothing installed.</p>
-<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore scan site app
+<figure class="term"><pre><code><span class="term-prompt">$</span> <span class="term-cmd">wherefore scan site app</span>
 2 places read together - site, app - state 2 things in common; they disagree on 1
   DIFFER  &quot;start your {} day free&quot;  site: 14 (2x) · app: 30 (1x)
   agree   &quot;plans from {} dollars a&quot;  site: 9 (1x) · app: 9 (1x)</code></pre>
@@ -240,7 +240,7 @@ the scan found our trial length stated two ways
 <div class="release-body">
 <h2>The roadmap says what shipped</h2>
 <p class="release-says">Releases that reach every client, true since 0.8.0, is a feature and off the roadmap; the first request to come in through wherefore report is on the roadmap, naming the issue and who asked.</p>
-<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore --version
+<figure class="term"><pre><code><span class="term-prompt">$</span> <span class="term-cmd">wherefore --version</span>
 wherefore 0.12.1</code></pre>
 <figcaption>What it printed</figcaption></figure>
 
@@ -252,7 +252,7 @@ wherefore 0.12.1</code></pre>
 <div class="release-body">
 <h2>Tell us</h2>
 <p class="release-says">A developer tells their agent to ping us, and this is what the agent runs: wherefore report writes a bug, a question or a feature request for the engine&#x27;s makers - the release, the corpus&#x27;s shape, the output given, the person&#x27;s words, nothing private - and opens it as an issue, or shows it first.</p>
-<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore report feature the scan across two repositories --show
+<figure class="term"><pre><code><span class="term-prompt">$</span> <span class="term-cmd">wherefore report feature the scan across two repositories --show</span>
 # feature request: the scan across two repositories
 **The corpus:** fernhollow-kettles: 4 generators, 1 sources, 5 authored rules, 1 captured groups
 --show: nothing was sent. Run it again without --show to open the issue.</code></pre>
@@ -266,7 +266,7 @@ wherefore 0.12.1</code></pre>
 <div class="release-body">
 <h2>The map says what it is</h2>
 <p class="release-says">What nobody regenerates is written, not built - by a person or by an agent - and the map says so, never &#x27;by hand&#x27;. wherefore graph --home puts a way back to the site on it, and a theme gets two marks beside the accent, so a brand whose accent is a highlighter writes with its ink and marks with the accent.</p>
-<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore graph --home https://fernhollow.example/ Fernhollow
+<figure class="term"><pre><code><span class="term-prompt">$</span> <span class="term-cmd">wherefore graph --home https://fernhollow.example/ Fernhollow</span>
 15 files: 4 generated by 4 scripts, 10 written, not built, 1 captured; 6 reads traced; wrote wherefore-graph.html</code></pre>
 <figcaption>What it printed</figcaption></figure>
 
@@ -278,7 +278,7 @@ wherefore 0.12.1</code></pre>
 <div class="release-body">
 <h2>The notice reads nothing new</h2>
 <p class="release-says">The gate&#x27;s palette notice counts colours only in the files the build made - which the gate wrote and compared anyway - so a courtesy never widens what the gate opens. The first client records every file its gate reads; 0.10.0 had broken that promise.</p>
-<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore gate
+<figure class="term"><pre><code><span class="term-prompt">$</span> <span class="term-cmd">wherefore gate</span>
   NOTICE colours are said in 2 files the build made and no palette is declared: `wherefore check palette` would hold them to one source. Declare `palette` in wherefore.json - its `source`, the JSON file the brand lives in - or decline it, {&quot;none&quot;: why}.</code></pre>
 <figcaption>What it printed</figcaption></figure>
 
@@ -290,7 +290,7 @@ wherefore 0.12.1</code></pre>
 <div class="release-body">
 <h2>One palette</h2>
 <p class="release-says">A brand is a fact like a price. wherefore check palette reads every tracked text file and fails a colour that is not one the brand&#x27;s source holds, unless the file says, with why, whose colours they are. On by default: the gate says when colours are said in several files and no palette is declared.</p>
-<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore check palette
+<figure class="term"><pre><code><span class="term-prompt">$</span> <span class="term-cmd">wherefore check palette</span>
 ::error::a colour is said that brand.json does not hold - the brand, said twice:
    site/page.css:3: #FF3355 - a colour that is not one of brand.json&#x27;s</code></pre>
 <figcaption>What it printed</figcaption></figure>
@@ -303,7 +303,7 @@ wherefore 0.12.1</code></pre>
 <div class="release-body">
 <h2>The map in the corpus&#x27;s own colours</h2>
 <p class="release-says">wherefore graph --theme CSS puts a corpus&#x27;s own stylesheet where the page&#x27;s light and dark palettes were, so the map reads the brand&#x27;s custom properties and carries no second palette typed into the engine.</p>
-<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore graph
+<figure class="term"><pre><code><span class="term-prompt">$</span> <span class="term-cmd">wherefore graph</span>
 15 files: 4 generated by 4 scripts, 10 written by hand, 1 captured; 6 reads traced; wrote wherefore-graph.html</code></pre>
 <figcaption>What it printed</figcaption></figure>
 
@@ -315,7 +315,7 @@ wherefore 0.12.1</code></pre>
 <div class="release-body">
 <h2>The map credits itself</h2>
 <p class="release-says">A corpus may publish its own map: a run generator that is wherefore graph, so the page is built and judged like any other file. Under the gate it runs; under wherefore graph it is credited with the files it names rather than run, so the map never maps itself without end.</p>
-<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore graph
+<figure class="term"><pre><code><span class="term-prompt">$</span> <span class="term-cmd">wherefore graph</span>
 15 files: 4 generated by 4 scripts, 10 written by hand, 1 captured; 6 reads traced; wrote wherefore-graph.html</code></pre>
 <figcaption>What it printed</figcaption></figure>
 <h3>What arrived</h3><ul class="arrived"><li><span class="arrived-name">Releases that reach every client</span> A new release? Your repository sees it, moves the pin and opens a pull request. No token, no client list.<figure class="does-motion"><iframe src="../motion/pins/index.html" loading="lazy" title="Releases that reach every client, in motion"></iframe></figure></li></ul>
@@ -327,7 +327,7 @@ wherefore 0.12.1</code></pre>
 <div class="release-body">
 <h2>What builds what</h2>
 <p class="release-says">wherefore graph runs every generator once, traces what each reads and writes, and draws the chain as one self-contained page: every source, the scripts that read it, and everything they make. Choose a source to see what changes with it. It classifies every file as the gate does, and puts the tree back as it found it.</p>
-<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore graph
+<figure class="term"><pre><code><span class="term-prompt">$</span> <span class="term-cmd">wherefore graph</span>
 15 files: 4 generated by 4 scripts, 10 written by hand, 1 captured; 6 reads traced; wrote wherefore-graph.html</code></pre>
 <figcaption>What it printed</figcaption></figure>
 <h3>What arrived</h3><ul class="arrived"><li><span class="arrived-name">What builds what</span> Every file, how it is made, and what moves when a source does, on one page.<figure class="does-motion"><iframe src="../motion/graph/index.html" loading="lazy" title="What builds what, in motion"></iframe></figure></li></ul>
@@ -339,7 +339,7 @@ wherefore 0.12.1</code></pre>
 <div class="release-body">
 <h2>A generator can be any command</h2>
 <p class="release-says">A generator can be any program - node, a shell script, a CAD export - declared by run, its command as a list of words, with no Python wrapper. What it writes is seen by comparing the tree before and after it runs, on the ctime no process can set back, so it is held exactly as strictly as a Python generator.</p>
-<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore list
+<figure class="term"><pre><code><span class="term-prompt">$</span> <span class="term-cmd">wherefore list</span>
 1 generators, in order
 
   ok   sh site.sh
@@ -357,7 +357,7 @@ wherefore 0.12.1</code></pre>
 <div class="release-body">
 <h2>What a pre-publication review found</h2>
 <p class="release-says">The first release for PyPI. When what the engine reads is not what it expected - an answer cut short, a pointer that is not one, a file that is not JSON, a redirect to another host - it now says so in words instead of a traceback or a wrong answer, and a scan of a site fetches no more than it is told to.</p>
-<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore check upstream
+<figure class="term"><pre><code><span class="term-prompt">$</span> <span class="term-cmd">wherefore check upstream</span>
 ::error::wherefore.json: captured group &#x27;pack&#x27; in wherefore.json: `upstream.read.json` is a JSON pointer - &quot;&quot; for the whole document, or a path that starts with &quot;/&quot;, such as &quot;/version&quot;; it says &#x27;release/version&#x27;</code></pre>
 <figcaption>What it printed</figcaption></figure>
 
@@ -369,7 +369,7 @@ wherefore 0.12.1</code></pre>
 <div class="release-body">
 <h2>Every surface, held to the source</h2>
 <p class="release-says">The skill now asks where else the product is described and sets each surface up to pin the source and fail its build on a feature it does not say. A copy taken from somewhere that cannot be pinned - another site, another product - says where it came from, and wherefore check upstream fails when that source moves. Every release is said once, as data, so a changelog is built rather than kept.</p>
-<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore init
+<figure class="term"><pre><code><span class="term-prompt">$</span> <span class="term-cmd">wherefore init</span>
 wrote ~/fernhollow/wherefore.json
 wrote .claude/skills/wherefore/ (Claude Code) and .agents/skills/wherefore/ (Codex): the skill a coding agent here reads
 <span class="term-cut" title="lines left out">…</span>
@@ -385,7 +385,7 @@ the one that decides it, and fails its build on a feature it does not say: start
 <div class="release-body">
 <h2>The skill reaches Codex</h2>
 <p class="release-says">The skill is written where Codex reads it as well as Claude Code, and held to the release in both places. What the engine does is said once, as data, so a page that describes the product keeps up or its build stops.</p>
-<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore init
+<figure class="term"><pre><code><span class="term-prompt">$</span> <span class="term-cmd">wherefore init</span>
 wrote ~/fernhollow/wherefore.json
 wrote .claude/skills/wherefore/ (Claude Code) and .agents/skills/wherefore/ (Codex): the skill a coding agent here reads
 
@@ -401,7 +401,7 @@ From the first build on, the skill is regenerated from the release this reposito
 <div class="release-body">
 <h2>Scan: the first win, with no setup</h2>
 <p class="release-says">Point wherefore scan at a built site, a docs folder or a live address, and it reports every value stated more than one way. It needs no configuration, and it would rather miss a disagreement than invent one.</p>
-<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore scan .
+<figure class="term"><pre><code><span class="term-prompt">$</span> <span class="term-cmd">wherefore scan .</span>
 4 stated values in 4 files or pages; 1 statement whose copies disagree
 
   &quot;start your {} day free&quot;  - said 4 times, 2 ways
@@ -417,7 +417,7 @@ From the first build on, the skill is regenerated from the release this reposito
 <div class="release-body">
 <h2>What a fresh review found</h2>
 <p class="release-says">Every way a fresh review found for the gate to pass when it should fail, reproduced, fixed, and held by a test that plants it. A flag a command does not take is refused, not ignored. Ready to be published as open source, under Apache-2.0.</p>
-<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore gate --kep
+<figure class="term"><pre><code><span class="term-prompt">$</span> <span class="term-cmd">wherefore gate --kep</span>
 ::error::the gate does not take --kep
 usage: wherefore gate [--keep]
        wherefore gate --restamp GROUP</code></pre>
@@ -431,7 +431,7 @@ usage: wherefore gate [--keep]
 <div class="release-body">
 <h2>The skill ships with the engine</h2>
 <p class="release-says">A coding agent learns the rules from the release itself, and starts a corpus with you: one fact, end to end. The copy in a repository is generated, so it moves with the pin.</p>
-<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore init
+<figure class="term"><pre><code><span class="term-prompt">$</span> <span class="term-cmd">wherefore init</span>
 wrote ~/fernhollow/wherefore.json
 wrote ~/fernhollow/.claude/skills/wherefore/, the skill every coding agent here reads
 
@@ -447,7 +447,7 @@ From the first build on, the skill is regenerated from the release this reposito
 <div class="release-body">
 <h2>Wherefore on Wherefore</h2>
 <p class="release-says">The engine became a client of itself. Its commands and its principles are said once, its own README is built from them, and it is judged by the release before it, the way a compiler builds itself.</p>
-<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore --help
+<figure class="term"><pre><code><span class="term-prompt">$</span> <span class="term-cmd">wherefore --help</span>
 wherefore - the command line.
 
   wherefore init [DIR]            write a wherefore.json that declares nothing yet
@@ -465,7 +465,7 @@ file; `wherefore --help` prints them from there, and so does the README.</code><
 <div class="release-body">
 <h2>The first release</h2>
 <p class="release-says">The machinery that keeps a hardware company&#x27;s documents true, moved out of the pendulum it was built for: generators, the coverage gate, proofs, retired facts and reach, proved against a fictional company.</p>
-<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore gate
+<figure class="term"><pre><code><span class="term-prompt">$</span> <span class="term-cmd">wherefore gate</span>
 15 tracked files; 4 generators
 
   generated      4   written by a generator during this run

@@ -35,12 +35,10 @@
  "hero": {
   "eyebrow": "Open-source CLI",
   "headline": "Your product changes.",
-  "headline_end": "Your site, docs and deck don't.",
-  "lede": "Everything your company says is a copy of a copy, and every copy drifts. Wherefore gives the rest of your company the pipeline your code already has.",
-  "try": "See what has already drifted. No setup, no account.",
-  "pip": "Or with pip:",
-  "shows": "Real output from an example company. One trial, two lengths.",
-  "also": "https://your-site.example app docs"
+  "headline_end": "Your site, docs and deck drift.",
+  "lede": "Wherefore gives the rest of your company the pipeline your code already has.",
+  "try": "See what has already drifted.",
+  "pip": "Or with pip:"
  },
  "forks": {
   "code": {
@@ -70,7 +68,7 @@
   "heading": "Code got one source of truth years ago. Nothing else did."
  },
  "demo": {
-  "heading": "Change it once. Every copy follows. (probe)",
+  "heading": "Change it once. Every copy follows.",
   "label": "An example company renames a feature. Tap each step.",
   "source": "source",
   "fact": "product.json · names.workspace",
@@ -430,8 +428,16 @@
  "docs": {
   "title": "Docs",
   "heading": "Every page, from the release this site pins.",
-  "intro": "The docs ship inside each release of the engine, held to its code by the engine's own tests: every command has its section, every section of the configuration is documented, and every example is run again before a release. This site renders the docs of the release it pins.",
+  "intro": "The docs ship inside each release of the engine, held to its code by the engine's own tests.",
   "pages": "The pages",
-  "on_this_page": "On this page"
+  "on_this_page": "On this page",
+  "release": "These are the docs of Wherefore {version}, the release this site pins. Every example in them ran before it shipped.",
+  "cards": {
+   "start": "One fact, said once, compiled into one asset, held by the gate. Then the same move, repeated.",
+   "commands": "Every command, what it takes, what it prints, and how it exits.",
+   "configuration": "Every section of wherefore.json: where the facts live, what builds each asset, what each check holds.",
+   "checks": "What each check holds, how it fails, and how to prove one.",
+   "reporting": "What a report carries, what never leaves the machine, and how it is sent."
+  }
  }
 }

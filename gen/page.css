@@ -391,6 +391,12 @@ em { font-style: italic; }
 .case-part figcaption { margin-top: 0.5rem; font: 400 0.75rem/1.4 var(--font-mono); color: var(--muted); text-align: center; }
 
 /* The docs (6 November 2026): the engine's pages in this site's shell. The
+   landing (7 November) is the pages as cards, one line each, in the steps' grid. */
+.docs-cards h3 { margin-top: 0; }
+.docs-cards h3 a { color: var(--ink); text-decoration: none; }
+.docs-cards h3 a:hover { color: var(--accent); }
+.docs-release { margin: 2rem 0 0; color: var(--muted); font-size: 0.9375rem; }
+/* The
    pages listed beside the text on a wide screen, above it on a phone; the
    text's own headings under that. Code blocks are the terminal's. */
 .docs { padding-top: 0; border-top: 0; }
@@ -550,19 +556,21 @@ footer p { margin: 0; }
    scan's own output: two columns once there is room for the terminal's
    longest line whole, one column below that. min-width: 0 on both, or the
    command block widens the page past a phone's screen. */
-.hero-grid { display: grid; gap: 2.5rem 3.5rem; align-items: start; }
+.hero-grid { display: grid; gap: 0.6rem 3.5rem; align-items: start; grid-template-areas: "copy" "label" "term" "after"; }
 .hero-grid > * { min-width: 0; }
-/* The scan's longest line is 78 characters, 616 px at this size: the wider of two columns holds it whole from 75rem up, so it never scrolls sideways beside the copy. */
-@media (min-width: 75rem) { .hero-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); }
+.hero .lede { grid-area: copy; }
+.try-label { grid-area: label; }
+.hero-term { grid-area: term; }
+.hero-after { grid-area: after; align-self: start; }
+/* The scan's longest line is 78 characters, 616 px at this size: the wider of two columns holds it whole from 75rem up, so it never scrolls sideways beside the copy.
+   ONE TERMINAL (owner, 7 November 2026): the install line and the scan at the top of the output, so the label stands over the terminal, and pip and the repository under the lede. */
+@media (min-width: 75rem) { .hero-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); grid-template-rows: auto 1fr; grid-template-areas: "copy label" "after term"; }
+  .try-label { align-self: end; }
   .hero-term pre { font-size: 0.75rem; } }
 .hero .lede { max-width: 40ch; }
-.try-label { margin: 1.75rem 0 0.6rem; font: 400 0.875rem/1.4 var(--font-mono); color: var(--muted); }
-.try { display: grid; gap: 0.35rem; padding: 1rem 1.25rem; border: 1px solid var(--accent); border-radius: 12px; background: var(--surface); overflow-x: auto; }
-/* One tap selects a whole command, so it can be copied as it stands. A command
-   longer than the box wraps under its own first word, the prompt hanging in
-   the margin, rather than running off the right where a visitor cannot read
-   its end: the two-address scan does, on every screen. */
-.try .cmd { display: block; font: 400 0.9375rem/1.5 var(--font-mono); white-space: pre-wrap; overflow-wrap: anywhere; padding-left: 1.3em; text-indent: -1.3em; user-select: all; -webkit-user-select: all; }
+.try-label { margin: 1.75rem 0 0; font: 400 0.875rem/1.4 var(--font-mono); color: var(--muted); }
+/* One tap selects a whole command, so it can be copied as it stands. */
+.term-cmd { user-select: all; -webkit-user-select: all; }
 .try-pip { margin: 0.6rem 0 0; font: 400 0.8125rem/1.4 var(--font-mono); color: var(--muted); }
 .try-pip code { color: var(--ink); user-select: all; -webkit-user-select: all; }
 .hero .actions { margin-top: 1.5rem; }

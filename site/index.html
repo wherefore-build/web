@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Wherefore — your company, compiled</title>
-<meta name="description" content="Everything your company says is a copy of a copy, and every copy drifts. Wherefore gives the rest of your company the pipeline your code already has.">
+<meta name="description" content="Wherefore gives the rest of your company the pipeline your code already has.">
 <meta name="color-scheme" content="dark">
 <link rel="icon" href="brand/icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="brand/icon-1024.png">
@@ -19,22 +19,21 @@
 <main id="top">
 <div class="src-key"><div class="wrap"><p>Every part of this page is generated. Each now names the facts it is built from, and the checks that hold it on every push. <a target="_blank" rel="noopener" href="https://github.com/wherefore-build/web">Read every file it is built from<svg class="out" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M9 2h5v5M14 2 7.5 8.5M12 9.5V13a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a> <a href="map/">See the map of this repository: every file on this site, how it is made, and what changes when a source does</a></p><dl><div><dt>gate</dt><dd>rebuilt from its sources on every push, and refused if it differs from what is committed</dd></div><div><dt>reach</dt><dd>each of these facts is moved, one at a time, and the page must change with it</dd></div><div><dt>press</dt><dd>every control here is tapped on a fresh load, at a phone’s width, and must show something new</dd></div><div><dt>engine</dt><dd>every command named here must be one the pinned release has</dd></div><div><dt>brand</dt><dd>every colour and face is a brand token, and every text colour reads at 4.5:1 on its ground</dd></div><div><dt>snapshot</dt><dd>these counts were taken from the pendulum once, at the commit and day they name; each is moved, one at a time, and the page must change with it</dd></div></dl></div></div>
 <section class="hero"><div class="wrap">
-<div class="src"><p><span class="src-k">from</span> facts/company.json · 14 facts: start.{steps[].{command, args}, install} · hero.{also, eyebrow, headline, headline_end, lede, try, pip, shows} · company.github · nav.github · changelog.cut</p><p><span class="src-k">from</span> wherefore 0.23.0 · version · licence · releases.json · commands.json: wherefore scan</p><p><span class="src-k">held by</span> gate · reach · brand · engine</p></div>
+<div class="src"><p><span class="src-k">from</span> facts/company.json · 10 facts: company.github · nav.github · hero.{eyebrow, headline, headline_end, lede, try, pip} · changelog.cut · start.install</p><p><span class="src-k">from</span> wherefore 0.23.0 · version · licence · releases.json</p><p><span class="src-k">held by</span> gate · reach · brand</p></div>
 <p class="eyebrow">Open-source CLI · Apache-2.0 · 0.23.0</p>
-<h1>Your product changes. <em>Your site, docs and deck don&#x27;t.</em></h1>
+<h1>Your product changes. <em>Your site, docs and deck drift.</em></h1>
 <div class="hero-grid">
-<div class="hero-copy">
-<p class="lede">Everything your company says is a copy of a copy, and every copy drifts. Wherefore gives the rest of your company the pipeline your code already has.</p>
-<p class="try-label">See what has already drifted. No setup, no account.</p>
-<div class="try"><code class="cmd"><span class="term-prompt">$</span> curl -fsSL https://wherefore.sh | sh</code><code class="cmd"><span class="term-prompt">$</span> wherefore scan https://your-site.example</code><code class="cmd"><span class="term-prompt">$</span> wherefore scan https://your-site.example app docs</code></div>
+<p class="lede">Wherefore gives the rest of your company the pipeline your code already has.</p>
+<p class="try-label">See what has already drifted.</p>
+<figure class="term hero-term"><pre><code><span class="term-prompt">$</span> <span class="term-cmd">curl -fsSL https://wherefore.sh | sh</span>
+<span class="term-prompt">$</span> <span class="term-cmd">wherefore scan site app backend docs</span>
+4 places read together - site, app, backend, docs - state 2 things in common; they disagree on 2
+  DIFFER  &quot;start your {} day free&quot;  site: 14 (1x) · app: 30 (1x) · backend: 14 (1x)
+  DIFFER  &quot;up to {} mb per&quot;  site: 250 (1x) · backend: 500 (1x) · docs: 250 (1x)</code></pre></figure>
+<div class="hero-after">
 <p class="try-pip">Or with pip: <code>pip install wherefore-build</code></p>
 <p class="actions"><a class="button button-quiet" href="https://github.com/wherefore-build/wherefore">View on GitHub<svg class="out" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M9 2h5v5M14 2 7.5 8.5M12 9.5V13a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
 </div>
-<figure class="term hero-term"><pre><code><span class="term-prompt">$</span> wherefore scan site app backend docs
-4 places read together - site, app, backend, docs - state 2 things in common; they disagree on 2
-  DIFFER  &quot;start your {} day free&quot;  site: 14 (1x) · app: 30 (1x) · backend: 14 (1x)
-  DIFFER  &quot;up to {} mb per&quot;  site: 250 (1x) · backend: 500 (1x) · docs: 250 (1x)</code></pre>
-<figcaption>Real output from an example company. One trial, two lengths.</figcaption></figure>
 </div>
 </div></section>
 <section id="how" class="opening"><div class="wrap">
@@ -56,7 +55,7 @@
 </div></section>
 <section id="demo" class="ripple"><div class="wrap">
 <div class="src"><p><span class="src-k">from</span> facts/company.json · 38 facts: demo.{heading, assets[].{by_hand, name, says, made}, before, after, stages[], said[], badges.{live, rebuilt, caught, fixed}, label, source, fact, note, checks[]}</p><p><span class="src-k">from</span> wherefore 0.23.0 · commands.json: wherefore gate, wherefore check retired</p><p><span class="src-k">held by</span> gate · reach · brand · press · engine</p></div>
-<h2>Change it once. Every copy follows. (probe)</h2>
+<h2>Change it once. Every copy follows.</h2>
 <div class="demo" role="group" aria-labelledby="demo-label">
 <input class="state" type="radio" name="stage" id="stage-0" checked>
 <input class="state" type="radio" name="stage" id="stage-1">

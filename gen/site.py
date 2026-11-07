@@ -518,26 +518,22 @@ OUT = ('<svg class="out" viewBox="0 0 16 16" aria-hidden="true" focusable="false
        'fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>')
 
 def hero(f):
-    """What it is, why it matters, and the commands that try it on your own site - and on your site and your app together - with real output beside them.
+    """What it is, why it matters, and one terminal that tries it: the install line, the scan pointed at a site, an app, a backend and docs together, and what it printed.
 
-    The headline runs the whole width; under it the lede and the two commands
-    take one column and the scan's output the other, once there is room for
-    its longest line (gen/page.css, .hero-grid).
+    The headline runs the whole width; under it the lede takes one column and
+    the terminal the other, once there is room for its longest line
+    (gen/page.css, .hero-grid). ONE TERMINAL (owner, 7 November 2026, from the
+    phone): the command above the output is the one that printed it, the
+    release's own picture, so the install line and that scan stand at the top
+    of the output, and there is no second block and no caption. The one-site
+    form of the scan is Get started's.
 
     The eyebrow's licence and version, the package pip installs and the scan's
-    output are the pinned release's own; the commands are start's, so the hero
-    and Get started state them once between them. The second button is the
+    output are the pinned release's own; the install line is start's, so the
+    hero and Get started state it once between them. The second button is the
     engine's public repository, once there is one: company.github."""
     h, st = f["hero"], f["start"]
     name, licence = release_meta()
-    first = st["steps"][0]
-    run = f'{command(first["command"])} {first.get("args", "")}'.strip()
-    # The same scan, pointed at several places at once (owner, 5 November 2026):
-    # the output beside it reads a site and an app together, so the command
-    # that does that stands under the one-site command, ready to copy. It is
-    # the hero's alone (owner, 7 November): Get started says the scan once.
-    also = (f'<code class="cmd"><span class="term-prompt">$</span> {esc(command(first["command"]))} {esc(h["also"])}</code>'
-            if h.get("also") else "")
     repo = f["company"]["github"]
     github = (f'<p class="actions"><a class="button button-quiet" href="{esc(repo)}">{esc(f["nav"]["github"])}{OUT}</a></p>'
               if repo else "")
@@ -546,15 +542,13 @@ def hero(f):
 <p class="eyebrow">{esc(h["eyebrow"])} · {esc(licence)} · {esc(version())}</p>
 <h1>{esc(h["headline"])} <em>{esc(h["headline_end"])}</em></h1>
 <div class="hero-grid">
-<div class="hero-copy">
 <p class="lede">{esc(h["lede"])}</p>
 <p class="try-label">{esc(h["try"])}</p>
-<div class="try"><code class="cmd"><span class="term-prompt">$</span> {esc(st["install"])}</code><code class="cmd"><span class="term-prompt">$</span> {esc(run)}</code>{also}</div>
+<figure class="term hero-term"><pre><code>{terminal(scan_shown(), f["changelog"]["cut"], before=[st["install"]])}</code></pre></figure>
+<div class="hero-after">
 <p class="try-pip">{esc(h["pip"])} <code>pip install {esc(name)}</code></p>
 {github}
 </div>
-<figure class="term hero-term"><pre><code>{terminal(scan_shown(), f["changelog"]["cut"])}</code></pre>
-<figcaption>{esc(h["shows"])}</figcaption></figure>
 </div>
 </div></section>"""
 
@@ -706,9 +700,12 @@ def releases():
     return [(r, [x for x in FEATURES if x["since"] == r["version"]]) for r in rows]
 
 
-def terminal(shows, cut):
-    """What a release printed, as a terminal shows it; a line of just … is lines left out."""
-    lines = [f'<span class="term-prompt">$</span> {esc(shows["run"])}']
+def terminal(shows, cut, before=()):
+    """What a release printed, as a terminal shows it; a line of just … is lines left out.
+
+    `before` is commands shown above the run - the hero's install line - each
+    at its own prompt. A command is one tap to select (gen/page.css, .term-cmd)."""
+    lines = [f'<span class="term-prompt">$</span> <span class="term-cmd">{esc(c)}</span>' for c in [*before, shows["run"]]]
     for line in shows["output"]:
         lines.append(f'<span class="term-cut" title="{esc(cut)}">…</span>' if line == "…" else esc(line))
     return "\n".join(lines)
@@ -854,7 +851,7 @@ def sub_page(f, slug, eyebrow, heading, lede, body):
 
 
 def docs_pages(f):
-    """site/docs/: the docs the pinned engine ships, one page each, the first at /docs/.
+    """site/docs/<page>/: the docs the pinned engine ships, one page each, under the landing docs_landing writes.
 
     THE DOCS ARE THE ENGINE'S. `wherefore.docs.pages()` hands over every page of
     the release this site pins - start, commands, configuration, checks and
@@ -862,34 +859,59 @@ def docs_pages(f):
     tests. This site renders them (gen/markdown.py) in its shell, with the
     pages listed beside each and the page's own headings under that. The
     heading and the words around them are this site's; every page is the
-    engine's, so a release that rewrites a page rewrites it here."""
+    engine's, so a release that rewrites a page rewrites it here. EVERY PAGE
+    HAS ITS OWN ADDRESS (owner, 7 November 2026): the Start guide was the
+    landing page itself, three thousand words at /docs/, and now sits at
+    /docs/start/ like the others, so /docs/ can be read in one screen."""
     from markdown import render
     d = f["docs"]
     ASKED.append("docs")
     pages = wherefore_docs.pages()
     out = {}
     for pid, title, md in pages:
-        slug = "docs/" if pid == pages[0][0] else f"docs/{pid}/"
-        home = "../" if pid == pages[0][0] else "../../"
-        listing = "".join(f'<li{" class=\"here\"" if p == pid else ""}><a href="{home}docs/{"" if p == pages[0][0] else p + "/"}">{esc(t)}</a></li>'
-                          for p, t, _ in pages)
+        listing = "".join(f'<li{" class=\"here\"" if p == pid else ""}><a href="../{p}/">{esc(t)}</a></li>' for p, t, _ in pages)
         heads = re.findall(r"^## (.+)$", md, re.M)
         on_page = "".join(f'<li><a href="#{re.sub(r"[^a-z0-9]+", "-", h.lower()).strip("-")}">{esc(h)}</a></li>' for h in heads)
         aside = (f'<aside class="docs-nav"><p class="docs-nav-title">{esc(d["pages"])}</p><ul>{listing}</ul>'
                  + (f'<p class="docs-nav-title">{esc(d["on_this_page"])}</p><ul class="docs-on-page">{on_page}</ul>' if on_page else "")
                  + '</aside>')
         body = f'<section class="docs"><div class="wrap docs-grid">{aside}<article class="docs-page">{render(md, shift=1)}</article></div></section>'
-        out[slug] = (title, body)
+        out[f"docs/{pid}/"] = (title, body)
     return out
 
 
+def docs_landing(f):
+    """site/docs/index.html: the pages, one card and one line each, and the release they are the docs of.
+
+    The pages and their titles are the engine's; the line under each is this
+    site's (docs.cards), and a page with no line, or a line for a page the
+    release does not ship, stops the build, so the landing never lists a page
+    it does not have or misses one it does."""
+    d = f["docs"]
+    ASKED.append("docs")
+    pages = wherefore_docs.pages()
+    cards = d["cards"]
+    for pid in cards:
+        if pid not in {p for p, _, _ in pages}:
+            raise SystemExit(f"docs.cards names `{pid}`, which is not a page of the docs {ENGINE} ships")
+    items = []
+    for pid, title, _ in pages:
+        if pid not in cards:
+            raise SystemExit(f"docs.cards has no line for `{pid}` - {title} - and the docs landing lists every page")
+        items.append(f'<li><h3><a href="{esc(pid)}/">{esc(title)}</a></h3><p>{esc(cards[pid])}</p></li>')
+    body = (f'<section class="docs"><div class="wrap"><ul class="steps docs-cards">{"".join(items)}</ul>'
+            f'<p class="docs-release">{esc(fill(d["release"], version=version()))}</p></div></section>')
+    return docs_page(f, "docs/", d["title"], body)
+
+
 def docs_page(f, slug, title, body):
-    """One docs page in the sub-page shell, one or two levels down."""
+    """One docs page in the sub-page shell: the landing one level down, every page of the docs two."""
     d, company = f["docs"], f["company"]
     depth = slug.count("/")
     up = "../" * depth
     name = company["name"]
-    lines = [head(f"{title} · {d['title']} — {name}", d["intro"], f"{up}brand.css"), f'<link rel="stylesheet" href="{up}page.css">']
+    titled = d["title"] if title == d["title"] else f"{title} · {d['title']}"
+    lines = [head(f"{titled} — {name}", d["intro"], f"{up}brand.css"), f'<link rel="stylesheet" href="{up}page.css">']
     if company["domain"]:
         lines.append(f'<link rel="canonical" href="https://{esc(company["domain"])}/{slug}">')
     return f"""<!doctype html>
@@ -1364,6 +1386,8 @@ def main():
     (SITE / "changelog").mkdir(exist_ok=True)
     inspect = FACTS["inspect"]
     (SITE / "changelog/index.html").write_text(part(changelog_page, FACTS, inspect), encoding="utf-8")
+    (SITE / "docs").mkdir(exist_ok=True)
+    (SITE / "docs/index.html").write_text(part(docs_landing, FACTS, inspect), encoding="utf-8")
     for slug, (title, _) in docs_pages(FACTS).items():
         (SITE / slug).mkdir(parents=True, exist_ok=True)
         (SITE / slug / "index.html").write_text(
