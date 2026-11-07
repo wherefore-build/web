@@ -33,12 +33,11 @@
   "menu": "Menu"
  },
  "hero": {
-  "eyebrow": "Open-source CLI",
+  "eyebrow": "Command-line tool",
   "headline": "Your product changes.",
   "headline_end": "Your site, docs and deck drift.",
   "lede": "Wherefore gives the rest of your company the pipeline your code already has.",
-  "try": "It starts with one command and no setup.",
-  "shows": "What one scan found, on an example company."
+  "free": "Free and open source, under {licence}."
  },
  "forks": {
   "code": {

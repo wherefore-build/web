@@ -173,15 +173,6 @@ def release_meta():
     return meta["Name"], licence
 
 
-def scan_shown():
-    """What `wherefore scan` printed, as the release that brought it recorded it: the hero's real output."""
-    for r in engine("releases.json", since="0.5.0")["releases"]:
-        if r["shows"]["run"].startswith("wherefore scan"):
-            ASKED.append("releases")
-            return r["shows"]
-    raise SystemExit(f"{ENGINE} records no release whose picture is a run of `wherefore scan`, and the hero shows one")
-
-
 def entry(usage):
     """The pinned release's own entry for a command the page names; refused if it has none."""
     for c in COMMANDS:
@@ -518,37 +509,28 @@ OUT = ('<svg class="out" viewBox="0 0 16 16" aria-hidden="true" focusable="false
        'fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>')
 
 def hero(f):
-    """What it is, why it matters, where to start, and the proof: what one scan printed, on an example company.
+    """What it is, why it matters, how to install it, and where to go next.
 
-    THE HERO SELLS AND POINTS DOWN (owner, 7 November 2026, second review on
-    the phone): the first command above the fold was not landing, and it said
-    again what Get started says at the foot. So the hero has no command. Under
-    the lede, one line says it starts with one command and no setup, and a
-    text link takes the reader to Get started, where every command is said
-    once; the repository is the quiet link beside it. The terminal is the
-    release's own picture of the scan, its result lines alone under a label:
-    no check requires the typed command above them, and Get started types it.
+    ONE INSTALL LINE, THEN ON (owner, 7 November 2026, third review on the
+    phone): the scan's output beside the copy was not doing enough, so it is
+    gone. Under the lede the hero says the one line that installs Wherefore,
+    one tap to select, then that it is open source and under which licence,
+    then Get started and the repository, and the page goes on to the next
+    part. Get started still holds every command, the install line among them.
 
-    The headline runs the whole width; under it the copy takes one column and
-    the terminal the other, once there is room for its longest line
-    (gen/page.css, .hero-grid). The eyebrow's licence and version and the
-    scan's output are the pinned release's own."""
-    h, n = f["hero"], f["nav"]
+    The licence and version are the pinned release's own."""
+    h, n, st = f["hero"], f["nav"], f["start"]
     _, licence = release_meta()
     repo = f["company"]["github"]
     github = (f'<a class="button button-quiet" href="{esc(repo)}">{esc(n["github"])}{OUT}</a>' if repo else "")
     return f"""<section class="hero"><div class="wrap">
 {SRC}
-<p class="eyebrow">{esc(h["eyebrow"])} · {esc(licence)} · {esc(version())}</p>
+<p class="eyebrow">{esc(h["eyebrow"])} · {esc(version())}</p>
 <h1>{esc(h["headline"])} <em>{esc(h["headline_end"])}</em></h1>
-<div class="hero-grid">
-<div class="hero-copy">
 <p class="lede">{esc(h["lede"])}</p>
-<p class="try-label">{esc(h["try"])}</p>
+<pre class="hero-install"><code><span class="term-prompt">$</span> <span class="term-cmd">{esc(st["install"])}</span></code></pre>
+<p class="hero-free">{esc(fill(h["free"], licence=licence))}</p>
 <p class="actions hero-links"><a class="hero-go" href="#start">{esc(n["start"])} →</a>{github}</p>
-</div>
-<figure class="term hero-term"><figcaption class="term-label">{esc(h["shows"])}</figcaption><pre><code>{terminal(scan_shown(), f["changelog"]["cut"], run=False)}</code></pre></figure>
-</div>
 </div></section>"""
 
 
@@ -699,13 +681,12 @@ def releases():
     return [(r, [x for x in FEATURES if x["since"] == r["version"]]) for r in rows]
 
 
-def terminal(shows, cut, run=True):
+def terminal(shows, cut):
     """What a release printed, as a terminal shows it; a line of just … is lines left out.
 
-    With `run`, the command stands at a prompt above its output, one tap to
-    select (gen/page.css, .term-cmd); without, the output alone - the hero's,
-    whose command Get started types."""
-    lines = [f'<span class="term-prompt">$</span> <span class="term-cmd">{esc(shows["run"])}</span>'] if run else []
+    The command stands at a prompt above its output, one tap to select
+    (gen/page.css, .term-cmd)."""
+    lines = [f'<span class="term-prompt">$</span> <span class="term-cmd">{esc(shows["run"])}</span>']
     for line in shows["output"]:
         lines.append(f'<span class="term-cut" title="{esc(cut)}">…</span>' if line == "…" else esc(line))
     return "\n".join(lines)
@@ -1272,8 +1253,8 @@ def turning_heading(st):
 def start(f):
     """Getting started: install (or pip), scan (one place, or a site, an app and docs together), init - in this company's words; the licence and package are the release's.
 
-    EVERY COMMAND IS SAID HERE, ONCE (owner, 7 November 2026): the hero points
-    down to this box and types nothing itself."""
+    EVERY COMMAND IS SAID HERE (owner, 7 November 2026): the hero says only the
+    install line, and points down to this box for the rest."""
     st = f["start"]
     name, licence = release_meta()
     lines = [f'<li><code>{esc(st["install"])}</code><span class="does">{esc(st["pip"])} <code>pip install {esc(name)}</code></span></li>']

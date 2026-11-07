@@ -554,25 +554,23 @@ footer p { margin: 0; }
 .icon-show { display: block; border: 1px solid var(--line); }
 .icon-round { border-radius: 50%; }
 
-/* The simpler home page (owner, 4 November 2026). The headline runs the whole
-   width; under it the lede and the two commands to try it stand beside the
-   scan's own output: two columns once there is room for the terminal's
-   longest line whole, one column below that. min-width: 0 on both, or the
-   command block widens the page past a phone's screen. */
-.hero-grid { display: grid; gap: 2rem 3.5rem; align-items: start; }
-.hero-grid > * { min-width: 0; }
-/* The scan's longest line is 78 characters, 616 px at this size: the wider of two columns holds it whole from 75rem up, so it never scrolls sideways beside the copy. */
-@media (min-width: 75rem) { .hero-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); }
-  .hero-term pre { font-size: 0.75rem; } }
+/* The hero (owner, 7 November 2026, third review): the headline runs the
+   whole width; under it the lede, the one install line, that it is open
+   source, and the two ways on - a text link to Get started (the nav has the
+   lime button) and the quiet repository link. The links are a thumb's
+   height, like every control. The install line scrolls inside itself on the
+   narrowest phone rather than widen the page. */
 .hero .lede { max-width: 40ch; }
-/* The hero sells and points down (owner, 7 November 2026): one ease line, then
-   a text link to Get started - the nav has the lime button - and the quiet
-   repository link beside it. The link is a thumb's height, like every control. */
-.try-label { margin: 1.25rem 0 0; font-size: 1.0625rem; color: var(--muted); max-width: 40ch; }
+/* The type scales with the screen so the whole line, 37 characters with its
+   prompt, fits a 390 px phone without scrolling. */
+.hero-install { margin: 1.75rem 0 0; max-width: 100%; width: max-content; padding: 0.875rem 1rem; overflow-x: auto;
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-card);
+  font: 400 clamp(0.8125rem, 3.4vw, 0.9375rem)/1.5 var(--font-mono); }
+.hero-install code { font-size: 1em; }
+.hero-free { margin: 0.75rem 0 0; font-size: 1rem; color: var(--muted); }
 .hero-links { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1.5rem; margin-top: 1rem; }
 .hero-go { display: inline-flex; align-items: center; min-height: 44px; padding: 0 0.25rem; font-weight: 600; color: var(--accent); text-decoration: none; }
 .hero-go:hover { text-decoration: underline; text-underline-offset: 0.2em; }
-.term-label { margin: 0 0 0.5rem; font: 400 0.8125rem/1.4 var(--font-mono); color: var(--muted); }
 /* One tap selects a whole command, so it can be copied as it stands. */
 .term-cmd { user-select: all; -webkit-user-select: all; }
 .hero .actions { margin-top: 1.5rem; }
