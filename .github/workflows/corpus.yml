@@ -4,10 +4,11 @@
 # said once and readable, every control on it doing something when a thumb
 # presses it - and each of those shown to fail.
 #
-# TWO JOBS SIDE BY SIDE, SO A RUN IS AS LONG AS ITS LONGEST HALF, NOT THE SUM
-# (owner, 6 November 2026). `corpus` runs every check; `proofs` plants each
-# check's fault and requires the check to fail, which takes longest and used
-# to run after everything else. The proofs run only when something that
+# THE CHECKS AND THE PROOFS SIDE BY SIDE, SO A RUN IS AS LONG AS ITS LONGEST
+# PART, NOT THE SUM (owner, 6 November 2026). `corpus` runs every check;
+# `proof` plants each check's fault and requires the check to fail, one job per
+# proof, each in its own checkout (owner, 7 November 2026: the fifteen in one
+# job took 44 minutes); `proofs` is their verdict. The proofs run only when something that
 # decides what a check does has moved - a check, a generator, the brand's
 # source, this workflow, wherefore.json. A push that only moves the pin, the
 # facts, the skill's copies or the pages they make changes no check's
@@ -25,10 +26,13 @@
 # deploy never ships a copy of something that has changed. It is asked when the
 # site is compiled, and only then, never on a timer: the owner's call.
 #
-# THEN IT DEPLOYS what those checks passed, and nothing else: `deploy` needs
-# `corpus`, and `proofs` when they ran. main goes to the site's address; every other branch to a preview
-# of its own, whose address is posted on its pull request. Cloudflare builds
-# nothing, so what it serves is the tree that was judged.
+# THEN IT DEPLOYS what those checks passed, and nothing else. main goes to the
+# site's address once `corpus` and `proofs` have both passed (`deploy`). Every
+# other branch goes to a preview of its own as soon as `corpus` has passed
+# (`preview`), and its address is posted on its pull request (owner, 7 November
+# 2026): the proofs judge the checks, not the page, so a reader need not wait
+# for them, and main still does. Cloudflare builds nothing, so what it serves
+# is the tree that was judged.
 name: corpus
 
 on:
@@ -50,10 +54,19 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       prove: ${{ steps.what.outputs.prove }}
+      scripts: ${{ steps.which.outputs.scripts }}
     steps:
       - uses: actions/checkout@v7
         with:
           fetch-depth: 0
+      # Every proof wherefore.json's glob names, one job each: a proof added
+      # later is run without this file changing.
+      - name: Which proofs are there?
+        id: which
+        run: |
+          SCRIPTS=$(python3 -c 'import glob, json; g = json.load(open("wherefore.json"))["proofs"]["glob"]; s = sorted(glob.glob(g)); assert s, f"the proofs glob {g!r} matches no file"; print(json.dumps(s))')
+          echo "$SCRIPTS"
+          echo "scripts=$SCRIPTS" >> "$GITHUB_OUTPUT"
       - name: Did anything that decides what a check does move?
         id: what
         env:
@@ -169,13 +182,18 @@ jobs:
           path: status.json
           retention-days: 30
 
-  # EACH CHECK SHOWN TO FAIL, beside the checks rather than after them. Needs
-  # the same engine and browser, in its own checkout: the proofs plant faults
-  # in the tree and put them back, and two in one checkout would corrupt each
-  # other.
-  proofs:
+  # EACH CHECK SHOWN TO FAIL, beside the checks rather than after them, and
+  # each proof in a job of its own (owner, 7 November 2026). Needs the same
+  # engine and browser, in its own checkout: the proofs plant faults in the
+  # tree and put them back, and two in one checkout would corrupt each other.
+  proof:
     needs: moved
     if: needs.moved.outputs.prove == 'yes'
+    name: proof (${{ matrix.script }})
+    strategy:
+      fail-fast: false
+      matrix:
+        script: ${{ fromJSON(needs.moved.outputs.scripts) }}
     runs-on: ubuntu-latest
     env:
       PYTHONPATH: ${{ github.workspace }}/.wherefore-engine:${{ github.workspace }}/.browser
@@ -195,72 +213,60 @@ jobs:
           rm -rf .browser
           python3 -m pip install --quiet --target .browser -r requirements-browser.txt
           python3 -m playwright install --with-deps chromium
-      - name: And each of those fails when it should
-        run: python3 -m wherefore prove
+      - name: And this check fails when it should
+        run: python3 -m wherefore prove "${{ matrix.script }}"
 
-  # Cloudflare's own Git builds are disconnected: this is the one deploy, and it
-  # waits for every check above. CLOUDFLARE_API_TOKEN is a token made from
-  # Cloudflare's "Edit Cloudflare Workers" template, saved as a secret of this
-  # repository (README.md, "Hosting"). wrangler is pinned, like the engine, so
-  # the deploy is the same program every time.
-  deploy:
-    needs: [corpus, proofs]
-    # The proofs may have been skipped for a push that moved no check; a deploy
-    # waits for the checks either way, and for the proofs when they ran.
-    if: ${{ !cancelled() && needs.corpus.result == 'success' && (needs.proofs.result == 'success' || needs.proofs.result == 'skipped') }}
+  # THE PROOFS' VERDICT, under the name `proofs` the runs have always had: it
+  # passes when every proof held, or when nothing that decides what a check
+  # does moved and so none ran; it fails when any proof missed, or the list of
+  # proofs could not be read.
+  proofs:
+    needs: [moved, proof]
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Every proof held, or none had to run
+        env:
+          MOVED: ${{ needs.moved.result }}
+          PROVE: ${{ needs.moved.outputs.prove }}
+          PROOF: ${{ needs.proof.result }}
+        run: |
+          if [ "$MOVED" != success ]; then echo "::error::which proofs to run could not be decided ($MOVED)"; exit 1; fi
+          if [ "$PROVE" != yes ]; then echo "nothing that decides what a check does moved: no proof had to run"; exit 0; fi
+          if [ "$PROOF" != success ]; then echo "::error::a proof did not hold ($PROOF): its own job, above, says which and why"; exit 1; fi
+          echo "every proof held"
+
+  # Cloudflare's own Git builds are disconnected: these are the one deploy,
+  # and .github/actions/deploy says how. CLOUDFLARE_API_TOKEN is a token made
+  # from Cloudflare's "Edit Cloudflare Workers" template, saved as a secret of
+  # this repository (README.md, "Hosting").
+  #
+  # A BRANCH'S PREVIEW waits for the checks on the page, not for the proofs of
+  # those checks (owner, 7 November 2026).
+  preview:
+    needs: corpus
+    if: ${{ !cancelled() && needs.corpus.result == 'success' && github.ref_name != 'main' }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
       pull-requests: write
-    env:
-      WRANGLER: wrangler@4.154.0
-      WRANGLER_SEND_METRICS: "false"
     steps:
       - uses: actions/checkout@v7
-      - name: Deploy main, or preview this branch
-        id: deploy
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          WRANGLER_OUTPUT_FILE_PATH: ${{ runner.temp }}/wrangler.ndjson
-          BRANCH: ${{ github.ref_name }}
-        run: |
-          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
-            echo "::error::CLOUDFLARE_API_TOKEN is not a secret of this repository, so nothing can be deployed. README.md, under Hosting, says how to add it."
-            exit 1
-          fi
-          if [ "$BRANCH" = main ]; then
-            npx --yes "$WRANGLER" deploy
-          else
-            # Cloudflare names a preview after its branch, in lower case, with
-            # every run of other characters made one hyphen.
-            NAME=$(printf '%s' "$BRANCH" | tr 'A-Z' 'a-z' | sed -E 's/[^a-z0-9]+/-/g; s/^-+//; s/-+$//')
-            # `wrangler preview` does not apply wrangler.jsonc's workers_dev and
-            # preview_urls; only main's `wrangler deploy` does. Apply them first.
-            python3 .github/scripts/cloudflare_urls.py
-            npx --yes "$WRANGLER" preview --name "$NAME"
-          fi
-          python3 .github/scripts/deployed.py "$WRANGLER_OUTPUT_FILE_PATH"
-      - name: The deployed site sends the policies site/_headers says
-        env:
-          URL: ${{ steps.deploy.outputs.url }}
-        run: python3 .github/scripts/served_headers.py "$URL"
-      - name: Say where the preview is, on the pull request
-        if: github.ref_name != 'main'
-        env:
-          GH_TOKEN: ${{ github.token }}
-          BRANCH: ${{ github.ref_name }}
-          URL: ${{ steps.deploy.outputs.url }}
-        run: |
-          PR=$(gh pr list --repo "$GITHUB_REPOSITORY" --head "$BRANCH" --state open --json number --jq '.[0].number // empty')
-          if [ -z "$PR" ]; then
-            echo "No open pull request for $BRANCH - the address is in this run's summary."
-            exit 0
-          fi
-          MARK='<!-- wherefore-preview -->'
-          BODY=$(printf '%s\n**Preview** - %s - `%s`\n\nDeployed from this commit after every check passed, with nothing built on Cloudflare'"'"'s side, so it is the site the checks judged. A newer push replaces this address'"'"'s contents and this line.\n' "$MARK" "$URL" "${GITHUB_SHA::7}")
-          ID=$(gh api "repos/$GITHUB_REPOSITORY/issues/$PR/comments" --paginate --jq ".[] | select(.body | startswith(\"$MARK\")) | .id" | head -1)
-          if [ -n "$ID" ]; then
-            gh api -X PATCH "repos/$GITHUB_REPOSITORY/issues/comments/$ID" -f body="$BODY" > /dev/null
-          else
-            gh api "repos/$GITHUB_REPOSITORY/issues/$PR/comments" -f body="$BODY" > /dev/null
-          fi
+      - uses: ./.github/actions/deploy
+        with:
+          cloudflare-token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          github-token: ${{ github.token }}
+
+  # MAIN waits for every check and for the proofs when they ran.
+  deploy:
+    needs: [corpus, proofs]
+    if: ${{ !cancelled() && github.ref_name == 'main' && needs.corpus.result == 'success' && needs.proofs.result == 'success' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/deploy
+        with:
+          cloudflare-token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          github-token: ${{ github.token }}

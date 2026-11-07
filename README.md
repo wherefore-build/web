@@ -279,15 +279,20 @@ so it needs no secret to read it; the one secret it holds is the deploy's,
 Cloudflare Workers serves `site/` exactly as committed, as static assets
 (`wrangler.jsonc`), with the headers in `site/_headers`.
 
-**CI deploys it, and only after every check has passed.** The `deploy` job in
-`.github/workflows/corpus.yml` needs `corpus`, and `proofs` when they ran, so
-a tree the gate or a proof failed never reaches Cloudflare, and nothing builds
-on Cloudflare's side.
+**CI deploys it, and only after its checks have passed.** Nothing builds on
+Cloudflare's side; `.github/actions/deploy` is the one deploy, and
+`.github/workflows/corpus.yml` decides when it runs.
 - `main` deploys to the site's address, `wherefore.build`, a Custom Domain
-  declared in `wrangler.jsonc` (and still at its `workers.dev` address).
-- Every other branch deploys to a preview of its own. The job posts the
-  preview's address on the branch's pull request, with the commit it was
-  built from, and updates that one comment on every push.
+  declared in `wrangler.jsonc` (and still at its `workers.dev` address). Its
+  `deploy` job needs `corpus` and `proofs`, so a tree the gate, a check or a
+  proof failed never reaches the site.
+- Every other branch deploys to a preview of its own as soon as `corpus` has
+  passed (its `preview` job), without waiting for the proofs, which judge the
+  checks rather than the page. The job posts the preview's address on the
+  branch's pull request, with the commit it was built from, and updates that
+  one comment on every push.
+- The proofs run one job per proof (`proof`), each in its own checkout, and
+  `proofs` is their verdict.
 
 **One-time setup (owner):**
 - A Cloudflare API token made from the **Edit Cloudflare Workers** template
