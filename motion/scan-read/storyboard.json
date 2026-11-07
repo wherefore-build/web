@@ -42,12 +42,15 @@
     "places": [
      "site"
     ],
-    "stated": 76,
-    "files": 16,
-    "disagree": 0,
-    "says": []
+    "stated": 77,
+    "files": 18,
+    "disagree": 2,
+    "says": [
+     "company json {} facts docs",
+     "company json {} facts nav"
+    ]
    },
-   "caption": "76 values stated across 16 pages in site; 0 disagree"
+   "caption": "77 values stated across 18 pages in site; 2 disagree"
   },
   {
    "kind": "claim",

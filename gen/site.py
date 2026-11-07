@@ -73,9 +73,10 @@ line it says Wherefore is not public yet, and with no quote the case study
 quotes no one. Each appears when its fact does.
 
 Run from gen/, as wherefore.json says, after brand.py. Writes site/index.html,
-site/page.css, site/_headers, the features page, site/features/index.html, the
-changelog, site/changelog/index.html, the framed model, site/pendulum/index.html, and
-the framed plate, site/pendulum/plate/index.html.
+site/page.css, site/_headers, the features page, site/features/index.html, why
+the name, site/why/index.html, the changelog, site/changelog/index.html, the
+framed model, site/pendulum/index.html, and the framed plate,
+site/pendulum/plate/index.html.
 The map, site/map/index.html, is the engine's: `wherefore graph` run as a
 generator of its own (wherefore.json), which the gate runs like any command
 and `wherefore graph` itself credits rather than runs.
@@ -102,6 +103,10 @@ MODEL_PAGE = "pendulum/"
 # path is served a policy that lets its own script run and load the brand's
 # fonts, like the model's.
 MAP_PAGE = "map/"
+# Why "Wherefore": the word, Juliet, the rule and the five questions, on a page
+# of their own (owner, 7 November 2026: the home page made its point once more
+# than it needed to; the people who want the name's story click for it).
+WHY_PAGE = "why/"
 # What frames the pendulum's model on this site, appended after its source -
 # which has no closing tags, so it is appended to, never edited. A three-quarter
 # view drawn back far enough, with the pivot high, that the whole swing stays in
@@ -166,15 +171,6 @@ def release_meta():
         raise SystemExit(f"{ENGINE} declares no licence in its metadata, and the page says which one it is under")
     ASKED.append("licence")
     return meta["Name"], licence
-
-
-def scan_shown():
-    """What `wherefore scan` printed, as the release that brought it recorded it: the hero's real output."""
-    for r in engine("releases.json", since="0.5.0")["releases"]:
-        if r["shows"]["run"].startswith("wherefore scan"):
-            ASKED.append("releases")
-            return r["shows"]
-    raise SystemExit(f"{ENGINE} records no release whose picture is a run of `wherefore scan`, and the hero shows one")
 
 
 def entry(usage):
@@ -308,7 +304,7 @@ def links(f, home=""):
     features and roadmap after why and before the changelog)."""
     n = f["nav"]
     return (f'<a href="{home}#how">{esc(n["how"])}</a><a href="{home}#case">{esc(f["case"]["eyebrow"])}</a>'
-            f'<a href="{home}#why">{esc(n["why"])}</a><a href="{home}features/">{esc(n["does"])}</a>'
+            f'<a href="{home}{WHY_PAGE}">{esc(n["why"])}</a><a href="{home}features/">{esc(n["does"])}</a>'
             f'<a href="{home}changelog/">{esc(f["changelog"]["title"])}</a>'
             f'<a href="{home}docs/">{esc(n["docs"])}</a><a href="{home}{MAP_PAGE}">{esc(n["map"])}</a>')
 
@@ -501,7 +497,7 @@ def forks(f):
     code, drift, done = k["code"], k["drift"], k["compiled"]
     return f"""<div class="forks">
 <figure class="fork fork-code"><figcaption class="fork-title">{esc(code["title"])}</figcaption>{code_art(code)}<p class="fork-caption">{esc(code["caption"])}</p></figure>
-<figure class="fork fork-drift"><figcaption class="fork-title">{esc(drift["title"])}</figcaption>{drift_art(drift)}<p class="fork-caption">{esc(drift["caption"])}</p><p class="fork-sting">{esc(drift["sting"])}</p></figure>
+<figure class="fork fork-drift"><figcaption class="fork-title">{esc(drift["title"])}</figcaption>{drift_art(drift)}<p class="fork-caption">{esc(drift["caption"])}</p></figure>
 <figure class="fork fork-compiled"><figcaption class="fork-title">{esc(done["title"])}</figcaption>{compiled_art(done, f["demo"]["assets"])}<p class="fork-caption">{esc(done["caption"])}</p></figure>
 </div>"""
 
@@ -513,53 +509,31 @@ OUT = ('<svg class="out" viewBox="0 0 16 16" aria-hidden="true" focusable="false
        'fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>')
 
 def hero(f):
-    """What it is, why it matters, and the commands that try it on your own site - and on your site and your app together - with real output beside them.
+    """What it is, why it matters, how to install it, and where to go next.
 
-    The headline runs the whole width; under it the lede and the two commands
-    take one column and the scan's output the other, once there is room for
-    its longest line (gen/page.css, .hero-grid).
+    ONE INSTALL LINE, THEN ON (owner, 7 November 2026, third review on the
+    phone): the scan's output beside the copy was not doing enough, so it is
+    gone. Under the lede the hero says the one line that installs Wherefore,
+    one tap to select, then that it is open source and under which licence,
+    then Get started and the repository, and the page goes on to the next
+    part. Under the install line, the pip line, for whoever will not pipe a
+    script into a shell (owner, 7 November 2026). Get started still holds
+    every command, these two among them.
 
-    The eyebrow's licence and version, the package pip installs and the scan's
-    output are the pinned release's own; the commands are start's, so the hero
-    and Get started state them once between them. The second button is the
-    engine's public repository, once there is one: company.github."""
-    h, st = f["hero"], f["start"]
+    The licence and version are the pinned release's own."""
+    h, n, st = f["hero"], f["nav"], f["start"]
     name, licence = release_meta()
-    first = st["steps"][0]
-    run = f'{command(first["command"])} {first.get("args", "")}'.strip()
-    # The same scan, pointed at two places at once (owner, 5 November 2026):
-    # the output beside it reads a site and an app together, so the command
-    # that does that stands under the one-site command, ready to copy.
-    also = (f'<code class="cmd"><span class="term-prompt">$</span> {esc(command(first["command"]))} {esc(first["also"])}</code>'
-            if first.get("also") else "")
     repo = f["company"]["github"]
-    github = (f'<p class="actions"><a class="button button-quiet" href="{esc(repo)}">{esc(f["nav"]["github"])}{OUT}</a></p>'
-              if repo else "")
+    github = (f'<a class="button button-quiet" href="{esc(repo)}">{esc(n["github"])}{OUT}</a>' if repo else "")
     return f"""<section class="hero"><div class="wrap">
 {SRC}
-<p class="eyebrow">{esc(h["eyebrow"])} · {esc(licence)} · {esc(version())}</p>
+<p class="eyebrow">{esc(h["eyebrow"])} · {esc(version())}</p>
 <h1>{esc(h["headline"])} <em>{esc(h["headline_end"])}</em></h1>
-<div class="hero-grid">
-<div class="hero-copy">
 <p class="lede">{esc(h["lede"])}</p>
-<p class="try-label">{esc(h["try"])}</p>
-<div class="try"><code class="cmd"><span class="term-prompt">$</span> {esc(st["install"])}</code><code class="cmd"><span class="term-prompt">$</span> {esc(run)}</code>{also}</div>
-<p class="try-pip">{esc(h["pip"])} <code>pip install {esc(name)}</code></p>
-{github}
-</div>
-<figure class="term hero-term"><pre><code>{terminal(scan_shown(), f["changelog"]["cut"])}</code></pre>
-<figcaption>{esc(h["shows"])}</figcaption></figure>
-</div>
-</div></section>"""
-
-
-def opening(f):
-    """The picture, right after the headline (owner, 5 November 2026): code merges back,
-    everything else forks for good, and Wherefore gives everything else code's shape."""
-    return f"""<section id="forks" class="opening"><div class="wrap">
-{SRC}
-<h2>{esc(f["forks"]["heading"])}</h2>
-{forks(f)}
+<pre class="hero-install"><code><span class="term-prompt">$</span> <span class="term-cmd">{esc(st["install"])}</span></code></pre>
+<p class="hero-pip">{esc(st["pip"])} <code class="term-cmd">pip install {esc(name)}</code></p>
+<p class="hero-free">{esc(fill(h["free"], licence=licence))}</p>
+<p class="actions hero-links"><a class="hero-go" href="#start">{esc(n["start"])} →</a>{github}</p>
 </div></section>"""
 
 
@@ -620,6 +594,7 @@ def flipping(n):
 
 
 def why(f):
+    """The word and the questions: the body of site/why/, under the page's own heading."""
     w, d = f["why"], f["demo"]
     values = dict(fact=d["fact"], before=d["before"], after=d["after"])
     tabs = [f'<input class="state" type="radio" name="ask" id="ask-auto" checked aria-label="{esc(w["pick"])}">']
@@ -637,10 +612,8 @@ def why(f):
             f'</dl></div>')
     tabs.append(f'<div class="ask-panels">\n{chr(10).join(panels)}\n</div>\n{flipping(len(w["asks"]))}')
     return f"""<section id="why" class="meaning"><div class="wrap">
-{SRC}
 <div class="meaning-grid">
 <div class="definition">
-<p class="eyebrow">{esc(w["heading"])}</p>
 <p class="word"><dfn>{esc(w["word"])}</dfn> <span class="part">{esc(w["part"])}</span></p>
 <p class="sense">{esc(w["meaning"])}</p>
 <p class="juliet">{esc(w["juliet"])}</p>
@@ -654,16 +627,30 @@ def why(f):
 </div></section>"""
 
 
+def why_page(f):
+    """site/why/index.html: why the name, on its own page, in the sub-page shell."""
+    w = f["why"]
+    return sub_page(f, WHY_PAGE.rstrip("/"), f["nav"]["why"], w["heading"], None, why(f))
+
+
 def how(f):
+    """One section (owner, 7 November 2026): the picture - code merges back,
+    everything else forks for good, Wherefore gives everything else code's
+    shape - and under it the three commands that do that, then what else it
+    catches. The picture and the steps each said the same thing on a section of
+    their own, and the page made its point once more than it needed to. Under
+    the steps, the one line to every feature."""
     h = f["how"]
     steps = []
     for i, s in enumerate(h["steps"], 1):
         label = f'<code>{esc(command(s["command"]))}</code>' if "command" in s else esc(s["label"])
         steps.append(f'<li><p class="step-label">{i:02d} · {label}</p>'
                      f'<h3>{esc(s["name"])}</h3><p>{esc(s["text"])}</p></li>')
-    return f"""<section id="how"><div class="wrap">
+    return f"""<section id="how" class="opening"><div class="wrap">
 {SRC}
-<h2>{esc(h["heading"])}</h2>
+<h2>{esc(f["forks"]["heading"])}</h2>
+{forks(f)}
+<h3 class="how-heading">{esc(h["heading"])}</h3>
 <ol class="steps">
 {chr(10).join(steps)}
 </ol>
@@ -673,17 +660,10 @@ def how(f):
 
 
 def catches(f):
-    """What else it catches, in one line each: three of the release's features, and the way to every one.
-    Under how it works, not a section of its own (owner, 5 November 2026)."""
-    d = f["does"]
-    byid = {x["id"]: x for x in FEATURES}
-    items = []
-    for k in d["home"]:
-        if k not in byid:
-            raise SystemExit(f"does.home names `{k}`, which {ENGINE} does not ship")
-        items.append(f'<li><p class="does-name">{esc(byid[k]["name"])}</p><p>{esc(d["short"][k])}</p></li>')
-    return (f'<h3 class="catches">{esc(d["home_heading"])}</h3>\n<ul class="does does-three">\n{chr(10).join(items)}\n</ul>\n'
-            f'<p class="more-all"><a href="features/">{esc(fill(d["all"], n=len(FEATURES)))}</a></p>')
+    """The way to every feature, in one line. The three features that stood here
+    in a line each (owner, 5 November 2026) went with the rest of the repetition
+    (owner, 7 November): each is on the features page, one tap away."""
+    return f'<p class="more-all"><a href="features/">{esc(fill(f["does"]["all"], n=len(FEATURES)))}</a></p>'
 
 
 def releases():
@@ -705,8 +685,11 @@ def releases():
 
 
 def terminal(shows, cut):
-    """What a release printed, as a terminal shows it; a line of just … is lines left out."""
-    lines = [f'<span class="term-prompt">$</span> {esc(shows["run"])}']
+    """What a release printed, as a terminal shows it; a line of just … is lines left out.
+
+    The command stands at a prompt above its output, one tap to select
+    (gen/page.css, .term-cmd)."""
+    lines = [f'<span class="term-prompt">$</span> <span class="term-cmd">{esc(shows["run"])}</span>']
     for line in shows["output"]:
         lines.append(f'<span class="term-cut" title="{esc(cut)}">…</span>' if line == "…" else esc(line))
     return "\n".join(lines)
@@ -852,7 +835,7 @@ def sub_page(f, slug, eyebrow, heading, lede, body):
 
 
 def docs_pages(f):
-    """site/docs/: the docs the pinned engine ships, one page each, the first at /docs/.
+    """site/docs/<page>/: the docs the pinned engine ships, one page each, under the landing docs_landing writes.
 
     THE DOCS ARE THE ENGINE'S. `wherefore.docs.pages()` hands over every page of
     the release this site pins - start, commands, configuration, checks and
@@ -860,34 +843,60 @@ def docs_pages(f):
     tests. This site renders them (gen/markdown.py) in its shell, with the
     pages listed beside each and the page's own headings under that. The
     heading and the words around them are this site's; every page is the
-    engine's, so a release that rewrites a page rewrites it here."""
+    engine's, so a release that rewrites a page rewrites it here. EVERY PAGE
+    HAS ITS OWN ADDRESS (owner, 7 November 2026): the Start guide was the
+    landing page itself, three thousand words at /docs/, and now sits at
+    /docs/start/ like the others, so /docs/ can be read in one screen."""
     from markdown import render
     d = f["docs"]
     ASKED.append("docs")
     pages = wherefore_docs.pages()
     out = {}
     for pid, title, md in pages:
-        slug = "docs/" if pid == pages[0][0] else f"docs/{pid}/"
-        home = "../" if pid == pages[0][0] else "../../"
-        listing = "".join(f'<li{" class=\"here\"" if p == pid else ""}><a href="{home}docs/{"" if p == pages[0][0] else p + "/"}">{esc(t)}</a></li>'
-                          for p, t, _ in pages)
+        listing = "".join(f'<li{" class=\"here\"" if p == pid else ""}><a href="../{p}/">{esc(t)}</a></li>' for p, t, _ in pages)
         heads = re.findall(r"^## (.+)$", md, re.M)
         on_page = "".join(f'<li><a href="#{re.sub(r"[^a-z0-9]+", "-", h.lower()).strip("-")}">{esc(h)}</a></li>' for h in heads)
         aside = (f'<aside class="docs-nav"><p class="docs-nav-title">{esc(d["pages"])}</p><ul>{listing}</ul>'
                  + (f'<p class="docs-nav-title">{esc(d["on_this_page"])}</p><ul class="docs-on-page">{on_page}</ul>' if on_page else "")
                  + '</aside>')
         body = f'<section class="docs"><div class="wrap docs-grid">{aside}<article class="docs-page">{render(md, shift=1)}</article></div></section>'
-        out[slug] = (title, body)
+        out[f"docs/{pid}/"] = (title, body)
     return out
 
 
+def docs_landing(f):
+    """site/docs/index.html: the pages, one card and one line each, and the release they are the docs of.
+
+    The pages and their titles are the engine's; the line under each is this
+    site's (docs.cards), and a page with no line, or a line for a page the
+    release does not ship, stops the build, so the landing never lists a page
+    it does not have or misses one it does. THE WHOLE CARD IS THE LINK (owner,
+    7 November 2026, from the phone): a tap anywhere on it opens the page."""
+    d = f["docs"]
+    ASKED.append("docs")
+    pages = wherefore_docs.pages()
+    cards = d["cards"]
+    for pid in cards:
+        if pid not in {p for p, _, _ in pages}:
+            raise SystemExit(f"docs.cards names `{pid}`, which is not a page of the docs {ENGINE} ships")
+    items = []
+    for pid, title, _ in pages:
+        if pid not in cards:
+            raise SystemExit(f"docs.cards has no line for `{pid}` - {title} - and the docs landing lists every page")
+        items.append(f'<li><a class="docs-card" href="{esc(pid)}/"><h3>{esc(title)}</h3><p>{esc(cards[pid])}</p></a></li>')
+    body = (f'<section class="docs"><div class="wrap"><ul class="steps docs-cards">{"".join(items)}</ul>'
+            f'<p class="docs-release">{esc(fill(d["release"], version=version()))}</p></div></section>')
+    return docs_page(f, "docs/", d["title"], body)
+
+
 def docs_page(f, slug, title, body):
-    """One docs page in the sub-page shell, one or two levels down."""
+    """One docs page in the sub-page shell: the landing one level down, every page of the docs two."""
     d, company = f["docs"], f["company"]
     depth = slug.count("/")
     up = "../" * depth
     name = company["name"]
-    lines = [head(f"{title} · {d['title']} — {name}", d["intro"], f"{up}brand.css"), f'<link rel="stylesheet" href="{up}page.css">']
+    titled = d["title"] if title == d["title"] else f"{title} · {d['title']}"
+    lines = [head(f"{titled} — {name}", d["intro"], f"{up}brand.css"), f'<link rel="stylesheet" href="{up}page.css">']
     if company["domain"]:
         lines.append(f'<link rel="canonical" href="https://{esc(company["domain"])}/{slug}">')
     return f"""<!doctype html>
@@ -970,14 +979,32 @@ def does(f):
     for it in ROADMAP["items"]:
         if it["state"] == "shipped" and it.get("issues"):
             answered.setdefault(it["feature"], []).append(it)
-    items = []
+    # FIVE GROUPS, NOT TWENTY-TWO CARDS (owner, 7 November 2026): a reader scans
+    # five headings. The grouping is the facts' (does.groups), each group a
+    # name, a line and the features in it; every feature shown is in exactly
+    # one group, and a group naming a feature the release does not ship, or
+    # one shown nowhere, stops the build.
+    placed = {}
+    for g in d["groups"]:
+        for k in g["features"]:
+            if k not in shipped:
+                raise SystemExit(f"does.groups `{g['name']}` names `{k}`, which {ENGINE} does not ship")
+            if k in placed:
+                raise SystemExit(f"does.groups puts `{k}` in both `{placed[k]}` and `{g['name']}`: a feature is in one group")
+            placed[k] = g["name"]
+    for x in FEATURES:
+        if x["id"] not in unshown and x["id"] not in placed:
+            raise SystemExit(f"does.groups puts `{x['id']}` - {x['name']} - in no group")
+    items = {}
     for x in FEATURES:
         if x["id"] in unshown:
             unshown[x["id"]]                          # read, so its reason is accounted for
             continue
         new = (f' <span class="chip chip-new">{esc(fill(d["new"], version=newest))}</span>'
                if x["since"] == newest else "")
-        cmds = "".join(f'<p class="does-cmd"><code>{esc(command(short(c)))}</code></p>' for c in x.get("commands", []))
+        # Two usages of one command - `wherefore gate [--keep]` and `wherefore gate --restamp` - are one line.
+        cmds = "".join(f'<p class="does-cmd"><code>{esc(command(c))}</code></p>'
+                       for c in dict.fromkeys(short(c) for c in x.get("commands", [])))
         since = f' <span class="chip chip-since">{esc(fill(d["since"], version=x["since"]))}</span>'
         asks = []
         for it in answered.get(x["id"], []):
@@ -997,15 +1024,18 @@ def does(f):
         # The command stays on the closed card (owner, 6 November 2026), the
         # clip opens with the details, in a landscape frame that takes the
         # card's width.
-        items.append(f'<li id="{esc(x["id"])}"><details class="does-more"><summary><p class="does-name">{esc(x["name"])}{since}{new}{toggle}</p>'
-                     f'<p>{esc(words[x["id"]])}</p>{cmds}</summary>'
-                     f'<p class="does-details"><span class="road-asked">{esc(d["open"])}</span> {esc(x["details"])}</p>'
-                     f'{"".join(asks)}{clip}</details></li>')
+        items[x["id"]] = (f'<li id="{esc(x["id"])}"><details class="does-more"><summary><p class="does-name">{esc(x["name"])}{since}{new}{toggle}</p>'
+                          f'<p>{esc(words[x["id"]])}</p>{cmds}</summary>'
+                          f'<p class="does-details"><span class="road-asked">{esc(d["open"])}</span> {esc(x["details"])}</p>'
+                          f'{"".join(asks)}{clip}</details></li>')
+    groups = []
+    for g in d["groups"]:
+        cards = [items[k] for k in g["features"] if k in items]
+        groups.append(f'<h2 class="does-group">{esc(g["name"])} <span class="does-group-lede">{esc(g["lede"])}</span></h2>\n'
+                      f'<ul class="does">\n{chr(10).join(cards)}\n</ul>')
     return f"""<section id="does"><div class="wrap">
 <p class="does-intro">{esc(d["intro"])} <a href="../changelog/">{esc(f["changelog"]["link"])}</a></p>
-<ul class="does">
-{chr(10).join(items)}
-</ul>
+{chr(10).join(groups)}
 </div></section>"""
 
 
@@ -1171,17 +1201,6 @@ def case(f, p):
 </div></section>"""
 
 
-def rule(f):
-    r = f["rule"]
-    return f"""<section class="rule"><div class="wrap">
-{SRC}
-<div class="rule-grid">
-<p class="rule-line">{esc(r["line"])}<br><em>{esc(r["end"])}</em></p>
-<p class="rule-text">{esc(r["text"])}</p>
-</div>
-</div></section>"""
-
-
 SLOT = 6.0      # seconds each word has, typed, held and erased: the same for every word (owner, 6 November 2026)
 TYPE = 0.11     # seconds a letter takes to type: unhurried (owner, 7 November 2026)
 ERASE = 0.07    # and to erase, a little quicker
@@ -1235,10 +1254,13 @@ def turning_heading(st):
 
 
 def start(f):
-    """Getting started: install, scan (one place, or a site and an app together), init - in this company's words; the licence and package are the release's."""
-    st, h = f["start"], f["hero"]
+    """Getting started: install (or pip), scan (one place, or a site, an app and docs together), init - in this company's words; the licence and package are the release's.
+
+    EVERY COMMAND IS SAID HERE (owner, 7 November 2026): the hero says only the
+    install line, and points down to this box for the rest."""
+    st = f["start"]
     name, licence = release_meta()
-    lines = [f'<li><code>{esc(st["install"])}</code><span class="does">{esc(h["pip"])} <code>pip install {esc(name)}</code></span></li>']
+    lines = [f'<li><code>{esc(st["install"])}</code><span class="does">{esc(st["pip"])} <code>pip install {esc(name)}</code></span></li>']
     for s in st["steps"]:
         run = f'{command(s["command"])} {s.get("args", "")}'.strip()
         # A step with a second form - the scan pointed at a site and an app
@@ -1279,10 +1301,13 @@ def page(f):
              '<link rel="stylesheet" href="page.css">']
     if company["domain"]:
         lines.append(f'<link rel="canonical" href="https://{esc(company["domain"])}/">')
+    # Five parts (owner, 7 November 2026): the hero; the picture and the three
+    # commands as one; the demo; the case; Get started. Why the name is a page
+    # of its own, WHY_PAGE, and the agents' line is the how section's note.
     parts = {name: part(render, f, inspect, *also) for name, render, *also in (
-        ("header", header), ("hero", hero), ("forks", opening), ("demo", ripple), ("how", how),
+        ("header", header), ("hero", hero), ("how", how), ("demo", ripple),
         ("case", case, (("facts/pendulum.json", PENDULUM),)),
-        ("rule", rule), ("why", why), ("start", start), ("footer", footer))}
+        ("start", start), ("footer", footer))}
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -1294,12 +1319,9 @@ def page(f):
 <main id="top">
 {key(f)}
 {parts["hero"]}
-{parts["forks"]}
-{parts["demo"]}
 {parts["how"]}
+{parts["demo"]}
 {parts["case"]}
-{parts["rule"]}
-{parts["why"]}
 {parts["start"]}
 </main>
 {parts["footer"]}
@@ -1352,12 +1374,16 @@ def main():
     (SITE / "changelog").mkdir(exist_ok=True)
     inspect = FACTS["inspect"]
     (SITE / "changelog/index.html").write_text(part(changelog_page, FACTS, inspect), encoding="utf-8")
+    (SITE / "docs").mkdir(exist_ok=True)
+    (SITE / "docs/index.html").write_text(part(docs_landing, FACTS, inspect), encoding="utf-8")
     for slug, (title, _) in docs_pages(FACTS).items():
         (SITE / slug).mkdir(parents=True, exist_ok=True)
         (SITE / slug / "index.html").write_text(
             part(lambda r, s=slug, t=title: docs_page(r, s, t, docs_pages(r)[s][1]), FACTS, inspect), encoding="utf-8")
     (SITE / "features").mkdir(exist_ok=True)
     (SITE / "features/index.html").write_text(part(features_page, FACTS, inspect), encoding="utf-8")
+    (SITE / WHY_PAGE).mkdir(exist_ok=True)
+    (SITE / WHY_PAGE / "index.html").write_text(part(why_page, FACTS, inspect), encoding="utf-8")
     (SITE / MODEL_PAGE).mkdir(exist_ok=True)
     (SITE / MODEL_PAGE / "index.html").write_text(model_page(FACTS), encoding="utf-8")
     (SITE / PART_PAGE).mkdir(exist_ok=True)

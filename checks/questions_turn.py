@@ -106,8 +106,8 @@ def main():
     try:
         with sync_playwright() as p:
             browser = p.chromium.launch()
-            # The questions live on the home page, under Why Wherefore, beside the word they answer.
-            found = faults(browser, f"http://127.0.0.1:{server.server_port}/")
+            # The questions live on their own page, why/, beside the word they answer (owner, 7 November 2026).
+            found = faults(browser, f"http://127.0.0.1:{server.server_port}/why/")
             browser.close()
     finally:
         server.shutdown()

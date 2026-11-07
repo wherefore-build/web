@@ -114,7 +114,6 @@ em { font-style: italic; }
 .fork-compiled .fork-title { color: var(--accent); }
 .fork-art { display: block; width: 100%; height: auto; margin: 0.75rem 0 1rem; overflow: visible; }
 .fork-caption { margin: 0; font-size: 0.9375rem; line-height: 1.5; color: var(--muted); }
-.fork-sting { margin: 0.6rem 0 0; font-size: 0.9375rem; line-height: 1.45; color: var(--fail); }
 .fork-art path { fill: none; stroke-linecap: round; stroke-linejoin: round; }
 .art-main { stroke: var(--muted); stroke-width: 2.5; }
 .art-branch { stroke: var(--muted); stroke-width: 1.75; }
@@ -296,8 +295,14 @@ em { font-style: italic; }
 .steps h3 { margin: 1rem 0 0.5rem; }
 .steps p:last-child { color: var(--muted); margin: 0; }
 .how-note { margin: 1.5rem 0 0; color: var(--muted); font-size: 0.9375rem; }
+/* The three commands, under the picture, in the same section (owner, 7 November 2026). */
+.how-heading { margin: clamp(2.5rem, 6vw, 4rem) 0 1.25rem; font-size: clamp(1.5rem, 3vw, 2rem); line-height: 1.15; }
 
 .does-intro { color: var(--muted); max-width: 46ch; margin: 0 0 2rem; }
+/* Five groups of features, each a heading with its line beside it, so a reader scans five things, not twenty-two (owner, 7 November 2026). */
+.does-group { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.25rem 1rem; margin: 2.75rem 0 1rem; font-size: 1.5rem; }
+.does-group:first-of-type { margin-top: 0; }
+.does-group-lede { font: 400 1rem/1.5 var(--font-body); color: var(--muted); }
 .does { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(17rem, 100%), 1fr)); gap: 1rem; }
 .does li { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-card); padding: 1.4rem 1.5rem; display: flex; flex-direction: column; gap: 0.6rem; }
 .does li p { margin: 0; }
@@ -344,11 +349,6 @@ em { font-style: italic; }
 }
 .chip-new { color: var(--on-accent); background: var(--accent); border-color: var(--accent); min-width: 0; }
 
-.rule { background: var(--accent); color: var(--on-accent); border-top: 0; }
-.rule-grid { display: flex; flex-wrap: wrap; gap: 1.5rem 4rem; align-items: flex-end; justify-content: space-between; }
-.rule-line { margin: 0; max-width: none; font: 400 clamp(2.25rem, 5.6vw, 4.75rem)/1 var(--font-display); letter-spacing: -0.025em; }
-.rule-text { margin: 0; max-width: 34ch; font-size: 1.0625rem; line-height: 1.5; }
-
 /* The case study */
 .case h2 { max-width: 20ch; }
 /* The pendulum's model stands to the right of the heading: beside the heading
@@ -391,6 +391,15 @@ em { font-style: italic; }
 .case-part figcaption { margin-top: 0.5rem; font: 400 0.75rem/1.4 var(--font-mono); color: var(--muted); text-align: center; }
 
 /* The docs (6 November 2026): the engine's pages in this site's shell. The
+   landing (7 November) is the pages as cards, one line each, in the steps' grid. */
+.docs-cards li { padding: 0; }
+.docs-cards li:hover { border-color: var(--accent); }
+.docs-card { display: block; height: 100%; box-sizing: border-box; padding: 1.6rem; color: inherit; text-decoration: none; border-radius: var(--radius-card); }
+.docs-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: var(--radius-card); }
+.docs-card h3 { margin: 0 0 0.5rem; }
+.docs-card:hover h3 { color: var(--accent); }
+.docs-release { margin: 2rem 0 0; color: var(--muted); font-size: 0.9375rem; }
+/* The
    pages listed beside the text on a wide screen, above it on a phone; the
    text's own headings under that. Code blocks are the terminal's. */
 .docs { padding-top: 0; border-top: 0; }
@@ -545,31 +554,30 @@ footer p { margin: 0; }
 .icon-show { display: block; border: 1px solid var(--line); }
 .icon-round { border-radius: 50%; }
 
-/* The simpler home page (owner, 4 November 2026). The headline runs the whole
-   width; under it the lede and the two commands to try it stand beside the
-   scan's own output: two columns once there is room for the terminal's
-   longest line whole, one column below that. min-width: 0 on both, or the
-   command block widens the page past a phone's screen. */
-.hero-grid { display: grid; gap: 2.5rem 3.5rem; align-items: start; }
-.hero-grid > * { min-width: 0; }
-/* The scan's longest line is 78 characters, 616 px at this size: the wider of two columns holds it whole from 75rem up, so it never scrolls sideways beside the copy. */
-@media (min-width: 75rem) { .hero-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); }
-  .hero-term pre { font-size: 0.75rem; } }
+/* The hero (owner, 7 November 2026, third review): the headline runs the
+   whole width; under it the lede, the one install line, that it is open
+   source, and the two ways on - a text link to Get started (the nav has the
+   lime button) and the quiet repository link. The links are a thumb's
+   height, like every control. The install line scrolls inside itself on the
+   narrowest phone rather than widen the page. */
 .hero .lede { max-width: 40ch; }
-.try-label { margin: 1.75rem 0 0.6rem; font: 400 0.875rem/1.4 var(--font-mono); color: var(--muted); }
-.try { display: grid; gap: 0.35rem; padding: 1rem 1.25rem; border: 1px solid var(--accent); border-radius: 12px; background: var(--surface); overflow-x: auto; }
-/* One tap selects a whole command, so it can be copied as it stands. A command
-   longer than the box wraps under its own first word, the prompt hanging in
-   the margin, rather than running off the right where a visitor cannot read
-   its end: the two-address scan does, on every screen. */
-.try .cmd { display: block; font: 400 0.9375rem/1.5 var(--font-mono); white-space: pre-wrap; overflow-wrap: anywhere; padding-left: 1.3em; text-indent: -1.3em; user-select: all; -webkit-user-select: all; }
-.try-pip { margin: 0.6rem 0 0; font: 400 0.8125rem/1.4 var(--font-mono); color: var(--muted); }
-.try-pip code { color: var(--ink); user-select: all; -webkit-user-select: all; }
+/* The type scales with the screen so the whole line, 37 characters with its
+   prompt, fits a 390 px phone without scrolling. */
+.hero-install { margin: 1.75rem 0 0; max-width: 100%; width: max-content; padding: 0.875rem 1rem; overflow-x: auto;
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-card);
+  font: 400 clamp(0.8125rem, 3.4vw, 0.9375rem)/1.5 var(--font-mono); }
+.hero-install code { font-size: 1em; }
+.hero-pip { margin: 0.625rem 0 0; font-size: 0.9375rem; color: var(--muted); }
+.hero-pip code { font: 400 0.875rem/1.5 var(--font-mono); color: var(--ink); }
+.hero-free { margin: 0.75rem 0 0; font-size: 1rem; color: var(--muted); }
+.hero-links { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1.5rem; margin-top: 1rem; }
+.hero-go { display: inline-flex; align-items: center; min-height: 44px; padding: 0 0.25rem; font-weight: 600; color: var(--accent); text-decoration: none; }
+.hero-go:hover { text-decoration: underline; text-underline-offset: 0.2em; }
+/* One tap selects a whole command, so it can be copied as it stands. */
+.term-cmd { user-select: all; -webkit-user-select: all; }
 .hero .actions { margin-top: 1.5rem; }
 
-/* What else it catches, under how it works: three features in a line each, then the way to all of them. */
-.catches { margin: 3rem 0 1rem; }
-.does-three { grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr)); }
+/* Under the steps: the one line to every feature. */
 .more-all { margin: 1.5rem 0 0; }
 .more-all a { color: var(--accent); }
 .chip-since { min-width: 0; }

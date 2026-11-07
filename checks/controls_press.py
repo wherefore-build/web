@@ -11,8 +11,9 @@ be found, then the same control doing nothing when pressed, both after a green
 suite. So this does what the thumb did.
 
 For every control on every page in site/ but the pendulum's framed model
-(NOT_OURS says why) - a `<label>`, a `<button>`, a `<summary>` - it loads the page fresh at 390 by 844 with touch, presses that
-one control, and requires that:
+(NOT_OURS says why) - a `<label>`, a `<button>`, a `<summary>`, and a link in
+the page's body to a part of the same page - it loads the page fresh at 390 by
+844 with touch, presses that one control, and requires that:
 
   - the control can be pressed there: it is shown, on the page, and nothing
     covers it;
@@ -20,7 +21,15 @@ one control, and requires that:
   - a label presses a control that exists, and selects it;
   - something NEW appears on the screen: a line of text that was not showing
     anywhere before. Text that only vanishes, moves, or appears only out of
-    sight is a press that did nothing a visitor saw.
+    sight is a press that did nothing a visitor saw;
+  - a link to a part of the page names a part that exists, and lands with that
+    part's heading on the screen and clear of the sticky header (owner, 7
+    November 2026: the hero's "Get started" must take the thumb to Get
+    started). A link in the body that the stylesheet folds away at a phone's
+    width - the docs' "On this page" - is not a control there and is not
+    pressed; a hidden label or button still is, and fails. Nor is a permalink
+    pressed - a link inside the very part it names, the changelog's version
+    numbers - because it moves the page nowhere a thumb meant to go.
 
 Each press starts from a fresh load, so no control is judged on a page another
 control already drove. A label for the control that is already selected is
@@ -45,7 +54,7 @@ SITE = ROOT / "site"
 PHONE = {"width": 390, "height": 844}
 THUMB = 44
 
-CONTROLS = "label, button, summary"
+CONTROLS = "label, button, summary, main a[href^='#']"
 
 # A page whose controls are not this site's to press, and why.
 NOT_OURS = {
@@ -77,8 +86,22 @@ SEEN = """() => {
 
 LIST = """(sel) => [...document.querySelectorAll(sel)].map(c => ({
   tag: c.tagName.toLowerCase(), for: c.tagName === 'LABEL' ? c.htmlFor : null,
+  to: c.tagName === 'A' ? decodeURIComponent(c.getAttribute('href').slice(1)) : null,
+  shown: c.checkVisibility(),
+  permalink: c.tagName === 'A' && !!c.closest('[id="' + decodeURIComponent(c.getAttribute('href').slice(1)) + '"]'),
   text: c.innerText.replace(/\\s+/g, ' ').trim()
 }))"""
+
+# Where a part of the page landed after a link to it was pressed: its heading
+# (or the part itself), against the screen and the sticky header.
+LANDED = """(id) => {
+  const part = document.getElementById(id);
+  const head = part.matches('h1, h2, h3') ? part : (part.querySelector('h1, h2, h3') || part);
+  const r = head.getBoundingClientRect();
+  const top = document.querySelector('header.top');
+  const bar = top && getComputedStyle(top).position === 'sticky' ? top.getBoundingClientRect().bottom : 0;
+  return {top: r.top, bottom: r.bottom, bar, vh: innerHeight, text: head.innerText.split('\\n')[0].trim()};
+}"""
 
 
 class Quiet(http.server.SimpleHTTPRequestHandler):
@@ -102,6 +125,12 @@ def press(browser, url, index, control):
         handle = page.locator(CONTROLS).nth(index)
         name = f"{control['text']!r}"
         target = None
+        if control["tag"] == "a":
+            if not control["to"] or page.locator(f'[id="{control["to"]}"]').count() == 0:
+                return f"the link {name} points at nothing: no part of the page is called {control['to']!r}"
+            there = page.evaluate(LANDED, control["to"])
+            if there["bar"] <= there["top"] and there["bottom"] <= there["vh"]:
+                return None                      # already on the screen where it loads: nothing to move
         if control["tag"] == "label":
             if not control["for"]:
                 return f"the label {name} is for nothing: it has no `for`"
@@ -121,6 +150,16 @@ def press(browser, url, index, control):
                     f"{box['width']:.0f} by {box['height']:.0f}, and it must be {THUMB} by {THUMB} at least")
         if was is not None and not target.is_checked():
             return f"pressing {name} did not select the control it is for, {control['for']}"
+        if control["tag"] == "a":
+            page.wait_for_timeout(300)
+            there = page.evaluate(LANDED, control["to"])
+            if there["top"] < there["bar"]:
+                return (f"pressing {name} lands {there['text']!r} under the sticky header at {PHONE['width']} px: "
+                        f"its top is {there['top']:.0f} px down and the header ends at {there['bar']:.0f}")
+            if there["bottom"] > there["vh"]:
+                return (f"pressing {name} did not bring {there['text']!r} onto the screen at {PHONE['width']} px: "
+                        f"it is {there['top']:.0f} px down a {there['vh']} px screen")
+            return None
         if was:
             return None
         page.wait_for_timeout(100)
@@ -159,6 +198,8 @@ def main():
             controls = page.evaluate(LIST, CONTROLS)
             ctx.close()
             for i, c in enumerate(controls):
+                if c["tag"] == "a" and (not c["shown"] or c["permalink"]):
+                    continue
                 fault = press(browser, url, i, c)
                 pressed += 1
                 if fault:

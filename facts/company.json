@@ -33,26 +33,23 @@
   "menu": "Menu"
  },
  "hero": {
-  "eyebrow": "Open-source CLI",
+  "eyebrow": "Command-line tool",
   "headline": "Your product changes.",
-  "headline_end": "Your site, docs and deck don't.",
-  "lede": "Everything your company says is a copy of a copy, and every copy drifts. Wherefore gives the rest of your company the pipeline your code already has.",
-  "try": "See what has already drifted on your site, or across your site, your app and your docs together. No setup, no account.",
-  "pip": "Or with pip:",
-  "shows": "Real output, on an example company. One trial, two lengths: you decide which is true, and Wherefore keeps it that way."
+  "headline_end": "Your site, docs and deck drift.",
+  "lede": "Wherefore gives the rest of your company the pipeline your code already has.",
+  "free": "Free and open source, under {licence}."
  },
  "forks": {
   "code": {
    "title": "Your code",
-   "caption": "Every change branches off, is tested, and merges back. There is one main, and it is the truth.",
+   "caption": "Every change is tested and merges back. One main, and it is the truth.",
    "main": "main",
    "tests": "tests",
    "ships": "ships"
   },
   "drift": {
    "title": "Everything else",
-   "caption": "Every copy forks, then forks again, and nothing ever merges back. Each version drifts on its own, for good.",
-   "sting": "That is how the website goes out of date, and the sales team ends up with the wrong deck.",
+   "caption": "Every copy forks and never merges back.",
    "start": "a decision",
    "copies": [
     "deck_final_v2.key",
@@ -63,7 +60,7 @@
   },
   "compiled": {
    "title": "With Wherefore",
-   "caption": "Everything else gets what code already has. Change a fact once: your feature pages, docs, deck and demo video follow it, and nothing ships that still says the old thing.",
+   "caption": "Change a fact once. Your pages, docs, deck and video follow it.",
    "source": "source",
    "ships": "ships"
   },
@@ -122,7 +119,7 @@
   },
   "said": [
    "One name, said in {total} places.",
-   "{rebuilt} rebuilt from the source. The {hand} was written by hand and still says “{before}”, so CI fails.",
+   "{rebuilt} rebuilt from the source. The {hand}, written by hand, still says “{before}”: CI fails.",
    "All {total} agree with the source. Ready to ship."
   ],
   "note": "The checks are real:",
@@ -174,7 +171,7 @@
     "because": "I am not allowed yet. Until the audit is signed, the most any page may say is “SOC 2 in progress”, and the check refuses the rest."
    }
   ],
-  "note": "The same example company as the demo above."
+  "note": "The same example company as the demo on the home page."
  },
  "how": {
   "heading": "It lives in your repo, and runs in your CI.",
@@ -182,61 +179,104 @@
    {
     "command": "wherefore scan",
     "name": "Find what has drifted.",
-    "text": "Point it at your site or docs. It lists every value stated more than one way, and where each copy lives."
+    "text": "Point it at your site or docs. It lists every value stated more than one way."
    },
    {
     "command": "wherefore build",
     "name": "Say each fact once.",
-    "text": "Prices, names and limits move into one source file. Your coding agent writes the small scripts that build each page from it."
+    "text": "Prices, names and limits move into one source file. Your coding agent writes the scripts that build each page."
    },
    {
     "command": "wherefore gate",
     "name": "Keep it that way.",
-    "text": "On every push, CI rebuilds everything. A stale page, or a file nobody can account for, fails the build, and the error says why."
+    "text": "Every push rebuilds everything. A stale page fails the build, and the error names it."
    }
   ],
-  "note": "One command-line tool, on Python. No server and no account."
+  "note": "Your coding agent writes the scripts. The build is plain code and never calls a model."
  },
  "does": {
   "heading": "Everything it does, and what's next.",
-  "intro": "Every feature in the release this site pins, tagged with the release it arrived in. When a release adds a feature, this site has to describe it before it can build.",
+  "intro": "Every feature of the pinned release, with the release it arrived in. A feature with no words here stops the build.",
   "new": "New in {version}",
   "words": {
-   "scan": "Point it at your site or docs: it finds every value you state more than one way, and where the copies disagree.",
-   "start": "One command starts a repository; the skill walks your agent through the first fact.",
-   "gate": "On every push, each file must be built from the source, written by a person for a stated reason, or a capture stamped with what it shows. Anything else stops the change, and says why.",
-   "build": "Every asset rebuilt from the source, the same way every time, so you see exactly what a change moves.",
-   "proofs": "No check is trusted until it has failed: each proof plants the fault its check exists to catch.",
-   "retired": "Retire an old price, name or limit once, and nothing a person reads may say it again.",
-   "reach": "Wherefore changes each fact, one at a time, and checks that everything stating it changes too.",
-   "claims": "Give a claim like “SOC 2 certified” a rule, and no page can say more than the rule allows.",
-   "upstream": "Copied something you can't pin, like a partner's spec sheet? The deploy fails the day its source changes.",
-   "published": "A page nobody builds - your site on a hosted CMS - declared with the facts it states. Wherefore reads it live and fails when it says otherwise, quoting the page: a copy held by reading until it can be built.",
+   "scan": "Point it at your site or docs. It finds every value you say two ways.",
+   "start": "One command starts a repository. The skill walks your agent through the first fact.",
+   "gate": "On every push, each file is built from a source, written for a reason, or stamped. Nothing else ships.",
+   "build": "Every asset rebuilt from the source, the same way every time.",
+   "proofs": "No check is trusted until it has failed: each proof plants the fault its check catches.",
+   "retired": "Retire an old price or name once; nothing a person reads may say it again.",
+   "reach": "Each fact is moved, one at a time, and everything that states it must change.",
+   "claims": "Give a claim like “SOC 2 certified” a rule; no page can say more than it allows.",
+   "upstream": "Copied a partner's spec? The deploy fails the day their source changes.",
+   "published": "A page on a CMS nobody builds? Declare what it states. Wherefore reads it live and fails when it disagrees.",
    "hook": "A push that would ship a stale document stops before it leaves your machine.",
    "skill": "Claude Code or Codex learns the rules from a skill that ships with each release.",
-   "docs": "Every release ships its own docs - start, commands, configuration, checks and proofs, reporting - held to the code by the engine's tests, and this site shows the docs of the release it pins.",
-   "graph": "A page for every repository: each file, how it is made, and what changes when a source does. One command draws it, and changes nothing.",
-   "palette": "Your brand lives in one file. Type a colour anywhere else and the build names the file and the line, unless the file says, with a reason, that the colour is somebody else's.",
-   "report": "Stuck, or missing something? Tell your agent to tell us: one command writes the report, with the release, the shape of your repository and your words, nothing private, and opens it with the people who make Wherefore.",
-   "pins": "When a release ships, this site's own workflow sees it on PyPI, moves the pin, rebuilds, and opens a draft pull request whose checks say what the site still has to describe. No token from the engine, no list of clients: every repository that pins the engine watches for it itself.",
-   "scan2": "Point the scan at your site, your app, your backend and your docs together: it says what they state in common and where any two disagree, before anything is installed.",
-   "scan-read": "Beside the result, what each place contributed and what it left unread; an app's own words, read out of its source; a table set apart from the stale copies; and the colours your site states, with the greys that were meant to be one grey, before any brand is declared.",
-   "drift": "Of the files you write by hand, which state a value in two or more of them that no source holds? The check names each such copy with its files and counts them, the map draws them beside the files, and you declare how many you still allow - a number that only ever falls.",
-   "launch": "Everything you say is ready has a stage, as a fact: a feature in beta, a site launched. Each stage names what it needs, a stage moves only when those are there, and nothing public names a feature still being built.",
-   "status": "Where a repository stands, in one read: what each file is, what drifts, where every launch stands and which engine it pins. A few lines for you, or one JSON file its CI keeps for the app to read."
+   "docs": "Every release ships its own docs, held to its code by tests; this site shows its release's.",
+   "graph": "Every file, how it is made, and what moves when a source does, on one page.",
+   "palette": "Your brand's colours live in one file. A colour typed anywhere else fails, by file and line.",
+   "report": "Stuck? One command writes the report, nothing private in it, and sends it to us.",
+   "pins": "A new release? Your repository sees it, moves the pin and opens a pull request. No token, no client list.",
+   "scan2": "Your site, app, backend and docs scanned together, and where any two disagree.",
+   "scan-read": "Beside the result: what each place read, what it left unread, and the colours it states.",
+   "drift": "Hand-written files that state a value no source holds, named and counted. The allowance only falls.",
+   "launch": "Everything you call ready has a stage, and it moves only when it has what it needs.",
+   "status": "Where a repository stands, in one read: its files, its drift, its launches, its engine."
   },
-  "unshown": {},
-  "home": [
-   "retired",
-   "claims",
-   "upstream"
+  "groups": [
+   {
+    "name": "Find",
+    "lede": "Before anything is set up: what your company already says twice.",
+    "features": [
+     "scan",
+     "scan2",
+     "scan-read",
+     "drift"
+    ]
+   },
+   {
+    "name": "Say it once",
+    "lede": "One source, and every asset built from it.",
+    "features": [
+     "start",
+     "build",
+     "palette",
+     "launch"
+    ]
+   },
+   {
+    "name": "Hold it",
+    "lede": "On every push, nothing ships that says the old thing.",
+    "features": [
+     "gate",
+     "hook",
+     "retired",
+     "reach",
+     "claims",
+     "upstream",
+     "published"
+    ]
+   },
+   {
+    "name": "Prove it",
+    "lede": "Nothing is trusted on its word.",
+    "features": [
+     "proofs",
+     "graph",
+     "status"
+    ]
+   },
+   {
+    "name": "Tooling",
+    "lede": "For your coding agent, your docs, and the release that reaches you.",
+    "features": [
+     "skill",
+     "docs",
+     "report",
+     "pins"
+    ]
+   }
   ],
-  "home_heading": "What else it catches.",
-  "short": {
-   "retired": "Retire an old price or name once, and nothing may say it again.",
-   "claims": "Give a claim a rule, and no page can say more than it allows.",
-   "upstream": "Copied a partner's spec? The deploy fails the day their source changes."
-  },
+  "unshown": {},
   "all": "All {n} features, and what's next",
   "since": "since {version}",
   "open": "What it does, in full",
@@ -282,11 +322,11 @@
    "taken": {
     "from": "chaotic-pendulums-co",
     "file": "web/prototype/mk3-hero-public.html",
-    "commit": "c4f5fa7e93dbf272ff4023554e0576e1525d521f",
-    "on": "2026-11-05"
+    "commit": "97c7dc4779269a533ecf07ff4247f98b2bfc3476",
+    "on": "2026-11-07"
    }
   },
-  "text": "Chaotic Pendulums makes a desk-sized double pendulum. Its drawings, print files, parts list, supplier pack and website are built from one spec file, with Wherefore built alongside it. Move one dimension and every file a supplier receives moves with it, or the change is refused. If one source can hold machined parts, it can hold your app and docs.",
+  "text": "Chaotic Pendulums builds a desk-sized double pendulum from one spec file: drawings, print files, parts list, supplier pack and website. If one source can hold machined parts, it can hold your app and docs.",
   "url": "https://chaoticpendulums.com/",
   "visit": "See the live site",
   "made_heading": "What it builds",
@@ -326,17 +366,12 @@
    "taken": {
     "from": "chaotic-pendulums-co",
     "file": "web/prototype/mk3-plate-public.html",
-    "commit": "f97c638aadc46329b0c301a1b312c42fde48fa93",
-    "on": "2026-11-05"
+    "commit": "97c7dc4779269a533ecf07ff4247f98b2bfc3476",
+    "on": "2026-11-07"
    }
   },
   "quote": null,
   "more": "What it builds, and what holds it"
- },
- "rule": {
-  "line": "Agents already run your code's pipeline.",
-  "end": "Wherefore lets them run the rest.",
-  "text": "Claude Code and Codex are good at CI: writing checks, fixing what fails, keeping the build green. Wherefore is the scaffolding that lets them do the same for your site, docs, deck and app. The build they write is plain code that runs the same every time and never calls a model."
  },
  "start": {
   "heading": "Your company, compiled.",
@@ -346,6 +381,7 @@
   ],
   "text": "Start with one scan. If it finds nothing, good: the rest of Wherefore keeps it that way.",
   "install": "curl -fsSL https://wherefore.sh | sh",
+  "pip": "Or",
   "steps": [
    {
     "command": "wherefore scan",
@@ -394,8 +430,16 @@
  "docs": {
   "title": "Docs",
   "heading": "Every page, from the release this site pins.",
-  "intro": "The docs ship inside each release of the engine, held to its code by the engine's own tests: every command has its section, every section of the configuration is documented, and every example is run again before a release. This site renders the docs of the release it pins.",
+  "intro": "The docs ship inside each release of the engine, held to its code by the engine's own tests.",
   "pages": "The pages",
-  "on_this_page": "On this page"
+  "on_this_page": "On this page",
+  "release": "These are the docs of Wherefore {version}, the release this site pins. Every example in them ran before it shipped.",
+  "cards": {
+   "start": "One fact, said once, compiled into one asset, held by the gate. Then the same move, repeated.",
+   "commands": "Every command, what it takes, what it prints, and how it exits.",
+   "configuration": "Every section of wherefore.json: where the facts live, what builds each asset, what each check holds.",
+   "checks": "What each check holds, how it fails, and how to prove one.",
+   "reporting": "What a report carries, what never leaves the machine, and how it is sent."
+  }
  }
 }
