@@ -1182,6 +1182,58 @@ def rule(f):
 </div></section>"""
 
 
+SLOT = 6.0      # seconds each word has, typed, held and erased: the same for every word (owner, 6 November 2026)
+TYPE = 0.11     # seconds a letter takes to type: unhurried (owner, 7 November 2026)
+ERASE = 0.07    # and to erase, a little quicker
+
+
+def turning_heading(st):
+    """Get started's heading, typed (owner, 6 November 2026): the word that
+    changes - company, project, organization - is typed out a letter at a
+    time, held, erased, and the next one typed, each on the same clock. Only
+    here: everywhere else the heading is one line.
+
+    The words are what the heading and start.heading_turns do not share: the
+    part before them ("Your ") and after them (", compiled.") is said once,
+    from the heading itself. Each letter is shown by its font size - nothing,
+    then the letter - so a word takes only the room it has typed, and the
+    heading moves the way a line being typed does. CSS alone does it, as it
+    turns the questions, with no cursor (owner, 7 November); a reader hears the heading once, and a visitor who
+    asks for less motion sees the heading, still."""
+    import os.path
+    lines = [st["heading"]] + list(st.get("heading_turns") or [])
+    if len(lines) < 2:
+        return f'<h2>{esc(st["heading"])}</h2>'
+    before = os.path.commonprefix(lines)
+    after = os.path.commonprefix([l[len(before):][::-1] for l in lines])[::-1]
+    words = [l[len(before):len(l) - len(after)] for l in lines]
+    cycle = SLOT * len(words)
+
+    def pct(t):
+        return f"{t / cycle * 100:.3f}%"
+    rules, spans = [], []
+    for k, word in enumerate(words):
+        t0, n = k * SLOT, len(word)
+        for j, ch in enumerate(word):
+            on = t0 + j * TYPE
+            off = t0 + SLOT - (j + 1) * ERASE        # erased from the end, as a person backspaces
+            name = f"type{k}_{j}"
+            rules.append(f"@keyframes {name} {{ 0%, {pct(on)} {{ font-size: 0; }} {pct(on)}, {pct(off)} {{ font-size: 1em; }} "
+                         f"{pct(off)}, 100% {{ font-size: 0; }} }}")
+            spans.append(f'<span class="ch w{k}" style="animation-name: {name}">{esc(ch)}</span>')
+    style = ("<style>\n"
+             f".typed .ch {{ font-size: 0; animation-duration: {cycle:g}s; animation-iteration-count: infinite; "
+             f"animation-timing-function: step-end; }}\n"
+             + "\n".join(rules) + "\n"
+             # After the animations, so it wins: less motion is the heading alone, still.
+             "@media (prefers-reduced-motion: reduce) { .typed .ch { animation: none; font-size: 0; } "
+             ".typed .ch.w0 { font-size: 1em; } }\n"
+             "</style>")
+    return (f'<h2 class="turning"><span class="sr">{esc(st["heading"])}</span>'
+            f'<span aria-hidden="true">{esc(before)}<span class="typed">{"".join(spans)}</span>'
+            f'{esc(after)}</span></h2>\n{style}')
+
+
 def start(f):
     """Getting started: install, scan (one place, or a site and an app together), init - in this company's words; the licence and package are the release's."""
     st, h = f["start"], f["hero"]
@@ -1198,7 +1250,7 @@ def start(f):
     return f"""<section id="start"><div class="wrap">
 {SRC}
 <div class="start-box">
-<h2>{esc(st["heading"])}</h2>
+{turning_heading(st)}
 <p class="start-text">{esc(st["text"])}</p>
 <ol class="start-steps">
 {chr(10).join(lines)}
