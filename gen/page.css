@@ -479,9 +479,6 @@ footer .src { margin: 0 0 1.25rem; }
    for it, so the page below does not move as the word grows and shrinks. */
 .turning { min-height: 2em; }
 .turning .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.typed { position: relative; }
-.typed .caret { position: absolute; right: -0.07em; top: 0.12em; width: 0.05em; height: 0.8em; background: var(--accent); animation: caret 1s step-end infinite; }
-@keyframes caret { 50% { opacity: 0; } }
 .start-box h2 { max-width: 16ch; margin: 0; font-size: clamp(2.5rem, 5.6vw, 4.75rem); line-height: 1; letter-spacing: -0.025em; }
 .start-text { margin: 1.25rem 0 0; font-size: 1.125rem; color: var(--muted); max-width: 50ch; }
 .start-steps { list-style: none; counter-reset: start; margin: 1.75rem 0 0; padding: 0; display: grid; gap: 0.5rem; max-width: 46rem; }

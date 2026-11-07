@@ -1183,8 +1183,8 @@ def rule(f):
 
 
 SLOT = 6.0      # seconds each word has, typed, held and erased: the same for every word (owner, 6 November 2026)
-TYPE = 0.06     # seconds a letter takes to type: quick, as a person who knows the word
-ERASE = 0.035   # and to erase, quicker still
+TYPE = 0.11     # seconds a letter takes to type: unhurried (owner, 7 November 2026)
+ERASE = 0.07    # and to erase, a little quicker
 
 
 def turning_heading(st):
@@ -1198,7 +1198,7 @@ def turning_heading(st):
     from the heading itself. Each letter is shown by its font size - nothing,
     then the letter - so a word takes only the room it has typed, and the
     heading moves the way a line being typed does. CSS alone does it, as it
-    turns the questions; a reader hears the heading once, and a visitor who
+    turns the questions, with no cursor (owner, 7 November); a reader hears the heading once, and a visitor who
     asks for less motion sees the heading, still."""
     import os.path
     lines = [st["heading"]] + list(st.get("heading_turns") or [])
@@ -1227,10 +1227,10 @@ def turning_heading(st):
              + "\n".join(rules) + "\n"
              # After the animations, so it wins: less motion is the heading alone, still.
              "@media (prefers-reduced-motion: reduce) { .typed .ch { animation: none; font-size: 0; } "
-             ".typed .ch.w0 { font-size: 1em; } .typed .caret { display: none; } }\n"
+             ".typed .ch.w0 { font-size: 1em; } }\n"
              "</style>")
     return (f'<h2 class="turning"><span class="sr">{esc(st["heading"])}</span>'
-            f'<span aria-hidden="true">{esc(before)}<span class="typed">{"".join(spans)}<span class="caret"></span></span>'
+            f'<span aria-hidden="true">{esc(before)}<span class="typed">{"".join(spans)}</span>'
             f'{esc(after)}</span></h2>\n{style}')
 
 
