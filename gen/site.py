@@ -516,11 +516,13 @@ def hero(f):
     gone. Under the lede the hero says the one line that installs Wherefore,
     one tap to select, then that it is open source and under which licence,
     then Get started and the repository, and the page goes on to the next
-    part. Get started still holds every command, the install line among them.
+    part. Under the install line, the pip line, for whoever will not pipe a
+    script into a shell (owner, 7 November 2026). Get started still holds
+    every command, these two among them.
 
     The licence and version are the pinned release's own."""
     h, n, st = f["hero"], f["nav"], f["start"]
-    _, licence = release_meta()
+    name, licence = release_meta()
     repo = f["company"]["github"]
     github = (f'<a class="button button-quiet" href="{esc(repo)}">{esc(n["github"])}{OUT}</a>' if repo else "")
     return f"""<section class="hero"><div class="wrap">
@@ -529,6 +531,7 @@ def hero(f):
 <h1>{esc(h["headline"])} <em>{esc(h["headline_end"])}</em></h1>
 <p class="lede">{esc(h["lede"])}</p>
 <pre class="hero-install"><code><span class="term-prompt">$</span> <span class="term-cmd">{esc(st["install"])}</span></code></pre>
+<p class="hero-pip">{esc(st["pip"])} <code class="term-cmd">pip install {esc(name)}</code></p>
 <p class="hero-free">{esc(fill(h["free"], licence=licence))}</p>
 <p class="actions hero-links"><a class="hero-go" href="#start">{esc(n["start"])} →</a>{github}</p>
 </div></section>"""

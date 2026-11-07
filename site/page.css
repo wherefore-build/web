@@ -567,6 +567,8 @@ footer p { margin: 0; }
   background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-card);
   font: 400 clamp(0.8125rem, 3.4vw, 0.9375rem)/1.5 var(--font-mono); }
 .hero-install code { font-size: 1em; }
+.hero-pip { margin: 0.625rem 0 0; font-size: 0.9375rem; color: var(--muted); }
+.hero-pip code { font: 400 0.875rem/1.5 var(--font-mono); color: var(--ink); }
 .hero-free { margin: 0.75rem 0 0; font-size: 1rem; color: var(--muted); }
 .hero-links { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1.5rem; margin-top: 1rem; }
 .hero-go { display: inline-flex; align-items: center; min-height: 44px; padding: 0 0.25rem; font-weight: 600; color: var(--accent); text-decoration: none; }
