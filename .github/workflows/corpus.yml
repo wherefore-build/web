@@ -154,6 +154,20 @@ jobs:
       - name: Every clip fits a portrait frame and a landscape one at every scene, and every scene shows its words
         if: ${{ !cancelled() && steps.browser.outcome == 'success' }}
         run: python3 checks/motion_fits.py
+      # WHERE THE SITE STANDS, for the app to read: on main only, once every
+      # check above has passed. `--gate` runs the gate once more, in its own
+      # process, so its verdict and counts are in the document; it judges
+      # nothing new, and the verdict that stops a deploy is the gate's, above.
+      - name: Where the site stands, kept for the app
+        if: ${{ success() && github.ref == 'refs/heads/main' }}
+        run: python3 -m wherefore status --gate --out status.json
+      - name: Keep it
+        if: ${{ success() && github.ref == 'refs/heads/main' }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: wherefore-status
+          path: status.json
+          retention-days: 30
 
   # EACH CHECK SHOWN TO FAIL, beside the checks rather than after them. Needs
   # the same engine and browser, in its own checkout: the proofs plant faults

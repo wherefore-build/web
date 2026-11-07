@@ -1,11 +1,17 @@
 # A RELEASE REACHES THIS REPOSITORY BY A PULL REQUEST IT OPENS ITSELF.
-# Written by `wherefore init`, and yours from then on. Every few hours, and
+# Written by `wherefore init`, and yours from then on. Once a day, and
 # whenever a person runs it, this asks PyPI for the newest release of the
 # engine; when it is newer than the one requirements-engine.txt pins, it
 # moves the pin, rebuilds what the release lets through, and opens a draft
 # pull request whose checks say what this corpus still has to describe: a
 # feature the release ships with no words here stops the build, and the
 # pull request quotes it. Nothing merges by itself; a person does.
+#
+# ONE PIN PULL REQUEST AT A TIME (owner, 7 November 2026). Once a day, not
+# every few hours: a pull request comes per release, not per look, and a day
+# is soon enough. And when it opens a pin to a newer release, it closes any
+# older pin still open, saying which replaces it - so there is never more
+# than one waiting.
 #
 # No token from the engine's makers, and no list of clients anywhere: a
 # repository that pins the engine watches for it on its own.
@@ -25,7 +31,7 @@ name: wherefore-pin
 
 on:
   schedule:
-    - cron: "17 */6 * * *"
+    - cron: "41 7 * * *"
   workflow_dispatch:
     inputs:
       version:
@@ -151,7 +157,18 @@ jobs:
             echo
             echo "Release notes: https://github.com/wherefore-build/wherefore/releases/tag/v$V"
           } > body.md
-          gh pr create --draft --base "${GITHUB_REF_NAME}" --head "engine/$V" --title "Wherefore $V" --body-file body.md
+          NEW=$(gh pr create --draft --base "${GITHUB_REF_NAME}" --head "engine/$V" --title "Wherefore $V" --body-file body.md)
+          echo "$NEW"
+          # Any older pin still open is replaced by this one: closed, saying so.
+          gh pr list --state open --json number,headRefName --jq '.[] | "\(.number) \(.headRefName)"' |
+          while read -r N HEAD; do
+            case "$HEAD" in engine/*) ;; *) continue ;; esac
+            OLD="${HEAD#engine/}"
+            [ "$OLD" = "$V" ] && continue
+            if [ "$(printf '%s\n%s\n' "$OLD" "$V" | sort -V | head -n1)" = "$OLD" ]; then
+              gh pr close "$N" --comment "Superseded by $NEW, which moves the pin to Wherefore $V." && echo "closed #$N (engine/$OLD)"
+            fi
+          done
           if [ "$OWN" = "true" ] && [ -n "$CHECKS" ] && [ -f ".github/workflows/$CHECKS" ]; then
             gh workflow run "$CHECKS" --ref "engine/$V" && echo "started $CHECKS on engine/$V" || echo "::warning::could not start $CHECKS on engine/$V: give it a workflow_dispatch trigger, or save CLIENT_TOKEN"
           fi
