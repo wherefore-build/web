@@ -19,13 +19,58 @@
 <main id="top">
 <div class="src-key"><div class="wrap"><p>Every part of this page is generated. Each now names the facts it is built from, and the checks that hold it on every push. <a target="_blank" rel="noopener" href="https://github.com/wherefore-build/web">Read every file it is built from<svg class="out" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M9 2h5v5M14 2 7.5 8.5M12 9.5V13a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a> <a href="../map/">See the map of this repository: every file on this site, how it is made, and what changes when a source does</a></p><dl><div><dt>gate</dt><dd>rebuilt from its sources on every push, and refused if it differs from what is committed</dd></div><div><dt>reach</dt><dd>each of these facts is moved, one at a time, and the page must change with it</dd></div><div><dt>press</dt><dd>every control here is tapped on a fresh load, at a phone’s width, and must show something new</dd></div><div><dt>engine</dt><dd>every command named here must be one the pinned release has</dd></div><div><dt>brand</dt><dd>every colour and face is a brand token, and every text colour reads at 4.5:1 on its ground</dd></div><div><dt>snapshot</dt><dd>these counts were taken from the pendulum once, at the commit and day they name; each is moved, one at a time, and the page must change with it</dd></div></dl></div></div>
 <section class="log-head"><div class="wrap">
-<p class="eyebrow">Changelog · Wherefore 0.21.0</p>
+<p class="eyebrow">Changelog · Wherefore 0.23.0</p>
 <h1>Every release, newest first.</h1>
 <p class="lede">Built from the release this site pins, so a release is here the moment the site moves to it - and the build stops if a feature it ships has no words on this site.</p>
-<div class="src"><p><span class="src-k">from</span> facts/company.json · 57 facts: does.{words.{launch, drift, docs, published, scan-read, scan2, report, palette, pins, graph, upstream, scan, skill, start, gate, build, proofs, retired, reach, claims, hook}, watch, asked, more, less, plan} · changelog.{arrived, cut, printed, answered, title, intro, heading} · company.{name, source, domain} · inspect.{source, checks.{gate, reach, press, engine, brand, snapshot}, map, intro, map_short, toggle, toggle_short} · nav.{menu, how, why, does, docs, map, start} · case.eyebrow · colophon</p><p><span class="src-k">held by</span> gate · reach · brand · press</p></div>
+<div class="src"><p><span class="src-k">from</span> facts/company.json · 58 facts: does.{words.{status, launch, drift, docs, published, scan-read, scan2, report, palette, pins, graph, upstream, scan, skill, start, gate, build, proofs, retired, reach, claims, hook}, watch, asked, more, less, plan} · changelog.{arrived, cut, printed, answered, title, intro, heading} · company.{name, source, domain} · inspect.{source, checks.{gate, reach, press, engine, brand, snapshot}, map, intro, map_short, toggle, toggle_short} · nav.{menu, how, why, does, docs, map, start} · case.eyebrow · colophon</p><p><span class="src-k">held by</span> gate · reach · brand · press</p></div>
 </div></section>
 <section class="log"><div class="wrap">
 <ol class="releases">
+<li class="release" id="v0.23.0">
+<div class="release-meta"><p class="release-v"><a href="#v0.23.0">0.23.0</a></p>
+<p class="release-date"><time datetime="2026-11-06">6 November 2026</time></p></div>
+<div class="release-body">
+<h2>Where it stands, in one read</h2>
+<p class="release-says">One command says where a repository stands - what each file is, what drifts, where every launch stands, which engine it pins - as a few lines or as the JSON the app will read.</p>
+<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore status
+fernhollow-kettles
+  engine   wherefore 0.23.0
+  files    15 tracked: 10 written, 1 captured, 4 for the gate to judge
+  drift    0 values said by hand twice with no source, none declared
+  launch   no ladders</code></pre>
+<figcaption>What it printed</figcaption></figure>
+<h3>What arrived</h3><ul class="arrived"><li><span class="arrived-name">Where it stands, in one read</span> Where a repository stands, in one read: what each file is, what drifts, where every launch stands and which engine it pins. A few lines for you, or one JSON file its CI keeps for the app to read.<figure class="does-motion"><iframe src="../motion/status/index.html" loading="lazy" title="Where it stands, in one read, in motion"></iframe></figure></li></ul>
+</div>
+</li>
+<li class="release" id="v0.22.0">
+<div class="release-meta"><p class="release-v"><a href="#v0.22.0">0.22.0</a></p>
+<p class="release-date"><time datetime="2026-11-06">6 November 2026</time></p></div>
+<div class="release-body">
+<h2>Many ladders, one by default</h2>
+<p class="release-says">Things that move differently each get a ladder of their own - features through building, beta and live, the site through draft and launched - and one ladder stays the default.</p>
+<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore check launch
+features  building · beta · live  (facts.json)
+  ok   lid       live      2 held
+  ok   timer     beta      1 held; live waits on the landing page names it
+site  draft · launched  (facts.json)
+::error::site: fernhollow-kettles is launched, and from launched it needs no draft banner: site/index.html says “A draft: nothing here is for sale yet.”
+1 of 3 things lacks what its stage needs (1 missing): a stage moves only when what it needs is there</code></pre>
+<figcaption>What it printed</figcaption></figure>
+
+</div>
+</li>
+<li class="release" id="v0.21.1">
+<div class="release-meta"><p class="release-v"><a href="#v0.21.1">0.21.1</a></p>
+<p class="release-date"><time datetime="2026-11-06">6 November 2026</time></p></div>
+<div class="release-body">
+<h2>A stopped build says why, this time truly</h2>
+<p class="release-says">When a release stops a client&#x27;s build, the pull request its watch opens quotes the stopped generator&#x27;s own words, not the pages every release moves.</p>
+<figure class="term"><pre><code><span class="term-prompt">$</span> wherefore --version
+wherefore 0.21.1</code></pre>
+<figcaption>What it printed</figcaption></figure>
+
+</div>
+</li>
 <li class="release" id="v0.21.0">
 <div class="release-meta"><p class="release-v"><a href="#v0.21.0">0.21.0</a></p>
 <p class="release-date"><time datetime="2026-11-06">6 November 2026</time></p></div>

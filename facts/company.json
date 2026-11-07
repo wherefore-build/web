@@ -222,7 +222,8 @@
    "scan2": "Point the scan at your site, your app, your backend and your docs together: it says what they state in common and where any two disagree, before anything is installed.",
    "scan-read": "Beside the result, what each place contributed and what it left unread; an app's own words, read out of its source; a table set apart from the stale copies; and the colours your site states, with the greys that were meant to be one grey, before any brand is declared.",
    "drift": "Of the files you write by hand, which state a value in two or more of them that no source holds? The check names each such copy with its files and counts them, the map draws them beside the files, and you declare how many you still allow - a number that only ever falls.",
-   "launch": "Everything you say is ready has a stage, as a fact: a feature in beta, a site launched. Each stage names what it needs, a stage moves only when those are there, and nothing public names a feature still being built."
+   "launch": "Everything you say is ready has a stage, as a fact: a feature in beta, a site launched. Each stage names what it needs, a stage moves only when those are there, and nothing public names a feature still being built.",
+   "status": "Where a repository stands, in one read: what each file is, what drifts, where every launch stands and which engine it pins. A few lines for you, or one JSON file its CI keeps for the app to read."
   },
   "unshown": {},
   "home": [
@@ -266,7 +267,8 @@
    "scan2": "Your site, your app, your docs, scanned together.",
    "scan-read": "Beside the result, what the scan read, so quiet means quiet.",
    "drift": "Every hand-written copy no source holds, named and counted.",
-   "launch": "A launch waits until everything it needs is there."
+   "launch": "A launch waits until everything it needs is there.",
+   "status": "Where a repository stands, in one read, kept by its CI."
   }
  },
  "case": {
