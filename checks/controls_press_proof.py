@@ -12,6 +12,8 @@ in the words of the case, or, for the case that must not fire, to pass.
           the tabs shrunk below a thumb
           an answer that opens below the fold
           the case study's list hidden when it is opened
+          the hero's link to Get started pointing at a part the page has not
+          Get started landing under the sticky header when the link is pressed
   passes  the site as it is, its case study's list closed until pressed
 
 Usage:  python3 checks/controls_press_proof.py
@@ -71,6 +73,15 @@ def main():
         append(p, ".case-more[open] .case-grid { display: none; }\n")
         check(r, "the case study's list hidden when opened", CHECK, True,
               ["'What it builds, and what holds it'", "showed nothing new"])
+    with Edit(PAGE) as p:
+        plant(p, '<section id="start">', '<section id="begin">')
+        check(r, "the hero's link to a part the page has not", CHECK, True,
+              ["'Get started →' points at nothing", "no part of the page is called 'start'"])
+    # The header is sticky and 101 px tall on a phone; a section's scroll margin keeps a pressed-for heading clear of it
+    with Edit(CSS) as p:
+        append(p, "section { scroll-margin-top: 0; }\n")
+        check(r, "Get started landing under the sticky header", CHECK, True,
+              ["'Get started →' lands 'Your company, compiled.' under the sticky header"])
     # Chromium lays a closed <details>'s content out unseen; counted as showing, it made this press look empty
     check(r, "the site as it is", CHECK, False, [PASS])
     return report(r)

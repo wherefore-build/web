@@ -37,8 +37,8 @@
   "headline": "Your product changes.",
   "headline_end": "Your site, docs and deck drift.",
   "lede": "Wherefore gives the rest of your company the pipeline your code already has.",
-  "try": "See what has already drifted.",
-  "pip": "Or with pip:"
+  "try": "It starts with one command and no setup.",
+  "shows": "What one scan found, on an example company."
  },
  "forks": {
   "code": {
@@ -382,10 +382,13 @@
   ],
   "text": "Start with one scan. If it finds nothing, good: the rest of Wherefore keeps it that way.",
   "install": "curl -fsSL https://wherefore.sh | sh",
+  "pip": "Or with pip:",
   "steps": [
    {
     "command": "wherefore scan",
     "args": "https://your-site.example",
+    "also": "https://your-site.example app docs",
+    "also_says": "Or your site, your app and your docs together, and see where any two disagree.",
     "says": "See what has drifted. Nothing to set up."
    },
    {

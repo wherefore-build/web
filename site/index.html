@@ -19,21 +19,18 @@
 <main id="top">
 <div class="src-key"><div class="wrap"><p>Every part of this page is generated. Each now names the facts it is built from, and the checks that hold it on every push. <a target="_blank" rel="noopener" href="https://github.com/wherefore-build/web">Read every file it is built from<svg class="out" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M9 2h5v5M14 2 7.5 8.5M12 9.5V13a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a> <a href="map/">See the map of this repository: every file on this site, how it is made, and what changes when a source does</a></p><dl><div><dt>gate</dt><dd>rebuilt from its sources on every push, and refused if it differs from what is committed</dd></div><div><dt>reach</dt><dd>each of these facts is moved, one at a time, and the page must change with it</dd></div><div><dt>press</dt><dd>every control here is tapped on a fresh load, at a phone’s width, and must show something new</dd></div><div><dt>engine</dt><dd>every command named here must be one the pinned release has</dd></div><div><dt>brand</dt><dd>every colour and face is a brand token, and every text colour reads at 4.5:1 on its ground</dd></div><div><dt>snapshot</dt><dd>these counts were taken from the pendulum once, at the commit and day they name; each is moved, one at a time, and the page must change with it</dd></div></dl></div></div>
 <section class="hero"><div class="wrap">
-<div class="src"><p><span class="src-k">from</span> facts/company.json · 10 facts: company.github · nav.github · hero.{eyebrow, headline, headline_end, lede, try, pip} · changelog.cut · start.install</p><p><span class="src-k">from</span> wherefore 0.23.0 · version · licence · releases.json</p><p><span class="src-k">held by</span> gate · reach · brand</p></div>
+<div class="src"><p><span class="src-k">from</span> facts/company.json · 10 facts: company.github · nav.{github, start} · hero.{eyebrow, headline, headline_end, lede, try, shows} · changelog.cut</p><p><span class="src-k">from</span> wherefore 0.23.0 · version · licence · releases.json</p><p><span class="src-k">held by</span> gate · reach · brand</p></div>
 <p class="eyebrow">Open-source CLI · Apache-2.0 · 0.23.0</p>
 <h1>Your product changes. <em>Your site, docs and deck drift.</em></h1>
 <div class="hero-grid">
+<div class="hero-copy">
 <p class="lede">Wherefore gives the rest of your company the pipeline your code already has.</p>
-<p class="try-label">See what has already drifted.</p>
-<figure class="term hero-term"><pre><code><span class="term-prompt">$</span> <span class="term-cmd">curl -fsSL https://wherefore.sh | sh</span>
-<span class="term-prompt">$</span> <span class="term-cmd">wherefore scan site app backend docs</span>
-4 places read together - site, app, backend, docs - state 2 things in common; they disagree on 2
+<p class="try-label">It starts with one command and no setup.</p>
+<p class="actions hero-links"><a class="hero-go" href="#start">Get started →</a><a class="button button-quiet" href="https://github.com/wherefore-build/wherefore">View on GitHub<svg class="out" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M9 2h5v5M14 2 7.5 8.5M12 9.5V13a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
+</div>
+<figure class="term hero-term"><figcaption class="term-label">What one scan found, on an example company.</figcaption><pre><code>4 places read together - site, app, backend, docs - state 2 things in common; they disagree on 2
   DIFFER  &quot;start your {} day free&quot;  site: 14 (1x) · app: 30 (1x) · backend: 14 (1x)
   DIFFER  &quot;up to {} mb per&quot;  site: 250 (1x) · backend: 500 (1x) · docs: 250 (1x)</code></pre></figure>
-<div class="hero-after">
-<p class="try-pip">Or with pip: <code>pip install wherefore-build</code></p>
-<p class="actions"><a class="button button-quiet" href="https://github.com/wherefore-build/wherefore">View on GitHub<svg class="out" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M9 2h5v5M14 2 7.5 8.5M12 9.5V13a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
-</div>
 </div>
 </div></section>
 <section id="how" class="opening"><div class="wrap">
@@ -103,7 +100,7 @@
 </details>
 </div></section>
 <section id="start"><div class="wrap">
-<div class="src"><p><span class="src-k">from</span> facts/company.json · 12 facts: start.{install, steps[].{command, args, says}, heading, heading_turns[], text, free} · hero.pip</p><p><span class="src-k">from</span> wherefore 0.23.0 · licence · commands.json: wherefore scan, wherefore init</p><p><span class="src-k">held by</span> gate · reach · brand · engine</p></div>
+<div class="src"><p><span class="src-k">from</span> facts/company.json · 14 facts: start.{install, pip, steps[].{command, args, also, also_says, says}, heading, heading_turns[], text, free}</p><p><span class="src-k">from</span> wherefore 0.23.0 · licence · commands.json: wherefore scan, wherefore init</p><p><span class="src-k">held by</span> gate · reach · brand · engine</p></div>
 <div class="start-box">
 <h2 class="turning"><span class="sr">Your company, compiled.</span><span aria-hidden="true">Your <span class="typed"><span class="ch w0" style="animation-name: type0_0">c</span><span class="ch w0" style="animation-name: type0_1">o</span><span class="ch w0" style="animation-name: type0_2">m</span><span class="ch w0" style="animation-name: type0_3">p</span><span class="ch w0" style="animation-name: type0_4">a</span><span class="ch w0" style="animation-name: type0_5">n</span><span class="ch w0" style="animation-name: type0_6">y</span><span class="ch w1" style="animation-name: type1_0">p</span><span class="ch w1" style="animation-name: type1_1">r</span><span class="ch w1" style="animation-name: type1_2">o</span><span class="ch w1" style="animation-name: type1_3">j</span><span class="ch w1" style="animation-name: type1_4">e</span><span class="ch w1" style="animation-name: type1_5">c</span><span class="ch w1" style="animation-name: type1_6">t</span><span class="ch w2" style="animation-name: type2_0">o</span><span class="ch w2" style="animation-name: type2_1">r</span><span class="ch w2" style="animation-name: type2_2">g</span><span class="ch w2" style="animation-name: type2_3">a</span><span class="ch w2" style="animation-name: type2_4">n</span><span class="ch w2" style="animation-name: type2_5">i</span><span class="ch w2" style="animation-name: type2_6">z</span><span class="ch w2" style="animation-name: type2_7">a</span><span class="ch w2" style="animation-name: type2_8">t</span><span class="ch w2" style="animation-name: type2_9">i</span><span class="ch w2" style="animation-name: type2_10">o</span><span class="ch w2" style="animation-name: type2_11">n</span></span>, compiled.</span></h2>
 <style>
@@ -139,7 +136,7 @@
 <p class="start-text">Start with one scan. If it finds nothing, good: the rest of Wherefore keeps it that way.</p>
 <ol class="start-steps">
 <li><code>curl -fsSL https://wherefore.sh | sh</code><span class="does">Or with pip: <code>pip install wherefore-build</code></span></li>
-<li><code>wherefore scan https://your-site.example</code><span class="does">See what has drifted. Nothing to set up.</span></li>
+<li><code>wherefore scan https://your-site.example</code><span class="does">See what has drifted. Nothing to set up.</span><code>wherefore scan https://your-site.example app docs</code><span class="does">Or your site, your app and your docs together, and see where any two disagree.</span></li>
 <li><code>wherefore init</code><span class="does">When you&#x27;re ready: set up the repository, then ask your coding agent to set up Wherefore.</span></li>
 </ol>
 <p class="start-free">Open source under Apache-2.0.</p>

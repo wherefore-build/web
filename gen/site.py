@@ -518,37 +518,36 @@ OUT = ('<svg class="out" viewBox="0 0 16 16" aria-hidden="true" focusable="false
        'fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>')
 
 def hero(f):
-    """What it is, why it matters, and one terminal that tries it: the install line, the scan pointed at a site, an app, a backend and docs together, and what it printed.
+    """What it is, why it matters, where to start, and the proof: what one scan printed, on an example company.
 
-    The headline runs the whole width; under it the lede takes one column and
+    THE HERO SELLS AND POINTS DOWN (owner, 7 November 2026, second review on
+    the phone): the first command above the fold was not landing, and it said
+    again what Get started says at the foot. So the hero has no command. Under
+    the lede, one line says it starts with one command and no setup, and a
+    text link takes the reader to Get started, where every command is said
+    once; the repository is the quiet link beside it. The terminal is the
+    release's own picture of the scan, its result lines alone under a label:
+    no check requires the typed command above them, and Get started types it.
+
+    The headline runs the whole width; under it the copy takes one column and
     the terminal the other, once there is room for its longest line
-    (gen/page.css, .hero-grid). ONE TERMINAL (owner, 7 November 2026, from the
-    phone): the command above the output is the one that printed it, the
-    release's own picture, so the install line and that scan stand at the top
-    of the output, and there is no second block and no caption. The one-site
-    form of the scan is Get started's.
-
-    The eyebrow's licence and version, the package pip installs and the scan's
-    output are the pinned release's own; the install line is start's, so the
-    hero and Get started state it once between them. The second button is the
-    engine's public repository, once there is one: company.github."""
-    h, st = f["hero"], f["start"]
-    name, licence = release_meta()
+    (gen/page.css, .hero-grid). The eyebrow's licence and version and the
+    scan's output are the pinned release's own."""
+    h, n = f["hero"], f["nav"]
+    _, licence = release_meta()
     repo = f["company"]["github"]
-    github = (f'<p class="actions"><a class="button button-quiet" href="{esc(repo)}">{esc(f["nav"]["github"])}{OUT}</a></p>'
-              if repo else "")
+    github = (f'<a class="button button-quiet" href="{esc(repo)}">{esc(n["github"])}{OUT}</a>' if repo else "")
     return f"""<section class="hero"><div class="wrap">
 {SRC}
 <p class="eyebrow">{esc(h["eyebrow"])} · {esc(licence)} · {esc(version())}</p>
 <h1>{esc(h["headline"])} <em>{esc(h["headline_end"])}</em></h1>
 <div class="hero-grid">
+<div class="hero-copy">
 <p class="lede">{esc(h["lede"])}</p>
 <p class="try-label">{esc(h["try"])}</p>
-<figure class="term hero-term"><pre><code>{terminal(scan_shown(), f["changelog"]["cut"], before=[st["install"]])}</code></pre></figure>
-<div class="hero-after">
-<p class="try-pip">{esc(h["pip"])} <code>pip install {esc(name)}</code></p>
-{github}
+<p class="actions hero-links"><a class="hero-go" href="#start">{esc(n["start"])} →</a>{github}</p>
 </div>
+<figure class="term hero-term"><figcaption class="term-label">{esc(h["shows"])}</figcaption><pre><code>{terminal(scan_shown(), f["changelog"]["cut"], run=False)}</code></pre></figure>
 </div>
 </div></section>"""
 
@@ -700,12 +699,13 @@ def releases():
     return [(r, [x for x in FEATURES if x["since"] == r["version"]]) for r in rows]
 
 
-def terminal(shows, cut, before=()):
+def terminal(shows, cut, run=True):
     """What a release printed, as a terminal shows it; a line of just … is lines left out.
 
-    `before` is commands shown above the run - the hero's install line - each
-    at its own prompt. A command is one tap to select (gen/page.css, .term-cmd)."""
-    lines = [f'<span class="term-prompt">$</span> <span class="term-cmd">{esc(c)}</span>' for c in [*before, shows["run"]]]
+    With `run`, the command stands at a prompt above its output, one tap to
+    select (gen/page.css, .term-cmd); without, the output alone - the hero's,
+    whose command Get started types."""
+    lines = [f'<span class="term-prompt">$</span> <span class="term-cmd">{esc(shows["run"])}</span>'] if run else []
     for line in shows["output"]:
         lines.append(f'<span class="term-cut" title="{esc(cut)}">…</span>' if line == "…" else esc(line))
     return "\n".join(lines)
@@ -886,7 +886,8 @@ def docs_landing(f):
     The pages and their titles are the engine's; the line under each is this
     site's (docs.cards), and a page with no line, or a line for a page the
     release does not ship, stops the build, so the landing never lists a page
-    it does not have or misses one it does."""
+    it does not have or misses one it does. THE WHOLE CARD IS THE LINK (owner,
+    7 November 2026, from the phone): a tap anywhere on it opens the page."""
     d = f["docs"]
     ASKED.append("docs")
     pages = wherefore_docs.pages()
@@ -898,7 +899,7 @@ def docs_landing(f):
     for pid, title, _ in pages:
         if pid not in cards:
             raise SystemExit(f"docs.cards has no line for `{pid}` - {title} - and the docs landing lists every page")
-        items.append(f'<li><h3><a href="{esc(pid)}/">{esc(title)}</a></h3><p>{esc(cards[pid])}</p></li>')
+        items.append(f'<li><a class="docs-card" href="{esc(pid)}/"><h3>{esc(title)}</h3><p>{esc(cards[pid])}</p></a></li>')
     body = (f'<section class="docs"><div class="wrap"><ul class="steps docs-cards">{"".join(items)}</ul>'
             f'<p class="docs-release">{esc(fill(d["release"], version=version()))}</p></div></section>')
     return docs_page(f, "docs/", d["title"], body)
@@ -1269,10 +1270,13 @@ def turning_heading(st):
 
 
 def start(f):
-    """Getting started: install, scan (one place, or a site and an app together), init - in this company's words; the licence and package are the release's."""
-    st, h = f["start"], f["hero"]
+    """Getting started: install (or pip), scan (one place, or a site, an app and docs together), init - in this company's words; the licence and package are the release's.
+
+    EVERY COMMAND IS SAID HERE, ONCE (owner, 7 November 2026): the hero points
+    down to this box and types nothing itself."""
+    st = f["start"]
     name, licence = release_meta()
-    lines = [f'<li><code>{esc(st["install"])}</code><span class="does">{esc(h["pip"])} <code>pip install {esc(name)}</code></span></li>']
+    lines = [f'<li><code>{esc(st["install"])}</code><span class="does">{esc(st["pip"])} <code>pip install {esc(name)}</code></span></li>']
     for s in st["steps"]:
         run = f'{command(s["command"])} {s.get("args", "")}'.strip()
         # A step with a second form - the scan pointed at a site and an app

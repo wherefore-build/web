@@ -392,9 +392,12 @@ em { font-style: italic; }
 
 /* The docs (6 November 2026): the engine's pages in this site's shell. The
    landing (7 November) is the pages as cards, one line each, in the steps' grid. */
-.docs-cards h3 { margin-top: 0; }
-.docs-cards h3 a { color: var(--ink); text-decoration: none; }
-.docs-cards h3 a:hover { color: var(--accent); }
+.docs-cards li { padding: 0; }
+.docs-cards li:hover { border-color: var(--accent); }
+.docs-card { display: block; height: 100%; box-sizing: border-box; padding: 1.6rem; color: inherit; text-decoration: none; border-radius: var(--radius-card); }
+.docs-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: var(--radius-card); }
+.docs-card h3 { margin: 0 0 0.5rem; }
+.docs-card:hover h3 { color: var(--accent); }
 .docs-release { margin: 2rem 0 0; color: var(--muted); font-size: 0.9375rem; }
 /* The
    pages listed beside the text on a wide screen, above it on a phone; the
@@ -556,23 +559,22 @@ footer p { margin: 0; }
    scan's own output: two columns once there is room for the terminal's
    longest line whole, one column below that. min-width: 0 on both, or the
    command block widens the page past a phone's screen. */
-.hero-grid { display: grid; gap: 0.6rem 3.5rem; align-items: start; grid-template-areas: "copy" "label" "term" "after"; }
+.hero-grid { display: grid; gap: 2rem 3.5rem; align-items: start; }
 .hero-grid > * { min-width: 0; }
-.hero .lede { grid-area: copy; }
-.try-label { grid-area: label; }
-.hero-term { grid-area: term; }
-.hero-after { grid-area: after; align-self: start; }
-/* The scan's longest line is 78 characters, 616 px at this size: the wider of two columns holds it whole from 75rem up, so it never scrolls sideways beside the copy.
-   ONE TERMINAL (owner, 7 November 2026): the install line and the scan at the top of the output, so the label stands over the terminal, and pip and the repository under the lede. */
-@media (min-width: 75rem) { .hero-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); grid-template-rows: auto 1fr; grid-template-areas: "copy label" "after term"; }
-  .try-label { align-self: end; }
+/* The scan's longest line is 78 characters, 616 px at this size: the wider of two columns holds it whole from 75rem up, so it never scrolls sideways beside the copy. */
+@media (min-width: 75rem) { .hero-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); }
   .hero-term pre { font-size: 0.75rem; } }
 .hero .lede { max-width: 40ch; }
-.try-label { margin: 1.75rem 0 0; font: 400 0.875rem/1.4 var(--font-mono); color: var(--muted); }
+/* The hero sells and points down (owner, 7 November 2026): one ease line, then
+   a text link to Get started - the nav has the lime button - and the quiet
+   repository link beside it. The link is a thumb's height, like every control. */
+.try-label { margin: 1.25rem 0 0; font-size: 1.0625rem; color: var(--muted); max-width: 40ch; }
+.hero-links { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1.5rem; margin-top: 1rem; }
+.hero-go { display: inline-flex; align-items: center; min-height: 44px; padding: 0 0.25rem; font-weight: 600; color: var(--accent); text-decoration: none; }
+.hero-go:hover { text-decoration: underline; text-underline-offset: 0.2em; }
+.term-label { margin: 0 0 0.5rem; font: 400 0.8125rem/1.4 var(--font-mono); color: var(--muted); }
 /* One tap selects a whole command, so it can be copied as it stands. */
 .term-cmd { user-select: all; -webkit-user-select: all; }
-.try-pip { margin: 0.6rem 0 0; font: 400 0.8125rem/1.4 var(--font-mono); color: var(--muted); }
-.try-pip code { color: var(--ink); user-select: all; -webkit-user-select: all; }
 .hero .actions { margin-top: 1.5rem; }
 
 /* Under the steps: the one line to every feature. */
