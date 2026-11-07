@@ -340,6 +340,10 @@
  },
  "start": {
   "heading": "Your company, compiled.",
+  "heading_turns": [
+   "Your project, compiled.",
+   "Your organization, compiled."
+  ],
   "text": "Start with one scan. If it finds nothing, good: the rest of Wherefore keeps it that way.",
   "install": "curl -fsSL https://wherefore.sh | sh",
   "steps": [
