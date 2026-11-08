@@ -55,8 +55,10 @@ def regenerate_brand():
 def main():
     r = []
     with Edit("site/index.html") as p:
+        # Anchored on the heading's tag, not its words: the headline is the
+        # owner's to change, and a case that quoted it missed when it did.
         p.write_text(p.read_text(encoding="utf-8").replace(
-            "<h1>Your product changes. <em>", "<h1>Your product ships. <em>", 1), encoding="utf-8")
+            "<h1>", "<h1>Edited by hand. ", 1), encoding="utf-8")
         gate(r, "the page edited by hand, instead of the facts", True, [PAGE])
 
     with Edit("facts/company.json") as p:
