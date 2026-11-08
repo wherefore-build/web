@@ -95,10 +95,10 @@ brand pack at `site/brand/`.
 ## The pages
 
 **The home page** says why before what, then shows it working.
-- **The headline and the try.** Your product changes; your site, docs and deck
-  don't. Under it, the two lines that run a real `wherefore scan` on your site -
-  no setup, no account - beside what one printed on an example company, from the
-  pinned release's own `releases.json`.
+- **The headline and the install.** Your product compiles; your site, docs and
+  decks drift. Under it, the one line that installs Wherefore, the pip line,
+  that it is open source and under which licence, then Get started and the
+  repository. Every command is in Get started.
 - **The picture.** Your code branches, is tested and merges back; everything
   else forks and never comes back; with Wherefore, everything else gets code's
   shape.
