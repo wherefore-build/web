@@ -291,7 +291,9 @@ Cloudflare's side; `.github/actions/deploy` is the one deploy, and
   checks rather than the page. The job posts the preview's address on the
   branch's pull request, with the commit it was built from, and updates that
   one comment on every push.
-- The proofs run one job per proof (`proof`), each in its own checkout, and
+- The checks on the page run in two jobs side by side, `checks` (the files)
+  and `browser` (the site at a phone's size), and `corpus` is their verdict.
+  The proofs run one job per proof (`proof`), each in its own checkout, and
   `proofs` is their verdict.
 
 **One-time setup (owner):**

@@ -5,7 +5,8 @@
 # presses it - and each of those shown to fail.
 #
 # THE CHECKS AND THE PROOFS SIDE BY SIDE, SO A RUN IS AS LONG AS ITS LONGEST
-# PART, NOT THE SUM (owner, 6 November 2026). `corpus` runs every check;
+# PART, NOT THE SUM (owner, 6 November 2026). `checks` and `browser` run every
+# check side by side, and `corpus` is their verdict (owner, 8 November 2026);
 # `proof` plants each check's fault and requires the check to fail, one job per
 # proof, each in its own checkout (owner, 7 November 2026: the fifteen in one
 # job took 44 minutes); `proofs` is their verdict. The proofs run only when something that
@@ -91,8 +92,12 @@ jobs:
             echo "prove=no" >> "$GITHUB_OUTPUT"; echo "only the pin, the facts, the skill's copies or the pages moved: no check's behaviour did, so the proofs are not run"
           fi
 
-  # `corpus` keeps its name: it is the status check main requires before a merge.
-  corpus:
+  # THE CHECKS ON THE PAGE, in two jobs side by side (owner, 8 November 2026:
+  # "I want much faster deploy"): `checks` reads the files - the gate, reach,
+  # upstream, the brand and the clips - and `browser` loads the site in a
+  # browser at a phone's size. Each has its own checkout, since reach and the
+  # case study move facts in the tree and put them back.
+  checks:
     runs-on: ubuntu-latest
     env:
       PYTHONPATH: ${{ github.workspace }}/.wherefore-engine:${{ github.workspace }}/.browser
@@ -130,6 +135,23 @@ jobs:
           python3 checks/one_palette.py
           python3 checks/contrast.py
           python3 checks/brand_reasons.py
+      - name: Every feature has its clip, and the features page plays it
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: python3 checks/motion_for_every_feature.py
+      - name: Every clip reads, runs a command the CLI has, prints what the engine prints, and carries every word
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: python3 checks/motion_reads.py
+  browser:
+    runs-on: ubuntu-latest
+    env:
+      PYTHONPATH: ${{ github.workspace }}/.wherefore-engine:${{ github.workspace }}/.browser
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install the engine this corpus pins
+        id: install
+        run: |
+          rm -rf .wherefore-engine
+          python3 -m pip install --quiet --no-deps --target .wherefore-engine -r requirements-engine.txt
       # The press check drives a real browser, pinned in
       # requirements-browser.txt and installed into the checkout like the
       # engine; `playwright install` fetches the Chromium build that pin asks for.
@@ -158,15 +180,34 @@ jobs:
       - name: Every page fits a phone's width, moving or still, and no icon outgrows its words
         if: ${{ !cancelled() && steps.browser.outcome == 'success' }}
         run: python3 checks/fits_phone.py
-      - name: Every feature has its clip, and the features page plays it
-        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
-        run: python3 checks/motion_for_every_feature.py
-      - name: Every clip reads, runs a command the CLI has, prints what the engine prints, and carries every word
-        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
-        run: python3 checks/motion_reads.py
       - name: Every clip fits a portrait frame and a landscape one at every scene, and every scene shows its words
         if: ${{ !cancelled() && steps.browser.outcome == 'success' }}
         run: python3 checks/motion_fits.py
+
+  # `corpus` keeps its name: it is the status check main requires before a
+  # merge, and it is now the verdict of `checks` and `browser` together.
+  corpus:
+    needs: [checks, browser]
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    env:
+      PYTHONPATH: ${{ github.workspace }}/.wherefore-engine
+    steps:
+      - name: Every check on the page passed
+        env:
+          CHECKS: ${{ needs.checks.result }}
+          BROWSER: ${{ needs.browser.result }}
+        run: |
+          if [ "$CHECKS" != success ] || [ "$BROWSER" != success ]; then
+            echo "::error::the checks on the page did not all pass (checks: $CHECKS, browser: $BROWSER): their own jobs, above, say which and why"
+            exit 1
+          fi
+          echo "every check on the page passed"
+      - uses: actions/checkout@v7
+        if: ${{ github.ref == 'refs/heads/main' }}
+      - name: Install the engine this corpus pins
+        if: ${{ github.ref == 'refs/heads/main' }}
+        run: python3 -m pip install --quiet --no-deps --target .wherefore-engine -r requirements-engine.txt
       # WHERE THE SITE STANDS, for the app to read: on main only, once every
       # check above has passed. `--gate` runs the gate once more, in its own
       # process, so its verdict and counts are in the document; it judges
@@ -181,6 +222,7 @@ jobs:
           name: wherefore-status
           path: status.json
           retention-days: 30
+
 
   # EACH CHECK SHOWN TO FAIL, beside the checks rather than after them, and
   # each proof in a job of its own (owner, 7 November 2026). Needs the same
