@@ -18,6 +18,7 @@ in the words of the case, or, for the case that must not fire, to pass.
 
 Usage:  python3 checks/controls_press_proof.py
 """
+import json
 import pathlib
 import sys
 
@@ -32,6 +33,10 @@ PAGE = "site/index.html"
 WHY = "site/why/index.html"        # the questions' tabs, on their own page
 CSS = "site/page.css"
 PASS = "every control on the site does something a visitor can see"
+# The case study's toggle, as the facts word it: the words are the owner's to
+# change, and a case that typed them missed when they did.
+CASE_MORE = json.loads((pathlib.Path(__file__).resolve().parents[1] / "facts/company.json")
+                       .read_text(encoding="utf-8"))["case"]["more"]
 
 
 def plant(p, before, after):
@@ -72,7 +77,7 @@ def main():
     with Edit(CSS) as p:
         append(p, ".case-more[open] .case-grid { display: none; }\n")
         check(r, "the case study's list hidden when opened", CHECK, True,
-              ["'What it builds, and what holds it'", "showed nothing new"])
+              [f"'{CASE_MORE}'", "showed nothing new"])
     with Edit(PAGE) as p:
         plant(p, '<section id="start">', '<section id="begin">')
         check(r, "the hero's link to a part the page has not", CHECK, True,

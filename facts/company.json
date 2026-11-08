@@ -329,7 +329,7 @@
   "text": "Chaotic Pendulums builds a desk-sized double pendulum from one spec file: drawings, print files, parts list, supplier pack and website. If one source can hold machined parts, it can hold your app and docs.",
   "url": "https://chaoticpendulums.com/",
   "visit": "See the live site",
-  "made_heading": "What it builds",
+  "made_heading": "Made from the spec",
   "made": [
    "Part drawings a machine shop quotes and inspects against, each with its cut file and its solid model",
    "Print-ready 3D files for a prototype, laid out plate by plate",
@@ -338,7 +338,7 @@
    "The brand: the mark, the hero and the renders, drawn from the object’s own dimensions",
    "The website, and the 3D pendulum that swings on it"
   ],
-  "held_heading": "What holds it",
+  "held_heading": "Proven before anything is cut",
   "held": [
    "Load simulations, worked from the real parts’ masses, prove every mount setup holds the pendulum at a torque a hand can give.",
    "Worst-case tolerance stacks prove every screw clamps and never bottoms, at every extreme of every band.",
@@ -371,7 +371,7 @@
    }
   },
   "quote": null,
-  "more": "What it builds, and what holds it"
+  "more": "What the spec makes, and what it proves"
  },
  "start": {
   "heading": "Your company, compiled.",

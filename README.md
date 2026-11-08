@@ -113,8 +113,8 @@ brand pack at `site/brand/`.
 - **The case study**: Chaotic Pendulums, the small hardware company the founder
   started to test the idea - its counts, with one of its parts beside them
   (`cases/pendulum/plate.html`, the mounting plate, machined and anodised,
-  turning in a frame a visitor can take hold of), and what it builds and
-  what holds it, behind one press.
+  turning in a frame a visitor can take hold of), and what the spec makes and
+  what it proves before anything is cut, behind one press.
 - **The rule.** Agents already run your code's pipeline; Wherefore lets them
   run the rest.
 - **Why Wherefore**: the word means *why*, and five tabs ask an asset of the
