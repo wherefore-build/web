@@ -34,8 +34,8 @@
  },
  "hero": {
   "eyebrow": "Command-line tool",
-  "headline": "Your product changes.",
-  "headline_end": "Your site, docs and deck drift.",
+  "headline": "Your product compiles.",
+  "headline_end": "Your site, docs and decks drift.",
   "lede": "Wherefore gives the rest of your company the pipeline your code already has.",
   "free": "Free and open source, under {licence}."
  },
