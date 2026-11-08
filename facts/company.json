@@ -379,7 +379,7 @@
    "Your project, compiled.",
    "Your organization, compiled."
   ],
-  "text": "Start with one scan. If it finds nothing, good: the rest of Wherefore keeps it that way.",
+  "text": "The scan changes nothing. Initialize the fix on a branch.",
   "install": "curl -fsSL https://wherefore.sh | sh",
   "pip": "Or",
   "steps": [
