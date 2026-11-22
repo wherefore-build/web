@@ -3,14 +3,14 @@
  "captured": {
   "from": "zakholdsworth/chaotic-pendulums-co",
   "path": "counted from the tree: spec/version.json, checks/*_proof.py, stack.MADE, product/Engineering Pack/PROTOTYPE/*.3mf",
-  "commit": "848fbdcd6bb186211d8962a0e78a7c7db153bbad",
-  "on": "2026-11-07",
-  "release": "cc9a97852c9f5e25"
+  "commit": "1de605129356733905ed6d7cac0e54fe32a1f0dc",
+  "on": "2026-11-22",
+  "release": "5a6fbc4da7739aff"
  },
  "counts": {
   "pack": {
-   "version": 86,
-   "date": "2026-11-07",
+   "version": 88,
+   "date": "2026-11-09",
    "draft": null
   },
   "proofs": 50,
