@@ -171,7 +171,24 @@
     "because": "I am not allowed yet. Until the audit is signed, the most any page may say is “SOC 2 in progress”, and the check refuses the rest."
    }
   ],
-  "note": "The same example company as the demo on the home page."
+  "note": "The same example company as the demo on the home page.",
+  "fits": {
+   "heading": "Where it fits",
+   "rows": [
+    {
+     "what": "Agent memory",
+     "does": "keeps your agents current."
+    },
+    {
+     "what": "A knowledge graph",
+     "does": "stores what they know."
+    },
+    {
+     "what": "Wherefore",
+     "does": "makes sure what you publish matches the source, and proves it."
+    }
+   ]
+  }
  },
  "how": {
   "heading": "It lives in your repo, and runs in your CI.",
