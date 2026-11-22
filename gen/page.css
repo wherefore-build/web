@@ -641,3 +641,17 @@ header.top .pill { order: 2; }
 /* The picture, part of the opening (owner, 5 November 2026): no line above it, so it reads on from the hero. */
 .opening { border-top: 0; padding-top: 0; }
 .opening h2 { max-width: 22ch; }
+
+/* Where it fits (owner, 22 November 2026): three kinds of tool, one line each,
+   Wherefore's in the accent. */
+.fits { padding-top: 0; }
+.fits h2 { margin-bottom: 1.25rem; }
+.fit-list { display: grid; gap: 0.75rem; margin: 0; max-width: 46rem; }
+.fit { display: grid; grid-template-columns: minmax(0, 11rem) minmax(0, 1fr); gap: 0.25rem 1.25rem; padding: 1rem 1.25rem;
+  border: 1px solid var(--line); border-radius: var(--radius-card); background: var(--surface); }
+.fit dt { font-weight: 600; }
+.fit dd { margin: 0; color: var(--muted); }
+.fit-ours { border-color: var(--accent); }
+.fit-ours dt { color: var(--accent); }
+.fit-ours dd { color: var(--ink); }
+@media (max-width: 30rem) { .fit { grid-template-columns: minmax(0, 1fr); } }

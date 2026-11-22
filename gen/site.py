@@ -627,10 +627,25 @@ def why(f):
 </div></section>"""
 
 
+def fits(f):
+    """WHERE IT FITS (owner, 22 November 2026): beside agent memory and knowledge
+    graphs, what Wherefore is for, in three lines, by kind and not by brand - a
+    claim about another product would be a copy of something this repository
+    cannot hold."""
+    t = f["why"]["fits"]
+    rows = "".join(f'<div class="fit{" fit-ours" if i == len(t["rows"]) - 1 else ""}">'
+                   f'<dt>{esc(r["what"])}</dt><dd>{esc(r["does"])}</dd></div>'
+                   for i, r in enumerate(t["rows"]))
+    return f"""<section id="fits" class="fits"><div class="wrap">
+<h2>{esc(t["heading"])}</h2>
+<dl class="fit-list">{rows}</dl>
+</div></section>"""
+
+
 def why_page(f):
-    """site/why/index.html: why the name, on its own page, in the sub-page shell."""
+    """site/why/index.html: why the name, and where it fits, on its own page, in the sub-page shell."""
     w = f["why"]
-    return sub_page(f, WHY_PAGE.rstrip("/"), f["nav"]["why"], w["heading"], None, why(f))
+    return sub_page(f, WHY_PAGE.rstrip("/"), f["nav"]["why"], w["heading"], None, why(f) + "\n" + fits(f))
 
 
 def how(f):
