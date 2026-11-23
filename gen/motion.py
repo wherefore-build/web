@@ -253,8 +253,12 @@ def gather():
                     "probe": {"fact": probe["fact"], "files": len(probe["files"])} if probe else None}
 
     # The site without its clips: a clip states these very numbers, and a scan
-    # that read the clips would count what they say about it.
-    got = scan.scan([str(p) for p in sorted(SITE.iterdir()) if p.name != "motion"])
+    # that read the clips would count what they say about it. And without the
+    # map: it is drawn from a run of every generator, this one among them, and
+    # says this repository's files and counts, not what the company says. A
+    # clip that read it would come after the map, and `wherefore gate --since`
+    # refuses to skip anything while a generator reads the map it writes last.
+    got = scan.scan([str(p) for p in sorted(SITE.iterdir()) if p.name not in ("motion", "map")])
     data["compare"] = {"places": ["site"], "stated": got["stated"], "files": got["sources"],
                        "disagree": len(got["disagree"]), "says": [g["says"] for g in got["disagree"][:2]]}
 

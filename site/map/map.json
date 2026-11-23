@@ -10,7 +10,7 @@
   "unknown": 0,
   "generators": 6,
   "code": 44,
-  "reads": 53,
+  "reads": 52,
   "failed": 0,
   "drifting": 0
  },
@@ -256,7 +256,6 @@
     "site/fonts/inter/OFL.txt",
     "site/fonts/jetbrains-mono/OFL.txt",
     "site/index.html",
-    "site/map/index.html",
     "site/page.css",
     "site/pendulum/index.html",
     "site/pendulum/plate/index.html",
