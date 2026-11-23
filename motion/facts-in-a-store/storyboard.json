@@ -1,0 +1,79 @@
+{
+ "id": "facts-in-a-store",
+ "name": "Facts in a store",
+ "version": "0.27.0",
+ "duration": 33.0,
+ "frames": [
+  "portrait",
+  "landscape"
+ ],
+ "scenes": [
+  {
+   "kind": "open",
+   "start": 0.0,
+   "end": 3.0,
+   "name": "Wherefore",
+   "version": "0.27.0"
+  },
+  {
+   "kind": "ask",
+   "start": 3.0,
+   "end": 7.0,
+   "eyebrow": "shipped in 0.27.0",
+   "headline": "Facts in a store"
+  },
+  {
+   "kind": "run",
+   "start": 7.0,
+   "end": 15.5,
+   "typed": "wherefore facts import --decided-by fern-founder",
+   "lines": [
+    "next: `wherefore facts pull` writes facts.json at version 1 and pins it in wherefore.json"
+   ],
+   "typing": 3.34
+  },
+  {
+   "kind": "mechanism",
+   "start": 15.5,
+   "end": 23.0,
+   "eyebrow": "what it holds",
+   "mechanism": "hold",
+   "data": {
+    "source": "facts/company.json",
+    "facts": 320,
+    "pages": 15,
+    "shown": [
+     "brand/",
+     "changelog/",
+     "docs/agents/",
+     "docs/checks/",
+     "docs/commands/",
+     "docs/configuration/",
+     "docs/",
+     "docs/reporting/"
+    ],
+    "probe": {
+     "fact": "company.name",
+     "files": 1
+    }
+   },
+   "caption": "320 facts in facts/company.json, and 15 pages built from them; company.name alone reaches 1 page"
+  },
+  {
+   "kind": "claim",
+   "start": 23.0,
+   "end": 27.0,
+   "text": "Every version of every fact kept, and the file held to it."
+  },
+  {
+   "kind": "close",
+   "start": 27.0,
+   "end": 33.0,
+   "home": "wherefore.build",
+   "tagline": "Your company, compiled.",
+   "install": "pip install wherefore-build",
+   "url": "wherefore.build/features/#facts-in-a-store",
+   "icon": "icon"
+  }
+ ]
+}

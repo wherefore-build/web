@@ -73,12 +73,15 @@ KINDS = ("compare", "hold", "sort", "handover")
 # feature the engine adds without a line here stops the build.
 MECHANISM = {"scan": "compare", "scan2": "compare", "scan-read": "compare", "drift": "compare",
              "reach": "hold", "retired": "hold", "claims": "hold", "published": "hold", "upstream": "hold", "palette": "hold",
-             "gate": "sort", "build": "sort", "graph": "sort", "proofs": "sort", "hook": "sort",
+             "facts-in-a-store": "hold",
+             "gate": "sort", "since": "sort", "build": "sort", "graph": "sort", "proofs": "sort", "hook": "sort",
              "report": "handover", "pins": "handover", "skill": "handover", "docs": "handover", "start": "handover",
              "motion": "handover", "status": "handover",
              # No picture of its own yet: what the check prints - one thing live, one waiting on its
              # help doc, one named nowhere public - is the picture.
-             "launch": None}
+             "launch": None,
+             # The same for a decision: which approvals did not count, and the fact still waiting on one.
+             "decisions": None}
 
 
 def engine(name):
@@ -130,12 +133,23 @@ def docs_examples():
     return out
 
 
+COMMIT = re.compile(r"(?<![0-9a-f])([0-9a-f]{7})[0-9a-f]{33}(?![0-9a-f])")
+
+
+def abbreviated(run):
+    """A command with each full commit id in it cut to the seven characters git
+    and the engine print it as (`--base 4b825dc…` -> `--base 4b825dc`): git
+    reads the short id as the same commit, and forty characters cannot be
+    broken at a space, so they would run off a portrait frame."""
+    return COMMIT.sub(r"\1", run)
+
+
 def picture(feature, release, examples):
     """(typed, lines): what the clip runs and what it prints, from the release
     picture when it shows this feature's command, else from the docs' example
     of it; (None, []) when the feature has no command to show."""
     shows = (release or {}).get("shows") or {}
-    run = shows.get("run", "")
+    run = abbreviated(shows.get("run", ""))
     heads = [head(u) for u in feature.get("commands", [])]
     if run and run.split()[1:2] != ["--version"] and (not heads or any(run.startswith(h) for h in heads)):
         return run, [l for l in shows.get("output", []) if l.strip() and l != ELIDED]
@@ -167,12 +181,17 @@ def answer(lines, short=False):
     return kept
 
 
+PROMPT = 2                       # the `$ ` or `> ` before each typed line, on the same line
+
+
 def typed_lines(typed):
-    """A command in lines of at most TYPED_LINE characters, broken at spaces,
-    every line but the last ending in the shell's backslash."""
+    """A command in lines of at most TYPED_LINE characters with the prompt
+    before each, broken at spaces, every line but the last ending in the
+    shell's backslash."""
     ws, lines, cur = typed.split(), [], ""
-    for w in ws:
-        if cur and len(cur) + 1 + len(w) + 2 > TYPED_LINE:
+    for k, w in enumerate(ws):
+        # the backslash, when a word follows on the next line
+        if cur and PROMPT + len(cur) + 1 + len(w) + (2 if k + 1 < len(ws) else 0) > TYPED_LINE:
             lines.append(cur + " \\")
             cur = w
         else:
@@ -234,8 +253,12 @@ def gather():
                     "probe": {"fact": probe["fact"], "files": len(probe["files"])} if probe else None}
 
     # The site without its clips: a clip states these very numbers, and a scan
-    # that read the clips would count what they say about it.
-    got = scan.scan([str(p) for p in sorted(SITE.iterdir()) if p.name != "motion"])
+    # that read the clips would count what they say about it. And without the
+    # map: it is drawn from a run of every generator, this one among them, and
+    # says this repository's files and counts, not what the company says. A
+    # clip that read it would come after the map, and `wherefore gate --since`
+    # refuses to skip anything while a generator reads the map it writes last.
+    got = scan.scan([str(p) for p in sorted(SITE.iterdir()) if p.name not in ("motion", "map")])
     data["compare"] = {"places": ["site"], "stated": got["stated"], "files": got["sources"],
                        "disagree": len(got["disagree"]), "says": [g["says"] for g in got["disagree"][:2]]}
 

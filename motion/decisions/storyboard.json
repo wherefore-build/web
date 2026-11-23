@@ -1,0 +1,53 @@
+{
+ "id": "decisions",
+ "name": "Decisions",
+ "version": "0.26.0",
+ "duration": 28.5,
+ "frames": [
+  "portrait",
+  "landscape"
+ ],
+ "scenes": [
+  {
+   "kind": "open",
+   "start": 0.0,
+   "end": 3.0,
+   "name": "Wherefore",
+   "version": "0.26.0"
+  },
+  {
+   "kind": "ask",
+   "start": 3.0,
+   "end": 7.0,
+   "eyebrow": "shipped in 0.26.0",
+   "headline": "Decisions"
+  },
+  {
+   "kind": "run",
+   "start": 7.0,
+   "end": 18.5,
+   "typed": "wherefore check decisions --base 4b825dc --approvals approvals.json",
+   "lines": [
+    "  not counted  fern-founder approved 3f2c1a9, not the head: the change moved after it",
+    "  FAIL  facts plans.pro.price_usd added, 99…"
+   ],
+   "typing": 4.59
+  },
+  {
+   "kind": "claim",
+   "start": 18.5,
+   "end": 22.5,
+   "text": "Every fact that needs a say carries its decider's approval."
+  },
+  {
+   "kind": "close",
+   "start": 22.5,
+   "end": 28.5,
+   "home": "wherefore.build",
+   "tagline": "Your company, compiled.",
+   "install": "pip install wherefore-build",
+   "url": "wherefore.build/features/#decisions",
+   "icon": "icon"
+  }
+ ]
+}

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>With a knowledge factory · Docs — Wherefore</title>
+<meta name="description" content="The docs ship inside each release of the engine, held to its code by the engine&#x27;s own tests.">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="../../brand/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../brand/icon-1024.png">
+<link rel="stylesheet" href="../../brand.css">
+<link rel="stylesheet" href="../../page.css">
+<link rel="canonical" href="https://wherefore.build/docs/agents/">
+</head>
+<body>
+<input class="state inspect-state" type="checkbox" id="inspect">
+<header class="top"><div class="wrap"><input class="state menu-state" type="checkbox" id="menu"><a class="name" href="../../">Wherefore</a>
+<label class="menu-switch" for="menu">Menu</label><nav aria-label="The site"><a href="../../#how">How it works</a><a href="../../#case">Case study</a><a href="../../why/">Why Wherefore</a><a href="../../features/">Features &amp; roadmap</a><a href="../../changelog/">Changelog</a><a href="../../docs/">Docs</a><a href="../../map/">Map</a></nav><a class="pill" href="../../#start">Get started</a></div></header>
+<main id="top">
+<div class="src-key"><div class="wrap"><p>Every part of this page is generated. Each now names the facts it is built from, and the checks that hold it on every push. <a target="_blank" rel="noopener" href="https://github.com/wherefore-build/web">Read every file it is built from<svg class="out" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M9 2h5v5M14 2 7.5 8.5M12 9.5V13a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a> <a href="../../map/">See the map of this repository: every file on this site, how it is made, and what changes when a source does</a></p><dl><div><dt>gate</dt><dd>rebuilt from its sources on every push, and refused if it differs from what is committed</dd></div><div><dt>reach</dt><dd>each of these facts is moved, one at a time, and the page must change with it</dd></div><div><dt>press</dt><dd>every control here is tapped on a fresh load, at a phone’s width, and must show something new</dd></div><div><dt>engine</dt><dd>every command named here must be one the pinned release has</dd></div><div><dt>fresh</dt><dd>the release named here is the newest on PyPI, or one only days behind it; a pin left behind longer fails</dd></div><div><dt>brand</dt><dd>every colour and face is a brand token, and every text colour reads at 4.5:1 on its ground</dd></div><div><dt>snapshot</dt><dd>these counts were taken from the pendulum once, at the commit and day they name; each is moved, one at a time, and the page must change with it</dd></div></dl></div></div>
+<section class="log-head"><div class="wrap">
+<p class="eyebrow">Docs · Wherefore 0.27.0</p>
+<h1>Every page, from the release this site pins.</h1>
+<p class="lede">The docs ship inside each release of the engine, held to its code by the engine&#x27;s own tests.</p>
+<div class="src"><p><span class="src-k">from</span> facts/company.json · 31 facts: docs.{pages, on_this_page, title, intro, heading} · company.{name, domain, source} · nav.{menu, how, why, does, docs, map, start} · case.eyebrow · changelog.title · inspect.{checks.{gate, reach, press, engine, fresh, brand, snapshot}, source, map, intro, map_short, toggle, toggle_short} · colophon</p><p><span class="src-k">from</span> wherefore 0.27.0 · docs/*.md, every page of them</p><p><span class="src-k">held by</span> gate · reach · brand · press</p></div>
+</div></section>
+<section class="docs"><div class="wrap docs-grid"><aside class="docs-nav"><p class="docs-nav-title">The pages</p><ul><li><a href="../start/">Start</a></li><li><a href="../commands/">Commands</a></li><li><a href="../configuration/">Configuration</a></li><li><a href="../checks/">Checks and proofs</a></li><li><a href="../reporting/">Reporting</a></li><li class="here"><a href="../agents/">With a knowledge factory</a></li></ul><p class="docs-nav-title">On this page</p><ul class="docs-on-page"><li><a href="#the-curator-proposes-a-fact-never-a-page">The curator proposes a fact, never a page</a></li><li><a href="#wherefore-judges-the-change">Wherefore judges the change</a></li><li><a href="#wherefore-gives-the-curator-its-flags">Wherefore gives the curator its flags</a></li><li><a href="#your-agents-read-the-same-facts">Your agents read the same facts</a></li><li><a href="#what-the-curator-must-not-do">What the curator must not do</a></li></ul></aside><article class="docs-page"><h2 id="with-a-knowledge-factory">With a knowledge factory</h2>
+<p>A knowledge factory keeps your agents' knowledge current. A curator agent reads what working agents flag, their traces and your raw notes, and updates the skills and facts they work from. Wherefore keeps what you publish matching its source, and refuses a change that would let a copy drift. The two meet at the facts: the curator proposes, Wherefore judges, and a person merges.</p>
+<h3 id="the-curator-proposes-a-fact-never-a-page">The curator proposes a fact, never a page</h3>
+<p>The curator edits a source - a file <code>sources</code> in wherefore.json names - on a branch, and opens a pull request. It never edits a page, a doc or a slide: those are built from the source, and <code>wherefore gate</code> refuses a generated file that differs from what its generator writes. One edit to a fact moves every copy that states it.</p>
+<p>The pull request is the ticket nobody filed. It says what changed and why, the person who reviews it sees every page that moved, and nothing ships until they merge it.</p>
+<h3 id="wherefore-judges-the-change">Wherefore judges the change</h3>
+<p>The checks the corpus already runs in CI judge the curator's branch the way they judge anyone's:</p>
+<ul><li><code>wherefore gate</code>: every generated file is what its generator writes from the new fact, and every file is accounted for.</li><li><code>wherefore check reach</code>: the fact reaches every page that should state it.</li><li><code>wherefore check retired</code>: no page a person reads still claims a value the change retired.</li><li><code>wherefore check claims</code>: a claim says only what its rule allows, so a curator cannot promote "SOC 2 in progress" to "SOC 2 certified" by editing a sentence.</li></ul>
+<p>A curator that cannot get its branch through these has not found a fact; it has found a question for a person.</p>
+<h3 id="wherefore-gives-the-curator-its-flags">Wherefore gives the curator its flags</h3>
+<p>A curator works from flags. Wherefore raises the ones about what you publish:</p>
+<ul><li><code>wherefore scan</code> reads your site, app or docs and names every value stated more than one way - the site says fourteen days, the app says thirty. Each is a flag: one copy is wrong, and the fix is one fact.</li><li><code>wherefore check drift</code> names values written by hand in two or more files that no source holds yet, with their files and a count: candidates for a new fact.</li><li><code>wherefore status --json</code> is where the repository stands, in one read, for a curator that runs on a cadence.</li></ul>
+<h3 id="your-agents-read-the-same-facts">Your agents read the same facts</h3>
+<p>The sources are plain files in your repository. An agent may read them as its domain knowledge, so the answer an agent gives and the page a customer reads come from the same line. A curator that keeps its own copy of a fact Wherefore holds is keeping a second source, and the two will drift: point it at the source instead.</p>
+<h3 id="what-the-curator-must-not-do">What the curator must not do</h3>
+<ul><li>Edit a generated file. The gate refuses it, and the next build would write over it.</li><li>Merge its own pull request. The review is the point.</li><li>Silence a check to get a branch through. A check that fails is the answer.</li></ul></article></div></section>
+</main>
+<footer><div class="wrap"><nav class="foot-nav" aria-label="The site, again"><a href="../../#how">How it works</a><a href="../../#case">Case study</a><a href="../../why/">Why Wherefore</a><a href="../../features/">Features &amp; roadmap</a><a href="../../changelog/">Changelog</a><a href="../../docs/">Docs</a><a href="../../map/">Map</a></nav><div class="footer-row"><p><span class="footer-name">Wherefore</span> · This site is built with Wherefore, from one source file and the release it pins.</p>
+<p class="footer-meta"><a href="../../">Wherefore</a> · <a href="../../brand/">Brand</a> · <a href="../../map/">Map</a> · <a target="_blank" rel="noopener" href="https://github.com/wherefore-build/web">Read every file it is built from<svg class="out" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M9 2h5v5M14 2 7.5 8.5M12 9.5V13a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p></div></div></footer>
+<label class="inspect-switch" for="inspect"><span class="switch-track" aria-hidden="true"></span><span class="switch-long">How Wherefore compiled this page</span><span class="switch-short">Compiled by Wherefore</span></label>
+</body>
+</html>

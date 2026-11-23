@@ -237,7 +237,10 @@
    "scan-read": "Beside the result: what each place read, what it left unread, and the colours it states.",
    "drift": "Hand-written files that state a value no source holds, named and counted. The allowance only falls.",
    "launch": "Everything you call ready has a stage, and it moves only when it has what it needs.",
-   "status": "Where a repository stands, in one read: its files, its drift, its launches, its engine."
+   "status": "Where a repository stands, in one read: its files, its drift, its launches, its engine.",
+   "since": "A pull request rebuilds only what its change can reach, by the map the full gate keeps.",
+   "decisions": "A price moves only when the person who decides it approves the pull request.",
+   "facts-in-a-store": "Keep the facts in a database instead of a file, every version kept for good."
   },
   "groups": [
    {
@@ -256,6 +259,7 @@
     "features": [
      "start",
      "build",
+     "facts-in-a-store",
      "palette",
      "launch"
     ]
@@ -265,6 +269,7 @@
     "lede": "On every push, nothing ships that says the old thing.",
     "features": [
      "gate",
+     "since",
      "hook",
      "retired",
      "reach",
@@ -279,7 +284,8 @@
     "features": [
      "proofs",
      "graph",
-     "status"
+     "status",
+     "decisions"
     ]
    },
    {
@@ -325,7 +331,10 @@
    "scan-read": "Beside the result, what the scan read, so quiet means quiet.",
    "drift": "Every hand-written copy no source holds, named and counted.",
    "launch": "A launch waits until everything it needs is there.",
-   "status": "Where a repository stands, in one read, kept by its CI."
+   "status": "Where a repository stands, in one read, kept by its CI.",
+   "since": "What a change can reach, rebuilt; the rest, taken as committed.",
+   "decisions": "Every fact that needs a say carries its decider's approval.",
+   "facts-in-a-store": "Every version of every fact kept, and the file held to it."
   }
  },
  "case": {
@@ -429,6 +438,7 @@
    "reach": "each of these facts is moved, one at a time, and the page must change with it",
    "press": "every control here is tapped on a fresh load, at a phone’s width, and must show something new",
    "engine": "every command named here must be one the pinned release has",
+   "fresh": "the release named here is the newest on PyPI, or one only days behind it; a pin left behind longer fails",
    "brand": "every colour and face is a brand token, and every text colour reads at 4.5:1 on its ground",
    "snapshot": "these counts were taken from the pendulum once, at the commit and day they name; each is moved, one at a time, and the page must change with it"
   }
@@ -456,7 +466,8 @@
    "commands": "Every command, what it takes, what it prints, and how it exits.",
    "configuration": "Every section of wherefore.json: where the facts live, what builds each asset, what each check holds.",
    "checks": "What each check holds, how it fails, and how to prove one.",
-   "reporting": "What a report carries, what never leaves the machine, and how it is sent."
+   "reporting": "What a report carries, what never leaves the machine, and how it is sent.",
+   "agents": "A curator agent proposes a fact as a pull request; the corpus's checks judge it, and a person merges."
   }
  }
 }

@@ -1,0 +1,67 @@
+{
+ "id": "since",
+ "name": "A gate for the change",
+ "version": "0.25.0",
+ "duration": 33.5,
+ "frames": [
+  "portrait",
+  "landscape"
+ ],
+ "scenes": [
+  {
+   "kind": "open",
+   "start": 0.0,
+   "end": 3.0,
+   "name": "Wherefore",
+   "version": "0.25.0"
+  },
+  {
+   "kind": "ask",
+   "start": 3.0,
+   "end": 7.0,
+   "eyebrow": "shipped in 0.25.0",
+   "headline": "A gate for the change"
+  },
+  {
+   "kind": "run",
+   "start": 7.0,
+   "end": 14.0,
+   "typed": "wherefore gate --since HEAD",
+   "lines": [
+    "can reach was written during this run and matches what is committed"
+   ],
+   "typing": 2.19
+  },
+  {
+   "kind": "mechanism",
+   "start": 14.0,
+   "end": 23.5,
+   "eyebrow": "what it sorts",
+   "mechanism": "sort",
+   "data": {
+    "files": 187,
+    "built": 114,
+    "authored": 68,
+    "captured": 5,
+    "left": 0
+   },
+   "caption": "187 files tracked: 114 built by a script, 68 written with a reason, 5 captured and stamped, 0 unaccounted for"
+  },
+  {
+   "kind": "claim",
+   "start": 23.5,
+   "end": 27.5,
+   "text": "What a change can reach, rebuilt; the rest, taken as committed."
+  },
+  {
+   "kind": "close",
+   "start": 27.5,
+   "end": 33.5,
+   "home": "wherefore.build",
+   "tagline": "Your company, compiled.",
+   "install": "pip install wherefore-build",
+   "url": "wherefore.build/features/#since",
+   "icon": "icon"
+  }
+ ]
+}
