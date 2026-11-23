@@ -30,7 +30,7 @@ private repository, not here, so that none of them goes public with the site.
 | `gen/kit.py` | what the generators share: the sources, the draft banner, contrast | authored |
 | `site/index.html` | the home page | generated |
 | `site/features/`, `site/changelog/` | everything it does and what's next, and every release | generated |
-| `site/map/` | the site's own map, written by `wherefore graph` run as a generator: every source, the scripts that read it, and every file they make, from a real run, in the brand's own colours (`--theme site/brand/map.css`) | generated |
+| `site/map/` | the site's own map, written by `wherefore graph` run as a generator: every source, the scripts that read it, and every file they make, from a real run, in the brand's own colours (`--theme site/brand/map.css`); and `site/map/map.json`, the same map as data, which `wherefore gate --since` reads (`--json`) | generated |
 | `gen/motion.py` | a clip for every feature the pinned release ships, compiled from the engine's features, releases and docs, the roadmap's ledger and this company's own words: the version, who asked, the command run and what it printed, what the feature does in this site's own numbers, the claim, the address - as a page in motion in the brand's own stylesheet | authored |
 | `site/motion/`, `motion/` | the clips, one page per feature, played on each card of the features page and the changelog; the storyboards, as data for the checks, sit in `motion/`, out of `site/`, because a storyboard quotes what a command printed | generated |
 | `gen/motion_render.py` | the camera: each clip stepped frame by frame into portrait and landscape video, on request (`.github/workflows/clips.yml`), never committed | authored |
@@ -193,6 +193,7 @@ pip install --force-reinstall --no-deps -r requirements-engine.txt
 
 wherefore build                      # regenerate site/ from the facts
 wherefore gate                       # every file classified, every generated one current
+wherefore gate --since main          # the same, running only the generators a change since main can reach
 wherefore check reach                # every fact reaches what a visitor receives
 python3 checks/self_contained.py     # nothing loaded from elsewhere, no dead links
 python3 checks/controls_press.py     # every control works under a thumb (needs the browser)
@@ -263,9 +264,10 @@ the commit and on the day it names.
 
 ## CI
 
-`.github/workflows/corpus.yml` runs on every push, on a hosted runner, as two
-jobs side by side: `corpus` runs every check, and `proofs` plants each check's
-fault and requires the check to fail. The proofs are the long half, and they
+`.github/workflows/corpus.yml` runs on every push, on a hosted runner: the
+checks on the page (`checks` and `browser`, with `corpus` their verdict) side by
+side with the proofs, which plant each check's fault and require the check to
+fail (`proof`, one job each, with `proofs` their verdict). The proofs are the long half, and they
 run only when something that decides what a check does has moved - a check, a
 generator, the brand's source, the workflow, `wherefore.json`; a push that only
 moves the pin, the facts or the pages they make skips them, and the job says
@@ -273,6 +275,21 @@ so. The browser the press check drives is cached by the file that pins it. The
 workflow installs the engine release `requirements-engine.txt` pins from PyPI,
 so it needs no secret to read it; the one secret it holds is the deploy's,
 `CLOUDFLARE_API_TOKEN` (below).
+
+**The gate for the change, on a branch; the full gate on main.** On `main`,
+`checks` runs `wherefore gate`: every generator, twice. On every other branch
+it runs `wherefore gate --since BASE`, BASE being where the branch left `main`
+(their merge-base; the job fetches the whole history to find it). It runs only
+the generators the change can reach - whose script, or a file they read or
+write, changed since BASE - and takes the rest as committed, naming each
+generator it ran, skipped or composed, and why. What each generator reads and
+writes it takes from `site/map/map.json` at BASE, the map `wherefore graph
+--json` writes as a generator, which the full gate keeps current. When the map
+cannot say - there is none at BASE, another engine release wrote it, a file was
+added or removed, `wherefore.json` changed - every generator runs and the gate
+says why, so a pull request that moves the pin, or the one that brought the map
+in, runs the full gate. A file a generator reads through a shell is not on the
+map, so `main`'s full gate stays the backstop.
 
 ## Hosting
 
@@ -293,6 +310,9 @@ Cloudflare's side; `.github/actions/deploy` is the one deploy, and
   one comment on every push.
 - The checks on the page run in two jobs side by side, `checks` (the files)
   and `browser` (the site at a phone's size), and `corpus` is their verdict.
+  On a branch, `checks` gates only what the change since `main` can reach
+  (`wherefore gate --since`, under CI above); on `main` it runs the full gate,
+  so nothing reaches the site's address that the full gate has not passed.
   The proofs run one job per proof (`proof`), each in its own checkout, and
   `proofs` is their verdict.
 

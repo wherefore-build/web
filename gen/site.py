@@ -952,6 +952,25 @@ def short(usage):
                     if not (w[:1] in "[-." or w.endswith("]") or w.isupper() or "|" in w))
 
 
+def shown(usage, x):
+    """The command a feature's card names: short(usage), unless that is an
+    earlier feature's command and this feature is a flag of it - then the
+    flag is kept, so `wherefore gate --since REF` reads `wherefore gate
+    --since` and not the gate's own `wherefore gate`."""
+    s = short(usage)
+    earlier = {short(c) for y in FEATURES if y["id"] != x["id"] and version_key(y["since"]) < version_key(x["since"])
+               for c in y.get("commands", [])}
+    if s not in earlier:
+        return s
+    words = usage.split()
+    flag = next((w for w in words[len(s.split()):] if w.startswith("--")), None)
+    return f"{s} {flag}" if flag else s
+
+
+def version_key(v):
+    return tuple(int(n) for n in v.split("."))
+
+
 def clip_frame(x, d, up="../"):
     """The feature's clip, the page the pinned engine wrote into site/motion/,
     played in a landscape frame; the same facts, in time. No caption (owner,
@@ -1019,7 +1038,7 @@ def does(f):
                if x["since"] == newest else "")
         # Two usages of one command - `wherefore gate [--keep]` and `wherefore gate --restamp` - are one line.
         cmds = "".join(f'<p class="does-cmd"><code>{esc(command(c))}</code></p>'
-                       for c in dict.fromkeys(short(c) for c in x.get("commands", [])))
+                       for c in dict.fromkeys(shown(c, x) for c in x.get("commands", [])))
         since = f' <span class="chip chip-since">{esc(fill(d["since"], version=x["since"]))}</span>'
         asks = []
         for it in answered.get(x["id"], []):

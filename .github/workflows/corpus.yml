@@ -4,6 +4,21 @@
 # said once and readable, every control on it doing something when a thumb
 # presses it - and each of those shown to fail.
 #
+# THE GATE FOR THE CHANGE ON A BRANCH, THE FULL GATE ON MAIN. On every branch
+# but main, `checks` runs `wherefore gate --since BASE`, BASE being where the
+# branch left main (their merge-base): it runs only the generators the change
+# can reach - a generator whose script, or a file it reads or writes, changed
+# since BASE - and takes the rest at the bytes committed, saying which ran,
+# which were skipped, and why. It knows what each generator reads and writes
+# from the map the full gate keeps, site/map/map.json (`wherefore graph --json`,
+# declared as a generator in wherefore.json). Where the map cannot say - none at
+# BASE, written by another release of the engine, a file added or removed, the
+# generators or wherefore.json changed - every generator runs, and the gate
+# says why: so the pull request that brought the map in, and every one that
+# moves the pin, runs the full gate. A read the map cannot see (a generator
+# reading through a shell) is skipped, so main keeps the full
+# `wherefore gate` as the backstop, as the engine's docs say to.
+#
 # THE CHECKS AND THE PROOFS SIDE BY SIDE, SO A RUN IS AS LONG AS ITS LONGEST
 # PART, NOT THE SUM (owner, 6 November 2026). `checks` and `browser` run every
 # check side by side, and `corpus` is their verdict (owner, 8 November 2026);
@@ -102,14 +117,36 @@ jobs:
     env:
       PYTHONPATH: ${{ github.workspace }}/.wherefore-engine:${{ github.workspace }}/.browser
     steps:
+      # The whole history, so where a branch left main can be found: the gate
+      # for the change judges it since that commit.
       - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
       - name: Install the engine this corpus pins
         id: install
         run: |
           rm -rf .wherefore-engine
           python3 -m pip install --quiet --no-deps --target .wherefore-engine -r requirements-engine.txt
+      # On main, the full gate: every generator, the backstop. On a branch, the
+      # gate for the change since it left main (the header says why); the gate
+      # names each generator it ran, skipped or composed, and falls back to
+      # every generator, saying why, when the map at that commit cannot say.
       - name: Every file is accounted for, and every generated one is what its sources make
-        run: python3 -m wherefore gate
+        env:
+          MAIN: ${{ github.event.repository.default_branch }}
+        run: |
+          if [ "${{ github.ref_name }}" = "$MAIN" ]; then
+            python3 -m wherefore gate
+            exit
+          fi
+          git fetch --quiet --no-tags origin "$MAIN"
+          if ! BASE=$(git merge-base "origin/$MAIN" HEAD); then
+            echo "this branch shares no history with $MAIN: the full gate runs"
+            python3 -m wherefore gate
+            exit
+          fi
+          echo "this branch left $MAIN at $BASE: the gate judges what has changed since"
+          python3 -m wherefore gate --since "$BASE"
       - name: Every fact reaches what a visitor receives
         if: ${{ !cancelled() && steps.install.outcome == 'success' }}
         run: python3 -m wherefore check reach

@@ -19,13 +19,93 @@
 <main id="top">
 <div class="src-key"><div class="wrap"><p>Every part of this page is generated. Each now names the facts it is built from, and the checks that hold it on every push. <a target="_blank" rel="noopener" href="https://github.com/wherefore-build/web">Read every file it is built from<svg class="out" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M9 2h5v5M14 2 7.5 8.5M12 9.5V13a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a> <a href="../map/">See the map of this repository: every file on this site, how it is made, and what changes when a source does</a></p><dl><div><dt>gate</dt><dd>rebuilt from its sources on every push, and refused if it differs from what is committed</dd></div><div><dt>reach</dt><dd>each of these facts is moved, one at a time, and the page must change with it</dd></div><div><dt>press</dt><dd>every control here is tapped on a fresh load, at a phone’s width, and must show something new</dd></div><div><dt>engine</dt><dd>every command named here must be one the pinned release has</dd></div><div><dt>brand</dt><dd>every colour and face is a brand token, and every text colour reads at 4.5:1 on its ground</dd></div><div><dt>snapshot</dt><dd>these counts were taken from the pendulum once, at the commit and day they name; each is moved, one at a time, and the page must change with it</dd></div></dl></div></div>
 <section class="log-head"><div class="wrap">
-<p class="eyebrow">Changelog · Wherefore 0.23.0</p>
+<p class="eyebrow">Changelog · Wherefore 0.27.0</p>
 <h1>Every release, newest first.</h1>
 <p class="lede">Built from the release this site pins, so a release is here the moment the site moves to it - and the build stops if a feature it ships has no words on this site.</p>
-<div class="src"><p><span class="src-k">from</span> facts/company.json · 58 facts: does.{words.{status, launch, drift, docs, published, scan-read, scan2, report, palette, pins, graph, upstream, scan, skill, start, gate, build, proofs, retired, reach, claims, hook}, watch, asked, more, less, plan} · changelog.{arrived, cut, printed, answered, title, intro, heading} · company.{name, source, domain} · inspect.{source, checks.{gate, reach, press, engine, brand, snapshot}, map, intro, map_short, toggle, toggle_short} · nav.{menu, how, why, does, docs, map, start} · case.eyebrow · colophon</p><p><span class="src-k">held by</span> gate · reach · brand · press</p></div>
+<div class="src"><p><span class="src-k">from</span> facts/company.json · 61 facts: does.{words.{facts-in-a-store, decisions, since, status, launch, drift, docs, published, scan-read, scan2, report, palette, pins, graph, upstream, scan, skill, start, gate, build, proofs, retired, reach, claims, hook}, watch, asked, more, less, plan} · changelog.{arrived, cut, printed, answered, title, intro, heading} · company.{name, source, domain} · inspect.{source, checks.{gate, reach, press, engine, brand, snapshot}, map, intro, map_short, toggle, toggle_short} · nav.{menu, how, why, does, docs, map, start} · case.eyebrow · colophon</p><p><span class="src-k">held by</span> gate · reach · brand · press</p></div>
 </div></section>
 <section class="log"><div class="wrap">
 <ol class="releases">
+<li class="release" id="v0.27.0">
+<div class="release-meta"><p class="release-v"><a href="#v0.27.0">0.27.0</a></p>
+<p class="release-date"><time datetime="2026-11-22">22 November 2026</time></p></div>
+<div class="release-body">
+<h2>Facts as a typed model, behind a pluggable source</h2>
+<p class="release-says">Each fact has an identity, a type and who decided it; a source may type its facts with a schema, which the gate checks, and may be backed by a store instead of a file - versions kept for good, read through an open protocol, with a reference store on SQLite. `wherefore facts pull` writes the store into the source&#x27;s file, so every generator reads it unchanged, and the gate fails the file when it stops saying what the store says at the version pinned.</p>
+<figure class="term"><pre><code><span class="term-prompt">$</span> <span class="term-cmd">wherefore facts import --decided-by fern-founder</span>
+facts: 2 facts from facts.json are version 1 of facts.db, decided by fern-founder
+  2 added, 0 changed, 0 removed since version 0
+next: `wherefore facts pull` writes facts.json at version 1 and pins it in wherefore.json</code></pre>
+<figcaption>What it printed</figcaption></figure>
+<h3>What arrived</h3><ul class="arrived"><li><span class="arrived-name">Facts in a store</span> Keep the facts in a database instead of a file, every version kept for good.<figure class="does-motion"><iframe src="../motion/facts-in-a-store/index.html" loading="lazy" title="Facts in a store, in motion"></iframe></figure></li></ul>
+</div>
+</li>
+<li class="release" id="v0.26.0">
+<div class="release-meta"><p class="release-v"><a href="#v0.26.0">0.26.0</a></p>
+<p class="release-date"><time datetime="2026-11-22">22 November 2026</time></p></div>
+<div class="release-body">
+<h2>Every fact change carries a decision</h2>
+<p class="release-says">A `decisions` section names the facts that need someone&#x27;s say - a source and a glob of its keys - and who decides them, and `wherefore check decisions` fails a pull request that changes one without an approving review on its head commit from someone allowed to give it. The author&#x27;s own approval, an approval on an earlier commit and anything typed in a commit message do not count.</p>
+<figure class="term"><pre><code><span class="term-prompt">$</span> <span class="term-cmd">wherefore check decisions --base 4b825dc642cb6eb9a060e54bf8d69288fbee4904 --approvals approvals.json</span>
+  rule  facts: plans.*.price_usd - fern-founder decides
+1 fact changed since 4b825dc; 1 needs a decision
+<span class="term-cut" title="lines left out">…</span>
+  not counted  sam approved, and is the author: nobody decides their own change
+  not counted  fern-founder approved 3f2c1a9, not the head: the change moved after it
+  FAIL  facts plans.pro.price_usd added, 99: needs an approving review on the head from fern-founder (facts: plans.*.price_usd)</code></pre>
+<figcaption>What it printed</figcaption></figure>
+<h3>What arrived</h3><ul class="arrived"><li><span class="arrived-name">Decisions</span> A price moves only when the person who decides it approves the pull request.<figure class="does-motion"><iframe src="../motion/decisions/index.html" loading="lazy" title="Decisions, in motion"></iframe></figure></li></ul>
+</div>
+</li>
+<li class="release" id="v0.25.0">
+<div class="release-meta"><p class="release-v"><a href="#v0.25.0">0.25.0</a></p>
+<p class="release-date"><time datetime="2026-11-22">22 November 2026</time></p></div>
+<div class="release-body">
+<h2>A gate for the change</h2>
+<p class="release-says">`wherefore gate --since REF` runs only the generators a change can reach, by the map the full gate keeps, takes the rest as committed, and says which ran, which were skipped, and why; the full gate stays the backstop.</p>
+<figure class="term"><pre><code><span class="term-prompt">$</span> <span class="term-cmd">wherefore gate --since HEAD</span>
+16 tracked files; 5 generators
+<span class="term-cut" title="lines left out">…</span>
+  skipped  landing.py - nothing it reads or writes has changed since HEAD
+  skipped  deck.py - nothing it reads or writes has changed since HEAD
+  skipped  notes.py - nothing it reads or writes has changed since HEAD
+  skipped  ledger.py - nothing it reads or writes has changed since HEAD
+  composed python3 -m wherefore graph --html - --json map/map.json - the map: this run&#x27;s reads and writes, and the map at HEAD for each generator skipped
+<span class="term-cut" title="lines left out">…</span>
+  ok   5 generated files, 0 differ from what is committed
+  ok   the corpus settles: a second regeneration moves 0 files
+<span class="term-cut" title="lines left out">…</span>
+every tracked file is classified, and every generated one a change since HEAD
+can reach was written during this run and matches what is committed</code></pre>
+<figcaption>What it printed</figcaption></figure>
+<h3>What arrived</h3><ul class="arrived"><li><span class="arrived-name">A gate for the change</span> A pull request rebuilds only what its change can reach, by the map the full gate keeps.<figure class="does-motion"><iframe src="../motion/since/index.html" loading="lazy" title="A gate for the change, in motion"></iframe></figure></li></ul>
+</div>
+</li>
+<li class="release" id="v0.24.1">
+<div class="release-meta"><p class="release-v"><a href="#v0.24.1">0.24.1</a></p>
+<p class="release-date"><time datetime="2026-11-22">22 November 2026</time></p></div>
+<div class="release-body">
+<h2>With a knowledge factory</h2>
+<p class="release-says">The docs say how Wherefore works beside a knowledge factory: a curator agent proposes a fact as a pull request, never a page, and the corpus&#x27;s own checks judge it before a person merges.</p>
+<figure class="term"><pre><code><span class="term-prompt">$</span> <span class="term-cmd">wherefore --version</span>
+wherefore 0.24.1</code></pre>
+<figcaption>What it printed</figcaption></figure>
+
+</div>
+</li>
+<li class="release" id="v0.24.0">
+<div class="release-meta"><p class="release-v"><a href="#v0.24.0">0.24.0</a></p>
+<p class="release-date"><time datetime="2026-11-07">7 November 2026</time></p></div>
+<div class="release-body">
+<h2>A stage said by a field being set</h2>
+<p class="release-says">A launch ladder reads a stage from whether a field is set at all - a draft open while `draft` is, a revision released once it is `promoted` - and a corpus that keeps its inventory in its own scripts is read through them by `check upstream` and `report`.</p>
+<figure class="term"><pre><code><span class="term-prompt">$</span> <span class="term-cmd">wherefore check launch</span>
+::error::pendulum-pack is released, and from released it needs an archive of the pack: no tracked file is archive/V23.zip
+1 of 1 thing lacks what its stage needs (1 missing): a stage moves only when what it needs is there</code></pre>
+<figcaption>What it printed</figcaption></figure>
+
+</div>
+</li>
 <li class="release" id="v0.23.0">
 <div class="release-meta"><p class="release-v"><a href="#v0.23.0">0.23.0</a></p>
 <p class="release-date"><time datetime="2026-11-06">6 November 2026</time></p></div>

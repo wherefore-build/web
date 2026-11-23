@@ -71,6 +71,8 @@
     "graph",
     "--html",
     "site/map/index.html",
+    "--json",
+    "site/map/map.json",
     "--theme",
     "site/brand/map.css",
     "--home",
@@ -78,7 +80,7 @@
     "wherefore.build"
    ],
    "cwd": ".",
-   "makes": "site/map/, the map of this repository: every source, the scripts that read it, and every file they make, drawn by the pinned engine from a real run in the brand's own colours (site/brand/map.css) - the gate runs it like any command, and `wherefore graph` credits it rather than running it"
+   "makes": "site/map/, the map of this repository: every source, the scripts that read it, and every file they make, drawn by the pinned engine from a real run in the brand's own colours (site/brand/map.css) - the gate runs it like any command, and `wherefore graph` credits it rather than running it. And site/map/map.json, the same map as data: what each generator reads and writes, which `wherefore gate --since` reads at the pull request's base to run only the generators a change can reach. The full gate keeps it current like any file it builds"
   },
   {
    "script": "motion.py",

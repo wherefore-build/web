@@ -40,24 +40,24 @@
    "mechanism": "hold",
    "data": {
     "source": "facts/company.json",
-    "facts": 309,
-    "pages": 14,
+    "facts": 319,
+    "pages": 15,
     "shown": [
      "brand/",
      "changelog/",
+     "docs/agents/",
      "docs/checks/",
      "docs/commands/",
      "docs/configuration/",
      "docs/",
-     "docs/reporting/",
-     "docs/start/"
+     "docs/reporting/"
     ],
     "probe": {
      "fact": "company.name",
      "files": 1
     }
    },
-   "caption": "309 facts in facts/company.json, and 14 pages built from them; company.name alone reaches 1 page"
+   "caption": "319 facts in facts/company.json, and 15 pages built from them; company.name alone reaches 1 page"
   },
   {
    "kind": "claim",

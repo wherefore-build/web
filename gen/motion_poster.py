@@ -65,10 +65,14 @@ def wrap(text, limit):
     return lines
 
 
+PROMPT = 2                # the `$ ` or `> ` before each typed line, as gen/motion.py counts it
+
+
 def typed_lines(typed):
     ws, lines, cur = typed.split(), [], ""
-    for w in ws:
-        if cur and len(cur) + 1 + len(w) + 2 > TYPED_LINE:
+    for k, w in enumerate(ws):
+        # the backslash, when a word follows on the next line
+        if cur and PROMPT + len(cur) + 1 + len(w) + (2 if k + 1 < len(ws) else 0) > TYPED_LINE:
             lines.append(cur + " \\")
             cur = w
         else:
