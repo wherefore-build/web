@@ -279,8 +279,10 @@ def part(render, f, inspect, also=()):
     html = render(Reading(f, "", log), *(Reading(v, "", l) for (_, v), l in zip(also, logs)))
     facts = list(dict.fromkeys(log))
     commands = list(dict.fromkeys(a[1] for a in ASKED if isinstance(a, tuple)))
+    # A part that states the pinned release's version is held by `fresh` too:
+    # checks/pin_fresh.py fails once a newer release has been out for days.
     held = (["gate", "reach", "brand"] + (["press"] if "<label" in html else []) + (["engine"] if commands else [])
-            + (["snapshot"] if also else []))
+            + (["fresh"] if "version" in ASKED else []) + (["snapshot"] if also else []))
     lines = [f'<p><span class="src-k">{esc(inspect["from"])}</span> facts/company.json · '
              f'{esc(fill(inspect["facts"], n=len(facts)))}: {esc(" · ".join(tree(facts)))}</p>']
     for (file, _), read in zip(also, logs):

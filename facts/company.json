@@ -438,6 +438,7 @@
    "reach": "each of these facts is moved, one at a time, and the page must change with it",
    "press": "every control here is tapped on a fresh load, at a phone’s width, and must show something new",
    "engine": "every command named here must be one the pinned release has",
+   "fresh": "the release named here is the newest on PyPI, or one only days behind it; a pin left behind longer fails",
    "brand": "every colour and face is a brand token, and every text colour reads at 4.5:1 on its ground",
    "snapshot": "these counts were taken from the pendulum once, at the commit and day they name; each is moved, one at a time, and the page must change with it"
   }

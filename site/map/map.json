@@ -3,13 +3,13 @@
  "engine": "0.27.0",
  "repository": "wherefore.build",
  "counts": {
-  "files": 185,
+  "files": 187,
   "generated": 114,
-  "authored": 66,
+  "authored": 68,
   "captured": 5,
   "unknown": 0,
   "generators": 6,
-  "code": 42,
+  "code": 44,
   "reads": 53,
   "failed": 0,
   "drifting": 0
@@ -493,6 +493,14 @@
    "rule": "*.py"
   },
   "checks/one_palette_proof.py": {
+   "kind": "authored",
+   "rule": "*.py"
+  },
+  "checks/pin_fresh.py": {
+   "kind": "authored",
+   "rule": "*.py"
+  },
+  "checks/pin_fresh_proof.py": {
    "kind": "authored",
    "rule": "*.py"
   },
@@ -1244,6 +1252,8 @@
     "checks/motion_reads_proof.py",
     "checks/one_palette.py",
     "checks/one_palette_proof.py",
+    "checks/pin_fresh.py",
+    "checks/pin_fresh_proof.py",
     "checks/questions_turn.py",
     "checks/questions_turn_proof.py",
     "checks/self_contained.py",

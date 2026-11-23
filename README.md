@@ -52,6 +52,7 @@ private repository, not here, so that none of them goes public with the site.
 | `checks/motion_for_every_feature.py` | every feature the pinned release ships has its clip, and the features page plays it | authored |
 | `checks/motion_reads.py` | every clip runs 16 to 40 s, no scene outruns a reader, every command run is one the CLI has, every printed line is one the engine prints, and every word is on the page | authored |
 | `checks/motion_fits.py` | every clip fits a portrait frame and a landscape one at the middle of every scene, and every scene shows its words | authored |
+| `checks/pin_fresh.py` | the engine the site pins is the newest release on PyPI, or behind it for no more than three days: it names every release the site is missing, with its day, and fails when PyPI cannot be read | authored |
 | `checks/*_proof.py` | each check, and the gate, shown to fail | authored |
 | `wherefore.json` | what this repository is to the engine | authored |
 | `requirements-engine.txt` | the engine release this is built and judged by | authored |
@@ -196,6 +197,7 @@ wherefore gate                       # every file classified, every generated on
 wherefore gate --since main          # the same, running only the generators a change since main can reach
 wherefore check reach                # every fact reaches what a visitor receives
 python3 checks/self_contained.py     # nothing loaded from elsewhere, no dead links
+python3 checks/pin_fresh.py          # the pin is not days behind the newest release (reads PyPI)
 python3 checks/controls_press.py     # every control works under a thumb (needs the browser)
 python3 checks/model_turns.py        # the pendulum's model turns under a thumb (needs the browser)
 python3 checks/questions_turn.py     # the questions turn, and stop when one is picked (needs the browser)
@@ -290,6 +292,14 @@ added or removed, `wherefore.json` changed - every generator runs and the gate
 says why, so a pull request that moves the pin, or the one that brought the map
 in, runs the full gate. A file a generator reads through a shell is not on the
 map, so `main`'s full gate stays the backstop.
+
+**The pin is never left behind.** `checks/pin_fresh.py` reads every release of
+`wherefore-build` from PyPI with the day it was published, and fails once a
+release newer than the pin has been out more than three days, naming each one
+the site is missing and the fix: finish the pin watch's pull request (branch
+`engine/VERSION`) or move the pin. Pre-releases and yanked releases do not
+count. It runs in `checks` on every push, so a pin left behind stops previews
+and the deploy alike; and it fails, saying so, when it cannot read PyPI.
 
 ## Hosting
 

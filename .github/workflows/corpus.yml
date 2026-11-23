@@ -2,7 +2,8 @@
 # every file accounted for and every generated one current, every fact reaching
 # what a visitor receives, the site reaching nothing outside itself, the brand
 # said once and readable, every control on it doing something when a thumb
-# presses it - and each of those shown to fail.
+# presses it, the engine it pins never left days behind the newest release -
+# and each of those shown to fail.
 #
 # THE GATE FOR THE CHANGE ON A BRANCH, THE FULL GATE ON MAIN. On every branch
 # but main, `checks` runs `wherefore gate --since BASE`, BASE being where the
@@ -41,6 +42,11 @@
 # and fails when the pendulum has moved, until the copy is taken again. So a
 # deploy never ships a copy of something that has changed. It is asked when the
 # site is compiled, and only then, never on a timer: the owner's call.
+# And `checks/pin_fresh.py` asks PyPI which releases of the engine exist, and
+# fails once one newer than the pin has been out more than three days (owner,
+# 23 November 2026: the site sat four releases behind with every check green).
+# It fails, saying so, when it cannot read PyPI - as the engine's install,
+# from the same index, already would.
 #
 # THEN IT DEPLOYS what those checks passed, and nothing else. main goes to the
 # site's address once `corpus` and `proofs` have both passed (`deploy`). Every
@@ -147,6 +153,9 @@ jobs:
           fi
           echo "this branch left $MAIN at $BASE: the gate judges what has changed since"
           python3 -m wherefore gate --since "$BASE"
+      - name: The engine this site pins is not left behind the newest release for more than three days
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: python3 checks/pin_fresh.py
       - name: Every fact reaches what a visitor receives
         if: ${{ !cancelled() && steps.install.outcome == 'success' }}
         run: python3 -m wherefore check reach
